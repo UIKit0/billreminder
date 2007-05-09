@@ -13,11 +13,12 @@ class Toolbar(gtk.Toolbar):
     def _populate(self):
         self.add_stock(gtk.STOCK_NEW, "Add a new record", self.on_mnuNew_clicked)
         self.add_stock(gtk.STOCK_EDIT, "Edit a record", self.on_mnuEdit_clicked)
+        self.add_stock(gtk.STOCK_DELETE, "Delete selected record", self.on_mnuDelete_clicked)
         self.add_space()
         self.add_button(gtk.STOCK_APPLY, "Paid", "Mark as paid", self.on_mnuPaid_clicked)
         self.add_button(gtk.STOCK_UNDO, "Not Paid", "Mark as not paid", self.on_mnuNotPaid_clicked)
         self.add_space()
-        self.add_stock(gtk.STOCK_DELETE, "Delete selected record", self.on_mnuDelete_clicked)
+        self.add_stock(gtk.STOCK_ABOUT, "About the application", self.on_mnuAbout_clicked)
         self.add_space()
         self.add_stock(gtk.STOCK_CLOSE, "Quit the application", self.on_mnuQuit_clicked)
 
@@ -60,13 +61,16 @@ class Toolbar(gtk.Toolbar):
     def on_mnuEdit_clicked(self, toolbutton):
         pass
 
+    def on_mnuDelete_clicked(self, toolbutton):
+        pass
+
     def on_mnuPaid_clicked(self, toolbutton):
         pass
 
     def on_mnuNotPaid_clicked(self, toolbutton):
         pass
 
-    def on_mnuDelete_clicked(self, toolbutton):
+    def on_mnuAbout_clicked(self, toolbutton):
         pass
 
     def on_mnuQuit_clicked(self, toolbutton):
