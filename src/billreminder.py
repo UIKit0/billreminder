@@ -42,7 +42,6 @@ class MainWindow:
 
         # Statusbar
         self.statusbar = Statusbar()
-        self.statusbar.push("<b>Records:</b>")
 
         # Pack it all up
         self.box.pack_start(self.menubar, expand=False, fill=True, padding=2)
@@ -68,7 +67,7 @@ class MainWindow:
         notes = bill.Notes
 
         # Display the status for the selected row
-        self.statusbar.push('%s' % (notes.replace('\n', ' ')))
+        self.statusbar.Notes(notes)
 
     def _populateTreeView(self, records):
         """ Populates the treeview control with the records passed """

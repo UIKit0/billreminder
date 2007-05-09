@@ -1,38 +1,34 @@
 import gtk
 
 class Statusbar(gtk.HBox):
-    """ This class implements the status bar """
+    """ This class implements the note bar """
     def __init__(self):
         gtk.HBox.__init__(self)
-        self.latest_id = 0
-        self.label = gtk.Label()
-        self.label.set_justify(gtk.JUSTIFY_LEFT)
-        self.pack_start(self.label, expand=False, fill=True, padding=2)
+
+        self.recordLabel = gtk.Label()
+        self.recordLabel.set_justify(gtk.JUSTIFY_LEFT)
+        self.recordLabel.set_markup("<b>Records: </b>")
+        self.pack_start(self.recordLabel, expand=False, fill=True, padding=2)
+
+        self.recordCount = gtk.Label()
+        self.recordCount.set_justify(gtk.JUSTIFY_RIGHT)
+        self.recordCount.set_markup("<b>0</b>")
+        self.pack_start(self.recordCount, expand=False, fill=True, padding=2)
+
+        self.noteLabel = gtk.Label()
+        self.noteLabel.set_justify(gtk.JUSTIFY_LEFT)
+        self.noteLabel.set_markup("<b>Notes: </b>")
+        self.pack_start(self.noteLabel, expand=False, fill=True, padding=2)
+
+        self.noteValue = gtk.Label()
+        self.noteValue.set_justify(gtk.JUSTIFY_LEFT)
+        self.noteValue.set_markup("")
+        self.pack_start(self.noteValue, expand=False, fill=True, padding=2)
+
         self.set_border_width(2)
-        # message stack is a dictionary as this is a very easy type
-        # to add and remove from
-        self.stack = {}
 
-    def push(self, message):
-        #increment message_id - this will be key for
-        #message and highest message_id will be 'top of stack'
-        self.latest_id += 1
-        self.stack[self.latest_id] = message
-        self.displayTopOfStack()
-        #print "adding",self.latest_id, message
-        return self.latest_id
+    def Records(self, count):
+        self.recordCount.set_markup("<b>%d</b>" % count)
 
-    def remove(self, message_id):
-        #remove message from stack (frst check if it's really there)
-        if message_id in self.stack:
-            del self.stack[message_id]
-        #print "clearing", message_id
-        self.displayTopOfStack()
-
-    def displayTopOfStack(self):
-        # if stack is now empty then clear status bar
-        if len(self.stack) == 0:
-            self.label.set_markup("")
-            return
-        # find the message at the top of the stack and display it
-        self.label.set_markup(self.stack[max(self.stack.keys())])
+    def Notes(self, notes):
+        self.noteValue.set_markup('%s' % notes.replace('\n', ' '))
