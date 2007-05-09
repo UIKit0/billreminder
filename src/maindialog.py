@@ -10,7 +10,7 @@ from bill import Bill
 from viewbill import ViewBill as ListView
 from dal import DAL
 
-class MainWindow:
+class MainDialog:
 
     # close the window and quit
     def on_delete_event(self, widget, event, data=None):
@@ -109,5 +109,5 @@ def main():
     gtk.main()
 
 if __name__ == "__main__":
-    billreminder = MainWindow()
+    billreminder = MainDialog()
     main()
