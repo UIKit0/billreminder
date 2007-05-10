@@ -110,6 +110,14 @@ class MainDialog:
     def add_bill(self):
         dialog = AddDialog(title="Add a new record", parent=self.window)
         ret = dialog.run()
+        print ret
+        dialog.destroy()
+
+    def edit_bill(self):
+        dialog = AddDialog(title="Edit an existing record", parent=self.window, record=self.currentrecord)
+        ret = dialog.run()
+        print ret
+        dialog.destroy()
 
     # Methods
     def _quit_application(self):
@@ -125,6 +133,9 @@ class MainDialog:
         # Get currently selected bill
         b_id, bill = self._getBill()
 
+        # Keep track of current bill
+        self.currentrecord = bill
+
         notes = bill.Notes
 
         # Display the status for the selected row
@@ -134,7 +145,7 @@ class MainDialog:
         self.add_bill()
 
     def on_mnuEdit_clicked(self, toolbutton):
-        pass
+        self.edit_bill()
 
     def on_mnuDelete_clicked(self, toolbutton):
         pass
