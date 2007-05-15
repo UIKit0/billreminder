@@ -11,6 +11,7 @@ from viewbill import ViewBill as ViewBill
 
 # Import dialogs modules
 from adddialog import AddDialog
+from aboutdialog import AboutDialog
 
 # Import data model modules
 from bill import Bill
@@ -119,6 +120,11 @@ class MainDialog:
         print ret
         dialog.destroy()
 
+    def about(self):
+        about = AboutDialog(parent=self.window)
+        ret = about.run()
+        about.destroy()
+
     # Methods
     def _quit_application(self):
         gtk.main_quit()
@@ -157,7 +163,7 @@ class MainDialog:
         pass
 
     def on_mnuAbout_clicked(self, toolbutton):
-        pass
+        self.about()
 
     def on_mnuQuit_clicked(self, toolbutton):
         self._quit_application()
