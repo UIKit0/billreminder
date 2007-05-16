@@ -17,14 +17,18 @@ from aboutdialog import AboutDialog
 from bill import Bill
 from dal import DAL
 
+# Import common utilities
+import common
+
 class MainDialog:
 
     def __init__(self):
         # Create a new window
         self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
-        self.window.set_title("BillReminder")
+        self.window.set_title("%s - %s" % (common.APPNAME, common.APPVERSION))
         self.window.set_border_width(3)
-        self.window.set_size_request(500, 200)
+        self.window.set_size_request(500, 300)
+        self.window.set_icon_from_file(common.APP_ICON)
         self.window.connect("delete_event", self.on_delete_event)
 
         self.box = gtk.VBox(homogeneous=False, spacing=0)
