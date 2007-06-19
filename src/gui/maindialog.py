@@ -136,13 +136,12 @@ class MainDialog:
         # Checks if the user did not cancel the action
         if response == -3: #gtk.RESPONSE_OK:
             try:
-                import epdb
-                epdb.st()
                 # Edit bill to database
-                bill = self.dal.edit('tblbills', b_id, bill.Dictionary)
+                self.dal.edit('tblbills', b_id, record.Dictionary)
                 # Update list with updated record
                 idx = self.list.get_cursor()[0][0]
-                self.list[idx] = self._formatedRow(bill)
+                self.list.listStore[idx] = self._formatedRow(record.Dictionary)
+                self.list.set_cursor(idx)
             except Exception, e:
                 print str(e)
 

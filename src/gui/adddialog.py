@@ -103,8 +103,6 @@ class AddDialog(gtk.Dialog):
         self.thousands_sep = locale.localeconv()['mon_thousands_sep']
 
         self.allowed_digts = [self.decimal_sep , self.thousands_sep]
-        import epdb
-        epdb.st()
         # Format the amount field
         self.amount.set_text("%0.2f" % self.currentrecord.AmountDue)
         # Format the dueDate field
