@@ -17,7 +17,7 @@ AUTHORS = [
     'Contributors:',
     'Giovanni Deganni <tiefox@gmail.com>',
     'Ruivaldo <ruivaldo@gmail.com>',
-    'Mario Danic pygi@gmail.com'
+    'Mario Danic <pygi@gmail.com>'
 ]
 
 ARTISTS = [

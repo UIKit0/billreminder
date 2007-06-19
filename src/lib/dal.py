@@ -11,7 +11,7 @@ except ImportError:
     print "Please install pysqlite2"
     sys.exit(1)
 
-from bill import Bill
+from lib.bill import Bill
 from db.versionstable import VersionsTable
 from db.configtable import ConfigTable
 from db.fieldstable import FieldsTable
@@ -159,6 +159,18 @@ class DAL(object):
             args = []
         return (stmt, args)
 
+    def delete(self, tblnick, key):
+        """ Delete a record in the database """
+        # Delete statement
+        stmt = "DELETE FROM %s WHERE %s=?" % (self.tables[tblnick].Name, self.tables[tblnick].Key)
+        try:
+            self._executeSQL(stmt, [key])
+            return True
+        except Exception, e:
+            # Dump error to the screen; may be helpfull when debugging
+            print str(e)
+            return False
+
     def add(self, tblnick, kwargs):
         """ Adds a record to the database """
 
@@ -171,8 +183,6 @@ class DAL(object):
         stmt = "INSERT INTO %s (%s) VALUES (%s)" %\
             (self.tables[tblnick].Name, ",".join(cols), ",".join('?' * len(values)))
         self.cur.execute(stmt, values)
-        import epdb
-        epdb.st()
         b_key = self.cur.lastrowid
         if b_key:
             rows = self.get(tblnick, {self.tables[tblnick].Key: b_key})

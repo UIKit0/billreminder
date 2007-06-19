@@ -8,21 +8,21 @@ try:
     import gtk
 except ImportError:
     print "Please install gtk"
-    sys.exit(1)
+    raise SystemExit
 
 try:
     import pygtk
     pygtk.require("2.0")
 except ImportError:
     print "Please install pygtk"
-    sys.exit(1)
+    raise SystemExit
 
 try:
-    from aboutdialog import AboutDialog
-    from adddialog import AddDialog
+    from gui.aboutdialog import AboutDialog
+    from gui.adddialog import AddDialog
 except ImportError, e:
     print str(e)
-    sys.exit(1)
+    raise SystemExit
 
 def about_dialog(parent=None):
     about = AboutDialog()

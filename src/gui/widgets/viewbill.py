@@ -2,8 +2,8 @@
 
 import gtk
 import datetime
-from genericlistview import GenericListView
-from bill import Bill
+from gui.widgets.genericlistview import GenericListView
+from lib.bill import Bill
 
 class ViewBill(GenericListView):
     """

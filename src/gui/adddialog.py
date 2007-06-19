@@ -6,10 +6,10 @@ import gtk
 import time
 import datetime
 import locale
-import utils
 import gobject
-from bill import Bill
-from dal import DAL
+import lib.utils
+from lib.bill import Bill
+from lib.dal import DAL
 
 class AddDialog(gtk.Dialog):
     """

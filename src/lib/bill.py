@@ -17,7 +17,7 @@ class Bill(object):
                 self.__set_dueDate(time.time())
             else:
                 self.__set_dueDate(payee['dueDate'])
-                
+
             self.__set_amountDue(payee['amountDue'])
             self.__set_notes(payee['notes'])
             self.__set_paid(payee['paid'])

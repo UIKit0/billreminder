@@ -21,10 +21,10 @@ class ContextMenu(gtk.Menu):
     def __init__(self, *args):
         gtk.Menu.__init__(self)
         self.menuItem = None
-    
+
     def addMenuItem(self, menuName, actionFunction=None, menuImage=None, forceName=False):
         """ Add itens to menu.
-            
+
             @menuName is the text showed in the menu option.
                     If you pass a - (minus) as parameter value,
                     it will create a separation menu item.
@@ -45,9 +45,9 @@ class ContextMenu(gtk.Menu):
                         img = gtk.Image()
                         img.set_from_stock(menuImage,gtk.ICON_SIZE_MENU)
                         self.menuItem.set_image(img)
-            else:    
+            else:
                 self.menuItem = gtk.ImageMenuItem(menuName)
-                
+
             if actionFunction is not None :
                 self.menuItem.connect("activate", actionFunction)
         self.menuItem.show()
@@ -62,19 +62,19 @@ class Message:
             dlg.set_title(_('Question'))
         else:
             dlg.set_title(title)
-            
+
         dlg.set_markup(text)
         response = dlg.run()
         dlg.destroy()
         return response == gtk.RESPONSE_YES
-    
+
     def ShowError(self, text, parentWindow=None, title=''):
         dlg= gtk.MessageDialog(parentWindow, gtk.DIALOG_MODAL, gtk.MESSAGE_ERROR, gtk.BUTTONS_OK, text)
         if title == '':
             dlg.set_title(_('Error'))
         else:
             dlg.set_title(title)
-            
+
         dlg.set_markup(text)
         dlg.run()
         dlg.destroy()
@@ -87,7 +87,7 @@ def select_combo_Text(cb, text):
             break
         i += 1
     cb.set_active(i)
-    
+
 def str_to_date(strdate):
     dt = strdate.split()[0]
     sep = [c for c in dt if not c.isdigit()][0]

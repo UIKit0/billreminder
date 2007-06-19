@@ -3,7 +3,7 @@
 import pygtk
 pygtk.require('2.0')
 import gtk
-import common
+import lib.common as common
 
 TRANSLATORS = "translator-credits"
 

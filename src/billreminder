@@ -18,9 +18,9 @@ except ImportError:
     raise SystemExit
 
 try:
-    from maindialog import MainDialog as BillReminder
-    import dialogs
-    import common
+    from gui.maindialog import MainDialog as BillReminder
+    import lib.dialogs
+    import lib.common
 except ImportError, e:
     print str(e)
     raise SystemExit
@@ -41,11 +41,11 @@ def main():
     if "--help" in args or "-h" in args  or "-?" in args:
         print help
     elif "--about" in args:
-        dialogs.about_dialog()
+        lib.dialogs.about_dialog()
     elif "--add" in args:
-        print dialogs.add_dialog()
+        print lib.dialogs.add_dialog()
     elif "--version" in args or "-v" in args:
-        print "This is %s - Version: %s" % (common.APPNAME, common.APPVERSION)
+        print "This is %s - Version: %s" % (lib.common.APPNAME, lib.common.APPVERSION)
     else:
         gtk.gdk.threads_init()
         app = BillReminder()

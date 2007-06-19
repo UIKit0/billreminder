@@ -5,20 +5,20 @@ pygtk.require('2.0')
 import gtk
 
 # Import widgets modules
-from toolbar import Toolbar
-from statusbar import Statusbar
-from viewbill import ViewBill as ViewBill
+from gui.widgets.toolbar import Toolbar
+from gui.widgets.statusbar import Statusbar
+from gui.widgets.viewbill import ViewBill as ViewBill
 
 # Import dialogs modules
-from adddialog import AddDialog
+#from gui.adddialog import AddDialog
 
 # Import data model modules
-from bill import Bill
-from dal import DAL
+from lib.bill import Bill
+from lib.dal import DAL
 
 # Import common utilities
-import common
-import dialogs
+import lib.common as common
+import lib.dialogs as dialogs
 
 class MainDialog:
 
@@ -116,8 +116,6 @@ class MainDialog:
         response, record = dialogs.add_dialog(parent=self.window)
 
         # Checks if the user did not cancel the action
-        import epdb
-        epdb.st()
         if response == -3: #gtk.RESPONSE_OK:
             # Add new bill to database
             bill = self.dal.add('tblbills', record.Dictionary)
