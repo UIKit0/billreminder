@@ -32,4 +32,3 @@ class AboutDialog(gtk.AboutDialog):
 
         # Show all widgets
         self.show_all()
-

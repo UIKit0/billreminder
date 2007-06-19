@@ -12,7 +12,8 @@ except:
 try:
     import gtk
     import datetime
-except:
+except ImportError, e:
+    print str(e)
     sys.exit(1)
 
 class ContextMenu(gtk.Menu):
@@ -92,4 +93,3 @@ def str_to_date(strdate):
     sep = [c for c in dt if not c.isdigit()][0]
     dtPieces = [int(p) for p in dt.split(sep)]
     return datetime.date(dtPieces[0], dtPieces[1], dtPieces[2])
-    

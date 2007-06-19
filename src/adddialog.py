@@ -3,6 +3,7 @@
 import pygtk
 pygtk.require('2.0')
 import gtk
+import time
 import datetime
 import locale
 import utils
@@ -100,7 +101,7 @@ class AddDialog(gtk.Dialog):
     def _populate_fields(self):
         self.decimal_sep = locale.localeconv()['mon_decimal_point']
         self.thousands_sep = locale.localeconv()['mon_thousands_sep']
-        
+
         self.allowed_digts = [self.decimal_sep , self.thousands_sep]
         # Format the amount field
         self.amount.set_text("%0.2f" % self.currentrecord.AmountDue)
@@ -143,7 +144,7 @@ class AddDialog(gtk.Dialog):
         else:
             return self.payeeEntry.get_text()
 
-    def _get_record(self):
+    def get_record(self):
         # Extracts the date off the calendar widget
         day = self.calendar.get_date()[2]
         month = self.calendar.get_date()[1] + 1
@@ -177,4 +178,4 @@ class AddDialog(gtk.Dialog):
             #self.currentrecord.Paid = int(self.chkPaid.get_active())
 
         #return the bill
-        return self.bill
+        return self.currentrecord

@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 import gtk
 
 class Statusbar(gtk.HBox):
@@ -30,5 +33,8 @@ class Statusbar(gtk.HBox):
     def Records(self, count):
         self.recordCount.set_markup("<b>%d</b>" % count)
 
-    def Notes(self, notes):
-        self.noteValue.set_markup('%s' % notes.replace('\n', ' '))
+    def Notes(self, notes=''):
+        if notes:
+            self.noteValue.set_markup('%s' % notes.replace('\n', ' '))
+        else:
+            self.noteValue.set_markup('')

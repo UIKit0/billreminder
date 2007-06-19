@@ -11,7 +11,6 @@ from viewbill import ViewBill as ViewBill
 
 # Import dialogs modules
 from adddialog import AddDialog
-from aboutdialog import AboutDialog
 
 # Import data model modules
 from bill import Bill
@@ -19,6 +18,7 @@ from dal import DAL
 
 # Import common utilities
 import common
+import dialogs
 
 class MainDialog:
 
@@ -72,7 +72,7 @@ class MainDialog:
 
         records = self.dal.get('tblbills', {'Id': b_id})
         rec = records[0]
-        
+
         # Return bill and id
         return b_id, Bill(rec)
 
@@ -113,10 +113,21 @@ class MainDialog:
         self.menubar.add_stock(gtk.STOCK_CLOSE, "Quit the application", self.on_mnuQuit_clicked)
 
     def add_bill(self):
-        dialog = AddDialog(title="Add a new record", parent=self.window)
-        ret = dialog.run()
-        print ret
-        dialog.destroy()
+        response, record = dialogs.add_dialog(parent=self.window)
+
+        # Checks if the user did not cancel the action
+        import epdb
+        epdb.st()
+        if response == -3: #gtk.RESPONSE_OK:
+            # Add new bill to database
+            bill = self.dal.add('tblbills', record.Dictionary)
+            id_ = bill['Id']
+            if bill:
+                self.list.add(self._formatedRow(bill))
+                #self.list.append(self.formatedRow(bill))
+                #self.updateStatusBar()
+                #self.bill_id = id_
+                #self.refreshBillList(False)
 
     def edit_bill(self):
         dialog = AddDialog(title="Edit an existing record", parent=self.window, record=self.currentrecord)
@@ -125,9 +136,7 @@ class MainDialog:
         dialog.destroy()
 
     def about(self):
-        about = AboutDialog(parent=self.window)
-        ret = about.run()
-        about.destroy()
+        dialogs.about_dialog(parent=self.window)
 
     # Methods
     def _quit_application(self):

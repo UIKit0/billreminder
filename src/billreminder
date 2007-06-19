@@ -1,0 +1,55 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+import sys
+import os
+
+try:
+    import gtk
+except ImportError:
+    print "Please install gtk"
+    raise SystemExit
+
+try:
+    import pygtk
+    pygtk.require("2.0")
+except ImportError:
+    print "Please install pygtk"
+    raise SystemExit
+
+try:
+    from maindialog import MainDialog as BillReminder
+    import dialogs
+    import common
+except ImportError, e:
+    print str(e)
+    raise SystemExit
+
+help = """Usage:  billreminder [OPTIONS...]
+
+Options:
+  --help, -h, -?\t\tShow this message.
+  --about\t\tAbout this application.
+  --add\t\tAdds a new record to the database.
+  --version, -v\t\tDisplays the version number for this application.
+"""
+
+
+def main():
+    args = sys.argv
+
+    if "--help" in args or "-h" in args  or "-?" in args:
+        print help
+    elif "--about" in args:
+        dialogs.about_dialog()
+    elif "--add" in args:
+        print dialogs.add_dialog()
+    elif "--version" in args or "-v" in args:
+        print "This is %s - Version: %s" % (common.APPNAME, common.APPVERSION)
+    else:
+        gtk.gdk.threads_init()
+        app = BillReminder()
+        gtk.main()
+
+if __name__ == "__main__":
+    main()

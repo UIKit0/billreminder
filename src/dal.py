@@ -35,16 +35,16 @@ class DAL(object):
     def __init__(self):
         if not os.path.isdir(self.dbPath):
             os.makedirs(self.dbPath)
-            
+
         self.conn = sqlite.connect(os.path.join(self.dbPath, self.dbName), isolation_level=None)
         self.cur = self.conn.cursor()
         self.cur.execute("PRAGMA count_changes=0")
-        
+
         if os.path.isfile(os.path.join(self.dbPath, self.dbName)):
             self.validateTables()
         else:
             self._createDb()
-        
+
     def _createDb(self):
         """ All tables get created here."""
         # First, we create them
@@ -59,8 +59,8 @@ class DAL(object):
         for table in self.tables.values():
             self._updateTableVersion(table.Name)
 
-    
-    def _createTable(self, tblname):        
+
+    def _createTable(self, tblname):
         # Create the table
         self.cur.execute(self._tables[tblname].CreateSQL)
         self.conn.commit()
@@ -76,7 +76,7 @@ class DAL(object):
         # Save version information for every table
         self.add('tblversions', {'tablename': tblname, 'version': self._tables[tblname].Version})
         print 'version saved (%s - %i)' % (tblname, self._tables[tblname].Version)
-    
+
     def validateTables(self):
         """ Validates that all tables are up to date. """
         stmt = "select tbl_name from sqlite_master where type = 'table' and tbl_name like 'br_%'"
@@ -84,12 +84,12 @@ class DAL(object):
         # List of all tables with names that start with "br_"
         tbllist = self.cur.fetchall()
         print tbllist
-        
+
         # Create all tables if database is empty
         if len(tbllist) == 0: 
             self._createDb()
             return True
-            
+
         unvalidated = self._tables.copy()
         #unvalidated.pop(self.tables['tblversions'].Name)
         #unvalidated.pop(self.tables['tblfields'].Name)
@@ -113,17 +113,17 @@ class DAL(object):
                 self._updateTable(tblname)
             # Remove valid tables from dict
             unvalidated.pop(tblname)
-        
+
         # Create tables new in actual version
         for table in unvalidated:
             self._createTable(table)
-     
+
     def _deleteTable(self, tblname):
         stmt = "DROP TABLE %s" % tblname
         self.cur.execute(stmt)
         self.delete('tblversions',  tblname)
         print "Removed table %s" % tblname
-    
+
     def _updateTable(self, tblname):
         oldfields = self.get('tblfields', {'tablename': tblname})[0]['fields'].split(', ')
         stmt = "SELECT %(fields)s FROM %(name)s" \
@@ -136,49 +136,32 @@ class DAL(object):
         self.delete('tblversions',  tblname)
         self.delete('tblfields', tblname)
         self._createTable(tblname)
-        
+
         for rec in oldrecords:
             self.add(self._nicks[tblname], dict([(col,rec.get(col,'')) for col in self._tables[tblname].Fields]))
-        
+
         self._deleteTable('%s_old' % tblname)
-    
+
     def _createQueryParams(self, kwargs):
         """ Helper method to create a statement and arguments to a query. """
         if None == kwargs or 0 == len(kwargs):
             return ("", [])
-        
+
         if not isinstance(kwargs,str):
             pairs = kwargs.items()
             stmt = " WHERE " + \
                 " AND ".join([ x[0] + (None is x[1] and " IS NULL" or " = ?")
                     for x in pairs ])
-            
+
             args = [ x[1] for x in filter(lambda x: None is not x[1], pairs) ]
         else:
             stmt = " WHERE " + kwargs
             args = []
         return (stmt, args)
-    
-    def get(self, tblnick, kwargs):
-        """ Returns one or more records that meet the criteria passed """
-        (stmt, args) = self._createQueryParams(kwargs)
-        
-        stmt = "SELECT %(fields)s FROM %(name)s" \
-            % dict(fields=", ".join(self.tables[tblnick].Fields), name=self.tables[tblnick].Name) + stmt
-        try:
-            self.cur.execute(stmt, args)
-        except sqlite.OperationalError:
-            return None
-
-        
-        rows = [dict([ (f, row[i]) for i, f in enumerate(self.tables[tblnick].Fields) ]) \
-            for row in self.cur.fetchall()]
-        
-        return rows
 
     def add(self, tblnick, kwargs):
         """ Adds a record to the database """
-        
+
         if self.tables[tblnick].KeyAuto:
             kwargs.pop(self.tables[tblnick].Key)
         # Separate columns and values
@@ -188,41 +171,30 @@ class DAL(object):
         stmt = "INSERT INTO %s (%s) VALUES (%s)" %\
             (self.tables[tblnick].Name, ",".join(cols), ",".join('?' * len(values)))
         self.cur.execute(stmt, values)
+        import epdb
+        epdb.st()
         b_key = self.cur.lastrowid
         if b_key:
             rows = self.get(tblnick, {self.tables[tblnick].Key: b_key})
             try: return rows[0]
             except: None
-    
-    def edit(self, tblnick, key, dic):
-        """ Edit a record in the database """
-        # Removes the key field
-        if self.tables[tblnick].KeyAuto:
-            del dic[self.tables[tblnick].Key]
-        
-        # Split up into pairs
-        pairs = dic.items()
-        
-        params = "=?, ".join([ x[0] for x in pairs ]) + "=?"
-        stmt = "UPDATE %s SET %s WHERE %s=?" \
-            % (self.tables[tblnick].Name, params, self.tables[tblnick].Key)
-        
-        args = [x[1] for x in pairs] + [key]
-        
-        rowsAffected = self._executeSQL(stmt, args)
-        return rowsAffected
-    
-    def delete(self, tblnick, key):
-        """ Delete a record in the database """
-        # Delete statement
-        stmt = "DELETE FROM %s WHERE %s=?" % (self.tables[tblnick].Name, self.tables[tblnick].Key)
+
+    def get(self, tblnick, kwargs):
+        """ Returns one or more records that meet the criteria passed """
+        (stmt, args) = self._createQueryParams(kwargs)
+
+        stmt = "SELECT %(fields)s FROM %(name)s" \
+            % dict(fields=", ".join(self.tables[tblnick].Fields), name=self.tables[tblnick].Name) + stmt
         try:
-            self._executeSQL(stmt, [key])
-            return True
-        except Exception, e:
-            # Dump error to the screen; may be helpfull when debugging
-            print str(e)
-            return False
+            self.cur.execute(stmt, args)
+        except sqlite.OperationalError:
+            return None
+
+
+        rows = [dict([ (f, row[i]) for i, f in enumerate(self.tables[tblnick].Fields) ]) \
+            for row in self.cur.fetchall()]
+
+        return rows
 
     def _executeSQL(self, stmt, args):
         """ Excutes passed SQL and returns the result """
@@ -231,5 +203,3 @@ class DAL(object):
         except Exception, e:
             print "Unexpected error:", sys.exc_info()[0], e
             return None
-
-
