@@ -80,7 +80,7 @@ class Message:
         dlg.destroy()
         return 
 
-def select_combo_Text(cb, text):
+def select_combo_text(cb, text):
     i = 0
     for n in cb.get_model():
         if n[0] == text:

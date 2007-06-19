@@ -159,6 +159,24 @@ class DAL(object):
             args = []
         return (stmt, args)
 
+    def edit(self, tblnick, key, dic):
+        """ Edit a record in the database """
+        # Removes the key field
+        if self.tables[tblnick].KeyAuto:
+            del dic[self.tables[tblnick].Key]
+
+        # Split up into pairs
+        pairs = dic.items()
+
+        params = "=?, ".join([ x[0] for x in pairs ]) + "=?"
+        stmt = "UPDATE %s SET %s WHERE %s=?" \
+            % (self.tables[tblnick].Name, params, self.tables[tblnick].Key)
+
+        args = [x[1] for x in pairs] + [key]
+
+        rowsAffected = self._executeSQL(stmt, args)
+        return rowsAffected
+
     def delete(self, tblnick, key):
         """ Delete a record in the database """
         # Delete statement

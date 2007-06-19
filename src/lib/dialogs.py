@@ -41,3 +41,13 @@ def add_dialog(parent=None):
     dialog.destroy()
 
     return response, record
+
+def edit_dialog(record, parent=None):
+    dialog = AddDialog(title="Edit a record", parent=parent, record=record)
+    response = dialog.run()
+    # Checks if the user did not cancel the action
+    if response == -3: #gtk.RESPONSE_OK:
+        record = dialog.get_record()
+    dialog.destroy()
+
+    return response, record
