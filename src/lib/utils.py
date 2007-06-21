@@ -124,3 +124,18 @@ def str_to_date(strdate):
     sep = [c for c in dt if not c.isdigit()][0]
     dtPieces = [int(p) for p in dt.split(sep)]
     return datetime.date(dtPieces[0], dtPieces[1], dtPieces[2])
+
+def force_string(dic):
+    """ Force string type """
+    if not isinstance(dic, dict):
+        return dic
+    ret = {}
+    for i in range(len(dic)):
+        key = dic.keys()[i]
+        value = dic.values()[i]
+        if not isinstance(key, basestring):
+            key = str(key)
+        if not isinstance(value, basestring):
+            value = str(value)
+        ret[key] = value
+    return ret
