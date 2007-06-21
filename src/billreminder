@@ -28,9 +28,10 @@ except ImportError, e:
 help = """Usage:  billreminder [OPTIONS...]
 
 Options:
-  --help, -h, -?\t\tShow this message.
+  --help, -h, -?\tShow this message.
   --about\t\tAbout this application.
-  --add\t\tAdds a new record to the database.
+  --add\t\t\tAdds a new record to the database.
+  --standalone\t\tAccess database directly, without daemon.
   --version, -v\t\tDisplays the version number for this application.
 """
 
