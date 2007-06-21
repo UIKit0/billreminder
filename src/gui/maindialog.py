@@ -190,7 +190,7 @@ class MainDialog:
 
     def toggle_bill_paid(self):
         # Toggle paid field
-        self.currentrecord.Paid = (self.currentrecord.Paid == 1) and 0 or 1
+        self.currentrecord.Paid = (self.currentrecord.Paid == 0) and 1 or 0
 
         try:
             # Edit bill to database
