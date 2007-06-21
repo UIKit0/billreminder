@@ -17,6 +17,3 @@ class FieldsTable(GenericTable):
         fields INT NOT NULL)
     """ % Name
     Fields = ['tablename', 'fields']
-
-    def __init__(self):
-        GenericTable.__init__(self)

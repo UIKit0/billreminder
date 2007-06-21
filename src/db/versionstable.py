@@ -17,6 +17,3 @@ class VersionsTable(GenericTable):
         version INT NOT NULL)
     """ % Name
     Fields = ['tablename', 'version']
-
-    def __init__(self):
-        GenericTable.__init__(self)

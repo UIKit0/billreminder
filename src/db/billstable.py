@@ -21,6 +21,3 @@ class BillsTable(GenericTable):
             paid INTEGER DEFAULT 0)
     """ % Name
     Fields = ['Id', 'payee', 'dueDate', 'amountDue', 'notes', 'paid']
-
-    def __init__(self):
-        GenericTable.__init__(self)

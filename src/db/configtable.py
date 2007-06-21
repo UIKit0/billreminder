@@ -17,6 +17,3 @@ class ConfigTable(GenericTable):
         value VARCHAR(255) NOT NULL)
     """ % Name
     Fields = ['key', 'value']
-
-    def __init__(self):
-        GenericTable.__init__(self)
