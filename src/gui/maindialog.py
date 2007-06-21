@@ -28,7 +28,7 @@ class MainDialog:
         self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
         self.window.set_title("%s - %s" % (common.APPNAME, common.APPVERSION))
         self.window.set_border_width(3)
-        self.window.set_size_request(500, 300)
+        self.window.set_size_request(550, 300)
         self.window.set_icon_from_file(common.APP_ICON)
         self.window.connect("delete_event", self.on_delete_event)
 

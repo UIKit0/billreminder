@@ -132,6 +132,7 @@ class GenericListView(gtk.TreeView):
 
         tvcolumn.set_resizable(True)
         tvcolumn.set_clickable(True)
+        tvcolumn.set_sort_column_id(index)
 
         return tvcolumn
 
