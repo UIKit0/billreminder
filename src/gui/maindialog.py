@@ -26,7 +26,7 @@ class MainDialog:
     def __init__(self):
         # Create a new window
         self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
-        self.window.set_title("%s - %s" % (common.APPNAME, common.APPVERSION))
+        self.window.set_title("%s" % common.APPNAME)
         self.window.set_border_width(3)
         self.window.set_size_request(550, 300)
         self.window.set_icon_from_file(common.APP_ICON)
@@ -159,15 +159,15 @@ class MainDialog:
         # Toggle paid field
         self.currentrecord.Paid = (self.currentrecord.Paid == 0) and 1 or 0
 
-        try:
+        if True:#try:
             # Edit bill to database
             self.actions.edit_bill(self.currentrecord.Dictionary)
             # Update list with updated record
             idx = self.list.get_cursor()[0][0]
             self.list.listStore[idx] = self._formated_row(self.currentrecord.Dictionary)
             self._update_statusbar(idx)
-        except Exception, e:
-            print str(e)
+        #except Exception, e:
+        #    print str(e)
 
     def about(self):
         dialogs.about_dialog(parent=self.window)
