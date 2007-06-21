@@ -57,7 +57,7 @@ class DAL(object):
 
         # Now save their version info
         for table in self.tables.values():
-            self._updateTableVersion(table.Name)
+            self.update_tableVersion(table.Name)
 
 
     def _createTable(self, tblname):
@@ -71,7 +71,7 @@ class DAL(object):
         # Saves fields information for every table except tblfields
         self.add('tblfields', {'tablename': tblname, 'fields': ", ".join(self._tables[tblname].Fields)})
 
-    def _updateTableVersion(self, tblname):
+    def update_tableVersion(self, tblname):
         """ Adds table verison information."""
         # Save version information for every table
         self.add('tblversions', {'tablename': tblname, 'version': self._tables[tblname].Version})
@@ -96,7 +96,8 @@ class DAL(object):
         for tblname in tbllist:
             tblname = str(tblname[0])
             try:
-                ver = self.get('tblversions', {'tablename': tblname})[0]['version']
+                #ver = self.get('tblversions', {'tablename': tblname})[0]['version']
+                ver = self.get(VersionsTable, {'tablename': tblname})[0]['version']
             except sqlite.OperationalError:
                 ver = -1
             print ver
@@ -104,13 +105,13 @@ class DAL(object):
             if tblname not in self._tables:
                 # We should revisit this logic
                 print  '%s is an obsolete table and it will be deleted' % tblname
-                self._deleteTable(tblname)
+                self._delete_table(tblname)
                 continue
             if self._tables[tblname].Version == int(ver) :
                 print '%s is a valid table' % tblname
             else:
                 print '%s is NOT a valid table' % tblname
-                self._updateTable(tblname)
+                self._update_table(tblname)
             # Remove valid tables from dict
             unvalidated.pop(tblname)
 
@@ -118,13 +119,13 @@ class DAL(object):
         for table in unvalidated:
             self._createTable(table)
 
-    def _deleteTable(self, tblname):
+    def _delete_table(self, tblname):
         stmt = "DROP TABLE %s" % tblname
         self.cur.execute(stmt)
         self.delete('tblversions',  tblname)
         print "Removed table %s" % tblname
 
-    def _updateTable(self, tblname):
+    def _update_table(self, tblname):
         oldfields = self.get('tblfields', {'tablename': tblname})[0]['fields'].split(', ')
         stmt = "SELECT %(fields)s FROM %(name)s" \
             % dict(fields=", ".join(oldfields), name=tblname)
@@ -140,9 +141,9 @@ class DAL(object):
         for rec in oldrecords:
             self.add(self._nicks[tblname], dict([(col,rec.get(col,'')) for col in self._tables[tblname].Fields]))
 
-        self._deleteTable('%s_old' % tblname)
+        self._delete_table('%s_old' % tblname)
 
-    def _createQueryParams(self, kwargs):
+    def _create_query_params(self, kwargs):
         """ Helper method to create a statement and arguments to a query. """
         if None == kwargs or 0 == len(kwargs):
             return ("", [])
@@ -159,28 +160,28 @@ class DAL(object):
             args = []
         return (stmt, args)
 
-    def edit(self, tblnick, key, dic):
+    def edit(self, table, kwargs):
         """ Edit a record in the database """
         # Removes the key field
-        if self.tables[tblnick].KeyAuto:
-            del dic[self.tables[tblnick].Key]
+        if table.KeyAuto:
+            del kwargs[table.Key]
 
         # Split up into pairs
         pairs = dic.items()
 
         params = "=?, ".join([ x[0] for x in pairs ]) + "=?"
         stmt = "UPDATE %s SET %s WHERE %s=?" \
-            % (self.tables[tblnick].Name, params, self.tables[tblnick].Key)
+            % (table.Name, params, table.Key)
 
         args = [x[1] for x in pairs] + [key]
 
         rowsAffected = self._executeSQL(stmt, args)
         return rowsAffected
 
-    def delete(self, tblnick, key):
+    def delete(self, table, key):
         """ Delete a record in the database """
         # Delete statement
-        stmt = "DELETE FROM %s WHERE %s=?" % (self.tables[tblnick].Name, self.tables[tblnick].Key)
+        stmt = "DELETE FROM %s WHERE %s=?" % (table.Name, table.Key)
         try:
             self._executeSQL(stmt, [key])
             return True
@@ -189,37 +190,37 @@ class DAL(object):
             print str(e)
             return False
 
-    def add(self, tblnick, kwargs):
+    def add(self, table, kwargs):
         """ Adds a record to the database """
 
-        if self.tables[tblnick].KeyAuto:
-            kwargs.pop(self.tables[tblnick].Key)
+        if table.KeyAuto:
+            kwargs.pop(table.Key)
         # Separate columns and values
         values = kwargs.values()
         cols = kwargs.keys()
         # Insert statement
         stmt = "INSERT INTO %s (%s) VALUES (%s)" %\
-            (self.tables[tblnick].Name, ",".join(cols), ",".join('?' * len(values)))
+            (table.Name, ",".join(cols), ",".join('?' * len(values)))
         self.cur.execute(stmt, values)
         b_key = self.cur.lastrowid
         if b_key:
-            rows = self.get(tblnick, {self.tables[tblnick].Key: b_key})
+            rows = self.get(table, {table.Key: b_key})
             try: return rows[0]
             except: None
 
-    def get(self, tblnick, kwargs):
+    def get(self, table, kwargs):
         """ Returns one or more records that meet the criteria passed """
-        (stmt, args) = self._createQueryParams(kwargs)
+        (stmt, args) = self._create_query_params(kwargs)
 
         stmt = "SELECT %(fields)s FROM %(name)s" \
-            % dict(fields=", ".join(self.tables[tblnick].Fields), name=self.tables[tblnick].Name) + stmt
+            % dict(fields=", ".join(table.Fields), name=table.Name) + stmt
         try:
             self.cur.execute(stmt, args)
         except sqlite.OperationalError:
             return None
 
 
-        rows = [dict([ (f, row[i]) for i, f in enumerate(self.tables[tblnick].Fields) ]) \
+        rows = [dict([ (f, row[i]) for i, f in enumerate(table.Fields) ]) \
             for row in self.cur.fetchall()]
 
         return rows

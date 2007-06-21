@@ -9,7 +9,7 @@ import locale
 import gobject
 import lib.utils as utils
 from lib.bill import Bill
-from lib.dal import DAL
+from lib.actions import Actions
 
 class AddDialog(gtk.Dialog):
     """
@@ -116,11 +116,11 @@ class AddDialog(gtk.Dialog):
     def _populate_payee(self):
         """ Populates combobox with existing payees """
         # Connects to the database
-        dal = DAL()
+        actions = Actions()
 
         # List of payees from database
         payees = []
-        records = dal.get('tblbills', "paid IN (0,1) ORDER BY payee ASC")
+        records = actions.get_bills("paid IN (0,1) ORDER BY payee ASC")
         for rec in records:
             if rec['payee'] not in payees:
                 payees.append(rec['payee'])

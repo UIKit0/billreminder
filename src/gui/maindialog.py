@@ -15,6 +15,7 @@ from gui.widgets.viewbill import ViewBill as ViewBill
 # Import data model modules
 from lib.bill import Bill
 from lib.dal import DAL
+from lib.actions import Actions
 
 # Import common utilities
 import lib.common as common
@@ -35,7 +36,7 @@ class MainDialog:
 
         # ViewBill
         self.list = ViewBill()
-        self.list.connect('cursor_changed', self.on_list_cursor_changed)
+        self.list.connect('cursor_changed', self._on_list_cursor_changed)
 
         # Menubar
         self.menubar = Toolbar()
@@ -59,24 +60,27 @@ class MainDialog:
 
         self.window.show_all()
 
-        # Connects to the database
-        self.dal = DAL()
-        self._populateTreeView(self.dal.get('tblbills', 'paid = 0 ORDER BY dueDate DESC'))
+        self.toggle_buttons()
 
-    def _getBill(self):
+        # Connects to the database
+        self.actions = Actions()
+        self._populateTreeView(self.actions.get_bills('paid = 0 ORDER BY dueDate DESC'))
+
+    # Methods:  UI
+    def _get_selected_record(self):
         """ Returns a bill object from the current selected record """
-        sel = self.list.get_selection()
-        _model, iteration = sel.get_selected()
+        selection = self.list.get_selection()
+        _model, iteration = selection.get_selected()
 
         b_id = _model.get_value(iteration, 0)
 
-        records = self.dal.get('tblbills', {'Id': b_id})
-        rec = records[0]
+        try:
+            records = self.actions.get_bills({'Id': b_id})
+            self.currentrecord = Bill(records[0])
+        except Exception, e:
+            print str(e)
+            self.currentrecord = None
 
-        # Return bill and id
-        return b_id, Bill(rec)
-
-    # Methods:  UI
     def _populateTreeView(self, records):
         """ Populates the treeview control with the records passed """
 
@@ -101,47 +105,42 @@ class MainDialog:
         return formated
 
     def _populate_menubar(self):
-        self.menubar.add_stock(gtk.STOCK_NEW, "Add a new record", self.on_mnuNew_clicked)
-        self.menubar.add_stock(gtk.STOCK_EDIT, "Edit a record", self.on_mnuEdit_clicked)
-        self.menubar.add_stock(gtk.STOCK_DELETE, "Delete selected record", self.on_mnuDelete_clicked)
+        self.btnNew = self.menubar.add_button(gtk.STOCK_NEW, "New","Add a new record", self.on_mnuNew_clicked)
+        self.btnEdit = self.menubar.add_button(gtk.STOCK_EDIT, "Edit", "Edit a record", self.on_mnuEdit_clicked)
+        self.btnRemove = self.menubar.add_button(gtk.STOCK_DELETE, "Delete", "Delete selected record", self.on_mnuDelete_clicked)
         self.menubar.add_space()
-        self.menubar.add_button(gtk.STOCK_APPLY, "Paid", "Mark as paid", self.on_mnuPaid_clicked)
-        self.menubar.add_button(gtk.STOCK_UNDO, "Not Paid", "Mark as not paid", self.on_mnuNotPaid_clicked)
+        self.btnPaid = self.menubar.add_button(gtk.STOCK_APPLY, "Paid", "Mark as paid", self.on_mnuPaid_clicked)
+        self.btnUnpaid = self.menubar.add_button(gtk.STOCK_UNDO, "Not Paid", "Mark as not paid", self.on_mnuNotPaid_clicked)
         self.menubar.add_space()
-        self.menubar.add_stock(gtk.STOCK_ABOUT, "About the application", self.on_mnuAbout_clicked)
+        self.btnAbout = self.menubar.add_button(gtk.STOCK_ABOUT, "About", "About the application", self.on_mnuAbout_clicked)
         self.menubar.add_space()
-        self.menubar.add_stock(gtk.STOCK_CLOSE, "Quit the application", self.on_mnuQuit_clicked)
+        self.btnClose = self.menubar.add_button(gtk.STOCK_CLOSE, "Close", "Quit the application", self.on_mnuQuit_clicked)
 
     def add_bill(self):
-        response, record = dialogs.add_dialog(parent=self.window)
+        record = dialogs.add_dialog(parent=self.window)
 
         # Checks if the user did not cancel the action
-        if response == -3: #gtk.RESPONSE_OK:
+        if record:
             # Add new bill to database
             bill = self.dal.add('tblbills', record.Dictionary)
-            id_ = bill['Id']
             if bill:
                 self.list.add(self._formatedRow(bill))
-                #self.list.append(self.formatedRow(bill))
-                #self.updateStatusBar()
+                self._update_statusbar()
                 #self.bill_id = id_
                 #self.refreshBillList(False)
 
     def edit_bill(self):
-        # Get currently selected bill
-        b_id, bill = self._getBill()
-
-        response, record = dialogs.edit_dialog(parent=self.window, record=bill)
+        record = dialogs.edit_dialog(parent=self.window, record=self.currentrecord)
 
         # Checks if the user did not cancel the action
-        if response == -3: #gtk.RESPONSE_OK:
+        if record:
             try:
                 # Edit bill to database
-                self.dal.edit('tblbills', b_id, record.Dictionary)
+                self.dal.edit('tblbills', self.currentrecord.Id, record.Dictionary)
                 # Update list with updated record
                 idx = self.list.get_cursor()[0][0]
                 self.list.listStore[idx] = self._formatedRow(record.Dictionary)
-                self.list.set_cursor(idx)
+                self._update_statusbar(idx)
             except Exception, e:
                 print str(e)
 
@@ -153,22 +152,45 @@ class MainDialog:
         gtk.main_quit()
         return False
 
+    def toggle_buttons(self, paid=None):
+        """ Toggles all buttons conform number of records present and their state """
+        if len(self.list.listStore) > 0:
+            self.btnEdit.set_sensitive(True)
+            self.btnRemove.set_sensitive(True)
+            """
+            Enable/disable paid and unpiad buttons.
+            If paid = True, paid button and menu will be enabled.
+            """
+            if paid:
+                self.btnPaid.set_sensitive(False)
+                self.btnUnpaid.set_sensitive(True)
+            else:
+                self.btnPaid.set_sensitive(True)
+                self.btnUnpaid.set_sensitive(False)
+        else:
+            self.btnEdit.set_sensitive(False)
+            self.btnRemove.set_sensitive(False)
+            self.btnPaid.set_sensitive(False)
+            self.btnUnpaid.set_sensitive(False)
+
+    def _update_statusbar(self, index=0):
+        """ This function is used to update status bar informations about the list """
+        records = len(self.list.listStore)
+
+        # Record count
+        self.statusbar.Records(records)
+        if self.currentrecord:
+            # Display the status for the selected row
+            self.statusbar.Notes(self.currentrecord.Notes)
+            # Toggles toolbar buttons on/off
+            self.toggle_buttons(self.currentrecord.Paid)
+
     # Event handlers
-    def on_list_cursor_changed(self, widget):
-        """ 
-            This function will handle the signal sent when a row is selected and 
-            displays the selected record information.
-        """
+    def _on_list_cursor_changed(self, widget):
         # Get currently selected bill
-        b_id, bill = self._getBill()
-
-        # Keep track of current bill
-        self.currentrecord = bill
-
-        notes = bill.Notes
-
-        # Display the status for the selected row
-        self.statusbar.Notes(notes)
+        self._get_selected_record()
+        # Update statusbar
+        self._update_statusbar()
 
     def on_mnuNew_clicked(self, toolbutton):
         self.add_bill()

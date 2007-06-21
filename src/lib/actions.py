@@ -3,6 +3,7 @@
 
 import dal
 import bill
+from db.billstable import BillsTable
 
 class Actions(object):
 
@@ -12,58 +13,18 @@ class Actions(object):
 
         self.dal = databaselayer
 
+    def get_bills(self, kwargs):
+        """ Returns one or more records that meet the criteria passed """
+        return self.dal.get(BillsTable, kwargs)
+
     def add_bill(self, bill):
         """ Adds a bill to the database """
-        # Turn it into a dictionary
-        billdict = bill.Dictionary
-        # Remove the Id field
-        billdict.pop('Id')
-        # Separate columns and values
-        values = billdict.values()
-        cols = billdict.keys()
-        # Insert statement
-        stmt = "INSERT INTO %s (%s) VALUES (%s)" % \
-            ('br_BillsTable', ",".join(cols), ",".join('?' * len(values)))
+        return self.dal.add(BillsTable, kwargs)
 
-        try:
-            # Execute it
-            self.dal.cur.execute(stmt, values)
-            # Grab the Id for the last record entered
-            id = self.dal.cur.lastrowid
-            # Return it
-            bill.Id = id
-
-            return bill
-        except Exception, e:
-            print str(e)
-            return None
-
-    def edit_bill(self, key, dic):
+    def edit_bill(self, BillsTable, key, kwargs):
         """ Edit a record in the database """
-        # Removes the key field
-        if self.dal.tables[tblnick].KeyAuto:
-            del dic[self.dal.tables[tblnick].Key]
-        
-        # Split up into pairs
-        pairs = dic.items()
-        
-        params = "=?, ".join([ x[0] for x in pairs ]) + "=?"
-        stmt = "UPDATE %s SET %s WHERE %s=?" \
-            % (self.dal.tables[tblnick].Name, params, self.dal.tables[tblnick].Key)
-        
-        args = [x[1] for x in pairs] + [key]
-        
-        rowsAffected = self.dal._executeSQL(stmt, args)
-        return rowsAffected
+        return self.dal.edit(BillsTable, key, kwargs)
 
-    def delete_bill(self, tblnick, key):
+    def delete_bill(self, BillsTable, key):
         """ Delete a record in the database """
-        # Delete statement
-        stmt = "DELETE FROM %s WHERE %s=?" % (self.dal.tables[tblnick].Name, self.dal.tables[tblnick].Key)
-        try:
-            self.dal._executeSQL(stmt, [key])
-            return True
-        except Exception, e:
-            # Dump error to the screen; may be helpfull when debugging
-            print str(e)
-            return False
+        return self.dal.delete(BillsTable, key)

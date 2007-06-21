@@ -15,9 +15,12 @@ class Toolbar(gtk.Toolbar):
     def add_button(self, image, title, tip_text=None, callback=None):
         toolitem = gtk.ToolButton(image)
         toolitem.set_label(title)
+        toolitem.set_tooltip(gtk.Tooltips(), tip_text, tip_text)
         if callback:
             toolitem.connect('clicked', callback)
         self.insert(toolitem,-1)
+
+        return toolitem
 
     def add_stock(self, stock_id, tip_text=None, callback=None):
         toolitem = gtk.ToolButton(stock_id)
@@ -37,5 +40,5 @@ class Toolbar(gtk.Toolbar):
         toolitem.add(widget)
         toolitem.set_expand(False)
         toolitem.set_homogeneous(False)
-        toolitem.set_tooltip(gtk.Tooltips(), tip_text, private_text)
+        toolitem.set_tooltip(gtk.Tooltips(), tip_text, tip_text)
         self.insert(toolitem,-1)
