@@ -87,12 +87,12 @@ class MainDialog:
         # Loops through bills collection
         path = 0
         for rec in records:
-            self.list.add(self._formatedRow(rec))
+            self.list.add(self._formated_row(rec))
 
         self.list.set_cursor(path)
         return
 
-    def _formatedRow(self, row):
+    def _formated_row(self, row):
         """ Formats a bill to be displayed as a row. """
         # Make sure the row is created using fields in proper order
         fields = ['Id', 'payee', 'dueDate', 'amountDue', 'notes', 'paid']
@@ -122,9 +122,9 @@ class MainDialog:
         # Checks if the user did not cancel the action
         if record:
             # Add new bill to database
-            bill = self.dal.add('tblbills', record.Dictionary)
+            bill = self.actions.add_bill(record.Dictionary)
             if bill:
-                self.list.add(self._formatedRow(bill))
+                self.list.add(self._formated_row(bill))
                 self._update_statusbar()
                 #self.bill_id = id_
                 #self.refreshBillList(False)
@@ -136,10 +136,10 @@ class MainDialog:
         if record:
             try:
                 # Edit bill to database
-                self.dal.edit('tblbills', self.currentrecord.Id, record.Dictionary)
+                self.actions.edit_bill(record.Dictionary)
                 # Update list with updated record
                 idx = self.list.get_cursor()[0][0]
-                self.list.listStore[idx] = self._formatedRow(record.Dictionary)
+                self.list.listStore[idx] = self._formated_row(record.Dictionary)
                 self._update_statusbar(idx)
             except Exception, e:
                 print str(e)

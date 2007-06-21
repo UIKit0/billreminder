@@ -17,14 +17,14 @@ class Actions(object):
         """ Returns one or more records that meet the criteria passed """
         return self.dal.get(BillsTable, kwargs)
 
-    def add_bill(self, bill):
+    def add_bill(self, kwargs):
         """ Adds a bill to the database """
         return self.dal.add(BillsTable, kwargs)
 
-    def edit_bill(self, BillsTable, key, kwargs):
+    def edit_bill(self, kwargs):
         """ Edit a record in the database """
-        return self.dal.edit(BillsTable, key, kwargs)
+        return self.dal.edit(BillsTable, kwargs)
 
-    def delete_bill(self, BillsTable, key):
+    def delete_bill(self, key):
         """ Delete a record in the database """
         return self.dal.delete(BillsTable, key)
