@@ -69,16 +69,19 @@ class MainDialog:
     # Methods:  UI
     def _get_selected_record(self):
         """ Returns a bill object from the current selected record """
-        selection = self.list.get_selection()
-        _model, iteration = selection.get_selected()
+        if len(self.list.listStore) > 0:
+            selection = self.list.get_selection()
+            _model, iteration = selection.get_selected()
 
-        b_id = _model.get_value(iteration, 0)
+            b_id = _model.get_value(iteration, 0)
 
-        try:
-            records = self.actions.get_bills({'Id': b_id})
-            self.currentrecord = Bill(records[0])
-        except Exception, e:
-            print str(e)
+            try:
+                records = self.actions.get_bills({'Id': b_id})
+                self.currentrecord = Bill(records[0])
+            except Exception, e:
+                print str(e)
+                self.currentrecord = None
+        else:
             self.currentrecord = None
 
     def _populateTreeView(self, records):
@@ -110,7 +113,7 @@ class MainDialog:
         self.btnRemove = self.menubar.add_button(gtk.STOCK_DELETE, "Delete", "Delete selected record", self.on_mnuDelete_clicked)
         self.menubar.add_space()
         self.btnPaid = self.menubar.add_button(gtk.STOCK_APPLY, "Paid", "Mark as paid", self.on_mnuPaid_clicked)
-        self.btnUnpaid = self.menubar.add_button(gtk.STOCK_UNDO, "Not Paid", "Mark as not paid", self.on_mnuNotPaid_clicked)
+        self.btnUnpaid = self.menubar.add_button(gtk.STOCK_UNDO, "Not Paid", "Mark as not paid", self.on_mnuPaid_clicked)
         self.menubar.add_space()
         self.btnAbout = self.menubar.add_button(gtk.STOCK_ABOUT, "About", "About the application", self.on_mnuAbout_clicked)
         self.menubar.add_space()
@@ -185,6 +188,20 @@ class MainDialog:
             # Toggles toolbar buttons on/off
             self.toggle_buttons(self.currentrecord.Paid)
 
+    def toggle_bill_paid(self):
+        # Toggle paid field
+        self.currentrecord.Paid = (self.currentrecord.Paid == 1) and 0 or 1
+
+        try:
+            # Edit bill to database
+            self.actions.edit_bill(self.currentrecord.Dictionary)
+            # Update list with updated record
+            idx = self.list.get_cursor()[0][0]
+            self.list.listStore[idx] = self._formated_row(self.currentrecord.Dictionary)
+            self._update_statusbar(idx)
+        except Exception, e:
+            print str(e)
+
     # Event handlers
     def _on_list_cursor_changed(self, widget):
         # Get currently selected bill
@@ -202,10 +219,7 @@ class MainDialog:
         pass
 
     def on_mnuPaid_clicked(self, toolbutton):
-        pass
-
-    def on_mnuNotPaid_clicked(self, toolbutton):
-        pass
+        self.toggle_bill_paid()
 
     def on_mnuAbout_clicked(self, toolbutton):
         self.about()

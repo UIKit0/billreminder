@@ -163,7 +163,7 @@ class DAL(object):
     def edit(self, table, kwargs):
         """ Edit a record in the database """
         # Removes the key field
-        key = table.Key
+        key = kwargs[table.Key]
         if table.KeyAuto:
             del kwargs[table.Key]
 
@@ -174,9 +174,9 @@ class DAL(object):
         stmt = "UPDATE %s SET %s WHERE %s=?" \
             % (table.Name, params, table.Key)
 
-        args = [x[1] for x in pairs] + [key]
+        params = [x[1] for x in pairs] + [key]
 
-        return self._executeSQL(stmt, args)
+        return self._executeSQL(stmt, params)
 
     def delete(self, table, key):
         """ Delete a record in the database """
