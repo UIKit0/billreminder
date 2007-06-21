@@ -33,6 +33,7 @@ class Actions(object):
         """ Delete a record in the database """
         return self.dal.delete(BillsTable, key)
 
-if not '--standalone' in sys.argv and not 'billreminderd' in sys.argv:
+print sys.argv
+if not '--standalone' in sys.argv and not sys.argv[0].endswith('billreminderd'):
     from lib.dbus_actions import Actions
 
