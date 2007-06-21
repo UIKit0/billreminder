@@ -18,7 +18,8 @@ from db.fieldstable import FieldsTable
 from db.billstable import BillsTable
 
 class DAL(object):
-
+    
+    # Maybe move dbName and dbPath to lib.common?
     # Database name and path
     dbName = 'billreminder.db'
     dbPath = '%s/.config/billreminder/data/' % os.environ['HOME']
@@ -66,11 +67,13 @@ class DAL(object):
         self.conn.commit()
         print tblname
 
+    # TODO: make compatible with new add method
     def _updateFieldsInformation(self, tblname):
         """ Adds field information for every table."""
         # Saves fields information for every table except tblfields
         self.add('tblfields', {'tablename': tblname, 'fields': ", ".join(self._tables[tblname].Fields)})
 
+     # TODO: make compatible with new add method
     def update_tableVersion(self, tblname):
         """ Adds table verison information."""
         # Save version information for every table
@@ -118,13 +121,23 @@ class DAL(object):
         # Create tables new in actual version
         for table in unvalidated:
             self._createTable(table)
+            
+        # Save tables version info
+        for table in unvalidated:
+            self._update_tableVersion(table)
+            
+        # Save tables fields info
+        for table in unvalidated:
+            self._updateFieldsInformation(table)
 
+    # TODO: make compatible with new delete method
     def _delete_table(self, tblname):
         stmt = "DROP TABLE %s" % tblname
         self.cur.execute(stmt)
         self.delete('tblversions',  tblname)
         print "Removed table %s" % tblname
 
+    # TODO: make compatible with new get, delete and add methods
     def _update_table(self, tblname):
         oldfields = self.get('tblfields', {'tablename': tblname})[0]['fields'].split(', ')
         stmt = "SELECT %(fields)s FROM %(name)s" \
@@ -148,7 +161,7 @@ class DAL(object):
         if None == kwargs or 0 == len(kwargs):
             return ("", [])
 
-        if not isinstance(kwargs,str):
+        if not isinstance(kwargs, basestring):
             pairs = kwargs.items()
             stmt = " WHERE " + \
                 " AND ".join([ x[0] + (None is x[1] and " IS NULL" or " = ?")
