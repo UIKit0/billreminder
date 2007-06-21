@@ -108,16 +108,16 @@ class MainDialog:
         return formated
 
     def _populate_menubar(self):
-        self.btnNew = self.menubar.add_button(gtk.STOCK_NEW, "New","Add a new record", self.on_mnuNew_clicked)
-        self.btnEdit = self.menubar.add_button(gtk.STOCK_EDIT, "Edit", "Edit a record", self.on_mnuEdit_clicked)
-        self.btnRemove = self.menubar.add_button(gtk.STOCK_DELETE, "Delete", "Delete selected record", self.on_mnuDelete_clicked)
+        self.btnNew = self.menubar.add_button(gtk.STOCK_NEW, "New","Add a new record", self.on_btnNew_clicked)
+        self.btnEdit = self.menubar.add_button(gtk.STOCK_EDIT, "Edit", "Edit a record", self.on_btnEdit_clicked)
+        self.btnRemove = self.menubar.add_button(gtk.STOCK_DELETE, "Delete", "Delete selected record", self.on_btnDelete_clicked)
         self.menubar.add_space()
-        self.btnPaid = self.menubar.add_button(gtk.STOCK_APPLY, "Paid", "Mark as paid", self.on_mnuPaid_clicked)
-        self.btnUnpaid = self.menubar.add_button(gtk.STOCK_UNDO, "Not Paid", "Mark as not paid", self.on_mnuPaid_clicked)
+        self.btnPaid = self.menubar.add_button(gtk.STOCK_APPLY, "Paid", "Mark as paid", self.on_btnPaid_clicked)
+        self.btnUnpaid = self.menubar.add_button(gtk.STOCK_UNDO, "Not Paid", "Mark as not paid", self.on_btnPaid_clicked)
         self.menubar.add_space()
-        self.btnAbout = self.menubar.add_button(gtk.STOCK_ABOUT, "About", "About the application", self.on_mnuAbout_clicked)
+        self.btnAbout = self.menubar.add_button(gtk.STOCK_ABOUT, "About", "About the application", self.on_btnAbout_clicked)
         self.menubar.add_space()
-        self.btnClose = self.menubar.add_button(gtk.STOCK_CLOSE, "Close", "Quit the application", self.on_mnuQuit_clicked)
+        self.btnClose = self.menubar.add_button(gtk.STOCK_CLOSE, "Close", "Quit the application", self.on_btnQuit_clicked)
 
     def add_bill(self):
         record = dialogs.add_dialog(parent=self.window)
@@ -146,6 +146,28 @@ class MainDialog:
                 self._update_statusbar(idx)
             except Exception, e:
                 print str(e)
+
+    def remove_bill(self):
+        try:
+            if self.actions.delete_bill(self.currentrecord.Id):
+                self.list.remove()
+                self._update_statusbar()
+        except Exception, e:
+            print str(e)
+
+    def toggle_bill_paid(self):
+        # Toggle paid field
+        self.currentrecord.Paid = (self.currentrecord.Paid == 0) and 1 or 0
+
+        try:
+            # Edit bill to database
+            self.actions.edit_bill(self.currentrecord.Dictionary)
+            # Update list with updated record
+            idx = self.list.get_cursor()[0][0]
+            self.list.listStore[idx] = self._formated_row(self.currentrecord.Dictionary)
+            self._update_statusbar(idx)
+        except Exception, e:
+            print str(e)
 
     def about(self):
         dialogs.about_dialog(parent=self.window)
@@ -188,20 +210,6 @@ class MainDialog:
             # Toggles toolbar buttons on/off
             self.toggle_buttons(self.currentrecord.Paid)
 
-    def toggle_bill_paid(self):
-        # Toggle paid field
-        self.currentrecord.Paid = (self.currentrecord.Paid == 0) and 1 or 0
-
-        try:
-            # Edit bill to database
-            self.actions.edit_bill(self.currentrecord.Dictionary)
-            # Update list with updated record
-            idx = self.list.get_cursor()[0][0]
-            self.list.listStore[idx] = self._formated_row(self.currentrecord.Dictionary)
-            self._update_statusbar(idx)
-        except Exception, e:
-            print str(e)
-
     # Event handlers
     def _on_list_cursor_changed(self, widget):
         # Get currently selected bill
@@ -209,22 +217,22 @@ class MainDialog:
         # Update statusbar
         self._update_statusbar()
 
-    def on_mnuNew_clicked(self, toolbutton):
+    def on_btnNew_clicked(self, toolbutton):
         self.add_bill()
 
-    def on_mnuEdit_clicked(self, toolbutton):
+    def on_btnEdit_clicked(self, toolbutton):
         self.edit_bill()
 
-    def on_mnuDelete_clicked(self, toolbutton):
-        pass
+    def on_btnDelete_clicked(self, toolbutton):
+        self.remove_bill()
 
-    def on_mnuPaid_clicked(self, toolbutton):
+    def on_btnPaid_clicked(self, toolbutton):
         self.toggle_bill_paid()
 
-    def on_mnuAbout_clicked(self, toolbutton):
+    def on_btnAbout_clicked(self, toolbutton):
         self.about()
 
-    def on_mnuQuit_clicked(self, toolbutton):
+    def on_btnQuit_clicked(self, toolbutton):
         self._quit_application()
 
     def on_delete_event(self, widget, event, data=None):

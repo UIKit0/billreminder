@@ -182,6 +182,7 @@ class DAL(object):
         """ Delete a record in the database """
         # Delete statement
         stmt = "DELETE FROM %s WHERE %s=?" % (table.Name, table.Key)
+
         try:
             self._executeSQL(stmt, [key])
             return True
