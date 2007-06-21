@@ -56,29 +56,60 @@ class ContextMenu(gtk.Menu):
 
 class Message:
     """ Generic prompt dialog """
+    _title_format = '<span weight="bold" size="larger">%s</span>'
+    
     def ShowQuestionOkCancel(self, text, parentWindow=None, title=''):
-        dlg = gtk.MessageDialog (parentWindow, gtk.DIALOG_MODAL, gtk.MESSAGE_QUESTION, gtk.BUTTONS_YES_NO, text)
-        if title == '':
-            dlg.set_title(_('Question'))
-        else:
-            dlg.set_title(title)
-
-        dlg.set_markup(text)
+        dlg = gtk.MessageDialog (parentWindow, 
+                                 gtk.DIALOG_MODAL, 
+                                 gtk.MESSAGE_QUESTION, 
+                                 gtk.BUTTONS_YES_NO)
+        title = title and title or 'Question'
+        dlg.set_markup(self._title_format % title)
+        dlg.format_secondary_markup(text)
         response = dlg.run()
         dlg.destroy()
         return response == gtk.RESPONSE_YES
 
     def ShowError(self, text, parentWindow=None, title=''):
-        dlg= gtk.MessageDialog(parentWindow, gtk.DIALOG_MODAL, gtk.MESSAGE_ERROR, gtk.BUTTONS_OK, text)
-        if title == '':
-            dlg.set_title(_('Error'))
-        else:
-            dlg.set_title(title)
-
-        dlg.set_markup(text)
+        dlg = gtk.MessageDialog(parentWindow, 
+                               gtk.DIALOG_MODAL, 
+                               gtk.MESSAGE_ERROR, 
+                               gtk.BUTTONS_OK)
+        title = title and title or 'Error'
+        dlg.set_markup(self._title_format % title)
+        dlg.format_secondary_markup(text)
         dlg.run()
         dlg.destroy()
-        return 
+        return
+
+    def ShowInfo(self, text, parentWindow=None, title=''):
+        dlg = gtk.MessageDialog(parentWindow, 
+                               gtk.DIALOG_MODAL, 
+                               gtk.MESSAGE_INFO, 
+                               gtk.BUTTONS_OK)
+        title = title and title or 'Information'
+        dlg.set_markup(self._title_format % title)
+        dlg.format_secondary_markup(text)
+        dlg.run()
+        dlg.destroy()
+        return
+
+    def ShowSaveConfirmation(self, parentWindow=None):
+        dlg = gtk.MessageDialog(parentWindow, 
+                               gtk.DIALOG_MODAL, 
+                               gtk.MESSAGE_WARNING, 
+                               gtk.BUTTONS_NONE)
+        dlg.add_button(_('Close _Without Saving'), gtk.RESPONSE_NO)
+        dlg.add_button(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
+        dlg.add_button(gtk.STOCK_SAVE, gtk.RESPONSE_YES)
+
+        dlg.set_default_response(gtk.RESPONSE_YES)
+
+        dlg.set_markup(self._title_format % 'Save changes before closing?')
+        dlg.format_secondary_markup('If you close without saving, your changes will be discarded.')
+        ret = dlg.run()
+        dlg.destroy()
+        return ret
 
 def select_combo_text(cb, text):
     i = 0
