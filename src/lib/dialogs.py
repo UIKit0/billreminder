@@ -33,7 +33,7 @@ def about_dialog(parent=None):
 
 def add_dialog(parent=None):
     record = None
-    dialog = AddDialog(title="Add a new record", parent=parent)
+    dialog = AddDialog(title="Add a New Record", parent=parent)
     response = dialog.run()
     # Checks if the user did not cancel the action
     if response == gtk.RESPONSE_ACCEPT:
@@ -43,7 +43,7 @@ def add_dialog(parent=None):
     return record
 
 def edit_dialog(record, parent=None):
-    dialog = AddDialog(title="Edit a record", parent=parent, record=record)
+    dialog = AddDialog(title="Edit a Record", parent=parent, record=record)
     response = dialog.run()
     # Checks if the user did not cancel the action
     if response == gtk.RESPONSE_ACCEPT:
