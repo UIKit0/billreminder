@@ -35,7 +35,7 @@ Copyright (c) 2006, 2007, Og Maciel
 All rights reserved.
 """
 
-#media path
+# Media path
 if os.path.exists(os.path.abspath('../images/')):
     IMAGE_PATH = os.path.abspath('../images/')
 else:
@@ -44,3 +44,12 @@ else:
 # Images
 APP_ICON = os.path.join(IMAGE_PATH, 'billreminder.png')
 APP_HEADER = os.path.join(IMAGE_PATH, 'header.png')
+
+# DBus info
+DBUS_INTERFACE = 'org.gnome.Billreminder.Daemon'
+DBUS_PATH = '/org/gnome/Billreminder/Daemon'
+
+# Daemon files
+DAEMON_LOCK_FILE = '/tmp/billreminderd.pid'
+DAEMON_LOG_FILE = '/tmp/billreminderd.log'
+
