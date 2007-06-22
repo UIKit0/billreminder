@@ -12,11 +12,11 @@ class NullDevice (object):
     """ Disable sys.stdout and sys.stderr """
     def __init__(self):
         pass
-        
+
     def write(self, string):
         """ Fake write """
         pass
-    
+
 
 class LogDevice (object):
     """ Redir sys.stdout and sys.stderr to log file """
@@ -33,7 +33,7 @@ class LogDevice (object):
                 filemode='a')
         self.log = logging.getLogger('billreminderd')
         pass
-        
+
     def write(self, string):
         """ Write log message """
         if string == '\n':
@@ -44,7 +44,6 @@ class LogDevice (object):
             self.log.info(string)
         elif self.type_ == 'stderr':
             self.log.error(string)
-    
 
 class VerboseDevice (LogDevice):
     def __init__(self, type_='stdout'):
@@ -54,4 +53,3 @@ class VerboseDevice (LogDevice):
                 logging.Formatter('%(name)-12s %(levelname)-9s %(message)s'))
         if type_ == 'stdout':
             self.log.addHandler(console)
-            

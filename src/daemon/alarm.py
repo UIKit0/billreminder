@@ -22,18 +22,18 @@ class NotifyMessage(object):
         self.hints = {}
         self.expire_timeout = 1000
         self.__action_func = None
-        
+
         self.__interface = dbus_manager.get_interface('org.freedesktop.Notifications', '/org/freedesktop/Notifications')
         self.__interface.connect_to_signal('ActionInvoked', self.__on_action_invoked)
-        
+
         self.parent = parent
-         
+
     def add_action(self, action):
         self.__actions.append(action)
- 
+
     def set_timeout(self, expire_timeout):
         self.expire_timeout = expire_timeout * 1000
-    
+
     def get_hints(self, tray):
         hints = {}
         if tray:
@@ -53,36 +53,35 @@ class NotifyMessage(object):
         hints['desktop-entry'] = 'billreminder'
         self.hints = hints
         return hints
-    
+
     def set_action(self, func):
         self.__action_func = func
-    
+
     def __on_action_invoked(self, *arg):
         if arg[0] != self.__id:
             return
-        
+
         self.parent.dbus_server.show_main_window()
-        
+
         print self.__action_func
         if self.__action_func:
             self.__action_func(arg)
-            
+
     def _set_id(self, id):
         self.__id = id
-        
+
     def _notify_error(self, e):
         print str(e)
- 
+
     def Notify(self):
         if self.__interface:
-            self.__interface.Notify(self.title, 
-                                    self.__replaces_id, 
-                                    self.icon, 
-                                    self.summary, 
-                                    self.body, 
-                                    self.__actions, 
-                                    self.hints, 
-                                    self.expire_timeout, 
-                                    reply_handler=self._set_id, 
+            self.__interface.Notify(self.title,
+                                    self.__replaces_id,
+                                    self.icon,
+                                    self.summary,
+                                    self.body,
+                                    self.__actions,
+                                    self.hints,
+                                    self.expire_timeout,
+                                    reply_handler=self._set_id,
                                     error_handler=self._notify_error)
-        
