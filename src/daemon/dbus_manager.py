@@ -7,7 +7,9 @@ import dbus
 import dbus.service
 
 from lib import common
-from lib.utils import force_string
+from lib.utils import force_string 
+from lib.utils import get_dbus_interface as get_interface
+from lib.utils import verify_dbus_service as verify_service
 
 from lib import bill
 
@@ -19,24 +21,6 @@ try:
 except ImportError:
     # dbus-python prior to 0.80
     import dbus.glib
-
-
-def get_interface(interface, path):
-    try:
-        session_bus = dbus.SessionBus()
-        obj = session_bus.get_object(interface, path)
-        ret = dbus.Interface(obj, interface)
-        return ret
-    except dbus.DBusException:
-        return None
-
-def verify_service(my_interface):
-    """ Verify if a specific DBus service is running """
-    try:
-        interface = get_interface('org.freedesktop.DBus', '/org/freedesktop/DBus')
-        return my_interface in interface.ListNames()
-    except dbus.DBusException:
-        return False
 
 
 class Server(dbus.service.Object):
