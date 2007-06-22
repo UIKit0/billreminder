@@ -23,7 +23,7 @@ class NotifyMessage(object):
         self.expire_timeout = 1000
         self.__action_func = None
 
-        self.__interface = dbus_manager.get_interface('org.freedesktop.Notifications', '/org/freedesktop/Notifications')
+        self.__interface = dbus_manager.get_interface(common.NOTIFICATION_INTERFACE, common.NOTIFICATION_PATH)
         self.__interface.connect_to_signal('ActionInvoked', self.__on_action_invoked)
 
         self.parent = parent
@@ -76,12 +76,12 @@ class NotifyMessage(object):
     def Notify(self):
         if self.__interface:
             self.__interface.Notify(self.title,
-                                    self.__replaces_id,
-                                    self.icon,
-                                    self.summary,
-                                    self.body,
-                                    self.__actions,
-                                    self.hints,
-                                    self.expire_timeout,
-                                    reply_handler=self._set_id,
-                                    error_handler=self._notify_error)
+                self.__replaces_id,
+                self.icon,
+                self.summary,
+                self.body,
+                self.__actions,
+                self.hints,
+                self.expire_timeout,
+                reply_handler=self._set_id,
+                error_handler=self._notify_error)

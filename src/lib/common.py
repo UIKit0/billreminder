@@ -49,6 +49,10 @@ APP_HEADER = os.path.join(IMAGE_PATH, 'header.png')
 DBUS_INTERFACE = 'org.gnome.Billreminder.Daemon'
 DBUS_PATH = '/org/gnome/Billreminder/Daemon'
 
+# Notification info
+NOTIFICATION_INTERFACE = 'org.freedesktop.Notifications'
+NOTIFICATION_PATH = '/org/freedesktop/Notifications'
+
 # Daemon files
 DAEMON_LOCK_FILE = '/tmp/billreminderd.pid'
 DAEMON_LOG_FILE = '/tmp/billreminderd.log'

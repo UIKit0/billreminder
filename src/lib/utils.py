@@ -59,7 +59,7 @@ class ContextMenu(gtk.Menu):
 class Message:
     """ Generic prompt dialog """
     _title_format = '<span weight="bold" size="larger">%s</span>'
-    
+
     def ShowQuestionOkCancel(self, text, parentWindow=None, title=''):
         dlg = gtk.MessageDialog (parentWindow, 
                                  gtk.DIALOG_MODAL, 

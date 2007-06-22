@@ -19,7 +19,7 @@ class Actions(object):
             self.dbus_interface = dbus.Interface(obj, common.DBUS_INTERFACE)
         except dbus.DBusException:
             pass
-            
+
     def _correct_type(self, record):
         if 'Id' in record.keys():
             record['Id'] = int(record['Id'])
@@ -37,7 +37,7 @@ class Actions(object):
             records = self.dbus_interface.get_bills_(kwargs)
         else:
             records = self.dbus_interface.get_bills(force_string(kwargs))
-        
+
         for record in records:
             record = self._correct_type(record)
         return records
@@ -55,4 +55,3 @@ class Actions(object):
     def delete_bill(self, key):
         """ Delete a record in the database """
         return self.dbus_interface.delete_bill(key)
-

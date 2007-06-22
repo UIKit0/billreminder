@@ -14,7 +14,7 @@ class Actions(object):
     def __init__(self, databaselayer=None):
         if not databaselayer:
             databaselayer = dal.DAL()
-        
+
         self.dal = databaselayer
 
     def get_bills(self, kwargs):
