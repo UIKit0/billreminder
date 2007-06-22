@@ -8,6 +8,7 @@ import gtk
 from gui.widgets.toolbar import Toolbar
 from gui.widgets.statusbar import Statusbar
 from gui.widgets.viewbill import ViewBill as ViewBill
+from gui.widgets.trayicon import NotifyIcon
 
 # Import dialogs modules
 #from gui.adddialog import AddDialog
@@ -66,8 +67,18 @@ class MainDialog:
         # Connects to the database
         self.actions = Actions()
         self._populateTreeView(self.actions.get_bills('paid = 0 ORDER BY dueDate DESC'))
+        self.notify = NotifyIcon(self)
 
     # Methods:  UI
+    def get_window_visibility(self):
+        return self.window.get_property("visible")
+
+    def show_hide_window(self):
+        if self.window.get_property("visible"):
+            self.window.hide()
+        else:
+            self.window.show()
+
     def _get_selected_record(self):
         """ Returns a bill object from the current selected record """
         if len(self.list.listStore) > 0:
