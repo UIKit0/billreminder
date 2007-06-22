@@ -16,7 +16,7 @@ Options:
   --no-daemon\t\tDon't run as a daemon.
   --version, -v\t\tDisplays the version number for this application.
 """)
-        
+
     # Verify arguments
     args = sys.argv
     if '--help' in args or '-h' in args or '-?' in args:

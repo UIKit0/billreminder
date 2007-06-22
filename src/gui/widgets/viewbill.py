@@ -4,6 +4,7 @@ import gtk
 import datetime
 from gui.widgets.genericlistview import GenericListView
 from lib.bill import Bill
+from lib import i18n
 
 class ViewBill(GenericListView):
     """
@@ -17,14 +18,14 @@ class ViewBill(GenericListView):
 
     def payee_cell_data_function(self, column, cell, model, iter):
         payee = model.get_value (iter, 1)
-        cell.set_property('markup', '<b>%s</b>' % payee)
+        cell.set_property('markup', _('<b>%(payee)s</b>') % payee)
 
     def duedate_cell_data_function(self, column, cell, model, iter):
         dueDate = float(model.get_value (iter, 2))
         # Format the dueDate field
         dueDate = datetime.datetime.fromtimestamp(dueDate)
         # TRANSLATORS: This is a date format. You can change the order.
-        dueDate = dueDate.strftime('%Y/%m/%d'.encode('ASCII'))
+        dueDate = dueDate.strftime(_('%Y/%m/%d').encode('ASCII'))
         cell.set_property('text', dueDate)
         cell.set_property('xalign', 0.5)
 
@@ -50,11 +51,11 @@ class ViewBill(GenericListView):
     # by the column title and cellrenderer type.
     columns = {
         0: ['Id', gtk.CellRendererText(), id_cell_data_function],
-        1: ['Payee', gtk.CellRendererText(), payee_cell_data_function],
-        2: ['Due Date', gtk.CellRendererText(), duedate_cell_data_function],
-        3: ['Amount Due', gtk.CellRendererText(), amountdue_cell_data_function],
-        4: ['Notes', gtk.CellRendererText(), notes_cell_data_function],
-        5: ['Paid', gtk.CellRendererText(), paid_cell_data_function]
+        1: [_('Payee'), gtk.CellRendererText(), payee_cell_data_function],
+        2: [_('Due Date'), gtk.CellRendererText(), duedate_cell_data_function],
+        3: [_('Amount Due'), gtk.CellRendererText(), amountdue_cell_data_function],
+        4: [_('Notes'), gtk.CellRendererText(), notes_cell_data_function],
+        5: [_('Paid'), gtk.CellRendererText(), paid_cell_data_function]
     }
 
     def __init__(self):

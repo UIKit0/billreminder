@@ -10,6 +10,7 @@ import gobject
 import lib.utils as utils
 from lib.bill import Bill
 from lib.actions import Actions
+from lib import i18n
 
 class AddDialog(gtk.Dialog):
     """
@@ -41,7 +42,7 @@ class AddDialog(gtk.Dialog):
 
         # Add calendar and label
         self.callabel = gtk.Label()
-        self.callabel.set_markup("<b>Due Date:</b>")
+        self.callabel.set_markup(_("<b>Due Date:</b>"))
         self.callabel.set_alignment(0.00, 0.50)
         self.calendar = gtk.Calendar()
         self.calendar.mark_day(datetime.datetime.today().day)
@@ -60,13 +61,13 @@ class AddDialog(gtk.Dialog):
 
         ## Labels
         self.payeelabel = gtk.Label()
-        self.payeelabel.set_markup("<b>Payee:</b>")
+        self.payeelabel.set_markup(_("<b>Payee:</b>"))
         self.payeelabel.set_alignment(0.00, 0.50)
         self.amountlabel = gtk.Label()
-        self.amountlabel.set_markup("<b>Amount:</b>")
+        self.amountlabel.set_markup(_("<b>Amount:</b>"))
         self.amountlabel.set_alignment(0.00, 0.50)
         self.noteslabel = gtk.Label()
-        self.noteslabel.set_markup("<b>Note:</b>")
+        self.noteslabel.set_markup(_("<b>Note:</b>"))
         self.noteslabel.set_alignment(0.00, 0.50)
         ## Fields
         self.payee = gtk.ComboBoxEntry()
@@ -104,7 +105,7 @@ class AddDialog(gtk.Dialog):
 
         self.allowed_digts = [self.decimal_sep , self.thousands_sep]
         # Format the amount field
-        self.amount.set_text("%0.2f" % self.currentrecord.AmountDue)
+        self.amount.set_text(_("%(amount)0.2f") % self.currentrecord.AmountDue)
         # Format the dueDate field
         dt = datetime.datetime.fromtimestamp(self.currentrecord.DueDate)
         self.calendar.select_day(dt.day)

@@ -20,6 +20,7 @@ except ImportError:
 try:
     from gui.aboutdialog import AboutDialog
     from gui.adddialog import AddDialog
+    from lib import i18n
 except ImportError, e:
     print str(e)
     raise SystemExit
@@ -33,7 +34,7 @@ def about_dialog(parent=None):
 
 def add_dialog(parent=None):
     record = None
-    dialog = AddDialog(title="Add a New Record", parent=parent)
+    dialog = AddDialog(title=_("Add a New Record"), parent=parent)
     response = dialog.run()
     # Checks if the user did not cancel the action
     if response == gtk.RESPONSE_ACCEPT:
@@ -43,7 +44,7 @@ def add_dialog(parent=None):
     return record
 
 def edit_dialog(record, parent=None):
-    dialog = AddDialog(title="Edit a Record", parent=parent, record=record)
+    dialog = AddDialog(title=_("Edit a Record"), parent=parent, record=record)
     response = dialog.run()
     # Checks if the user did not cancel the action
     if response == gtk.RESPONSE_ACCEPT:

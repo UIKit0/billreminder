@@ -2,11 +2,12 @@
 # -*- coding: utf-8 -*-
 
 import os
+from lib import i18n
 
 # Application info
-APPNAME = "BillReminder"
+APPNAME = _("BillReminder")
 APPVERSION = "0.3"
-COPYRIGHTS = "BillReminder - Copyright (c) 2006, 2007\nOg Maciel <ogmaciel@ubuntu.com>"
+COPYRIGHTS = _("BillReminder - Copyright (c) 2006, 2007\nOg Maciel <omaciel@foresightlinux.org>")
 WEBSITE = "http://billreminder.sourceforge.net"
 AUTHORS = [
     'Developers:',
@@ -56,4 +57,3 @@ NOTIFICATION_PATH = '/org/freedesktop/Notifications'
 # Daemon files
 DAEMON_LOCK_FILE = '/tmp/billreminderd.pid'
 DAEMON_LOG_FILE = '/tmp/billreminderd.log'
-

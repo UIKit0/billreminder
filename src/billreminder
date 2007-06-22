@@ -18,6 +18,7 @@ except ImportError:
     raise SystemExit
 
 try:
+    from lib import i18n
     from gui.maindialog import MainDialog as BillReminder
     import lib.dialogs
     import lib.common
@@ -25,7 +26,7 @@ except ImportError, e:
     print str(e)
     raise SystemExit
 
-help = """Usage:  billreminder [OPTIONS...]
+help = _("""Usage:  billreminder [OPTIONS...]
 
 Options:
   --help, -h, -?\tShow this message.
@@ -33,7 +34,7 @@ Options:
   --add\t\t\tAdds a new record to the database.
   --standalone\t\tAccess database directly, without daemon.
   --version, -v\t\tDisplays the version number for this application.
-"""
+""")
 
 
 def main():
@@ -46,7 +47,7 @@ def main():
     elif "--add" in args:
         print lib.dialogs.add_dialog()
     elif "--version" in args or "-v" in args:
-        print "This is %s - Version: %s" % (lib.common.APPNAME, lib.common.APPVERSION)
+        print _("This is %(appname)s - Version: %(version)s") % (lib.common.APPNAME, lib.common.APPVERSION)
     else:
         gtk.gdk.threads_init()
         app = BillReminder()

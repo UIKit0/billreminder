@@ -12,6 +12,7 @@ from lib.utils import get_dbus_interface as get_interface
 from lib.utils import verify_dbus_service as verify_service
 
 from lib import bill
+from lib import i18n
 
 # Set up DBus event loop
 try:
@@ -41,7 +42,7 @@ class Server(dbus.service.Object):
     # DBus Methods (Called via DBus Service)
     @dbus.service.method(common.DBUS_INTERFACE, out_signature='s')
     def hello(self):
-        return 'Runnig %s Daemon %s' % (common.APPNAME, common.APPVERSION)
+        return _('Runnig %(appname)s Daemon %(version)s') % (common.APPNAME, common.APPVERSION)
 
     @dbus.service.method(common.DBUS_INTERFACE, out_signature='b')
     def quit(self):

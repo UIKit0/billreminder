@@ -20,6 +20,7 @@ from lib.actions import Actions
 # Import common utilities
 import lib.common as common
 import lib.dialogs as dialogs
+from lib import i18n
 
 class MainDialog:
 
@@ -108,16 +109,16 @@ class MainDialog:
         return formated
 
     def _populate_menubar(self):
-        self.btnNew = self.menubar.add_button(gtk.STOCK_NEW, "New","Add a new record", self.on_btnNew_clicked)
-        self.btnEdit = self.menubar.add_button(gtk.STOCK_EDIT, "Edit", "Edit a record", self.on_btnEdit_clicked)
-        self.btnRemove = self.menubar.add_button(gtk.STOCK_DELETE, "Delete", "Delete selected record", self.on_btnDelete_clicked)
+        self.btnNew = self.menubar.add_button(gtk.STOCK_NEW, _("New"),_("Add a new record"), self.on_btnNew_clicked)
+        self.btnEdit = self.menubar.add_button(gtk.STOCK_EDIT, _("Edit"), _("Edit a record"), self.on_btnEdit_clicked)
+        self.btnRemove = self.menubar.add_button(gtk.STOCK_DELETE, _("Delete"), _("Delete selected record"), self.on_btnDelete_clicked)
         self.menubar.add_space()
-        self.btnPaid = self.menubar.add_button(gtk.STOCK_APPLY, "Paid", "Mark as paid", self.on_btnPaid_clicked)
-        self.btnUnpaid = self.menubar.add_button(gtk.STOCK_UNDO, "Not Paid", "Mark as not paid", self.on_btnPaid_clicked)
+        self.btnPaid = self.menubar.add_button(gtk.STOCK_APPLY, _("Paid"), _("Mark as paid"), self.on_btnPaid_clicked)
+        self.btnUnpaid = self.menubar.add_button(gtk.STOCK_UNDO, _("Not Paid"), _("Mark as not paid"), self.on_btnPaid_clicked)
         self.menubar.add_space()
-        self.btnAbout = self.menubar.add_button(gtk.STOCK_ABOUT, "About", "About the application", self.on_btnAbout_clicked)
+        self.btnAbout = self.menubar.add_button(gtk.STOCK_ABOUT, _("About"), _("About the application"), self.on_btnAbout_clicked)
         self.menubar.add_space()
-        self.btnClose = self.menubar.add_button(gtk.STOCK_CLOSE, "Close", "Quit the application", self.on_btnQuit_clicked)
+        self.btnClose = self.menubar.add_button(gtk.STOCK_CLOSE, _("Close"), _("Quit the application"), self.on_btnQuit_clicked)
 
     def add_bill(self):
         record = dialogs.add_dialog(parent=self.window)

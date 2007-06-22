@@ -18,7 +18,7 @@ from db.fieldstable import FieldsTable
 from db.billstable import BillsTable
 
 class DAL(object):
-    
+
     # Maybe move dbName and dbPath to lib.common?
     # Database name and path
     dbName = 'billreminder.db'
