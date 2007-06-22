@@ -6,7 +6,7 @@ import sys
 import dal
 import bill
 from lib import common
-from lib.utils import force_string
+from lib.utils import force_string, verify_dbus_service
 from db.billstable import BillsTable
 
 class Actions(object):
@@ -33,7 +33,6 @@ class Actions(object):
         """ Delete a record in the database """
         return self.dal.delete(BillsTable, key)
 
-print sys.argv
-if not '--standalone' in sys.argv and not sys.argv[0].endswith('billreminderd'):
+if not '--standalone' in sys.argv and not sys.argv[0].endswith('billreminderd') and verify_dbus_service(common.DBUS_INTERFACE):
     from lib.dbus_actions import Actions
 
