@@ -1,0 +1,61 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+__all__ = ['NotifyIcon']
+
+import sys
+
+import os
+import gtk
+import time
+from lib import common
+from lib.utils import ContextMenu
+
+class NotifyIcon:
+    """ This class creates the tray icon notification - GTK 2.10 or above """
+
+    def __init__(self,parent):
+        """ Constructor """
+
+        self.parent = parent
+
+        #show the icon
+        self.start()
+
+    def start(self):
+        """ Function used to show an icon in notification area."""
+
+        self.tray = gtk.StatusIcon()
+        self.tray.set_from_file(common.APP_ICON)
+        self.tray.set_tooltip("BillReminder")
+        self.tray.connect("popup-menu", self.show_menu, None)
+        self.tray.connect("activate", self.show_hide, None)
+
+    def show_hide(self, status_icon, arg=None):
+        """ Show and Hide the main window. """
+        self.parent.show_hide_window()
+
+    def show_menu(self, status_icon, button, activate_time, arg=None):
+        """ Show a popup menu when an user right clicks notification area icon."""
+        c = ContextMenu(self)
+        if self.parent.get_window_visibility():
+            c.addMenuItem(_('Hide Window'), self.show_hide)
+        else:
+            c.addMenuItem(_('Show Window'), self.show_hide)
+
+        c.addMenuItem('-', None)
+        c.addMenuItem(_('About'), self.parent.on_btnAbout_clicked, gtk.STOCK_ABOUT)
+        c.addMenuItem('-', None)
+        c.addMenuItem(_('Quit'), self.parent.on_btnQuit_clicked, gtk.STOCK_QUIT)
+
+        print type(activate_time)
+        c.popup(None, None, None, button, activate_time)
+        del c
+
+    def destroy(self):
+        """ Hide the systray icon. """
+        self.tray.set_visible(False)
+
+    def exists(self):
+        """ Do nothing here, only returns that the class was instantiated."""
+        return True

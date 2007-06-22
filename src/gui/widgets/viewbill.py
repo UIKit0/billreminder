@@ -18,7 +18,7 @@ class ViewBill(GenericListView):
 
     def payee_cell_data_function(self, column, cell, model, iter):
         payee = model.get_value (iter, 1)
-        cell.set_property('markup', _('<b>%(payee)s</b>') % payee)
+        cell.set_property('markup', _('<b>%(payee)s</b>') % {'payee': payee})
 
     def duedate_cell_data_function(self, column, cell, model, iter):
         dueDate = float(model.get_value (iter, 2))
