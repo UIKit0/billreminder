@@ -28,12 +28,12 @@ if __error:
     raise SystemExit
 
 from lib import common
-from lib import config
 from lib import i18n
+from lib.utils import verify_pid
 from lib.actions import Actions
-
-import alarm
-import dbus_manager
+from lib.config import Config
+from alarm import Alarm
+from dbus_manager import Server, verify_service
 from device import *
 
 stdout_orig = sys.stdout
@@ -109,13 +109,25 @@ class Program(Daemon):
 
     def __init__(self):
 
-        # Verify if Lock File exist
-        if not lock(): 
-            print _('Lock File found: Maybe you have another' \
-                    ' instance running.')
+        # Verify if Lock File exist and if there is another instance running
+        if not lock():
+            lockfd = open(common.DAEMON_LOCK_FILE, 'r')
+            lockpid = int(lockfd.readline())
+            lockfd.close()
+            if verify_pid(lockpid):
+                print _('Lock File found: You have another instance running. (pid=%d)') % lockpid
+                raise SystemExit
+            else:
+                print _('Lock File found: Possibly the program was exited unexpectedly.')
+                try:
+                    print _('Removing Lock File...')
+                    os.remove(common.DAEMON_LOCK_FILE)
+                    print _('Successfully.')
+                except OSError:
+                    print _('Failed.')
 
         # Verify if there is another Billreminder-Daemon DBus Service
-        if dbus_manager.verify_service(common.DBUS_INTERFACE):
+        if verify_service(common.DBUS_INTERFACE):
             print _('BillReminder is already running.')
             raise SystemExit
 
@@ -123,10 +135,10 @@ class Program(Daemon):
 
         self.client_pid = None
 
-        self.config = config.Config()
+        self.config = Config()
         self.actions = Actions()
-        self.dbus_server = dbus_manager.Server(self)
-        self.alarm = alarm.Alarm(self)
+        self.dbus_server = Server(self)
+        self.alarm = Alarm(self)
 
         # Create the mainloop
         self.mainloop = gobject.MainLoop()
