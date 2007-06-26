@@ -29,7 +29,6 @@ class Server(dbus.service.Object):
 
     def __init__(self, parent):
         self.parent = parent
-        self.dal = self.parent.dal
         self.actions = self.parent.actions
 
         # Start DBus support
@@ -49,6 +48,11 @@ class Server(dbus.service.Object):
         self.parent.quit()
         return True
 
+    @dbus.service.method(common.DBUS_INTERFACE, in_signature='i', out_signature='i')
+    def register(self, pid):
+        self.parent.client_pid = pid
+        return self.parent.client_pid
+
     @dbus.service.method(common.DBUS_INTERFACE, in_signature='a{ss}', out_signature='aa{ss}')
     def get_bills(self, kwargs):
         """ Returns one or more records that meet the criteria passed """
@@ -63,7 +67,7 @@ class Server(dbus.service.Object):
     @dbus.service.method(common.DBUS_INTERFACE, in_signature='s', out_signature='aa{ss}')
     def get_bills_(self, kwargs):
         """ Returns one or more records that meet the criteria passed """
-        print kwargs
+        #print kwargs
         ret = []
         records = self.actions.get_bills(kwargs)
         for record in records:
@@ -100,16 +104,20 @@ class Server(dbus.service.Object):
         # Set tray icon hints
         hints['x'] = int(hints['x'])
         hints['y'] = int(hints['y'])
-        self.parent.tray_hints = hints
+        self.parent.alarm.tray_hints = hints
 
     @dbus.service.method(common.DBUS_INTERFACE, out_signature='s')
     def get_notification_message(self):
-        return self.parent.show_pay_notification(show=False)
+        return self.parent.alarm.show_pay_notification(show=False)
 
     @dbus.service.method(common.DBUS_INTERFACE, in_signature='ss', out_signature='b')
     def show_message(self, title, msg):
-        self.parent.show_notification(title, msg)
+        self.parent.alarm.show_notification(title, msg)
         return True
+
+    @dbus.service.method(common.DBUS_INTERFACE)
+    def reload_config(self):
+        self.parent.config.reload()
 
     # DBus Signals
     @dbus.service.signal(common.DBUS_INTERFACE, signature='a{ss}')

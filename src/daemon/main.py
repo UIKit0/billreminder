@@ -5,12 +5,8 @@ __all__ = ['Daemon', 'Program', 'lock', 'unlock']
 
 __error = False
 
-import datetime
-import time
 import os
 import sys
-
-from lib.actions import Actions
 
 try:
     import gobject
@@ -28,13 +24,13 @@ except ImportError:
     print 'Required package: python-pysqlite2'
     __error = True
 
-
 if __error:
     raise SystemExit
 
 from lib import common
-from lib import dal
+from lib import config
 from lib import i18n
+from lib.actions import Actions
 
 import alarm
 import dbus_manager
@@ -97,8 +93,7 @@ class Daemon(object):
                     raise SystemExit
             else:
                 raise SystemExit
-            # Redirect STDIN, STDOUT and STDERR  
-            # TODO: Create a log system
+            # Redirect STDIN, STDOUT and STDERR
             sys.stdin.close()
         if '--verbose' in sys.argv:
             sys.stdout.write('\n')
@@ -126,13 +121,12 @@ class Program(Daemon):
 
         Daemon.__init__(self)
 
-        self.tray_hints = {}
+        self.client_pid = None
 
-        self.dal = dal.DAL()
-        self.actions = Actions(self.dal)
+        self.config = config.Config()
+        self.actions = Actions()
         self.dbus_server = dbus_manager.Server(self)
-
-        self.show_pay_notification()
+        self.alarm = alarm.Alarm(self)
 
         # Create the mainloop
         self.mainloop = gobject.MainLoop()
@@ -143,29 +137,6 @@ class Program(Daemon):
             unlock()
         except:
             pass
-
-    def show_notification(self, title, body, show=True):
-        self.dbus_server.show_notification(title, body, 10, common.APP_HEADER)
-        if show:
-            notify = alarm.NotifyMessage(self)
-            notify.title = title
-            notify.body = body
-            notify.set_timeout(10)
-            notify.hints = self.tray_hints
-            notify.Notify()
-
-    def show_pay_notification(self, show=True):
-        today = time.mktime(datetime.date.today().timetuple())
-        limit = today + (7 * 86400.0) # TODO use config data
-        records = self.actions.get_bills('dueDate <= %s AND paid = 0' % today)
-
-        msg = N_('You have %s outstanding bill to pay!',
-                 'You have %s outstanding bills to pay!', len(records)) % len(records)
-
-        if show and msg:
-            self.show_notification(_('BillReminder'), msg)
-
-        return msg
 
     def quit(self):
         """ Close program """
