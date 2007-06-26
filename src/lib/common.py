@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import os
@@ -10,12 +10,12 @@ APPVERSION = "0.3"
 COPYRIGHTS = _("BillReminder - Copyright (c) 2006, 2007\nOg Maciel <omaciel@foresightlinux.org>")
 WEBSITE = "http://billreminder.sourceforge.net"
 AUTHORS = [
-    'Developers:',
+    _('Developers:'),
     'Og Maciel <OgMaciel@ubuntu.com>',
     'Laudeci Oliveira <laudeci@gmail.com>',
     'Luiz Armesto <luiz.armesto@gmail.com>',
     '',
-    'Contributors:',
+    _('Contributors:'),
     'Giovanni Deganni <tiefox@gmail.com>',
     'Ruivaldo <ruivaldo@gmail.com>',
     'Mario Danic <pygi@gmail.com>'
@@ -45,6 +45,14 @@ else:
 # Images
 APP_ICON = os.path.join(IMAGE_PATH, 'billreminder.png')
 APP_HEADER = os.path.join(IMAGE_PATH, 'header.png')
+
+# Config info
+CFG_NAME = 'billreminder.cfg'
+CFG_PATH =  os.path.expanduser('~/.config/billreminder/')
+
+# Database info
+DB_NAME = 'billreminder.db'
+DB_PATH =  os.path.expanduser('~/.config/billreminder/data/')
 
 # DBus info
 DBUS_INTERFACE = 'org.gnome.Billreminder.Daemon'

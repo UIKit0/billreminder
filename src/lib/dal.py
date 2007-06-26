@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 __all__ = ['DAL']
@@ -13,6 +13,7 @@ except ImportError:
     sys.exit(1)
 
 from lib.bill import Bill
+from lib.common import DB_NAME, DB_PATH
 from db.versionstable import VersionsTable
 from db.configtable import ConfigTable
 from db.fieldstable import FieldsTable
@@ -22,8 +23,8 @@ class DAL(object):
 
     # Maybe move dbName and dbPath to lib.common?
     # Database name and path
-    dbName = 'billreminder.db'
-    dbPath = os.path.expanduser('~/.config/billreminder/data/')
+    dbName = DB_NAME
+    dbPath = DB_PATH
 
     # Tables used by applications and corresponding versions
     tables = {'tblversions': VersionsTable(),
@@ -122,11 +123,11 @@ class DAL(object):
         # Create tables new in actual version
         for table in unvalidated:
             self._createTable(table)
-            
+
         # Save tables version info
         for table in unvalidated:
             self._update_tableVersion(table)
-            
+
         # Save tables fields info
         for table in unvalidated:
             self._updateFieldsInformation(table)
