@@ -4,6 +4,8 @@
 __all__ = ['ContextMenu', 'Message']
 
 import sys
+import os
+import datetime
 try:
     import pygtk
     pygtk.require("2.0")
@@ -13,7 +15,6 @@ except:
       pass
 try:
     import gtk
-    import datetime
 except ImportError, e:
     print str(e)
     sys.exit(1)
@@ -157,4 +158,11 @@ def verify_dbus_service(my_interface):
         interface = get_dbus_interface('org.freedesktop.DBus', '/org/freedesktop/DBus')
         return my_interface in interface.ListNames()
     except dbus.DBusException:
+        return False
+
+def verify_pid(pid):
+    try:
+        if os.getpgid(pid):
+            return True
+    except OSError:
         return False
