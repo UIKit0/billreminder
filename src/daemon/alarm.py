@@ -3,18 +3,17 @@
 
 __all__ = ['Alarm', 'NotifyMessage']
 
+from sys import stderr
 import datetime
 import time
-import gobject
-import sys
-import os
+from gobject import timeout_add
 from subprocess import Popen
 
 from lib import common
-from lib import utils
 from lib import i18n
+from lib.utils import Message, verify_pid
 
-import dbus_manager
+from dbus_manager import get_interface
 
 class NotifyMessage(object):
 
@@ -29,11 +28,12 @@ class NotifyMessage(object):
         self.hints = {}
         self.expire_timeout = 1000
         self.__action_func = None
+        self.parent = parent
 
-        self.__interface = dbus_manager.get_interface(common.NOTIFICATION_INTERFACE, common.NOTIFICATION_PATH)
+        # Connect DBus notification interface
+        self.__interface = get_interface(common.NOTIFICATION_INTERFACE, common.NOTIFICATION_PATH)
         self.__interface.connect_to_signal('ActionInvoked', self.__on_action_invoked)
 
-        self.parent = parent
 
     def add_action(self, action):
         self.__actions.append(action)
@@ -65,30 +65,26 @@ class NotifyMessage(object):
         self.__action_func = func
 
     def __on_action_invoked(self, *arg):
-        if arg[0] != self.__id:
+        # Ignore notifications from another programs
+        if not arg[0] == self.__id:
             return
 
+        # Send DBus 'show_main_window' signal
         self.parent.dbus_server.show_main_window()
 
-        print self.__action_func
+        # Verify if there is a specific function to call
         if self.__action_func:
             self.__action_func(arg)
-        else:
-            try:
-                if self.parent.client_pid:
-                    os.getpgid(self.parent.client_pid)
-                else:
-                     gui = Popen('python billreminder', shell=True)
-                     self.parent.client_pid = gui.pid
-            except OSError:
-                gui = Popen('python billreminder', shell=True)
-                self.parent.client_pid = gui.pid
+        # If client is not running, launch it
+        elif not self.parent.client_pid or not verify_pid(self.parent.client_pid):
+                 gui = Popen('python billreminder', shell=True)
+                 self.parent.client_pid = gui.pid
 
     def _set_id(self, id):
         self.__id = id
 
     def _notify_error(self, e):
-        print >> sys.stderr, str(e)
+        print >> stderr, str(e)
 
     def Notify(self):
         if self.__interface:
@@ -108,15 +104,15 @@ class Alarm(object):
     def __init__(self, parent):
         self.parent = parent
         self.tray_hints = {}
-        if self.parent.config.getboolean('alarm', 'startup'):
+        self.interval = self.parent.config.getint('Alarm', 'interval') * 1000
+        self.time = self.parent.config.getfloat('Alarm', 'show_alarm_at_time')
+        if self.parent.config.getboolean('Alarm', 'show_startup_notification'):
             self.show_pay_notification()
-        self.interval = self.parent.config.getint('alarm', 'interval') * 1000
-        self.time = self.parent.config.getfloat('alarm', 'time')
         if self.interval:
-            gobject.timeout_add(self.interval, self.timer)
+            timeout_add(self.interval, self.timer)
 
     def show(self, title, body, show=True):
-        if self.parent.config.getboolean('alarm', 'alert'):
+        if self.parent.config.getboolean('Alarm', 'use_alert_dialog'):
             self.show_alert(title, body, show)
         else:
             self.show_notification(title, body, show)
@@ -124,7 +120,7 @@ class Alarm(object):
     def show_alert(self, title, body, show=True):
         self.parent.dbus_server.show_alert(title, body, 'info')
         if show:
-            message = utils.Message()
+            message = Message()
             message.ShowInfo(text=body, title=title)
 
     def show_notification(self, title, body, show=True):
@@ -139,7 +135,7 @@ class Alarm(object):
 
     def show_pay_notification(self, show=True):
         today = time.mktime(datetime.date.today().timetuple())
-        limit = self.parent.config.getint('alarm', 'limit') * 86400.0
+        limit = self.parent.config.getint('Alarm', 'notification_days_limit') * 86400.0
         if limit:
             records = self.parent.actions.get_bills('dueDate <= %s AND paid = 0' % (today + limit))
         else:
@@ -149,7 +145,7 @@ class Alarm(object):
                  'You have %s outstanding bills to pay!', len(records)) % len(records)
 
         if msg:
-            self.show_notification(_('BillReminder'), msg, show)
+            self.show_notification(common.APPNAME, msg, show)
 
         return msg
 
