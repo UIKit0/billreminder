@@ -105,7 +105,7 @@ class AddDialog(gtk.Dialog):
 
         self.allowed_digts = [self.decimal_sep , self.thousands_sep]
         # Format the amount field
-        self.amount.set_text(_("%(amount)0.2f") % self.currentrecord.AmountDue)
+        self.amount.set_text(_("%(amount)0.2f") % {'amount': self.currentrecord.AmountDue})
         # Format the dueDate field
         dt = datetime.datetime.fromtimestamp(self.currentrecord.DueDate)
         self.calendar.select_day(dt.day)
