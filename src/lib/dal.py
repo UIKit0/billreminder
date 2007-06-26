@@ -3,7 +3,8 @@
 
 __all__ = ['DAL']
 
-import os, sys
+import os
+import sys
 
 try:
     from pysqlite2 import dbapi2 as sqlite
@@ -22,7 +23,7 @@ class DAL(object):
     # Maybe move dbName and dbPath to lib.common?
     # Database name and path
     dbName = 'billreminder.db'
-    dbPath = '%s/.config/billreminder/data/' % os.environ['HOME']
+    dbPath = os.path.expanduser('~/.config/billreminder/data/')
 
     # Tables used by applications and corresponding versions
     tables = {'tblversions': VersionsTable(),

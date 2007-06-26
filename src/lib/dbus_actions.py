@@ -3,6 +3,7 @@
 
 import dbus
 import dbus.service
+import os
 
 import dal
 import bill
@@ -19,6 +20,8 @@ class Actions(object):
             self.dbus_interface = dbus.Interface(obj, common.DBUS_INTERFACE)
         except dbus.DBusException:
             pass
+        pid = os.getpid()
+        print self.dbus_interface.register(pid)
 
     def _correct_type(self, record):
         if 'Id' in record.keys():
