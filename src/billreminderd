@@ -28,6 +28,6 @@ Options:
                                        'version': common.APPVERSION}
     else:
         BillReminderd.main()
-    
+
 if __name__ == "__main__":
     main()
