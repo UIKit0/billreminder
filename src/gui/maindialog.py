@@ -21,6 +21,7 @@ from lib.actions import Actions
 # Import common utilities
 import lib.common as common
 import lib.dialogs as dialogs
+from lib.utils import ContextMenu
 from lib import i18n
 
 class MainDialog:
@@ -39,6 +40,7 @@ class MainDialog:
         # ViewBill
         self.list = ViewBill()
         self.list.connect('cursor_changed', self._on_list_cursor_changed)
+        self.list.connect('button_press_event', self._on_list_button_press_event)
 
         # Menubar
         self.menubar = Toolbar()
@@ -223,6 +225,25 @@ class MainDialog:
             self.toggle_buttons(self.currentrecord.Paid)
 
     # Event handlers
+    def _on_list_button_press_event(self, widget, event):
+        """ This function will handle the signal to show a popup menu sent by 
+            a right click on tvBill widget. """
+        if event.button == 3 and event.type == gtk.gdk.BUTTON_PRESS and len(self.list.listStore) > 0:
+
+            c = ContextMenu(self)
+            c.addMenuItem(_('Add New'), self.on_btnNew_clicked, gtk.STOCK_NEW)
+            c.addMenuItem('-', None)
+            c.addMenuItem(_('Remove'), self.on_btnDelete_clicked, gtk.STOCK_DELETE)
+            c.addMenuItem(_('Edit'), self.on_btnEdit_clicked, gtk.STOCK_EDIT)
+            c.addMenuItem('-', None)
+            if not self.currentrecord.Paid:
+                c.addMenuItem(_('Paid'), self.on_btnPaid_clicked, gtk.STOCK_APPLY, True)
+            else:
+                c.addMenuItem(_('Not Paid'), self.on_btnPaid_clicked, gtk.STOCK_UNDO, True)
+            c.addMenuItem('-', None)
+            c.addMenuItem(_('Cancel'), None, gtk.STOCK_CANCEL)
+            c.popup(None, None, None, event.button, event.get_time())
+
     def _on_list_cursor_changed(self, widget):
         # Get currently selected bill
         self._get_selected_record()
