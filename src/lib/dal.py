@@ -136,7 +136,7 @@ class DAL(object):
         print "Removed table %s" % table.Name
 
     def _update_table(self, table):
-        oldfields = self.get('tblfields', {'tablename': table.Name})[0]['fields'].split(', ')
+        oldfields = self.get(self.tables['tblfields'], {'tablename': table.Name})[0]['fields'].split(', ')
         stmt = "SELECT %(fields)s FROM %(name)s" \
             % dict(fields=", ".join(oldfields), name=table.Name)
         self.cur.execute(stmt)
@@ -144,8 +144,8 @@ class DAL(object):
             for row in self.cur.fetchall()]
         stmt = "ALTER TABLE %s RENAME TO %s_old" % (table.Name, table.Name)
         self.cur.execute(stmt)
-        self.delete('tblversions',  table)
-        self.delete('tblfields', table)
+        self.delete(self.tables['tblversions'],  table.Name)
+        self.delete(self.tables['tblfields'], table.Name)
         self._createTable(table)
 
         for rec in oldrecords:
