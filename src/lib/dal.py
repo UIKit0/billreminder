@@ -33,7 +33,6 @@ class DAL(object):
         'tblbills': BillsTable()}
     # Same dict, but with real table name 
     _tables = dict([(tables[table].Name, tables[table]) for table in tables])
-    _nicks = dict([(tables[table].Name, table) for table in tables])
 
     def __init__(self):
         if not os.path.isdir(self.dbPath):
@@ -52,35 +51,33 @@ class DAL(object):
         """ All tables get created here."""
         # First, we create them
         for table in self.tables.values():
-            self._createTable(table.Name)
+            self._createTable(table)
 
         # Now save their field info
         for table in self.tables.values():
-            self._updateFieldsInformation(table.Name)
+            self._updateFieldsInformation(table)
 
         # Now save their version info
         for table in self.tables.values():
-            self.update_tableVersion(table.Name)
+            self.update_tableVersion(table)
 
 
-    def _createTable(self, tblname):
+    def _createTable(self, table):
         # Create the table
-        self.cur.execute(self._tables[tblname].CreateSQL)
+        self.cur.execute(table.CreateSQL)
         self.conn.commit()
-        print tblname
+        print table.Name
 
-    # TODO: make compatible with new add method
-    def _updateFieldsInformation(self, tblname):
+    def _updateFieldsInformation(self, table):
         """ Adds field information for every table."""
         # Saves fields information for every table except tblfields
-        self.add('tblfields', {'tablename': tblname, 'fields': ", ".join(self._tables[tblname].Fields)})
+        self.add(self.tables['tblfields'], {'tablename': table.Name, 'fields': ", ".join(table.Fields)})
 
-     # TODO: make compatible with new add method
-    def update_tableVersion(self, tblname):
+    def update_tableVersion(self, table):
         """ Adds table verison information."""
         # Save version information for every table
-        self.add('tblversions', {'tablename': tblname, 'version': self._tables[tblname].Version})
-        print 'version saved (%s - %i)' % (tblname, self._tables[tblname].Version)
+        self.add(self.tables['tblversions'], {'tablename': table.Name, 'version': table.Version})
+        print 'version saved (%s - %i)' % (table.Name, table.Version)
 
     def validateTables(self):
         """ Validates that all tables are up to date. """
@@ -132,29 +129,27 @@ class DAL(object):
         for table in unvalidated:
             self._updateFieldsInformation(table)
 
-    # TODO: make compatible with new delete method
-    def _delete_table(self, tblname):
-        stmt = "DROP TABLE %s" % tblname
+    def _delete_table(self, table):
+        stmt = "DROP TABLE %s" % table.Name
         self.cur.execute(stmt)
-        self.delete('tblversions',  tblname)
-        print "Removed table %s" % tblname
+        self.delete(self.tables['tblversions'],  table.Name)
+        print "Removed table %s" % table.Name
 
-    # TODO: make compatible with new get, delete and add methods
-    def _update_table(self, tblname):
-        oldfields = self.get('tblfields', {'tablename': tblname})[0]['fields'].split(', ')
+    def _update_table(self, table):
+        oldfields = self.get('tblfields', {'tablename': table.Name})[0]['fields'].split(', ')
         stmt = "SELECT %(fields)s FROM %(name)s" \
-            % dict(fields=", ".join(oldfields), name=tblname)
+            % dict(fields=", ".join(oldfields), name=table.Name)
         self.cur.execute(stmt)
         oldrecords = [dict([ (f, row[i]) for i, f in enumerate(oldfields) ]) \
             for row in self.cur.fetchall()]
-        stmt = "ALTER TABLE %s RENAME TO %s_old" % (tblname, tblname)
+        stmt = "ALTER TABLE %s RENAME TO %s_old" % (table.Name, table.Name)
         self.cur.execute(stmt)
-        self.delete('tblversions',  tblname)
-        self.delete('tblfields', tblname)
-        self._createTable(tblname)
+        self.delete('tblversions',  table)
+        self.delete('tblfields', table)
+        self._createTable(table)
 
         for rec in oldrecords:
-            self.add(self._nicks[tblname], dict([(col,rec.get(col,'')) for col in self._tables[tblname].Fields]))
+            self.add(self.tables[tblname], dict([(col,rec.get(col,'')) for col in self._tables[tblname].Fields]))
 
         self._delete_table('%s_old' % tblname)
 
