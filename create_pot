@@ -1,5 +1,5 @@
 #!/bin/bash
 cd locale/po
 echo "Generating pot file."
-xgettext --keyword=_ --keyword=N_ --add-comments=TRANSLATORS --language=Python --copyright-holder="Og Maciel <omaciel@foresightlinux.org>" --output=billreminder.pot ../../src/billreminder* ../../src/*.py ../../src/gui/*.py ../../src/gui/widgets/*.py ../../src/daemon/*.py ../../src/lib/*.py ../../src/db/*.py
+xgettext --keyword=_ --keyword=N_ --add-comments=TRANSLATORS --language=Python --copyright-holder="Og Maciel <omaciel@foresightlinux.org>" --output=billreminder.pot ../../src/billreminder* ../../src/*.py ../../src/gui/*.py ../../src/daemon/*.py ../../src/lib/*.py ../../src/db/*.py
 echo "done."
