@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-22 18:16-0400\n"
+"POT-Creation-Date: 2007-09-14 15:44-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,65 +65,73 @@ msgstr ""
 msgid "<b>Note:</b>"
 msgstr ""
 
-#: ../../src/gui/adddialog.py:108
-#, python-format
-msgid "%(amount)0.2f"
-msgstr ""
-
-#: ../../src/gui/maindialog.py:123
+#: ../../src/gui/maindialog.py:125
 msgid "New"
 msgstr ""
 
-#: ../../src/gui/maindialog.py:123
+#: ../../src/gui/maindialog.py:125
 msgid "Add a new record"
 msgstr ""
 
-#: ../../src/gui/maindialog.py:124
+#: ../../src/gui/maindialog.py:126 ../../src/gui/maindialog.py:237
 msgid "Edit"
 msgstr ""
 
-#: ../../src/gui/maindialog.py:124
+#: ../../src/gui/maindialog.py:126
 msgid "Edit a record"
 msgstr ""
 
-#: ../../src/gui/maindialog.py:125
+#: ../../src/gui/maindialog.py:127
 msgid "Delete"
 msgstr ""
 
-#: ../../src/gui/maindialog.py:125
+#: ../../src/gui/maindialog.py:127
 msgid "Delete selected record"
 msgstr ""
 
-#: ../../src/gui/maindialog.py:127 ../../src/gui/widgets/viewbill.py:58
+#: ../../src/gui/maindialog.py:129 ../../src/gui/maindialog.py:240
+#: ../../src/gui/widgets/viewbill.py:58
 msgid "Paid"
 msgstr ""
 
-#: ../../src/gui/maindialog.py:127
+#: ../../src/gui/maindialog.py:129
 msgid "Mark as paid"
 msgstr ""
 
-#: ../../src/gui/maindialog.py:128
+#: ../../src/gui/maindialog.py:130 ../../src/gui/maindialog.py:242
 msgid "Not Paid"
 msgstr ""
 
-#: ../../src/gui/maindialog.py:128
+#: ../../src/gui/maindialog.py:130
 msgid "Mark as not paid"
 msgstr ""
 
-#: ../../src/gui/maindialog.py:130 ../../src/gui/widgets/trayicon.py:47
+#: ../../src/gui/maindialog.py:132 ../../src/gui/widgets/trayicon.py:47
 msgid "About"
 msgstr ""
 
-#: ../../src/gui/maindialog.py:130
+#: ../../src/gui/maindialog.py:132
 msgid "About the application"
 msgstr ""
 
-#: ../../src/gui/maindialog.py:132
+#: ../../src/gui/maindialog.py:134
 msgid "Close"
 msgstr ""
 
-#: ../../src/gui/maindialog.py:132
+#: ../../src/gui/maindialog.py:134
 msgid "Quit the application"
+msgstr ""
+
+#: ../../src/gui/maindialog.py:234
+msgid "Add New"
+msgstr ""
+
+#: ../../src/gui/maindialog.py:236
+msgid "Remove"
+msgstr ""
+
+#: ../../src/gui/maindialog.py:244
+msgid "Cancel"
 msgstr ""
 
 #: ../../src/gui/widgets/statusbar.py:14
@@ -136,16 +144,6 @@ msgstr ""
 
 #: ../../src/gui/widgets/statusbar.py:24
 msgid "<b>Notes: </b>"
-msgstr ""
-
-#: ../../src/gui/widgets/statusbar.py:35
-#, python-format
-msgid "<b>%(count)d</b>"
-msgstr ""
-
-#: ../../src/gui/widgets/statusbar.py:39
-#, python-format
-msgid "%(notes)s"
 msgstr ""
 
 #: ../../src/gui/widgets/trayicon.py:42
@@ -186,25 +184,42 @@ msgstr ""
 msgid "Notes"
 msgstr ""
 
-#: ../../src/daemon/dbus_manager.py:45
-#, python-format
-msgid "Runnig %(appname)s Daemon %(version)s"
-msgstr ""
-
-#: ../../src/daemon/main.py:119
-msgid "Lock File found: Maybe you have another instance running."
-msgstr ""
-
-#: ../../src/daemon/main.py:124
-msgid "BillReminder is already running."
-msgstr ""
-
-#: ../../src/daemon/main.py:162
+#: ../../src/daemon/alarm.py:144
 #, python-format
 msgid "You have %s outstanding bill to pay!"
 msgstr ""
 
-#: ../../src/daemon/main.py:166 ../../src/lib/common.py:8
+#: ../../src/daemon/dbus_manager.py:44
+#, python-format
+msgid "Runnig %(appname)s Daemon %(version)s"
+msgstr ""
+
+#: ../../src/daemon/main.py:118
+#, python-format
+msgid "Lock File found: You have another instance running. (pid=%d)"
+msgstr ""
+
+#: ../../src/daemon/main.py:121
+msgid "Lock File found: Possibly the program was exited unexpectedly."
+msgstr ""
+
+#: ../../src/daemon/main.py:123
+msgid "Removing Lock File..."
+msgstr ""
+
+#: ../../src/daemon/main.py:125
+msgid "Successfully."
+msgstr ""
+
+#: ../../src/daemon/main.py:127
+msgid "Failed."
+msgstr ""
+
+#: ../../src/daemon/main.py:131
+msgid "BillReminder is already running."
+msgstr ""
+
+#: ../../src/lib/common.py:8
 msgid "BillReminder"
 msgstr ""
 
@@ -212,6 +227,14 @@ msgstr ""
 msgid ""
 "BillReminder - Copyright (c) 2006, 2007\n"
 "Og Maciel <omaciel@foresightlinux.org>"
+msgstr ""
+
+#: ../../src/lib/common.py:13
+msgid "Developers:"
+msgstr ""
+
+#: ../../src/lib/common.py:18
+msgid "Contributors:"
 msgstr ""
 
 #: ../../src/lib/dialogs.py:37
@@ -222,6 +245,6 @@ msgstr ""
 msgid "Edit a Record"
 msgstr ""
 
-#: ../../src/lib/utils.py:104
+#: ../../src/lib/utils.py:105
 msgid "Close _Without Saving"
 msgstr ""

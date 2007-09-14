@@ -8,193 +8,313 @@ msgid ""
 msgstr ""
 "Project-Id-Version: billreminder\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-25 21:28-0400\n"
+"POT-Creation-Date: 2007-09-14 15:44-0400\n"
 "PO-Revision-Date: 2007-04-04 11:35-0400\n"
 "Last-Translator: Gilberto Miralla <xyhthyx@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: ../../src/controller/aboutdialog.py:36 ../../src/controller/daemon.py:73
-#: ../../gui/aboutdialog.glade.h:1 ../../gui/maindialog.glade.h:4
-msgid "BillReminder"
-msgstr "RecuerdaCuentas"
-
-#: ../../src/controller/billdialog.py:69
-#, python-format
-msgid "Editing bill '%s'"
-msgstr "Cambiando la cuenta %s"
-
-#. TRANSLATORS: This is a date format. You can change the order.
-#: ../../src/controller/daemon.py:52 ../../src/controller/maindialog.py:210
-msgid "%Y/%m/%d"
-msgstr "%d/%m/%Y"
-
-#: ../../src/controller/daemon.py:67
-msgid "You have 1 outstanding bill to pay!"
-msgstr "Te queda 1 cuenta por pagar!"
-
-#: ../../src/controller/daemon.py:69
-#, python-format
-msgid "You have %s outstanding bills to pay!"
-msgstr "Te quedan %s cuentas por pagar!"
-
-#: ../../src/controller/maindialog.py:71
-msgid "Id"
-msgstr "Id"
-
-#: ../../src/controller/maindialog.py:72
-msgid "Payee"
-msgstr "Beneficiario"
-
-#: ../../src/controller/maindialog.py:73
-msgid "Due Date"
-msgstr "Fecha Debida"
-
-#: ../../src/controller/maindialog.py:74
-msgid "Amount Due"
-msgstr "Cantidad Debida"
-
-#: ../../src/controller/maindialog.py:75
-msgid "Notes"
-msgstr "Notas"
-
-#: ../../src/controller/maindialog.py:76
-#: ../../src/controller/maindialog.py:336
-msgid "Paid"
-msgstr "Pagado"
-
-#. TRANSLATORS: Don't translate words inside parentheses!
-#: ../../src/controller/maindialog.py:293
-#, python-format
+#: ../../src/billreminder:29
 msgid ""
-"do you really want to remove it?\n"
+"Usage:  billreminder [OPTIONS...]\n"
 "\n"
-" <b>%(payee)s - %(amount)0.2f </b>"
+"Options:\n"
+"  --help, -h, -?\tShow this message.\n"
+"  --about\t\tAbout this application.\n"
+"  --add\t\t\tAdds a new record to the database.\n"
+"  --standalone\t\tAccess database directly, without daemon.\n"
+"  --version, -v\t\tDisplays the version number for this application.\n"
 msgstr ""
-"seguro que quieres eliminarlo?"
-"\n"
-" <b>%(payee)s - %(amount)0.2f </b>"
-#: ../../src/controller/maindialog.py:329
-msgid "Add New"
-msgstr "Añadir Nuevo"
 
-#: ../../src/controller/maindialog.py:332
-msgid "Remove"
-msgstr "Eliminar"
-
-#: ../../src/controller/maindialog.py:333
-msgid "Edit"
-msgstr "Cambiar"
-
-#: ../../src/controller/maindialog.py:338
-msgid "Not Paid"
-msgstr "No Pagado"
-
-#: ../../src/controller/maindialog.py:340
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: ../../src/controller/maindialog.py:363
-msgid "<big><b>Are you sure you want to quit?</b></big>"
-msgstr "<big><b>Seguro que quieres salir?</b></big>"
-
-#: ../../src/controller/maindialog.py:446
-msgid "The following bill was removed:\n"
-msgstr "La siguiente cuenta fue eliminada:\n"
-
-#: ../../src/controller/maindialog.py:448
-msgid "Item deleted."
-msgstr "Artículo borrado."
-
-#: ../../src/controller/maindialog.py:451
+#: ../../src/billreminder:50
 #, python-format
-msgid "Bill '%s' not deleted."
-msgstr "La cuenta '%s' no fue borrada."
+msgid "This is %(appname)s - Version: %(version)s"
+msgstr ""
 
-#: ../../src/controller/trayicon.py:49
-msgid "Hide Window"
-msgstr "Esconder Ventana"
+#: ../../src/billreminderd:11
+msgid ""
+"Usage:  billreminderd [OPTIONS...]\n"
+"\n"
+"Options:\n"
+"  --help, -h, -?\tShow this message.\n"
+"  --verbose\t\tPrint output messages.\n"
+"  --no-daemon\t\tDon't run as a daemon.\n"
+"  --version, -v\t\tDisplays the version number for this application.\n"
+msgstr ""
 
-#: ../../src/controller/trayicon.py:51 ../../gui/systraymenu.glade.h:1
-msgid "Show Window"
-msgstr "Enseñar Ventana"
+#: ../../src/billreminderd:26
+#, python-format
+msgid "This is %(appname)s - Version: %(verion)s"
+msgstr ""
 
-#: ../../src/controller/trayicon.py:54
-msgid "Quit"
-msgstr "Salir"
-
-#: ../../src/controller/utils.py:62
-msgid "Question"
-msgstr "Pregunta"
-
-#: ../../src/controller/utils.py:74
-msgid "Error"
-msgstr "Error"
-
-#. TRANSLATORS: Replace this string with your names, one name per line.
-#: ../../gui/aboutdialog.glade.h:3
-msgid "translator-credits"
-msgstr "créditos-traductor"
-
-#: ../../gui/billdialog.glade.h:1
-msgid "<b>Amount:</b>"
-msgstr "<b>Cantidad:</b>"
-
-#: ../../gui/billdialog.glade.h:2
+#: ../../src/gui/adddialog.py:45
 msgid "<b>Due Date:</b>"
 msgstr "<b>Fecha Debida:</b>"
 
-#: ../../gui/billdialog.glade.h:3
-msgid "<b>Note:</b>"
-msgstr "<b>Nota:</b>"
-
-#: ../../gui/billdialog.glade.h:4
+#: ../../src/gui/adddialog.py:64
 msgid "<b>Payee:</b>"
 msgstr "<b>Beneficario</b>"
 
-#: ../../gui/billdialog.glade.h:5
-msgid "Bill"
-msgstr "Cuenta"
+#: ../../src/gui/adddialog.py:67
+msgid "<b>Amount:</b>"
+msgstr "<b>Cantidad:</b>"
 
-#: ../../gui/billdialog.glade.h:6
-msgid "Save as Paid"
+#: ../../src/gui/adddialog.py:70
+msgid "<b>Note:</b>"
+msgstr "<b>Nota:</b>"
+
+#: ../../src/gui/maindialog.py:125
+#, fuzzy
+msgid "New"
+msgstr "Añadir Nuevo"
+
+#: ../../src/gui/maindialog.py:125
+msgid "Add a new record"
+msgstr ""
+
+#: ../../src/gui/maindialog.py:126 ../../src/gui/maindialog.py:237
+msgid "Edit"
+msgstr "Cambiar"
+
+#: ../../src/gui/maindialog.py:126
+msgid "Edit a record"
+msgstr ""
+
+#: ../../src/gui/maindialog.py:127
+msgid "Delete"
+msgstr ""
+
+#: ../../src/gui/maindialog.py:127
+msgid "Delete selected record"
+msgstr ""
+
+#: ../../src/gui/maindialog.py:129 ../../src/gui/maindialog.py:240
+#: ../../src/gui/widgets/viewbill.py:58
+msgid "Paid"
+msgstr "Pagado"
+
+#: ../../src/gui/maindialog.py:129
+#, fuzzy
+msgid "Mark as paid"
 msgstr "Guardar como Pagado"
 
-#: ../../gui/maindialog.glade.h:1
-msgid "0"
-msgstr "0"
+#: ../../src/gui/maindialog.py:130 ../../src/gui/maindialog.py:242
+msgid "Not Paid"
+msgstr "No Pagado"
 
-#: ../../gui/maindialog.glade.h:2
-msgid "<b>Info:</b>"
-msgstr "<b>Información:</b>"
+#: ../../src/gui/maindialog.py:130
+msgid "Mark as not paid"
+msgstr ""
 
-#: ../../gui/maindialog.glade.h:3
-msgid "<b>Records:</b>"
+#: ../../src/gui/maindialog.py:132 ../../src/gui/widgets/trayicon.py:47
+msgid "About"
+msgstr ""
+
+#: ../../src/gui/maindialog.py:132
+msgid "About the application"
+msgstr ""
+
+#: ../../src/gui/maindialog.py:134
+msgid "Close"
+msgstr ""
+
+#: ../../src/gui/maindialog.py:134
+msgid "Quit the application"
+msgstr ""
+
+#: ../../src/gui/maindialog.py:234
+msgid "Add New"
+msgstr "Añadir Nuevo"
+
+#: ../../src/gui/maindialog.py:236
+msgid "Remove"
+msgstr "Eliminar"
+
+#: ../../src/gui/maindialog.py:244
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: ../../src/gui/widgets/statusbar.py:14
+#, fuzzy
+msgid "<b>Records: </b>"
 msgstr "<b>Expedientes:</b>"
 
-#: ../../gui/maindialog.glade.h:5
-msgid "Mostrar Janela"
-msgstr "Mostrar Janela"
+#: ../../src/gui/widgets/statusbar.py:19
+#, fuzzy
+msgid "<b>0</b>"
+msgstr "<b>Nota:</b>"
 
-#: ../../gui/maindialog.glade.h:6
-msgid "N_ot Paid"
-msgstr "N_o Pagado"
+#: ../../src/gui/widgets/statusbar.py:24
+#, fuzzy
+msgid "<b>Notes: </b>"
+msgstr "<b>Nota:</b>"
 
-#: ../../gui/maindialog.glade.h:7
-msgid "_Edit"
-msgstr "_Cambiar"
+#: ../../src/gui/widgets/trayicon.py:42
+msgid "Hide Window"
+msgstr "Esconder Ventana"
 
-#: ../../gui/maindialog.glade.h:8
-msgid "_File"
+#: ../../src/gui/widgets/trayicon.py:44
+msgid "Show Window"
+msgstr "Enseñar Ventana"
+
+#: ../../src/gui/widgets/trayicon.py:49
+msgid "Quit"
+msgstr "Salir"
+
+#: ../../src/gui/widgets/viewbill.py:21
+#, fuzzy, python-format
+msgid "<b>%(payee)s</b>"
+msgstr "<b>Beneficario</b>"
+
+#. TRANSLATORS: This is a date format. You can change the order.
+#: ../../src/gui/widgets/viewbill.py:28
+msgid "%Y/%m/%d"
+msgstr "%d/%m/%Y"
+
+#: ../../src/gui/widgets/viewbill.py:54
+msgid "Payee"
+msgstr "Beneficiario"
+
+#: ../../src/gui/widgets/viewbill.py:55
+msgid "Due Date"
+msgstr "Fecha Debida"
+
+#: ../../src/gui/widgets/viewbill.py:56
+msgid "Amount Due"
+msgstr "Cantidad Debida"
+
+#: ../../src/gui/widgets/viewbill.py:57
+msgid "Notes"
+msgstr "Notas"
+
+#: ../../src/daemon/alarm.py:144
+#, fuzzy, python-format
+msgid "You have %s outstanding bill to pay!"
+msgstr "Te quedan %s cuentas por pagar!"
+
+#: ../../src/daemon/dbus_manager.py:44
+#, python-format
+msgid "Runnig %(appname)s Daemon %(version)s"
+msgstr ""
+
+#: ../../src/daemon/main.py:118
+#, python-format
+msgid "Lock File found: You have another instance running. (pid=%d)"
+msgstr ""
+
+#: ../../src/daemon/main.py:121
+msgid "Lock File found: Possibly the program was exited unexpectedly."
+msgstr ""
+
+#: ../../src/daemon/main.py:123
+msgid "Removing Lock File..."
+msgstr ""
+
+#: ../../src/daemon/main.py:125
+msgid "Successfully."
+msgstr ""
+
+#: ../../src/daemon/main.py:127
+#, fuzzy
+msgid "Failed."
 msgstr "_Archivo"
 
-#: ../../gui/maindialog.glade.h:9
-msgid "_Help"
-msgstr "_Ayuda"
+#: ../../src/daemon/main.py:131
+msgid "BillReminder is already running."
+msgstr ""
 
-#: ../../gui/maindialog.glade.h:10
-msgid "_Paid"
-msgstr "_Pagado"
+#: ../../src/lib/common.py:8
+msgid "BillReminder"
+msgstr "RecuerdaCuentas"
+
+#: ../../src/lib/common.py:10
+msgid ""
+"BillReminder - Copyright (c) 2006, 2007\n"
+"Og Maciel <omaciel@foresightlinux.org>"
+msgstr ""
+
+#: ../../src/lib/common.py:13
+msgid "Developers:"
+msgstr ""
+
+#: ../../src/lib/common.py:18
+msgid "Contributors:"
+msgstr ""
+
+#: ../../src/lib/dialogs.py:37
+#, fuzzy
+msgid "Add a New Record"
+msgstr "Añadir Nuevo"
+
+#: ../../src/lib/dialogs.py:47
+msgid "Edit a Record"
+msgstr ""
+
+#: ../../src/lib/utils.py:105
+msgid "Close _Without Saving"
+msgstr ""
+
+#~ msgid "Editing bill '%s'"
+#~ msgstr "Cambiando la cuenta %s"
+
+#~ msgid "You have 1 outstanding bill to pay!"
+#~ msgstr "Te queda 1 cuenta por pagar!"
+
+#~ msgid "Id"
+#~ msgstr "Id"
+
+#~ msgid ""
+#~ "do you really want to remove it?\n"
+#~ "\n"
+#~ " <b>%(payee)s - %(amount)0.2f </b>"
+#~ msgstr ""
+#~ "seguro que quieres eliminarlo?\n"
+#~ " <b>%(payee)s - %(amount)0.2f </b>"
+
+#~ msgid "<big><b>Are you sure you want to quit?</b></big>"
+#~ msgstr "<big><b>Seguro que quieres salir?</b></big>"
+
+#~ msgid "The following bill was removed:\n"
+#~ msgstr "La siguiente cuenta fue eliminada:\n"
+
+#~ msgid "Item deleted."
+#~ msgstr "Artículo borrado."
+
+#~ msgid "Bill '%s' not deleted."
+#~ msgstr "La cuenta '%s' no fue borrada."
+
+#~ msgid "Question"
+#~ msgstr "Pregunta"
+
+#~ msgid "Error"
+#~ msgstr "Error"
+
+#~ msgid "translator-credits"
+#~ msgstr "créditos-traductor"
+
+#~ msgid "Bill"
+#~ msgstr "Cuenta"
+
+#~ msgid "0"
+#~ msgstr "0"
+
+#~ msgid "<b>Info:</b>"
+#~ msgstr "<b>Información:</b>"
+
+#~ msgid "Mostrar Janela"
+#~ msgstr "Mostrar Janela"
+
+#~ msgid "N_ot Paid"
+#~ msgstr "N_o Pagado"
+
+#~ msgid "_Edit"
+#~ msgstr "_Cambiar"
+
+#~ msgid "_Help"
+#~ msgstr "_Ayuda"
+
+#~ msgid "_Paid"
+#~ msgstr "_Pagado"
