@@ -145,6 +145,9 @@ def force_string(dic):
 
 def get_dbus_interface(interface, path):
     try:
+        from dbus.mainloop.glib import DBusGMainLoop
+        dbus_loop = DBusGMainLoop()
+        bus = dbus.SessionBus(mainloop=dbus_loop)
         session_bus = dbus.SessionBus()
         obj = session_bus.get_object(interface, path)
         ret = dbus.Interface(obj, interface)
