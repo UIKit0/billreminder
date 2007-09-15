@@ -73,7 +73,8 @@ class MainDialog:
         self.notify = NotifyIcon(self)
         
         iface = get_dbus_interface(common.DBUS_INTERFACE, common.DBUS_PATH)
-        iface.connect_to_signal("bill_edited", self.reloadTreeView)
+        if iface:
+            iface.connect_to_signal("bill_edited", self.reloadTreeView)
 
     # Methods:  UI
     def get_window_visibility(self):
