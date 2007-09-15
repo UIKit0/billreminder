@@ -21,8 +21,9 @@ from lib.actions import Actions
 # Import common utilities
 import lib.common as common
 import lib.dialogs as dialogs
-from lib.utils import ContextMenu
+from lib.utils import ContextMenu, get_dbus_interface
 from lib import i18n
+
 
 class MainDialog:
 
@@ -70,6 +71,9 @@ class MainDialog:
         self.actions = Actions()
         self._populateTreeView(self.actions.get_bills('paid = 0 ORDER BY dueDate DESC'))
         self.notify = NotifyIcon(self)
+        
+        iface = get_dbus_interface(common.DBUS_INTERFACE, common.DBUS_PATH)
+        iface.connect_to_signal("bill_edited", self.reloadTreeView)
 
     # Methods:  UI
     def get_window_visibility(self):
@@ -109,6 +113,13 @@ class MainDialog:
         self.list.set_cursor(path)
         return
 
+    def reloadTreeView(self, *arg):
+        # Update list with updated record
+        path = self.list.get_cursor()[0]
+        self.list.listStore.clear()
+        self._populateTreeView(self.actions.get_bills('paid = 0 ORDER BY dueDate DESC'))
+        self.list.set_cursor(path)
+
     def _formated_row(self, row):
         """ Formats a bill to be displayed as a row. """
         # Make sure the row is created using fields in proper order
@@ -129,6 +140,7 @@ class MainDialog:
         self.btnPaid = self.menubar.add_button(gtk.STOCK_APPLY, _("Paid"), _("Mark as paid"), self.on_btnPaid_clicked)
         self.btnUnpaid = self.menubar.add_button(gtk.STOCK_UNDO, _("Not Paid"), _("Mark as not paid"), self.on_btnPaid_clicked)
         self.menubar.add_space()
+        self.btnPref = self.menubar.add_button(gtk.STOCK_PREFERENCES, _("Preferences..."), _("Preferences"), self.on_btnPref_clicked)
         self.btnAbout = self.menubar.add_button(gtk.STOCK_ABOUT, _("About"), _("About the application"), self.on_btnAbout_clicked)
         self.menubar.add_space()
         self.btnClose = self.menubar.add_button(gtk.STOCK_CLOSE, _("Close"), _("Quit the application"), self.on_btnQuit_clicked)
@@ -185,6 +197,9 @@ class MainDialog:
 
     def about(self):
         dialogs.about_dialog(parent=self.window)
+
+    def preferences(self):
+        dialogs.preferences_dialog(parent=self.window)
 
     # Methods
     def _quit_application(self):
@@ -264,6 +279,9 @@ class MainDialog:
 
     def on_btnAbout_clicked(self, toolbutton):
         self.about()
+
+    def on_btnPref_clicked(self, toolbutton):
+        self.preferences()
 
     def on_btnQuit_clicked(self, toolbutton):
         self._quit_application()
