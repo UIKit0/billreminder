@@ -75,7 +75,7 @@ class Alarm(object):
 
     def show_bill_notification(self, bill=None):
 
-        msg = _('The bill %s is matured.') % "<b>\"%s\"</b>" % bill['payee']
+        msg = _('The bill %s is due.') % "<b>\"%s\"</b>" % bill['payee']
         if msg:
             bubble = self.notification(common.APPNAME, msg)
             bubble.add_action("paid", _("Mark as paid"), self.__cb_mark_as_paid, bill)
