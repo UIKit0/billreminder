@@ -20,6 +20,7 @@ except ImportError:
 try:
     from gui.aboutdialog import AboutDialog
     from gui.adddialog import AddDialog
+    from gui.prefdialog import PrefDialog
     from lib import i18n
 except ImportError, e:
     print str(e)
@@ -29,6 +30,13 @@ def about_dialog(parent=None):
     about = AboutDialog()
     ret = about.run()
     about.destroy()
+
+    return ret
+
+def preferences_dialog(parent=None):
+    pref = PrefDialog()
+    ret = pref.run()
+    pref.destroy()
 
     return ret
 
