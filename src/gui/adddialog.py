@@ -12,6 +12,7 @@ import lib.common as common
 from lib.bill import Bill
 from lib.actions import Actions
 from lib import i18n
+from gui.widgets.datebutton import DateButton
 
 class AddDialog(gtk.Dialog):
     """
@@ -52,13 +53,13 @@ class AddDialog(gtk.Dialog):
         self.calbox.pack_start(self.calendar, expand=True, fill=True, padding=5)
 
         # Fields
-        ## Table of 3 x 2
-        self.table = gtk.Table(rows=3, columns=2, homogeneous=False)
+        ## Table of 4 x 2
+        self.table = gtk.Table(rows=4, columns=2, homogeneous=False)
         ### Spacing to make things look better
         self.table.set_col_spacing(0, 10)
-        self.table.set_row_spacing(0, 13)
-        self.table.set_row_spacing(1, 13)
-        self.table.set_row_spacing(2, 13)
+        self.table.set_row_spacing(0, 6)
+        self.table.set_row_spacing(1, 6)
+        self.table.set_row_spacing(2, 6)
 
         ## Labels
         self.payeelabel = gtk.Label()
@@ -70,11 +71,17 @@ class AddDialog(gtk.Dialog):
         self.noteslabel = gtk.Label()
         self.noteslabel.set_markup(_("<b>Note:</b>"))
         self.noteslabel.set_alignment(0.00, 0.50)
+        self.alarmlabel = gtk.Label()
+        self.alarmlabel.set_markup(_("<b>Alarm:</b>"))
+        self.alarmlabel.set_alignment(0.00, 0.50)
         ## Fields
         self.payee = gtk.ComboBoxEntry()
+        self.payeecompletion = gtk.EntryCompletion()
+        self.payee.child.set_completion(self.payeecompletion)
         ### Populate combobox with payee from database
         self._populate_payee()
         self.amount = gtk.Entry()
+        self.alarm = DateButton(self)
         self.notesdock = gtk.ScrolledWindow()
         self.notesdock .set_shadow_type(gtk.SHADOW_OUT)
         self.notesdock .set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
@@ -86,9 +93,11 @@ class AddDialog(gtk.Dialog):
         self.table.attach(self.payeelabel, 0, 1, 0, 1, gtk.FILL, gtk.FILL)
         self.table.attach(self.amountlabel, 0, 1, 1, 2, gtk.FILL, gtk.FILL)
         self.table.attach(self.noteslabel, 0, 1, 2, 3, gtk.FILL, gtk.FILL)
+        self.table.attach(self.alarmlabel, 0, 1, 3, 4, gtk.FILL, gtk.FILL)
         self.table.attach(self.payee, 1, 2, 0, 1, gtk.FILL, gtk.FILL)
         self.table.attach(self.amount, 1, 2, 1, 2, gtk.FILL, gtk.FILL)
         self.table.attach(self.notesdock, 1, 2, 2, 3, gtk.FILL, gtk.FILL)
+        self.table.attach(self.alarm, 1, 2, 3, 4, gtk.FILL, gtk.FILL)
         ## Pack table
         self.fieldbox.pack_start(self.table, expand=True, fill=True, padding=0)
 
@@ -132,7 +141,9 @@ class AddDialog(gtk.Dialog):
             store.append([payee])
 
         self.payee.set_model(store)
+        self.payeecompletion.set_model(store)
         self.payee.set_text_column(0)
+        self.payeecompletion.set_text_column(0)
         self.payeeEntry = self.payee.child
         self.selectedText = ''
 
