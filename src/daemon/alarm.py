@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__all__ = ['Alarm', 'NotifyMessage']
+__all__ = ['Alarm']
 
 from sys import stderr
 import datetime
@@ -11,93 +11,11 @@ from subprocess import Popen
 
 from lib import common
 from lib import i18n
-from lib.utils import Message, verify_pid
+from lib.bubble import NotifyMessage
+from lib.utils import verify_pid, Message
+from lib import dialogs
+from lib.bill import Bill
 
-from dbus_manager import get_interface
-
-class NotifyMessage(object):
-
-    def __init__(self, parent):
-        """ Constructor """
-        self.title = common.APPNAME
-        self.__replaces_id = 0
-        self.icon = common.APP_HEADER
-        self.summary = ''
-        self.body = ''
-        self.__actions = []
-        self.hints = {}
-        self.expire_timeout = 1000
-        self.__action_func = None
-        self.parent = parent
-
-        # Connect DBus notification interface
-        self.__interface = get_interface(common.NOTIFICATION_INTERFACE, common.NOTIFICATION_PATH)
-        self.__interface.connect_to_signal('ActionInvoked', self.__on_action_invoked)
-
-
-    def add_action(self, action):
-        self.__actions.append(action)
-
-    def set_timeout(self, expire_timeout):
-        self.expire_timeout = expire_timeout * 1000
-
-    def get_hints(self, tray):
-        hints = {}
-        if tray:
-           x = tray.get_geometry()[1].x
-           y = tray.get_geometry()[1].y
-           w = tray.get_geometry()[1].width
-           h = tray.get_geometry()[1].height
-           x += w/2
-           if y < 100:
-              # top-panel
-              y += h/2
-           else:
-              # bottom-panel
-              y -= h/2
-           hints['x'] = x
-           hints['y'] = y
-        hints['desktop-entry'] = 'billreminder'
-        self.hints = hints
-        return hints
-
-    def set_action(self, func):
-        self.__action_func = func
-
-    def __on_action_invoked(self, *arg):
-        # Ignore notifications from another programs
-        if not arg[0] == self.__id:
-            return
-
-        # Send DBus 'show_main_window' signal
-        self.parent.dbus_server.show_main_window()
-
-        # Verify if there is a specific function to call
-        if self.__action_func:
-            self.__action_func(arg)
-        # If client is not running, launch it
-        elif not self.parent.client_pid or not verify_pid(self.parent.client_pid):
-                 gui = Popen('python billreminder', shell=True)
-                 self.parent.client_pid = gui.pid
-
-    def _set_id(self, id):
-        self.__id = id
-
-    def _notify_error(self, e):
-        print >> stderr, str(e)
-
-    def Notify(self):
-        if self.__interface:
-            self.__interface.Notify(self.title,
-                self.__replaces_id,
-                self.icon,
-                self.summary,
-                self.body,
-                self.__actions,
-                self.hints,
-                self.expire_timeout,
-                reply_handler=self._set_id,
-                error_handler=self._notify_error)
 
 class Alarm(object):
 
@@ -106,34 +24,29 @@ class Alarm(object):
         self.tray_hints = {}
         self.interval = self.parent.config.getint('Alarm', 'interval') * 1000
         self.time = self.parent.config.getfloat('Alarm', 'show_alarm_at_time')
+        self.parent = parent
+        self.tray_hints = {}
+        start_delay = self.parent.config.getint('General', 'delay') * 1000
+        print start_delay
+        timeout_add(start_delay, self.start)
+
+    def start(self):
         if self.parent.config.getboolean('Alarm', 'show_startup_notification'):
             self.show_pay_notification()
+        self.verify_matured()
         if self.interval:
             timeout_add(self.interval, self.timer)
 
-    def show(self, title, body, show=True):
-        if self.parent.config.getboolean('Alarm', 'use_alert_dialog'):
-            self.show_alert(title, body, show)
-        else:
-            self.show_notification(title, body, show)
+    def notification(self, title, body):
+        notify = NotifyMessage(self.parent)
+        notify.title = title
+        notify.body = body
+        notify.set_timeout(10)
+        notify.set_default_action(self.__cb_launch_gui)
+        notify.hints = self.tray_hints
+        return notify
 
-    def show_alert(self, title, body, show=True):
-        self.parent.dbus_server.show_alert(title, body, 'info')
-        if show:
-            message = Message()
-            message.ShowInfo(text=body, title=title)
-
-    def show_notification(self, title, body, show=True):
-        self.parent.dbus_server.show_notification(title, body, 10, common.APP_HEADER)
-        if show:
-            notify = NotifyMessage(self.parent)
-            notify.title = title
-            notify.body = body
-            notify.set_timeout(10)
-            notify.hints = self.tray_hints
-            notify.Notify()
-
-    def show_pay_notification(self, show=True):
+    def show_pay_notification(self):
         today = time.mktime(datetime.date.today().timetuple())
         limit = self.parent.config.getint('Alarm', 'notification_days_limit') * 86400.0
         if limit:
@@ -143,11 +56,60 @@ class Alarm(object):
 
         msg = N_('You have %s outstanding bill to pay!',
                  'You have %s outstanding bills to pay!', len(records)) % len(records)
-
-        if msg:
-            self.show_notification(common.APPNAME, msg, show)
+        if msg and records:
+            bubble = self.notification(common.APPNAME, msg)
+            bubble.add_action("view", _("Show BillReminder"), self.__cb_launch_gui, None)
+            bubble.add_action("close", _("Cancel"), None)
+            bubble.show()
 
         return msg
+
+    def verify_matured(self):
+        today = time.mktime(datetime.date.today().timetuple())
+        records = self.parent.actions.get_bills('dueDate < %s AND paid = 0' % today)
+
+        i = 1
+        for bill in records:
+            timeout_add(i * 12000, self.show_bill_notification, bill)
+            i += 1
+
+    def show_bill_notification(self, bill=None):
+
+        msg = _('The bill %s is matured.') % "<b>\"%s\"</b>" % bill['payee']
+        if msg:
+            bubble = self.notification(common.APPNAME, msg)
+            bubble.add_action("paid", _("Mark as paid"), self.__cb_mark_as_paid, bill)
+            bubble.add_action("edit", _("Edit"), self.__cb_edit_bill, bill)
+            bubble.add_action("close", _("Cancel"), None)
+            bubble.show()
+
+
+    def __cb_launch_gui(self, *arg):
+    # If client is not running, launch it
+        # Send DBus 'show_main_window' signal
+        self.parent.dbus_server.show_main_window()
+        if not self.parent.client_pid or not verify_pid(self.parent.client_pid):
+            gui = Popen('python billreminder', shell=True)
+            self.parent.client_pid = gui.pid
+
+    def __cb_mark_as_paid(self, *arg):
+        record = arg[1][0]
+        if record:
+            record['paid'] = 1
+            try:
+                # Edit bill to database
+                self.parent.dbus_server.edit_bill(record)
+            except Exception, e:
+                print str(e)
+
+    def __cb_edit_bill(self, *arg):
+        record = dialogs.edit_dialog(Bill(arg[1][0]))
+        if record:
+            try:
+                # Edit bill to database
+                self.parent.dbus_server.edit_bill(record.Dictionary)
+            except Exception, e:
+                print str(e)
 
     def timer(self):
         # TODO: Show custom alarms
