@@ -8,6 +8,7 @@ import datetime
 import locale
 import gobject
 import lib.utils as utils
+import lib.common as common
 from lib.bill import Bill
 from lib.actions import Actions
 from lib import i18n
@@ -17,8 +18,8 @@ class AddDialog(gtk.Dialog):
     Class used to generate dialog to allow user to enter/edit records.
     """
     def __init__(self, title=None, parent=None, record=None):
-        gtk.Dialog.__init__(self, title=title, parent=parent, flags=gtk.DIALOG_MODAL, buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_REJECT, gtk.STOCK_SAVE, gtk.RESPONSE_ACCEPT)
-         )
+        gtk.Dialog.__init__(self, title=title, parent=parent, flags=gtk.DIALOG_MODAL, buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_REJECT, gtk.STOCK_SAVE, gtk.RESPONSE_ACCEPT))
+        self.set_icon_from_file(common.APP_ICON)
 
         if parent:
             self.set_transient_for(parent)

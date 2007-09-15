@@ -17,6 +17,7 @@ class AboutDialog(gtk.AboutDialog):
 
         # Set up the UI
         self._initialize_dialog_widgets()
+        self.set_icon_from_file(common.APP_ICON)
 
     def _initialize_dialog_widgets(self):
         self.set_name(common.APPNAME)
