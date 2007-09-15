@@ -26,7 +26,7 @@ class NotifyIcon:
         """ Function used to show an icon in notification area."""
 
         self.tray = gtk.StatusIcon()
-        self.tray.set_from_file(common.APP_ICON)
+        self.tray.set_from_file(common.TRAY_ICON)
         self.tray.set_tooltip("BillReminder")
         self.tray.connect("popup-menu", self.show_menu, None)
         self.tray.connect("activate", self.show_hide, None)
@@ -49,7 +49,7 @@ class NotifyIcon:
         c.addMenuItem(_('Quit'), self.parent.on_btnQuit_clicked, gtk.STOCK_QUIT)
 
         print type(activate_time)
-        c.popup(None, None, None, button, activate_time)
+        c.popup(None, None, gtk.status_icon_position_menu, button, activate_time, self.tray)
         del c
 
     def destroy(self):
