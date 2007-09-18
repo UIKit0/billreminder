@@ -44,6 +44,7 @@ class NotifyIcon:
             c.addMenuItem(_('Show Window'), self.show_hide)
 
         c.addMenuItem('-', None)
+        c.addMenuItem(_('Preferences'), self.parent.on_btnPref_clicked, gtk.STOCK_PREFERENCES)
         c.addMenuItem(_('About'), self.parent.on_btnAbout_clicked, gtk.STOCK_ABOUT)
         c.addMenuItem('-', None)
         c.addMenuItem(_('Quit'), self.parent.on_btnQuit_clicked, gtk.STOCK_QUIT)
