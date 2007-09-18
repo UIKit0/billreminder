@@ -23,16 +23,26 @@ import lib.common as common
 import lib.dialogs as dialogs
 from lib.utils import ContextMenu, get_dbus_interface
 from lib import i18n
+from lib.config import Config
 
 
 class MainDialog:
 
     def __init__(self):
+        self.config = Config()
+        width = self.config.getint('GUI', 'width')
+        height = self.config.getint('GUI', 'height')
+        x = self.config.getint('GUI', 'x')
+        y = self.config.getint('GUI', 'y')
         # Create a new window
         self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
         self.window.set_title("%s" % common.APPNAME)
         self.window.set_border_width(3)
-        self.window.set_size_request(550, 300)
+        self.window.set_size_request(500, 300)
+        if width and height:
+            self.window.resize(width, height)
+        if x and y:
+            self.window.move(x, y)
         self.window.set_icon_from_file(common.APP_ICON)
         self.window.connect("delete_event", self.on_delete_event)
 
@@ -71,10 +81,11 @@ class MainDialog:
         self.actions = Actions()
         self._populateTreeView(self.actions.get_bills('paid = 0 ORDER BY dueDate DESC'))
         self.notify = NotifyIcon(self)
-        
+
         iface = get_dbus_interface(common.DBUS_INTERFACE, common.DBUS_PATH)
         if iface:
             iface.connect_to_signal("bill_edited", self.reloadTreeView)
+            iface.connect_to_signal("show_main_window", self.window.show)
 
     # Methods:  UI
     def get_window_visibility(self):
@@ -139,12 +150,14 @@ class MainDialog:
         self.btnRemove = self.menubar.add_button(gtk.STOCK_DELETE, _("Delete"), _("Delete selected record"), self.on_btnDelete_clicked)
         self.menubar.add_space()
         self.btnPaid = self.menubar.add_button(gtk.STOCK_APPLY, _("Paid"), _("Mark as paid"), self.on_btnPaid_clicked)
+        self.btnPaid.set_is_important(True)
         self.btnUnpaid = self.menubar.add_button(gtk.STOCK_UNDO, _("Not Paid"), _("Mark as not paid"), self.on_btnPaid_clicked)
+        self.btnUnpaid.set_is_important(True)
         self.menubar.add_space()
-        self.btnPref = self.menubar.add_button(gtk.STOCK_PREFERENCES, _("Preferences..."), _("Preferences"), self.on_btnPref_clicked)
+        self.btnPref = self.menubar.add_button(gtk.STOCK_PREFERENCES, _("Preferences"), _("Edit preferences"), self.on_btnPref_clicked)
         self.btnAbout = self.menubar.add_button(gtk.STOCK_ABOUT, _("About"), _("About the application"), self.on_btnAbout_clicked)
-        self.menubar.add_space()
-        self.btnClose = self.menubar.add_button(gtk.STOCK_CLOSE, _("Close"), _("Quit the application"), self.on_btnQuit_clicked)
+        #self.menubar.add_space()
+        #self.btnClose = self.menubar.add_button(gtk.STOCK_CLOSE, _("Close"), _("Quit the application"), self.on_btnQuit_clicked)
 
     def add_bill(self):
         record = dialogs.add_dialog(parent=self.window)
@@ -204,8 +217,22 @@ class MainDialog:
 
     # Methods
     def _quit_application(self):
+        self.save_position()
+        self.save_size()
         gtk.main_quit()
         return False
+
+    def save_position(self):
+        x, y = self.window.get_position()
+        self.config.set('GUI', 'x', x)
+        self.config.set('GUI', 'y', y)
+        self.config.save()
+
+    def save_size(self):
+        width, height = self.window.get_size()
+        self.config.set('GUI', 'width', width)
+        self.config.set('GUI', 'height', height)
+        self.config.save()
 
     def toggle_buttons(self, paid=None):
         """ Toggles all buttons conform number of records present and their state """
@@ -242,7 +269,7 @@ class MainDialog:
 
     # Event handlers
     def _on_list_button_press_event(self, widget, event):
-        """ This function will handle the signal to show a popup menu sent by 
+        """ This function will handle the signal to show a popup menu sent by
             a right click on tvBill widget. """
         if event.button == 3 and event.type == gtk.gdk.BUTTON_PRESS and len(self.list.listStore) > 0:
 
