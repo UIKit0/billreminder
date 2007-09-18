@@ -34,7 +34,7 @@ def about_dialog(parent=None):
     return ret
 
 def preferences_dialog(parent=None):
-    pref = PrefDialog()
+    pref = PrefDialog(parent=parent)
     ret = pref.run()
     pref.destroy()
 
