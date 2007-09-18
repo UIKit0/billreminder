@@ -83,8 +83,8 @@ class AddDialog(gtk.Dialog):
         self.amount = gtk.Entry()
         self.alarm = DateButton(self)
         self.notesdock = gtk.ScrolledWindow()
-        self.notesdock .set_shadow_type(gtk.SHADOW_OUT)
-        self.notesdock .set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        self.notesdock.set_shadow_type(gtk.SHADOW_OUT)
+        self.notesdock.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
         self.notes = gtk.TextView()
         self.notesdock.add_with_viewport(self.notes)
         ### Buffer object for Notes field
