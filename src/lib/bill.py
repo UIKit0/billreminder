@@ -12,7 +12,7 @@ class Bill(object):
 
         if isinstance(payee,dict):
             self.__set_id(payee['Id'])
-            self.__set_category(payee['category'])
+            self.__set_category(payee['catId'])
             self.__set_payee(payee['payee'])
             if not payee['dueDate']:
                 self.__set_dueDate(time.time())
@@ -80,7 +80,7 @@ class Bill(object):
     def __get_dictionary(self):
         return dict({
             'Id': self.__id,
-            'category': self.__category,
+            'catId': self.__category,
             'payee': self.__payee,
             'dueDate': self.__dueDate,
             'amountDue': self.__amountDue,
