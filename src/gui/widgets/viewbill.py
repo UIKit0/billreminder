@@ -12,7 +12,7 @@ class ViewBill(GenericListView):
     """
 
     def id_cell_data_function(self, column, cell, model, iter):
-        id = model.get_value (iter, 0)
+        id = model.get_value(iter, 0)
         cell.set_property('text', id)
         column.set_visible(False)
 
@@ -22,8 +22,13 @@ class ViewBill(GenericListView):
         column.set_visible(True)
 
     def payee_cell_data_function(self, column, cell, model, iter):
-        payee = model.get_value (iter, 2)
-        cell.set_property('markup', _('<b>%(payee)s</b>') % {'payee': payee})
+        payee = model.get_value(iter, 2)
+        paid = int(model.get_value(iter, 6))
+        if not paid:
+            text = '<b>%(payee)s</b>'
+        else:
+            text = '%(payee)s'
+        cell.set_property('markup', text % {'payee': payee})
 
     def duedate_cell_data_function(self, column, cell, model, iter):
         dueDate = float(model.get_value (iter, 3))
@@ -36,9 +41,12 @@ class ViewBill(GenericListView):
 
     def amountdue_cell_data_function(self, column, cell, model, iter):
         amountDue = model.get_value(iter, 4)
+        paid = int(model.get_value(iter, 5))
         amountDue = len(amountDue) > 0 and amountDue or 0
         amountDue = "%0.2f" % float(amountDue)
-        cell.set_property('text', amountDue)
+        if paid:
+            amountDue = "<s>%s</s>" % amountDue
+        cell.set_property('markup', amountDue)
         cell.set_property('xalign', 1.0)
 
     def notes_cell_data_function(self, column, cell, model, iter):
