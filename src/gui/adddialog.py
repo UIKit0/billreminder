@@ -180,7 +180,7 @@ class AddDialog(gtk.Dialog):
 
         if self.currentrecord is None:
             # Create a new object
-            self.currentrecord = Bill(payee, selectedDate, self.amount.get_text(), sbuffer)
+            self.currentrecord = Bill(payee, None, selectedDate, self.amount.get_text(), sbuffer)
             #self.currentrecord = Bill(payee, selectedDate, self.amount.get_text(), sbuffer, int(self.chkPaid.get_active()))
         else:
             # Edit existing bill
