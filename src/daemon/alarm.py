@@ -22,20 +22,19 @@ class Alarm(object):
     def __init__(self, parent):
         self.parent = parent
         self.tray_hints = {}
-        self.interval = self.parent.config.getint('Alarm', 'interval') * 1000
-        self.time = self.parent.config.getfloat('Alarm', 'show_alarm_at_time')
         self.parent = parent
         self.tray_hints = {}
-        start_delay = self.parent.config.getint('General', 'delay') * 1000
+        start_delay = self.parent.config.getint('General', 'delay') * 60000
         print start_delay
         timeout_add(start_delay, self.start)
 
     def start(self):
         if self.parent.config.getboolean('Alarm', 'show_startup_notification'):
             self.show_pay_notification()
-        self.verify_matured()
-        if self.interval:
-            timeout_add(self.interval, self.timer)
+        self.verify_due()
+        interval = self.parent.config.getint('Alarm', 'interval') * 1000
+        if interval:
+            timeout_add(interval, self.timer)
 
     def notification(self, title, body):
         notify = NotifyMessage(self.parent)
@@ -64,7 +63,9 @@ class Alarm(object):
 
         return msg
 
-    def verify_matured(self):
+    def verify_due(self):
+        if not self.parent.config.getboolean('Alarm', 'show_due_alarm'):
+            return
         today = time.mktime(datetime.date.today().timetuple())
         records = self.parent.actions.get_bills('dueDate < %s AND paid = 0' % today)
 
@@ -76,7 +77,7 @@ class Alarm(object):
     def show_bill_notification(self, bill=None):
 
         msg = _('The bill %s is due.') % "<b>\"%s\"</b>" % bill['payee']
-        if msg:
+        if msg and self.parent.actions.get_bills({'Id': bill['Id']})[0]['paid'] == 0:
             bubble = self.notification(common.APPNAME, msg)
             bubble.add_action("paid", _("Mark as paid"), self.__cb_mark_as_paid, bill)
             bubble.add_action("edit", _("Edit"), self.__cb_edit_bill, bill)
@@ -113,5 +114,5 @@ class Alarm(object):
 
     def timer(self):
         # TODO: Show custom alarms
-        print self.time
+        print self.parent.config.get('Alarm', 'show_alarm_at_time')
         return True
