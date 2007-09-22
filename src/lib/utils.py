@@ -25,7 +25,7 @@ class ContextMenu(gtk.Menu):
         gtk.Menu.__init__(self)
         self.menuItem = None
 
-    def addMenuItem(self, menuName, actionFunction=None, menuImage=None, forceName=False):
+    def addMenuItem(self, menuName, actionFunction=None, menuImage=None, forceName=False, isCheck=False):
         """ Add itens to menu.
 
             @menuName is the text showed in the menu option.
@@ -34,37 +34,42 @@ class ContextMenu(gtk.Menu):
             @actionFunction is the procedure called when activate signal is triggered from the menu.
         """
         if menuName == "-":
-            self.menuItem = gtk.SeparatorMenuItem()
+            menuItem = gtk.SeparatorMenuItem()
         else:
             if menuImage is not None:
                 if isinstance(menuImage, gtk.Image):
-                    self.menuItem = gtk.ImageMenuItem(menuName)
-                    self.menuItem.set_image(menuImage)
+                    menuItem = gtk.ImageMenuItem(menuName)
+                    menuItem.set_image(menuImage)
                 else:
                     if not forceName:
-                        self.menuItem = gtk.ImageMenuItem(menuImage)
+                        menuItem = gtk.ImageMenuItem(menuImage)
                     else:
-                        self.menuItem = gtk.ImageMenuItem(menuName)
+                        menuItem = gtk.ImageMenuItem(menuName)
                         img = gtk.Image()
                         img.set_from_stock(menuImage,gtk.ICON_SIZE_MENU)
-                        self.menuItem.set_image(img)
+                        menuItem.set_image(img)
+            elif isCheck:
+                menuItem = gtk.CheckMenuItem(menuName)
             else:
-                self.menuItem = gtk.ImageMenuItem(menuName)
+                menuItem = gtk.ImageMenuItem(menuName)
 
-            if actionFunction is not None :
-                self.menuItem.connect("activate", actionFunction)
-        self.menuItem.show()
-        self.append(self.menuItem)
-        return
+            if actionFunction is not None and not isCheck:
+                menuItem.connect("activate", actionFunction)
+            elif actionFunction is not None and isCheck:
+                menuItem.connect("toggled", actionFunction)
+        menuItem.show()
+        self.append(menuItem)
+        self.menuItem = menuItem
+        return menuItem
 
 class Message:
     """ Generic prompt dialog """
     _title_format = '<span weight="bold" size="larger">%s</span>'
 
-    def ShowQuestionOkCancel(self, text, parentWindow=None, title=''):
-        dlg = gtk.MessageDialog (parentWindow, 
-                                 gtk.DIALOG_MODAL, 
-                                 gtk.MESSAGE_QUESTION, 
+    def ShowQuestionYesNo(self, text, parentWindow=None, title=''):
+        dlg = gtk.MessageDialog (parentWindow,
+                                 gtk.DIALOG_MODAL,
+                                 gtk.MESSAGE_QUESTION,
                                  gtk.BUTTONS_YES_NO)
         title = title and title or 'Question'
         dlg.set_markup(self._title_format % title)
@@ -74,9 +79,9 @@ class Message:
         return response == gtk.RESPONSE_YES
 
     def ShowError(self, text, parentWindow=None, title=''):
-        dlg = gtk.MessageDialog(parentWindow, 
-                               gtk.DIALOG_MODAL, 
-                               gtk.MESSAGE_ERROR, 
+        dlg = gtk.MessageDialog(parentWindow,
+                               gtk.DIALOG_MODAL,
+                               gtk.MESSAGE_ERROR,
                                gtk.BUTTONS_OK)
         title = title and title or 'Error'
         dlg.set_markup(self._title_format % title)
@@ -85,10 +90,22 @@ class Message:
         dlg.destroy()
         return
 
+    def ShowErrorQuestion(self, text, parentWindow=None, title=''):
+        dlg = gtk.MessageDialog(parentWindow,
+                               gtk.DIALOG_MODAL,
+                               gtk.MESSAGE_ERROR,
+                               gtk.BUTTONS_YES_NO)
+        title = title and title or 'Error'
+        dlg.set_markup(self._title_format % title)
+        dlg.format_secondary_markup(text)
+        response = dlg.run()
+        dlg.destroy()
+        return response == gtk.RESPONSE_YES
+
     def ShowInfo(self, text, parentWindow=None, title=''):
-        dlg = gtk.MessageDialog(parentWindow, 
-                               gtk.DIALOG_MODAL, 
-                               gtk.MESSAGE_INFO, 
+        dlg = gtk.MessageDialog(parentWindow,
+                               gtk.DIALOG_MODAL,
+                               gtk.MESSAGE_INFO,
                                gtk.BUTTONS_OK)
         title = title and title or 'Information'
         dlg.set_markup(self._title_format % title)
@@ -98,9 +115,9 @@ class Message:
         return
 
     def ShowSaveConfirmation(self, parentWindow=None):
-        dlg = gtk.MessageDialog(parentWindow, 
-                               gtk.DIALOG_MODAL, 
-                               gtk.MESSAGE_WARNING, 
+        dlg = gtk.MessageDialog(parentWindow,
+                               gtk.DIALOG_MODAL,
+                               gtk.MESSAGE_WARNING,
                                gtk.BUTTONS_NONE)
         dlg.add_button(_('Close _Without Saving'), gtk.RESPONSE_NO)
         dlg.add_button(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
