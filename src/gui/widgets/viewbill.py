@@ -16,12 +16,17 @@ class ViewBill(GenericListView):
         cell.set_property('text', id)
         column.set_visible(False)
 
+    def category_cell_data_function(self, column, cell, model, iter):
+        category = model.get_value (iter, 1)
+        cell.set_property('text', category)
+        column.set_visible(True)
+
     def payee_cell_data_function(self, column, cell, model, iter):
-        payee = model.get_value (iter, 1)
+        payee = model.get_value (iter, 2)
         cell.set_property('markup', _('<b>%(payee)s</b>') % {'payee': payee})
 
     def duedate_cell_data_function(self, column, cell, model, iter):
-        dueDate = float(model.get_value (iter, 2))
+        dueDate = float(model.get_value (iter, 3))
         # Format the dueDate field
         dueDate = datetime.datetime.fromtimestamp(dueDate)
         # TRANSLATORS: This is a date format. You can change the order.
@@ -30,19 +35,19 @@ class ViewBill(GenericListView):
         cell.set_property('xalign', 0.5)
 
     def amountdue_cell_data_function(self, column, cell, model, iter):
-        amountDue = model.get_value(iter, 3)
+        amountDue = model.get_value(iter, 4)
         amountDue = len(amountDue) > 0 and amountDue or 0
         amountDue = "%0.2f" % float(amountDue)
         cell.set_property('text', amountDue)
         cell.set_property('xalign', 1.0)
 
     def notes_cell_data_function(self, column, cell, model, iter):
-        notes = model.get_value (iter, 4)
+        notes = model.get_value (iter, 5)
         cell.set_property('text', notes)
         column.set_visible(False)
 
     def paid_cell_data_function(self, column, cell, model, iter):
-        paid = model.get_value (iter, 5)
+        paid = model.get_value (iter, 6)
         cell.set_property('text', paid)
         column.set_visible(False)
 
@@ -51,11 +56,12 @@ class ViewBill(GenericListView):
     # by the column title and cellrenderer type.
     columns = {
         0: ['Id', gtk.CellRendererText(), id_cell_data_function],
-        1: [_('Payee'), gtk.CellRendererText(), payee_cell_data_function],
-        2: [_('Due Date'), gtk.CellRendererText(), duedate_cell_data_function],
-        3: [_('Amount Due'), gtk.CellRendererText(), amountdue_cell_data_function],
-        4: [_('Notes'), gtk.CellRendererText(), notes_cell_data_function],
-        5: [_('Paid'), gtk.CellRendererText(), paid_cell_data_function]
+        1: [_('Category'), gtk.CellRendererText(), category_cell_data_function],
+        2: [_('Payee'), gtk.CellRendererText(), payee_cell_data_function],
+        3: [_('Due Date'), gtk.CellRendererText(), duedate_cell_data_function],
+        4: [_('Amount Due'), gtk.CellRendererText(), amountdue_cell_data_function],
+        5: [_('Notes'), gtk.CellRendererText(), notes_cell_data_function],
+        6: [_('Paid'), gtk.CellRendererText(), paid_cell_data_function]
     }
 
     def __init__(self):
@@ -65,19 +71,22 @@ class ViewBill(GenericListView):
         id.set_cell_data_func(id.get_cell_renderers()[0], self.id_cell_data_function)
         id.set_visible(False)
 
-        payee = self.get_column(1)
+        category = self.get_column(1)
+        category.set_cell_data_func(category.get_cell_renderers()[0], self.category_cell_data_function)
+
+        payee = self.get_column(2)
         payee.set_cell_data_func(payee.get_cell_renderers()[0], self.payee_cell_data_function)
 
-        duedate = self.get_column(2)
+        duedate = self.get_column(3)
         duedate.set_cell_data_func(duedate.get_cell_renderers()[0], self.duedate_cell_data_function)
 
-        amountdue = self.get_column(3)
+        amountdue = self.get_column(4)
         amountdue.set_cell_data_func(amountdue.get_cell_renderers()[0], self.amountdue_cell_data_function)
 
-        notes = self.get_column(4)
+        notes = self.get_column(5)
         notes.set_cell_data_func(notes.get_cell_renderers()[0], self.notes_cell_data_function)
         notes.set_visible(False)
 
-        paid = self.get_column(5)
+        paid = self.get_column(6)
         paid.set_cell_data_func(paid.get_cell_renderers()[0], self.paid_cell_data_function)
         paid.set_visible(False)
