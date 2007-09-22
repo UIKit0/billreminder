@@ -6,7 +6,6 @@ designed to allow for easy tracking of bills.
 Dependencies:
 ============
 
-pynotify
 pysqlite2
 
 Many thanks to the following people who directly and indirectly helped with this project:
