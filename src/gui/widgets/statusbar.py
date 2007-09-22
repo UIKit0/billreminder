@@ -32,7 +32,7 @@ class Statusbar(gtk.HBox):
         self.set_border_width(2)
 
     def Records(self, count):
-        self.recordCount.set_markup("<b>%(count)d</b>" % {'count': count})
+        self.recordCount.set_markup("%(count)d" % {'count': count})
 
     def Notes(self, notes=''):
         if notes:
