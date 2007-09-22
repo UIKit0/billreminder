@@ -38,26 +38,6 @@ class NotifyMessage(object):
     def set_timeout(self, expire_timeout):
         self.expire_timeout = expire_timeout * 1000
 
-    def get_hints(self, tray):
-        hints = {}
-        if tray:
-           x = tray.get_geometry()[1].x
-           y = tray.get_geometry()[1].y
-           w = tray.get_geometry()[1].width
-           h = tray.get_geometry()[1].height
-           x += w/2
-           if y < 100:
-              # top-panel
-              y += h/2
-           else:
-              # bottom-panel
-              y -= h/2
-           hints['x'] = x
-           hints['y'] = y
-        hints['desktop-entry'] = 'billreminder'
-        self.hints = hints
-        return hints
-
     def set_default_action(self, callback):
         self.__default_action_func = callback
 
