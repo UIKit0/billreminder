@@ -107,16 +107,20 @@ class DAL(object):
             if tblname not in self._tables:
                 # We should revisit this logic
                 print  '%s is an obsolete table and it will be deleted' % tblname
-                self._delete_table(self._tables[tblname])
+                self._delete_table(self._tables[tblname]) ##### MALFUNCTION
                 continue
             if self._tables[tblname].Version == int(ver) :
                 print '%s is a valid table' % tblname
             else:
                 print '%s is NOT a valid table' % tblname
                 self._update_table(self._tables[tblname])
+                # Save tables version info
+                self._update_table_version(self._tables[tblname])
+                # Save tables fields info
+                self._update_fields_information(self._tables[tblname])
             # Remove valid tables from dict
             unvalidated.pop(tblname)
-
+                
         # Create tables new in actual version
         for table in unvalidated.values():
             self._create_table(table)
@@ -126,15 +130,20 @@ class DAL(object):
             self._update_fields_information(table)
 
     def _delete_table(self, table):
-        stmt = "DROP TABLE %s" % table.Name
+        if isinstance(table, basestring):
+            table_name = table
+        else:
+            table_name = table.Name
+        stmt = "DROP TABLE %s" % table_name
         self.cur.execute(stmt)
-        self.delete(self.tables['tblversions'],  table.Name)
-        print "Removed table %s" % table.Name
+        self.delete(self.tables['tblversions'],  table_name)
+        print "Removed table %s" % table_name
 
     def _update_table(self, table):
         oldfields = self.get(self.tables['tblfields'], {'tablename': table.Name})[0]['fields'].split(', ')
         stmt = "SELECT %(fields)s FROM %(name)s" \
             % dict(fields=", ".join(oldfields), name=table.Name)
+        print stmt
         self.cur.execute(stmt)
         oldrecords = [dict([ (f, row[i]) for i, f in enumerate(oldfields) ]) \
             for row in self.cur.fetchall()]
@@ -145,7 +154,7 @@ class DAL(object):
         self._create_table(table)
 
         for rec in oldrecords:
-            self.add(self.tables[tblname], dict([(col,rec.get(col,'')) for col in self._tables[tblname].Fields]))
+            self.add(table, dict([(col,rec.get(col,'')) for col in table.Fields]))
 
         self._delete_table('%s_old' % table.Name)
 
