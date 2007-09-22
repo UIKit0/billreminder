@@ -43,7 +43,7 @@ class DAL(object):
         self.cur.execute("PRAGMA count_changes=0")
 
         if os.path.isfile(os.path.join(self.dbPath, self.dbName)):
-            self.validateTables()
+            self._validate_tables()
         else:
             self._createDb()
 
@@ -51,35 +51,35 @@ class DAL(object):
         """ All tables get created here."""
         # First, we create them
         for table in self.tables.values():
-            self._createTable(table)
+            self._create_table(table)
 
         # Now save their field info
         for table in self.tables.values():
-            self._updateFieldsInformation(table)
+            self._update_fields_information(table)
 
         # Now save their version info
         for table in self.tables.values():
-            self.update_tableVersion(table)
+            self._update_table_version(table)
 
 
-    def _createTable(self, table):
+    def _create_table(self, table):
         # Create the table
         self.cur.execute(table.CreateSQL)
         self.conn.commit()
         print table.Name
 
-    def _updateFieldsInformation(self, table):
+    def _update_fields_information(self, table):
         """ Adds field information for every table."""
         # Saves fields information for every table except tblfields
         self.add(self.tables['tblfields'], {'tablename': table.Name, 'fields': ", ".join(table.Fields)})
 
-    def update_tableVersion(self, table):
+    def _update_table_version(self, table):
         """ Adds table verison information."""
         # Save version information for every table
         self.add(self.tables['tblversions'], {'tablename': table.Name, 'version': table.Version})
         print 'version saved (%s - %i)' % (table.Name, table.Version)
 
-    def validateTables(self):
+    def _validate_tables(self):
         """ Validates that all tables are up to date. """
         stmt = "select tbl_name from sqlite_master where type = 'table' and tbl_name like 'br_%'"
         self.cur.execute(stmt)
@@ -100,34 +100,30 @@ class DAL(object):
             try:
                 #ver = self.get('tblversions', {'tablename': tblname})[0]['version']
                 ver = self.get(VersionsTable, {'tablename': tblname})[0]['version']
-            except sqlite.OperationalError:
+            except:
                 ver = -1
             print ver
             # Table is obsolete and will be deleted 
             if tblname not in self._tables:
                 # We should revisit this logic
                 print  '%s is an obsolete table and it will be deleted' % tblname
-                self._delete_table(tblname)
+                self._delete_table(self._tables[tblname])
                 continue
             if self._tables[tblname].Version == int(ver) :
                 print '%s is a valid table' % tblname
             else:
                 print '%s is NOT a valid table' % tblname
-                self._update_table(tblname)
+                self._update_table(self._tables[tblname])
             # Remove valid tables from dict
             unvalidated.pop(tblname)
 
         # Create tables new in actual version
-        for table in unvalidated:
-            self._createTable(table)
-
-        # Save tables version info
-        for table in unvalidated:
-            self._update_tableVersion(table)
-
-        # Save tables fields info
-        for table in unvalidated:
-            self._updateFieldsInformation(table)
+        for table in unvalidated.values():
+            self._create_table(table)
+            # Save tables version info
+            self._update_table_version(table)
+            # Save tables fields info
+            self._update_fields_information(table)
 
     def _delete_table(self, table):
         stmt = "DROP TABLE %s" % table.Name
@@ -146,12 +142,12 @@ class DAL(object):
         self.cur.execute(stmt)
         self.delete(self.tables['tblversions'],  table.Name)
         self.delete(self.tables['tblfields'], table.Name)
-        self._createTable(table)
+        self._create_table(table)
 
         for rec in oldrecords:
             self.add(self.tables[tblname], dict([(col,rec.get(col,'')) for col in self._tables[tblname].Fields]))
 
-        self._delete_table('%s_old' % tblname)
+        self._delete_table('%s_old' % table.Name)
 
     def _create_query_params(self, kwargs):
         """ Helper method to create a statement and arguments to a query. """
