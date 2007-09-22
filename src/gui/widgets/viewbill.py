@@ -41,7 +41,7 @@ class ViewBill(GenericListView):
 
     def amountdue_cell_data_function(self, column, cell, model, iter):
         amountDue = model.get_value(iter, 4)
-        paid = int(model.get_value(iter, 5))
+        paid = int(model.get_value(iter, 6))
         amountDue = len(amountDue) > 0 and amountDue or 0
         amountDue = "%0.2f" % float(amountDue)
         if paid:
