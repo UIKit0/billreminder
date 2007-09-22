@@ -7,6 +7,7 @@ __error = False
 
 import os
 import sys
+from subprocess import Popen
 
 try:
     import gobject
@@ -73,7 +74,7 @@ class Daemon(object):
         """ Detach process and run it as a daemon """
         if not '--no-daemon' in sys.argv:
             # Fork first child
-            try: 
+            try:
                 pid = os.fork()
             except OSError, err:
                 print >> sys.stderr, ('Unexpected error:', sys.exc_info()[0], err)
@@ -138,7 +139,11 @@ class Program(Daemon):
         self.config = Config()
         self.actions = Actions()
         self.dbus_server = Server(self)
+        if '--open-gui' in sys.argv:
+            gui = Popen('python billreminder', shell=True)
+            self.client_pid = gui.pid
         self.alarm = Alarm(self)
+
 
         # Create the mainloop
         self.mainloop = gobject.MainLoop()
