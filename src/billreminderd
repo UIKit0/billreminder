@@ -14,6 +14,7 @@ Options:
   --help, -h, -?\tShow this message.
   --verbose\t\tPrint output messages.
   --no-daemon\t\tDon't run as a daemon.
+  --open-gui\t\tStart daemon and launch GUI.
   --version, -v\t\tDisplays the version number for this application.
 """)
 
@@ -24,7 +25,7 @@ Options:
         raise SystemExit
     elif '--version' in args or '-v' in args:
         print _('This is %(appname)s - Version: %(verion)s') % \
-                                      {'appname': '%s Daemon' % common.APPNAME, 
+                                      {'appname': '%s Daemon' % common.APPNAME,
                                        'version': common.APPVERSION}
     else:
         BillReminderd.main()
