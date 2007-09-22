@@ -18,6 +18,7 @@ from gui.widgets.trayicon import NotifyIcon
 from lib.bill import Bill
 from lib.dal import DAL
 from lib.actions import Actions
+from db.billstable import BillsTable
 
 # Import common utilities
 import lib.common as common
@@ -151,7 +152,7 @@ class MainDialog:
     def _formated_row(self, row):
         """ Formats a bill to be displayed as a row. """
         # Make sure the row is created using fields in proper order
-        fields = ['Id', 'payee', 'dueDate', 'amountDue', 'notes', 'paid']
+        fields = BillsTable.Fields
         # Initial list
         formated = []
         # Loop through 'fields' and color code them
