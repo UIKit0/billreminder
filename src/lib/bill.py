@@ -8,10 +8,11 @@ import time
 
 class Bill(object):
 
-    def __init__(self, payee, dueDate='', amountDue='', notes=None, paid=0, id=-1):
+    def __init__(self, payee, category='', dueDate='', amountDue='', notes=None, paid=0, id=-1):
 
         if isinstance(payee,dict):
             self.__set_id(payee['Id'])
+            self.__set_category(payee['category'])
             self.__set_payee(payee['payee'])
             if not payee['dueDate']:
                 self.__set_dueDate(time.time())
@@ -24,6 +25,7 @@ class Bill(object):
         else:
             self.__set_id(id)
             self.__set_payee(payee)
+            self.__set_category(category)
             if not dueDate:
                 self.__set_dueDate(time.time())
             else:
@@ -33,12 +35,17 @@ class Bill(object):
             self.__set_paid(paid)
 
     # Id
-    def __get_id (self): return self.__id 
+    def __get_id (self): return self.__id
     def __set_id (self, value): self.__id  = value
     Id = property(fget=__get_id, fset=__set_id, doc='Get/Set the Id.')
 
+    # Category
+    def __get_category (self): return self.__category
+    def __set_category (self, value): self.__category  = value
+    Category = property(fget=__get_category, fset=__set_category, doc='Get/Set the category.')
+
     # Payee
-    def __get_payee (self): return self.__payee 
+    def __get_payee (self): return self.__payee
     def __set_payee (self, value): self.__payee  = value
     Payee = property(fget=__get_payee, fset=__set_payee, doc='Get/Set the payee.')
 
@@ -73,6 +80,7 @@ class Bill(object):
     def __get_dictionary(self):
         return dict({
             'Id': self.__id,
+            'category': self.__category,
             'payee': self.__payee,
             'dueDate': self.__dueDate,
             'amountDue': self.__amountDue,
