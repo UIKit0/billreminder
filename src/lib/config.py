@@ -22,3 +22,4 @@ class Config(ConfigParser):
     def save(self):
         file = open(self.filename, 'w')
         self.write(file)
+        file.close()
