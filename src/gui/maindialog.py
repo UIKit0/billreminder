@@ -3,6 +3,7 @@
 import pygtk
 pygtk.require('2.0')
 import gtk
+from gobject import timeout_add
 
 # Import widgets modules
 from gui.widgets.toolbar import Toolbar
@@ -21,7 +22,7 @@ from lib.actions import Actions
 # Import common utilities
 import lib.common as common
 import lib.dialogs as dialogs
-from lib.utils import ContextMenu, get_dbus_interface
+from lib.utils import ContextMenu, get_dbus_interface, force_string
 from lib import i18n
 from lib.config import Config
 
@@ -74,20 +75,32 @@ class MainDialog:
         self.window.add(self.box)
 
         self.window.show_all()
+        if self.config.getboolean('General', 'start_in_tray'):
+            self.window.hide()
 
         self.toggle_buttons()
 
         # Connects to the database
         self.actions = Actions()
-        self._populateTreeView(self.actions.get_bills('paid = 0 ORDER BY dueDate DESC'))
+        if self.config.getboolean('GUI', 'show_paid_bills'):
+            self._populateTreeView(self.actions.get_bills('paid IN (0,1) ORDER BY dueDate DESC'))
+        else:
+            self._populateTreeView(self.actions.get_bills('paid = 0 ORDER BY dueDate DESC'))
         self.notify = NotifyIcon(self)
 
+        self.iface = None
         iface = get_dbus_interface(common.DBUS_INTERFACE, common.DBUS_PATH)
         if iface:
             iface.connect_to_signal("bill_edited", self.reloadTreeView)
             iface.connect_to_signal("show_main_window", self.window.show)
+            self.iface = iface
+            timeout_add(2000, self._send_tray_hints)
 
     # Methods:  UI
+    def _send_tray_hints(self):
+        self.iface.set_tray_hints(force_string(self.notify.get_hints()))
+        timeout_add(60000, self._send_tray_hints)
+
     def get_window_visibility(self):
         return self.window.get_property("visible")
 
@@ -129,7 +142,10 @@ class MainDialog:
         # Update list with updated record
         path = self.list.get_cursor()[0]
         self.list.listStore.clear()
-        self._populateTreeView(self.actions.get_bills('paid = 0 ORDER BY dueDate DESC'))
+        if self.config.getboolean('GUI', 'show_paid_bills'):
+            self._populateTreeView(self.actions.get_bills('paid IN (0,1) ORDER BY dueDate DESC'))
+        else:
+            self._populateTreeView(self.actions.get_bills('paid = 0 ORDER BY dueDate DESC'))
         self.list.set_cursor(path)
 
     def _formated_row(self, row):
@@ -199,21 +215,24 @@ class MainDialog:
         # Toggle paid field
         self.currentrecord.Paid = (self.currentrecord.Paid == 0) and 1 or 0
 
-        if True:#try:
+        try:
             # Edit bill to database
             self.actions.edit_bill(self.currentrecord.Dictionary)
             # Update list with updated record
             idx = self.list.get_cursor()[0][0]
             self.list.listStore[idx] = self._formated_row(self.currentrecord.Dictionary)
             self._update_statusbar(idx)
-        #except Exception, e:
-        #    print str(e)
+        except Exception, e:
+            print str(e)
 
     def about(self):
         dialogs.about_dialog(parent=self.window)
 
     def preferences(self):
         dialogs.preferences_dialog(parent=self.window)
+        self.config.reload()
+        if self.iface:
+            self.iface.reload_config()
 
     # Methods
     def _quit_application(self):
@@ -272,26 +291,40 @@ class MainDialog:
         """ This function will handle the signal to show a popup menu sent by
             a right click on tvBill widget. """
         if event.button == 3 and event.type == gtk.gdk.BUTTON_PRESS and len(self.list.listStore) > 0:
-
-            c = ContextMenu(self)
-            c.addMenuItem(_('Add New'), self.on_btnNew_clicked, gtk.STOCK_NEW)
-            c.addMenuItem('-', None)
-            c.addMenuItem(_('Remove'), self.on_btnDelete_clicked, gtk.STOCK_DELETE)
-            c.addMenuItem(_('Edit'), self.on_btnEdit_clicked, gtk.STOCK_EDIT)
-            c.addMenuItem('-', None)
-            if not self.currentrecord.Paid:
-                c.addMenuItem(_('Paid'), self.on_btnPaid_clicked, gtk.STOCK_APPLY, True)
-            else:
-                c.addMenuItem(_('Not Paid'), self.on_btnPaid_clicked, gtk.STOCK_UNDO, True)
-            c.addMenuItem('-', None)
-            c.addMenuItem(_('Cancel'), None, gtk.STOCK_CANCEL)
-            c.popup(None, None, None, event.button, event.get_time())
+            self._get_selected_record()
+            timeout_add(100, self._create_list_contextmenu, widget, event)
+    
+    def _create_list_contextmenu(self, widget, event):
+        c = ContextMenu(self)
+        c.addMenuItem(_('Add New'), self.on_btnNew_clicked, gtk.STOCK_NEW)
+        c.addMenuItem('-', None)
+        c.addMenuItem(_('Remove'), self.on_btnDelete_clicked, gtk.STOCK_DELETE)
+        c.addMenuItem(_('Edit'), self.on_btnEdit_clicked, gtk.STOCK_EDIT)
+        c.addMenuItem('-', None)
+        if not self.currentrecord.Paid:
+            c.addMenuItem(_('Paid'), self.on_btnPaid_clicked, gtk.STOCK_APPLY, True)
+        else:
+            c.addMenuItem(_('Not Paid'), self.on_btnPaid_clicked, gtk.STOCK_UNDO, True)
+        c.addMenuItem('-', None)
+        showitem = c.addMenuItem(_('Show paid bills'), self.on_btnShow_toggle, None, isCheck=True)
+        showitem.set_active(self.config.getboolean("GUI", "show_paid_bills"))
+        c.addMenuItem('-', None)
+        c.addMenuItem(_('Cancel'), None, gtk.STOCK_CANCEL)
+        c.popup(None, None, None, 3, event.get_time())
+            
 
     def _on_list_cursor_changed(self, widget):
         # Get currently selected bill
         self._get_selected_record()
         # Update statusbar
         self._update_statusbar()
+
+    def on_btnShow_toggle(self, checkmenuitem):
+        if self.config.getboolean("GUI", "show_paid_bills") == checkmenuitem.get_active():
+            return
+        self.config.set("GUI", "show_paid_bills", str(checkmenuitem.get_active()))
+        self.config.save()
+        self.reloadTreeView()
 
     def on_btnNew_clicked(self, toolbutton):
         self.add_bill()
