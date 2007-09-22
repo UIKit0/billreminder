@@ -63,6 +63,7 @@ class ViewBill(GenericListView):
         # Set the following columns to invisible
         id = self.get_column(0)
         id.set_cell_data_func(id.get_cell_renderers()[0], self.id_cell_data_function)
+        id.set_visible(False)
 
         payee = self.get_column(1)
         payee.set_cell_data_func(payee.get_cell_renderers()[0], self.payee_cell_data_function)
@@ -75,7 +76,8 @@ class ViewBill(GenericListView):
 
         notes = self.get_column(4)
         notes.set_cell_data_func(notes.get_cell_renderers()[0], self.notes_cell_data_function)
+        notes.set_visible(False)
 
         paid = self.get_column(5)
         paid.set_cell_data_func(paid.get_cell_renderers()[0], self.paid_cell_data_function)
-
+        paid.set_visible(False)
