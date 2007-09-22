@@ -60,3 +60,22 @@ class NotifyIcon:
     def exists(self):
         """ Do nothing here, only returns that the class was instantiated."""
         return True
+
+    def get_hints(self):
+        hints = {}
+        x = self.tray.get_geometry()[1].x
+        y = self.tray.get_geometry()[1].y
+        w = self.tray.get_geometry()[1].width
+        h = self.tray.get_geometry()[1].height
+        x += w/2
+        if y < 100:
+            # top-panel
+            y += h/2
+        else:
+            # bottom-panel
+            y -= h/2
+        hints['x'] = x
+        hints['y'] = y
+        hints['desktop-entry'] = 'billreminder'
+        self.hints = hints
+        return hints
