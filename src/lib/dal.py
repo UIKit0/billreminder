@@ -18,6 +18,7 @@ from db.versionstable import VersionsTable
 from db.configtable import ConfigTable
 from db.fieldstable import FieldsTable
 from db.billstable import BillsTable
+from db.categoriestable import CategoriesTable
 
 class DAL(object):
 
@@ -28,6 +29,7 @@ class DAL(object):
 
     # Tables used by applications and corresponding versions
     tables = {'tblversions': VersionsTable(),
+        'tblcategories': CategoriesTable(),
         'tblconfig': ConfigTable(),
         'tblfields': FieldsTable(),
         'tblbills': BillsTable()}
@@ -120,7 +122,7 @@ class DAL(object):
                 self._update_fields_information(self._tables[tblname])
             # Remove valid tables from dict
             unvalidated.pop(tblname)
-                
+
         # Create tables new in actual version
         for table in unvalidated.values():
             self._create_table(table)
@@ -140,7 +142,7 @@ class DAL(object):
         print "Removed table %s" % table_name
 
     def _update_table(self, table):
-        oldfields = self.get(self.tables['tblfields'], {'tablename': table.Name})[0]['fields'].split(', ')
+        oldfields = self.get(self.tables['tblfields'], {'tablename': table.Name})[0]['fields'].split(',')
         stmt = "SELECT %(fields)s FROM %(name)s" \
             % dict(fields=", ".join(oldfields), name=table.Name)
         print stmt
