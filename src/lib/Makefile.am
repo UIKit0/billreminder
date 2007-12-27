@@ -13,7 +13,7 @@ billreminder_lib_PYTHON = \
 	dbus_actions.py \
 	dialogs.py \
 	i18n.py \
-	sysvars.py
+	sysvars.py \
 	utils.py
 
 sysvars.py: sysvars.py.in
