@@ -3,8 +3,6 @@
 
 __all__ = ['Daemon', 'Program', 'lock', 'unlock']
 
-__error = False
-
 import os
 import sys
 from subprocess import Popen
@@ -12,20 +10,17 @@ from subprocess import Popen
 try:
     import gobject
 except ImportError:
-    print 'Required package: python-gobject'
-    __error = True
+    print 'Required package: pygobject'
+    raise SystemExit
 try:
     import dbus
 except ImportError:
     print 'Required package: dbus-python'
-    __error = True
+    raise SystemExit
 try:
     import pysqlite2
 except ImportError:
-    print 'Required package: python-pysqlite2'
-    __error = True
-
-if __error:
+    print 'Required package: pysqlite2'
     raise SystemExit
 
 from lib import common
@@ -34,7 +29,8 @@ from lib.utils import verify_pid
 from lib.actions import Actions
 from lib.config import Config
 from alarm import Alarm
-from dbus_manager import Server, verify_service
+from dbus_manager import Server
+from dbus_manager import verify_service
 from device import *
 
 stdout_orig = sys.stdout
@@ -47,7 +43,8 @@ def lock():
     global LOCKFD
 
     try:
-        LOCKFD = os.open(common.DAEMON_LOCK_FILE, os.O_CREAT | os.O_EXCL | os.O_RDWR)
+        LOCKFD = os.open(common.DAEMON_LOCK_FILE,
+                         os.O_CREAT | os.O_EXCL | os.O_RDWR)
         os.write(LOCKFD, '%d' % os.getpid())
         return True
     except OSError:
@@ -77,7 +74,8 @@ class Daemon(object):
             try:
                 pid = os.fork()
             except OSError, err:
-                print >> sys.stderr, ('Unexpected error:', sys.exc_info()[0], err)
+                print >> sys.stderr, \
+                         ('Unexpected error:', sys.exc_info()[0], err)
 
             if pid == 0:
                 os.setsid()
@@ -86,7 +84,8 @@ class Daemon(object):
                 try:
                     pid = os.fork()
                 except OSError, err:
-                    print >> sys.stderr, ('Unexpected error:', sys.exc_info()[0], err)
+                    print >> sys.stderr, \
+                             ('Unexpected error:', sys.exc_info()[0], err)
 
                 if pid == 0:
                     os.umask(0)
@@ -116,10 +115,13 @@ class Program(Daemon):
             lockpid = int(lockfd.readline())
             lockfd.close()
             if verify_pid(lockpid):
-                print _('Lock File found: You have another instance running. (pid=%d)') % lockpid
+                print _('Lock File found:' \
+                        ' You have another instance running. (pid=%d)') % \
+                        lockpid
                 raise SystemExit
             else:
-                print _('Lock File found: Possibly the program was exited unexpectedly.')
+                print _('Lock File found: ' \
+                        'Possibly the program was exited unexpectedly.')
                 try:
                     print _('Removing Lock File...')
                     os.remove(common.DAEMON_LOCK_FILE)
@@ -129,7 +131,7 @@ class Program(Daemon):
 
         # Verify if there is another Billreminder-Daemon DBus Service
         if verify_service(common.DBUS_INTERFACE):
-            print _('BillReminder is already running.')
+            print _('BillReminder Notifier is already running.')
             raise SystemExit
 
         Daemon.__init__(self)
@@ -140,7 +142,7 @@ class Program(Daemon):
         self.actions = Actions()
         self.dbus_server = Server(self)
         if '--open-gui' in sys.argv:
-            gui = Popen('python billreminder', shell=True)
+            gui = Popen('billreminder', shell=True)
             self.client_pid = gui.pid
         self.alarm = Alarm(self)
 
