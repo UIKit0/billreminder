@@ -1,11 +1,14 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+__all__ = ['AboutDialog']
 
 import pygtk
 pygtk.require('2.0')
 import gtk
 import lib.common as common
 
-TRANSLATORS = "translator-credits"
+TRANSLATORS = _("translator-credits")
 
 
 class AboutDialog(gtk.AboutDialog):
