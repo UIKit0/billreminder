@@ -7,7 +7,8 @@ from sys import stderr
 
 from lib import common
 from lib import i18n
-from lib.utils import verify_pid, get_dbus_interface
+from lib.utils import verify_pid
+from lib.utils import get_dbus_interface
 
 class NotifyMessage(object):
 
@@ -26,8 +27,10 @@ class NotifyMessage(object):
         self.parent = parent
 
         # Connect DBus notification interface
-        self.__interface = get_dbus_interface(common.NOTIFICATION_INTERFACE, common.NOTIFICATION_PATH)
-        self.__interface.connect_to_signal('ActionInvoked', self.__on_action_invoked)
+        self.__interface = get_dbus_interface(common.NOTIFICATION_INTERFACE,
+                                              common.NOTIFICATION_PATH)
+        self.__interface.connect_to_signal('ActionInvoked',
+                                           self.__on_action_invoked)
 
 
     def add_action(self, action, label, callback, *arg):
@@ -50,7 +53,7 @@ class NotifyMessage(object):
         if arg[1] == "default" and self.__default_action_func:
             self.__default_action_func(arg)
         elif self.__action_func[arg[1]][0]:
-            self.__action_func[arg[1]][0](arg,  self.__action_func[arg[1]][1])
+            self.__action_func[arg[1]][0](arg, self.__action_func[arg[1]][1])
 
     def _set_id(self, id):
         self.id = id

@@ -1,5 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
+__all__ = ['about_dialog', 'add_dialog', 'edit_dialog', 'preferences_dialog']
 
 import sys
 import os
@@ -17,14 +19,10 @@ except ImportError:
     print "Please install pygtk"
     raise SystemExit
 
-try:
-    from gui.aboutdialog import AboutDialog
-    from gui.adddialog import AddDialog
-    from gui.prefdialog import PrefDialog
-    from lib import i18n
-except ImportError, e:
-    print str(e)
-    raise SystemExit
+from gui.aboutdialog import AboutDialog
+from gui.adddialog import AddDialog
+from gui.prefdialog import PrefDialog
+from lib import i18n
 
 def about_dialog(parent=None):
     about = AboutDialog()
@@ -42,6 +40,7 @@ def preferences_dialog(parent=None):
 
 def add_dialog(parent=None):
     record = None
+    # Dialog Title
     dialog = AddDialog(title=_("Add a New Record"), parent=parent)
     response = dialog.run()
     # Checks if the user did not cancel the action
@@ -52,6 +51,7 @@ def add_dialog(parent=None):
     return record
 
 def edit_dialog(record, parent=None):
+    # Dialog Title
     dialog = AddDialog(title=_("Edit a Record"), parent=parent, record=record)
     response = dialog.run()
     # Checks if the user did not cancel the action
