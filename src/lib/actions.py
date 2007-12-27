@@ -1,13 +1,18 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
+__all__ = ['Actions']
 
 import sys
 
 import dal
 import bill
 from lib import common
-from lib.utils import force_string, verify_dbus_service
+from lib.utils import force_string
+from lib.utils import verify_dbus_service
 from db.billstable import BillsTable
+from db.alarmstable import AlarmsTable
+from db.categoriestable import CategoriesTable
 
 class Actions(object):
 
@@ -33,6 +38,43 @@ class Actions(object):
         """ Delete a record in the database """
         return self.dal.delete(BillsTable, key)
 
-if not '--standalone' in sys.argv and not sys.argv[0].endswith('billreminderd') and verify_dbus_service(common.DBUS_INTERFACE):
+
+    def get_alarms(self, kwargs):
+        """ Returns one or more records that meet the criteria passed """
+        return self.dal.get(AlarmsTable, kwargs)
+
+    def add_alarm(self, kwargs):
+        """ Adds a alarm to the database """
+        return self.dal.add(AlarmsTable, kwargs)
+
+    def edit_alarm(self, kwargs):
+        """ Edit a record in the database """
+        return self.dal.edit(AlarmsTable, kwargs)
+
+    def delete_alarm(self, key):
+        """ Delete a record in the database """
+        return self.dal.delete(AlarmsTable, key)
+
+
+    def get_categories(self, kwargs):
+        """ Returns one or more records that meet the criteria passed """
+        return self.dal.get(CategoriesTable, kwargs)
+
+    def add_category(self, kwargs):
+        """ Adds a category to the database """
+        return self.dal.add(CategoriesTable, kwargs)
+
+    def edit_category(self, kwargs):
+        """ Edit a record in the database """
+        return self.dal.edit(CategoriesTable, kwargs)
+
+    def delete_category(self, key):
+        """ Delete a record in the database """
+        return self.dal.delete(CategoriesTable, key)
+
+
+if not '--standalone' in sys.argv \
+   and not sys.argv[0].endswith('billreminderd') \
+   and verify_dbus_service(common.DBUS_INTERFACE):
     from lib.dbus_actions import Actions
 
