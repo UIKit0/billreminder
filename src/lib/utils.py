@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 __all__ = ['ContextMenu', 'Message']
@@ -17,7 +17,9 @@ try:
     import gtk
 except ImportError, e:
     print str(e)
-    sys.exit(1)
+    raise SystemExit
+
+from lib import i18n
 
 class ContextMenu(gtk.Menu):
     """ Creates context menus accessed by mouse right click. """
@@ -25,13 +27,15 @@ class ContextMenu(gtk.Menu):
         gtk.Menu.__init__(self)
         self.menuItem = None
 
-    def addMenuItem(self, menuName, actionFunction=None, menuImage=None, forceName=False, isCheck=False):
+    def addMenuItem(self, menuName, actionFunction=None, menuImage=None,
+                          forceName=False, isCheck=False):
         """ Add itens to menu.
 
             @menuName is the text showed in the menu option.
                     If you pass a - (minus) as parameter value,
                     it will create a separation menu item.
-            @actionFunction is the procedure called when activate signal is triggered from the menu.
+            @actionFunction is the procedure called when activate
+                    signal is triggered from the menu.
         """
         if menuName == "-":
             menuItem = gtk.SeparatorMenuItem()
@@ -46,7 +50,7 @@ class ContextMenu(gtk.Menu):
                     else:
                         menuItem = gtk.ImageMenuItem(menuName)
                         img = gtk.Image()
-                        img.set_from_stock(menuImage,gtk.ICON_SIZE_MENU)
+                        img.set_from_stock(menuImage, gtk.ICON_SIZE_MENU)
                         menuItem.set_image(img)
             elif isCheck:
                 menuItem = gtk.CheckMenuItem(menuName)
@@ -71,7 +75,8 @@ class Message:
                                  gtk.DIALOG_MODAL,
                                  gtk.MESSAGE_QUESTION,
                                  gtk.BUTTONS_YES_NO)
-        title = title and title or 'Question'
+        # Dialog Title
+        title = title and title or _('Question')
         dlg.set_markup(self._title_format % title)
         dlg.format_secondary_markup(text)
         response = dlg.run()
@@ -83,7 +88,8 @@ class Message:
                                gtk.DIALOG_MODAL,
                                gtk.MESSAGE_ERROR,
                                gtk.BUTTONS_OK)
-        title = title and title or 'Error'
+        # Dialog Title
+        title = title and title or _('Error')
         dlg.set_markup(self._title_format % title)
         dlg.format_secondary_markup(text)
         dlg.run()
@@ -95,7 +101,8 @@ class Message:
                                gtk.DIALOG_MODAL,
                                gtk.MESSAGE_ERROR,
                                gtk.BUTTONS_YES_NO)
-        title = title and title or 'Error'
+        # Dialog Title
+        title = title and title or _('Error')
         dlg.set_markup(self._title_format % title)
         dlg.format_secondary_markup(text)
         response = dlg.run()
@@ -107,12 +114,29 @@ class Message:
                                gtk.DIALOG_MODAL,
                                gtk.MESSAGE_INFO,
                                gtk.BUTTONS_OK)
-        title = title and title or 'Information'
+        # Dialog Title
+        title = title and title or _('Information')
         dlg.set_markup(self._title_format % title)
         dlg.format_secondary_markup(text)
         dlg.run()
         dlg.destroy()
         return
+
+    def ShowBillInfo(self, text, parentWindow=None, title=''):
+        dlg = gtk.MessageDialog(parentWindow,
+                               gtk.DIALOG_MODAL,
+                               gtk.MESSAGE_WARNING,
+                               gtk.BUTTONS_NONE)
+        # Button Title
+        dlg.add_button(_("Mark as paid"), gtk.RESPONSE_YES)
+        dlg.add_button(_("Edit"), gtk.RESPONSE_NO)
+        dlg.add_button(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
+        title = title and title or _('BillReminder')
+        dlg.set_markup(self._title_format % title)
+        dlg.format_secondary_markup(text)
+        ret = dlg.run()
+        dlg.destroy()
+        return ret
 
     def ShowSaveConfirmation(self, parentWindow=None):
         dlg = gtk.MessageDialog(parentWindow,
@@ -125,8 +149,9 @@ class Message:
 
         dlg.set_default_response(gtk.RESPONSE_YES)
 
-        dlg.set_markup(self._title_format % 'Save changes before closing?')
-        dlg.format_secondary_markup('If you close without saving, your changes will be discarded.')
+        dlg.set_markup(self._title_format % _('Save changes before closing?'))
+        dlg.format_secondary_markup(_('If you close without saving,' \
+                                      ' your changes will be discarded.'))
         ret = dlg.run()
         dlg.destroy()
         return ret
@@ -175,7 +200,8 @@ def get_dbus_interface(interface, path):
 def verify_dbus_service(my_interface):
     """ Verify if a specific DBus service is running """
     try:
-        interface = get_dbus_interface('org.freedesktop.DBus', '/org/freedesktop/DBus')
+        interface = get_dbus_interface('org.freedesktop.DBus',
+                                       '/org/freedesktop/DBus')
         return my_interface in interface.ListNames()
     except dbus.DBusException:
         return False
