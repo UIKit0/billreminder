@@ -1,4 +1,5 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__all__ = ['billstable', 'configtable', 'fieldstable', 'generictable', 'versionstable']
+__all__ = ['alarmstable', 'billstable', 'categoriestable', 'fieldstable',
+           'generictable', 'versionstable']
