@@ -4,10 +4,16 @@
 import os
 from lib import i18n
 
+try:
+    from sysvars import datadir
+except ImportError:
+    datadir = "/usr/share"
+
 # Application info
 APPNAME = _("BillReminder")
 APPVERSION = "0.3"
-COPYRIGHTS = _("BillReminder - Copyright (c) 2006, 2007\nOg Maciel <omaciel@foresightlinux.org>")
+COPYRIGHTS = "%s - Copyright (c) 2006, 2007\n" \
+             "Og Maciel <omaciel@foresightlinux.org>" % APPNAME
 WEBSITE = "http://billreminder.sourceforge.net"
 AUTHORS = [
     _('Developers:'),
@@ -27,9 +33,9 @@ ARTISTS = [
 ]
 
 LICENSE = """
-This application is distributed under the BSD 
-Licensing scheme.  An online version of the 
-license can be obtained from 
+This application is distributed under the BSD
+Licensing scheme.  An online version of the
+license can be obtained from
 http://www.opensource.org/licenses/bsd-license.html.
 
 Copyright (c) 2006, 2007, Og Maciel
@@ -37,19 +43,23 @@ All rights reserved.
 """
 
 # Media path
-if os.path.exists(os.path.abspath('../images/')):
-    IMAGE_PATH = os.path.abspath('../images/')
+if os.path.exists(os.path.abspath('../data/images/')):
+    IMAGE_PATH = os.path.abspath('../data/images/')
 else:
-    IMAGE_PATH = '/usr/share/billreminder/images'
+    IMAGE_PATH = '%s/billreminder/images' % datadir
 
 # Images
-APP_ICON = os.path.join(IMAGE_PATH, 'billreminder.png')
-TRAY_ICON = os.path.join(IMAGE_PATH, 'billreminder.png')
-APP_HEADER = os.path.join(IMAGE_PATH, 'header.png')
+APP_ICON = os.path.join(IMAGE_PATH, 'billreminder16.png')
+TRAY_ICON = os.path.join(IMAGE_PATH, 'billreminder16.png')
+APP_HEADER = os.path.join(IMAGE_PATH, 'billreminder.png')
 
 # Config info
 CFG_NAME = 'billreminder.cfg'
-CFG_PATH =  os.path.expanduser('~/.config/billreminder/')
+USER_CFG_PATH =  os.path.expanduser('~/.config/billreminder/')
+if os.path.exists(os.path.abspath('../data/')):
+    DEFAULT_CFG_PATH = os.path.abspath('../data/')
+else:
+    DEFAULT_CFG_PATH = '%s/billreminder/' % datadir
 
 # Database info
 DB_NAME = 'billreminder.db'
