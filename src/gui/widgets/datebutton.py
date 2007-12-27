@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+__all__ = ['DateButton']
+
 import gtk
 import gobject
 import time
@@ -12,6 +14,7 @@ class DateButton(gtk.Button):
     def __init__(self, parent=None):
         gtk.Button.__init__(self)
         self.parent_window = parent
+        #TRANSLATORS: No date selected
         self.set_label(_("None"))
         self.date = None
 
@@ -24,7 +27,8 @@ class DateButton(gtk.Button):
         dialog = gtk.Dialog(title=_("Select date and hour"),
                             parent=self.parent_window,
                             flags=gtk.DIALOG_MODAL,
-                            buttons=("None", gtk.RESPONSE_REJECT, gtk.STOCK_CLOSE, gtk.RESPONSE_ACCEPT))
+                            buttons=("None", gtk.RESPONSE_REJECT,
+                                     gtk.STOCK_CLOSE, gtk.RESPONSE_ACCEPT))
 
         if self.parent_window:
             dialog.set_transient_for(self.parent_window)
