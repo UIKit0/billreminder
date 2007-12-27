@@ -33,7 +33,8 @@ class Server(dbus.service.Object):
 
         # Start DBus support
         self.__session_bus = dbus.SessionBus()
-        self.__bus_name = dbus.service.BusName(common.DBUS_INTERFACE, bus=self.__session_bus)
+        self.__bus_name = dbus.service.BusName(common.DBUS_INTERFACE,
+                                               bus=self.__session_bus)
 
         dbus.service.Object.__init__(self, self.__bus_name, common.DBUS_PATH)
 
@@ -41,7 +42,9 @@ class Server(dbus.service.Object):
     # DBus Methods (Called via DBus Service)
     @dbus.service.method(common.DBUS_INTERFACE, out_signature='s')
     def hello(self):
-        return _('Runnig %(appname)s Daemon %(version)s') % (common.APPNAME, common.APPVERSION)
+        return _('This is %(appname)s - Version: %(version)s') % \
+                         {'appname': _("BillReminder Notifier"),
+                          'version': common.APPVERSION}
 
     @dbus.service.method(common.DBUS_INTERFACE, out_signature='b')
     def quit(self):
@@ -85,7 +88,7 @@ class Server(dbus.service.Object):
 
     @dbus.service.method(common.DBUS_INTERFACE, in_signature='a{ss}', out_signature='a{ss}')
     def add_bill(self, kwargs):
-        """ Edit a record in the database """
+        """ Add a record to the database """
         ret = self.actions.add_bill(kwargs)
         if ret:
             self.bill_added(kwargs)
@@ -97,6 +100,86 @@ class Server(dbus.service.Object):
         ret = self.actions.delete_bill(key)
         if ret:
             self.bill_deleted(key)
+        return ret
+
+    @dbus.service.method(common.DBUS_INTERFACE, in_signature='a{ss}', out_signature='aa{ss}')
+    def get_alarms(self, kwargs):
+        """ Returns one or more records that meet the criteria passed """
+        print kwargs
+        ret = []
+        records = self.actions.get_alarms(kwargs)
+        for record in records:
+            ret.append(force_string(record))
+        print ret
+        return ret
+
+    @dbus.service.method(common.DBUS_INTERFACE, in_signature='s', out_signature='aa{ss}')
+    def get_alarms_(self, kwargs):
+        """ Returns one or more records that meet the criteria passed """
+        #print kwargs
+        ret = []
+        records = self.actions.get_alarms(kwargs)
+        for record in records:
+            ret.append(force_string(record))
+        print ret
+        return ret
+
+    @dbus.service.method(common.DBUS_INTERFACE, in_signature='a{ss}', out_signature='a{ss}')
+    def edit_alarm(self, kwargs):
+        """ Edit a record in the database """
+        ret = self.actions.edit_alarm(kwargs)
+        return force_string(ret)
+
+    @dbus.service.method(common.DBUS_INTERFACE, in_signature='a{ss}', out_signature='a{ss}')
+    def add_alarm(self, kwargs):
+        """ Add a record to the database """
+        ret = self.actions.add_alarm(kwargs)
+        return force_string(ret)
+
+    @dbus.service.method(common.DBUS_INTERFACE, in_signature='i', out_signature='b')
+    def delete_alarm(self, key):
+        """ Delete a record in the database """
+        ret = self.actions.delete_alarm(key)
+        return ret
+
+    @dbus.service.method(common.DBUS_INTERFACE, in_signature='a{ss}', out_signature='aa{ss}')
+    def get_categories(self, kwargs):
+        """ Returns one or more records that meet the criteria passed """
+        print kwargs
+        ret = []
+        records = self.actions.get_categories(kwargs)
+        for record in records:
+            ret.append(force_string(record))
+        print ret
+        return ret
+
+    @dbus.service.method(common.DBUS_INTERFACE, in_signature='s', out_signature='aa{ss}')
+    def get_categories_(self, kwargs):
+        """ Returns one or more records that meet the criteria passed """
+        #print kwargs
+        ret = []
+        records = self.actions.get_categories(kwargs)
+        for record in records:
+            ret.append(force_string(record))
+        print ret
+        return ret
+
+    @dbus.service.method(common.DBUS_INTERFACE, in_signature='a{ss}', out_signature='a{ss}')
+    def edit_category(self, kwargs):
+        """ Edit a record in the database """
+        ret = self.actions.edit_category(kwargs)
+        return force_string(ret)
+
+    @dbus.service.method(common.DBUS_INTERFACE, in_signature='a{ss}', out_signature='a{ss}')
+    def add_category(self, kwargs):
+        """ Add a record to the database """
+        ret = self.actions.add_category(kwargs)
+        return force_string(ret)
+
+    @dbus.service.method(common.DBUS_INTERFACE, in_signature='i', out_signature='b')
+    def delete_category(self, key):
+        """ Delete a record in the database """
+        ret = self.actions.delete_category(key)
         return ret
 
     @dbus.service.method(common.DBUS_INTERFACE, in_signature='a{ss}')
