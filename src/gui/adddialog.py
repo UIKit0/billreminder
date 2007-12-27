@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+__all__ = ['AddDialog']
 
 import pygtk
 pygtk.require('2.0')
@@ -7,8 +10,9 @@ import time
 import datetime
 import locale
 import gobject
-import lib.utils as utils
-import lib.common as common
+
+from lib import utils
+from lib import common
 from lib.bill import Bill
 from lib.actions import Actions
 from lib import i18n
@@ -19,7 +23,12 @@ class AddDialog(gtk.Dialog):
     Class used to generate dialog to allow user to enter/edit records.
     """
     def __init__(self, title=None, parent=None, record=None):
-        gtk.Dialog.__init__(self, title=title, parent=parent, flags=gtk.DIALOG_MODAL, buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_REJECT, gtk.STOCK_SAVE, gtk.RESPONSE_ACCEPT))
+        gtk.Dialog.__init__(self, title=title, parent=parent,
+                            flags=gtk.DIALOG_MODAL,
+                            buttons=(gtk.STOCK_CANCEL,
+                                     gtk.RESPONSE_REJECT,
+                                     gtk.STOCK_SAVE,
+                                     gtk.RESPONSE_ACCEPT))
         self.set_icon_from_file(common.APP_ICON)
 
         if parent:
@@ -37,6 +46,7 @@ class AddDialog(gtk.Dialog):
             self._populate_fields()
 
     def _initialize_dialog_widgets(self):
+        # TODO: Add CATEGORY selector
         self.vbox.set_spacing(8)
         self.topcontainer = gtk.HBox(homogeneous=False, spacing=0)
         self.calbox = gtk.VBox(homogeneous=False, spacing=0)
@@ -44,43 +54,52 @@ class AddDialog(gtk.Dialog):
 
         # Add calendar and label
         self.callabel = gtk.Label()
-        self.callabel.set_markup(_("<b>Due Date:</b>"))
+        self.callabel.set_markup("<b>%s: </b>" % _("Due Date"))
         self.callabel.set_alignment(0.00, 0.50)
         self.calendar = gtk.Calendar()
         self.calendar.mark_day(datetime.datetime.today().day)
         ## Pack it all up
-        self.calbox.pack_start(self.callabel, expand=True, fill=True, padding=5)
-        self.calbox.pack_start(self.calendar, expand=True, fill=True, padding=5)
+        self.calbox.pack_start(self.callabel,
+                               expand=True, fill=True, padding=5)
+        self.calbox.pack_start(self.calendar,
+                               expand=True, fill=True, padding=5)
 
         # Fields
-        ## Table of 4 x 2
-        self.table = gtk.Table(rows=4, columns=2, homogeneous=False)
+        ## Table of 5 x 2
+        self.table = gtk.Table(rows=5, columns=2, homogeneous=False)
         ### Spacing to make things look better
         self.table.set_col_spacing(0, 10)
         self.table.set_row_spacing(0, 6)
         self.table.set_row_spacing(1, 6)
         self.table.set_row_spacing(2, 6)
+        self.table.set_row_spacing(3, 6)
 
         ## Labels
         self.payeelabel = gtk.Label()
-        self.payeelabel.set_markup(_("<b>Payee:</b>"))
+        self.payeelabel.set_markup("<b>%s </b>" % _("Payee:"))
         self.payeelabel.set_alignment(0.00, 0.50)
         self.amountlabel = gtk.Label()
-        self.amountlabel.set_markup(_("<b>Amount:</b>"))
+        self.amountlabel.set_markup("<b>%s </b>" % _("Amount:"))
         self.amountlabel.set_alignment(0.00, 0.50)
+        self.categorylabel = gtk.Label()
+        self.categorylabel.set_markup("<b>%s </b>" % _("Category:"))
+        self.categorylabel.set_alignment(0.00, 0.50)
         self.noteslabel = gtk.Label()
-        self.noteslabel.set_markup(_("<b>Note:</b>"))
+        self.noteslabel.set_markup("<b>%s </b>" % _("Notes:"))
         self.noteslabel.set_alignment(0.00, 0.50)
         self.alarmlabel = gtk.Label()
-        self.alarmlabel.set_markup(_("<b>Alarm:</b>"))
+        self.alarmlabel.set_markup("<b>%s </b>" % _("Alarm:"))
         self.alarmlabel.set_alignment(0.00, 0.50)
         ## Fields
         self.payee = gtk.ComboBoxEntry()
         self.payeecompletion = gtk.EntryCompletion()
         self.payee.child.set_completion(self.payeecompletion)
-        ### Populate combobox with payee from database
-        self._populate_payee()
+        self._populate_payee() # Populate combobox with payee from db
         self.amount = gtk.Entry()
+        self.category = gtk.ComboBoxEntry()
+        self.categorycompletion = gtk.EntryCompletion()
+        self.category.child.set_completion(self.categorycompletion)
+        self._populate_category() # Populate combobox with category from db
         self.alarm = DateButton(self)
         self.notesdock = gtk.ScrolledWindow()
         self.notesdock.set_shadow_type(gtk.SHADOW_OUT)
@@ -92,19 +111,24 @@ class AddDialog(gtk.Dialog):
         ## Pack it all into the table
         self.table.attach(self.payeelabel, 0, 1, 0, 1, gtk.FILL, gtk.FILL)
         self.table.attach(self.amountlabel, 0, 1, 1, 2, gtk.FILL, gtk.FILL)
-        self.table.attach(self.noteslabel, 0, 1, 2, 3, gtk.FILL, gtk.FILL)
-        self.table.attach(self.alarmlabel, 0, 1, 3, 4, gtk.FILL, gtk.FILL)
+        self.table.attach(self.categorylabel, 0, 1, 2, 3, gtk.FILL, gtk.FILL)
+        self.table.attach(self.noteslabel, 0, 1, 3, 4, gtk.FILL, gtk.FILL)
+        self.table.attach(self.alarmlabel, 0, 1, 4, 5, gtk.FILL, gtk.FILL)
         self.table.attach(self.payee, 1, 2, 0, 1, gtk.FILL, gtk.FILL)
         self.table.attach(self.amount, 1, 2, 1, 2, gtk.FILL, gtk.FILL)
-        self.table.attach(self.notesdock, 1, 2, 2, 3, gtk.FILL, gtk.FILL)
-        self.table.attach(self.alarm, 1, 2, 3, 4, gtk.FILL, gtk.FILL)
+        self.table.attach(self.category, 1, 2, 2, 3, gtk.FILL, gtk.FILL)
+        self.table.attach(self.notesdock, 1, 2, 3, 4, gtk.FILL, gtk.FILL)
+        self.table.attach(self.alarm, 1, 2, 4, 5, gtk.FILL, gtk.FILL)
         ## Pack table
         self.fieldbox.pack_start(self.table, expand=True, fill=True, padding=0)
 
         # Everything
-        self.topcontainer.pack_start(self.calbox, expand=False, fill=False, padding=5)
-        self.topcontainer.pack_start(self.fieldbox, expand=False, fill=False, padding=5)
-        self.vbox.pack_start(self.topcontainer, expand=False, fill=True, padding=10)
+        self.topcontainer.pack_start(self.calbox,
+                                     expand=False, fill=False, padding=5)
+        self.topcontainer.pack_start(self.fieldbox,
+                                     expand=False, fill=False, padding=5)
+        self.vbox.pack_start(self.topcontainer,
+                             expand=False, fill=True, padding=10)
 
         # Show all widgets
         self.show_all()
@@ -115,12 +139,18 @@ class AddDialog(gtk.Dialog):
 
         self.allowed_digts = [self.decimal_sep , self.thousands_sep]
         # Format the amount field
-        self.amount.set_text("%(amount)0.2f" % {'amount': self.currentrecord.AmountDue})
+        self.amount.set_text("%(amount)0.2f" % \
+                             {'amount': self.currentrecord.AmountDue})
         # Format the dueDate field
         dt = datetime.datetime.fromtimestamp(self.currentrecord.DueDate)
         self.calendar.select_day(dt.day)
         self.calendar.select_month(dt.month - 1, dt.year)
         utils.select_combo_text(self.payee, self.currentrecord.Payee)
+        actions = Actions()
+        records = actions.get_categories({'id': self.currentrecord.Category})
+        if records:
+            categoryname = records[0]['categoryname']
+            utils.select_combo_text(self.category, categoryname)
         self.txtbuffer.set_text(self.currentrecord.Notes)
         #self.chkPaid.set_active(self.currentrecord.Paid)
 
@@ -157,6 +187,52 @@ class AddDialog(gtk.Dialog):
         else:
             return self.payeeEntry.get_text()
 
+    def _populate_category(self):
+        """ Populates combobox with existing categories """
+        # Connects to the database
+        actions = Actions()
+
+        # List of categories from database
+        categories = []
+        records = actions.get_categories("")
+        records = records or []
+        for rec in records:
+            if rec['categoryname'] not in categories:
+                categories.append(rec['categoryname'])
+
+        store = gtk.ListStore(gobject.TYPE_STRING)
+        for category in categories:
+            store.append([category])
+
+        self.category.set_model(store)
+        self.categorycompletion.set_model(store)
+        self.category.set_text_column(0)
+        self.categorycompletion.set_text_column(0)
+        self.categoryEntry = self.category.child
+        self.selectedText = ''
+        
+    def _get_category(self):
+        """ Extracts information typed into comboboxentry """
+        actions = Actions()
+        
+        if self.category.get_active_iter() is not None:
+            model = self.category.get_model()
+            iteration = self.category.get_active_iter()
+            if iteration:
+                name = model.get_value(iteration, 0)
+        else:
+            name = self.categoryEntry.get_text()
+        if not name:
+            return None
+        records = actions.get_categories({'categoryname': name})
+        if records:
+            cat_id = records[0]['id']
+        else:
+            row = actions.add_category({'categoryname': name})
+            if row:
+                cat_id = row['id']
+        return cat_id and int(cat_id) or None
+
     def get_record(self):
         # Extracts the date off the calendar widget
         day = self.calendar.get_date()[2]
@@ -174,16 +250,23 @@ class AddDialog(gtk.Dialog):
         # Gets the payee
         payee = self._get_payee()
 
+        # Gets the category
+        category = self._get_category()
+
         # Validate form
         if len(payee.strip()) == 0 or len(self.amount.get_text().strip()) == 0:
             return None, None
 
         if self.currentrecord is None:
             # Create a new object
-            self.currentrecord = Bill(payee, None, selectedDate, self.amount.get_text(), sbuffer)
-            #self.currentrecord = Bill(payee, selectedDate, self.amount.get_text(), sbuffer, int(self.chkPaid.get_active()))
+            self.currentrecord = Bill(payee, category, selectedDate,
+                                      self.amount.get_text(), sbuffer)
+            #self.currentrecord = Bill(payee, selectedDate,
+            #                          self.amount.get_text(), sbuffer,
+            #                          int(self.chkPaid.get_active()))
         else:
             # Edit existing bill
+            self.currentrecord.Category = category
             self.currentrecord.Payee = payee
             self.currentrecord.DueDate = int(selectedDate)
             self.currentrecord.AmountDue = float(self.amount.get_text())
