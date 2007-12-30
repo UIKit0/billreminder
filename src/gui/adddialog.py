@@ -237,9 +237,11 @@ class AddDialog(gtk.Dialog):
             if iteration:
                 name = model.get_value(iteration, 0)
         else:
-            name = self.categoryEntry.get_text()
+            name = None
+
         if not name:
             return None
+
         records = actions.get_categories({'categoryname': name})
         if records:
             cat_id = records[0]['id']
