@@ -22,6 +22,7 @@ except ImportError:
 from gui.aboutdialog import AboutDialog
 from gui.adddialog import AddDialog
 from gui.prefdialog import PrefDialog
+from gui.categoriesdialog import CategoriesDialog
 from lib import i18n
 
 def about_dialog(parent=None):
@@ -34,6 +35,13 @@ def about_dialog(parent=None):
 def preferences_dialog(parent=None):
     pref = PrefDialog(parent=parent)
     ret = pref.run()
+    pref.destroy()
+
+    return ret
+
+def categories_dialog(parent=None):
+    categories = CategoriesDialog(parent=parent)
+    ret = categories.run()
     pref.destroy()
 
     return ret
