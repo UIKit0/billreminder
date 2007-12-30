@@ -20,15 +20,25 @@ class DateButton(gtk.Button):
 
         self.connect("clicked", self.show_calendar)
 
-    def set_date(self, int):
-        self.set_label(_("None"))
+    def set_date(self, date):
+        if not date:
+            self.date = None
+            self.set_label(_("None"))
+            return
+
+        (year, month, day, hour, minute) = date
+        # Create datetime object
+        selectedDate = datetime.datetime(year, month, day, hour, minute)
+        # Turn it into a time object
+        self.date = time.mktime(selectedDate.timetuple())
+        self.set_label(selectedDate.strftime(_('%Y/%m/%d %H:%M').encode('ASCII')))
 
     def show_calendar(self, *arg):
         dialog = gtk.Dialog(title=_("Select date and hour"),
                             parent=self.parent_window,
                             flags=gtk.DIALOG_MODAL,
-                            buttons=("None", gtk.RESPONSE_REJECT,
-                                     gtk.STOCK_CLOSE, gtk.RESPONSE_ACCEPT))
+                            buttons=(str(_("None")), gtk.RESPONSE_REJECT,
+                                     gtk.STOCK_OK, gtk.RESPONSE_OK))
 
         if self.parent_window:
             dialog.set_transient_for(self.parent_window)
@@ -42,4 +52,17 @@ class DateButton(gtk.Button):
 
         dialog.show_all()
 
-        dialog.run()
+        response = dialog.run()
+        print response
+        if response == gtk.RESPONSE_REJECT:
+            self.set_date(None)
+        elif response == gtk.RESPONSE_OK:
+            # Extracts the date off the calendar widget
+            day = calendar.get_date()[2]
+            month = calendar.get_date()[1] + 1
+            year = calendar.get_date()[0]
+            hour = 5
+            minute = 0
+            self.set_date((year, month, day, hour, minute))
+
+        dialog.destroy()
