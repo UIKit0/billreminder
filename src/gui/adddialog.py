@@ -17,6 +17,7 @@ from lib.bill import Bill
 from lib.actions import Actions
 from lib import i18n
 from gui.widgets.datebutton import DateButton
+from gui.categoriesdialog import CategoriesDialog
 
 class AddDialog(gtk.Dialog):
     """
@@ -25,10 +26,8 @@ class AddDialog(gtk.Dialog):
     def __init__(self, title=None, parent=None, record=None):
         gtk.Dialog.__init__(self, title=title, parent=parent,
                             flags=gtk.DIALOG_MODAL,
-                            buttons=(gtk.STOCK_CANCEL,
-                                     gtk.RESPONSE_REJECT,
-                                     gtk.STOCK_SAVE,
-                                     gtk.RESPONSE_ACCEPT))
+                            buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_REJECT,
+                                     gtk.STOCK_SAVE, gtk.RESPONSE_ACCEPT))
         self.set_icon_from_file(common.APP_ICON)
 
         if parent:
@@ -91,16 +90,30 @@ class AddDialog(gtk.Dialog):
         self.alarmlabel.set_markup("<b>%s </b>" % _("Alarm:"))
         self.alarmlabel.set_alignment(0.00, 0.50)
         ## Fields
+        ### Payee
         self.payee = gtk.ComboBoxEntry()
         self.payeecompletion = gtk.EntryCompletion()
         self.payee.child.set_completion(self.payeecompletion)
         self._populate_payee() # Populate combobox with payee from db
+        ### Amount
         self.amount = gtk.Entry()
-        self.category = gtk.ComboBoxEntry()
-        self.categorycompletion = gtk.EntryCompletion()
-        self.category.child.set_completion(self.categorycompletion)
+        ### Category
+        self.categorydock = gtk.HBox(homogeneous=False, spacing=0)
+        self.category = gtk.ComboBox()
+        self.categorybutton = gtk.Button()
+        self.categorybutton.connect("clicked",
+                                    _on_categoriesbutton_clicked, self)
+        self.categorybutton.set_tooltip_text(_("Manage Categories"))
+        self.categorybuttonimage = gtk.Image()
+        self.categorybuttonimage.set_from_stock(gtk.STOCK_EDIT,
+                                                gtk.ICON_SIZE_BUTTON)
+        self.categorybutton.set_image(self.categorybuttonimage)
+        self.categorydock.pack_start(self.category, expand=True,
+                                     fill=True, padding=0)
+        self.categorydock.pack_start(self.categorybutton, expand=False,
+                                     fill=True, padding=0)
         self._populate_category() # Populate combobox with category from db
-        self.alarm = DateButton(self)
+        ### Notes
         self.notesdock = gtk.ScrolledWindow()
         self.notesdock.set_shadow_type(gtk.SHADOW_OUT)
         self.notesdock.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
@@ -108,6 +121,10 @@ class AddDialog(gtk.Dialog):
         self.notesdock.add_with_viewport(self.notes)
         ### Buffer object for Notes field
         self.txtbuffer = self.notes.get_buffer()
+        ### Alarm
+        self.alarm = DateButton(self)
+        self.alarm.set_tooltip_text(_("Select Date and Time"))
+
         ## Pack it all into the table
         self.table.attach(self.payeelabel, 0, 1, 0, 1, gtk.FILL, gtk.FILL)
         self.table.attach(self.amountlabel, 0, 1, 1, 2, gtk.FILL, gtk.FILL)
@@ -116,7 +133,7 @@ class AddDialog(gtk.Dialog):
         self.table.attach(self.alarmlabel, 0, 1, 4, 5, gtk.FILL, gtk.FILL)
         self.table.attach(self.payee, 1, 2, 0, 1, gtk.FILL, gtk.FILL)
         self.table.attach(self.amount, 1, 2, 1, 2, gtk.FILL, gtk.FILL)
-        self.table.attach(self.category, 1, 2, 2, 3, gtk.FILL, gtk.FILL)
+        self.table.attach(self.categorydock, 1, 2, 2, 3, gtk.FILL, gtk.FILL)
         self.table.attach(self.notesdock, 1, 2, 3, 4, gtk.FILL, gtk.FILL)
         self.table.attach(self.alarm, 1, 2, 4, 5, gtk.FILL, gtk.FILL)
         ## Pack table
@@ -203,18 +220,17 @@ class AddDialog(gtk.Dialog):
         store = gtk.ListStore(gobject.TYPE_STRING)
         for category in categories:
             store.append([category])
+        print store
 
         self.category.set_model(store)
-        self.categorycompletion.set_model(store)
-        self.category.set_text_column(0)
-        self.categorycompletion.set_text_column(0)
-        self.categoryEntry = self.category.child
-        self.selectedText = ''
-        
+        cell = gtk.CellRendererText()
+        self.category.pack_start(cell, True)
+        self.category.add_attribute(cell, 'text', 0)
+
     def _get_category(self):
         """ Extracts information typed into comboboxentry """
         actions = Actions()
-        
+
         if self.category.get_active_iter() is not None:
             model = self.category.get_model()
             iteration = self.category.get_active_iter()
@@ -275,3 +291,10 @@ class AddDialog(gtk.Dialog):
 
         #return the bill
         return self.currentrecord
+
+def _on_categoriesbutton_clicked(button, parent=None):
+    categories = CategoriesDialog(parent=parent)
+    ret = categories.run()
+    categories.destroy()
+
+    return ret
