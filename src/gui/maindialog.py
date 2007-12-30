@@ -14,9 +14,6 @@ from gui.widgets.statusbar import Statusbar
 from gui.widgets.viewbill import ViewBill as ViewBill
 from gui.widgets.trayicon import NotifyIcon
 
-# Import dialogs modules
-#from gui.adddialog import AddDialog
-
 # Import data model modules
 from lib.bill import Bill
 from lib.dal import DAL
@@ -24,8 +21,8 @@ from lib.actions import Actions
 from db.billstable import BillsTable
 
 # Import common utilities
-import lib.common as common
-import lib.dialogs as dialogs
+from lib import common
+from lib import dialogs
 from lib.utils import ContextMenu
 from lib.utils import get_dbus_interface
 from lib.utils import force_string
