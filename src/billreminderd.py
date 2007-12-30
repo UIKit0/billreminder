@@ -26,6 +26,7 @@ Options:
   --verbose\t\tPrint output messages.
   --no-daemon\t\tDon't run as a daemon.
   --open-gui\t\tStart daemon and launch GUI.
+  --stop\t\t\tStop daemon.
   --version, -v\t\tDisplays the version number for this application.
 """)
 
