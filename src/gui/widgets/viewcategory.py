@@ -20,7 +20,7 @@ class ViewCategory(GenericListView):
         column.set_visible(False)
 
     def category_cell_data_function(self, column, cell, model, iter):
-        category = model.get_value(iter, 1)
+        category = model.get_value(iter, 2)
         cell.set_property('text', category)
         column.set_visible(True)
 
@@ -33,7 +33,7 @@ class ViewCategory(GenericListView):
         1: [None,
             gtk.CellRendererPixbuf(), None],
         2: [_('Category'),
-            gtk.CellRendererText(), payee_cell_data_function],
+            gtk.CellRendererText(), category_cell_data_function],
     }
 
     def __init__(self):
