@@ -172,6 +172,9 @@ class AddDialog(gtk.Dialog):
         if records:
             categoryname = records[0]['categoryname']
             utils.select_combo_text(self.category, categoryname)
+        else:
+            self.category.set_active(0)
+
         self.txtbuffer.set_text(self.currentrecord.Notes)
         #self.chkPaid.set_active(self.currentrecord.Paid)
 
@@ -302,9 +305,21 @@ class AddDialog(gtk.Dialog):
     def _on_categoriesbutton_clicked(self, button):
         categories = CategoriesDialog(parent=self)
         ret = categories.run()
-        categories.destroy()
 
+        index = self.category.get_active()
+        before = self.category.get_model()[index][0]
         # Repopulate categories
         self._populate_category()
+        after = self.category.get_model()[index][0]
+        if ret == gtk.RESPONSE_OK:
+            cat_index = categories.list.get_cursor()[0][0]
+            if cat_index:
+                index = cat_index + 2
+        else:
+            if after != before:
+                index = 0
 
+        self.category.set_active(index)
+
+        categories.destroy()
         return ret

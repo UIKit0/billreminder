@@ -18,10 +18,11 @@ class CategoriesDialog(gtk.Dialog):
     """
     Class used to generate dialog to allow user to enter/edit categories.
     """
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, new=False):
         gtk.Dialog.__init__(self, title=_("Categories Manager"),
                             parent=parent, flags=gtk.DIALOG_MODAL,
-                            buttons=(gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
+                            buttons=(gtk.STOCK_OK, gtk.RESPONSE_OK,
+                                     gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
         self.set_icon_from_file(common.APP_ICON)
 
         if parent:
@@ -35,6 +36,11 @@ class CategoriesDialog(gtk.Dialog):
         #self._populate_fields()
         self.actions = Actions()
         self._populateTreeView(self.actions.get_categories(""))
+
+        if not new:
+            index = parent.category.get_active()-2
+            if index >= 0:
+                self.list.set_cursor((index,))
 
     def _initialize_dialog_widgets(self):
         self.vbox.set_spacing(8)
@@ -69,7 +75,9 @@ class CategoriesDialog(gtk.Dialog):
         self.colorlabel.set_alignment(0.00, 0.50)
 
         self.name_ = gtk.Entry()
+        self.name_.connect("changed", self._on_edit)
         self.color = gtk.ColorButton()
+        self.color.connect("color-set", self._on_edit)
 
         self.table.attach(self.namelabel, 0, 1, 0, 1, gtk.FILL, gtk.FILL)
         self.table.attach(self.colorlabel, 0, 1, 1, 2, gtk.FILL, gtk.FILL)
@@ -136,6 +144,8 @@ class CategoriesDialog(gtk.Dialog):
         print self.currentrecord
         # Update statusbar
         self._update_fields()
+        self.deletebutton.set_sensitive(True)
+        self.savebutton.set_sensitive(False)
 
     def _get_selected_record(self):
         """ Returns a tuple from the current selected record """
@@ -147,6 +157,10 @@ class CategoriesDialog(gtk.Dialog):
                                   _model.get_value(iteration, 3))
 
     def _update_fields(self):
+        if not self.currentrecord:
+            self.name_.set_text("")
+            self.color.set_color(gtk.gdk.color_parse("#000"))
+            return
         self.name_.set_text(self.currentrecord[1])
         try:
             color = gtk.gdk.color_parse(self.currentrecord[2])
@@ -159,13 +173,16 @@ class CategoriesDialog(gtk.Dialog):
         path = self.list.get_cursor()[0]
         self.list.listStore.clear()
         self._populateTreeView(self.actions.get_categories(""))
-        self.list.set_cursor(path)
+        if path:
+            self.list.set_cursor(path)
 
     def _on_newbutton_clicked(self, button):
         self.currentrecord = None
         self.name_.set_text("")
         self.color.set_color(gtk.gdk.color_parse("#000"))
-        #self.list.set_cursor((-1,))
+        self.deletebutton.set_sensitive(False)
+        self.savebutton.set_sensitive(False)
+        #self.list.set_cursor((11,))
 
     def _on_savebutton_clicked(self, button):
         name =  self.name_.get_text()
@@ -178,10 +195,18 @@ class CategoriesDialog(gtk.Dialog):
         else:
             row = self.actions.add_category({'categoryname': name,
                                              'color': color})
+        self.savebutton.set_sensitive(False)
         self.reloadTreeView()
 
     def _on_deletebutton_clicked(self, button):
         if self.currentrecord:
             id = self.currentrecord[0]
             row = self.actions.delete_category(int(id))
+            self.currentrecord = None
+            self.name_.set_text("")
+            self.color.set_color(gtk.gdk.color_parse("#000"))
+            self.savebutton.set_sensitive(False)
             self.reloadTreeView()
+
+    def _on_edit(self, widget):
+        self.savebutton.set_sensitive(True)
