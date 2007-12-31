@@ -101,6 +101,7 @@ class AddDialog(gtk.Dialog):
         self.categorydock = gtk.HBox(homogeneous=False, spacing=0)
         self.category = gtk.combo_box_new_text()
         self.category.set_row_separator_func(self._determine_separator)
+        self.category.connect("changed", self._on_categorycombo_changed)
         self.categorybutton = gtk.Button()
         self.categorybutton.connect("clicked",
                                     self._on_categoriesbutton_clicked)
@@ -233,7 +234,7 @@ class AddDialog(gtk.Dialog):
         for category in categories:
             store.append([category])
         store.append(["---"])
-        store.append([_("New category")])
+        store.append([_("New Category")])
 
     def _get_category(self):
         """ Extracts information typed into comboboxentry """
@@ -302,24 +303,37 @@ class AddDialog(gtk.Dialog):
         #return the bill
         return self.currentrecord
 
-    def _on_categoriesbutton_clicked(self, button):
-        categories = CategoriesDialog(parent=self)
+    def _on_categoriesbutton_clicked(self, button, new=False):
+        categories = CategoriesDialog(parent=self, new=new)
         ret = categories.run()
 
+        if ret == gtk.RESPONSE_OK and new:
+            categories._on_savebutton_clicked(None)
+
         index = self.category.get_active()
-        before = self.category.get_model()[index][0]
+        name_before = self.category.get_model()[index][0]
         # Repopulate categories
         self._populate_category()
-        after = self.category.get_model()[index][0]
+        name_after = self.category.get_model()[index][0]
         if ret == gtk.RESPONSE_OK:
             cat_index = categories.list.get_cursor()[0][0]
             if cat_index:
                 index = cat_index + 2
         else:
-            if after != before:
+            if name_after != name_before:
                 index = 0
+
+        if new:
+            index = len(self.category.get_model()) - 3
 
         self.category.set_active(index)
 
         categories.destroy()
         return ret
+
+    def _on_categorycombo_changed(self, combobox):
+        index = self.category.get_active()
+        if index == len(self.category.get_model()) - 1:
+            self.category.set_active(self.category_index_before)
+            self._on_categoriesbutton_clicked(combobox, True)
+        self.category_index_before = index

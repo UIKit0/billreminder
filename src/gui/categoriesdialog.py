@@ -20,10 +20,13 @@ class CategoriesDialog(gtk.Dialog):
     """
     def __init__(self, parent=None, new=False):
         gtk.Dialog.__init__(self, title=_("Categories Manager"),
-                            parent=parent, flags=gtk.DIALOG_MODAL,
-                            buttons=(gtk.STOCK_OK, gtk.RESPONSE_OK,
-                                     gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
+                            parent=parent, flags=gtk.DIALOG_MODAL)
+
+        self.okbutton = self.add_button(gtk.STOCK_OK, gtk.RESPONSE_OK)
+        self.closebutton = self.add_button(gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE)
         self.set_icon_from_file(common.APP_ICON)
+
+        self.new = new
 
         if parent:
             self.set_transient_for(parent)
@@ -37,7 +40,14 @@ class CategoriesDialog(gtk.Dialog):
         self.actions = Actions()
         self._populateTreeView(self.actions.get_categories(""))
 
-        if not new:
+        if new:
+            self._on_newbutton_clicked(None)
+            self.topcontainer.get_label_widget().set_markup("<b>%s</b>" \
+                                                     % _("New Category"))
+            self.okbutton.set_label(gtk.STOCK_SAVE)
+            self.closebutton.set_label(gtk.STOCK_CANCEL)
+
+        else:
             index = parent.category.get_active()-2
             if index >= 0:
                 self.list.set_cursor((index,))
@@ -84,9 +94,9 @@ class CategoriesDialog(gtk.Dialog):
         self.table.attach(self.name_, 1, 2, 0, 1)
         self.table.attach(self.color, 1, 2, 1, 2)
 
-        self.actions = gtk.HButtonBox()
-        self.actions.set_layout(gtk.BUTTONBOX_END)
-        self.actions.set_spacing(6)
+        self.actionspack = gtk.HButtonBox()
+        self.actionspack.set_layout(gtk.BUTTONBOX_END)
+        self.actionspack.set_spacing(6)
 
         self.newbutton = gtk.Button(stock=gtk.STOCK_NEW)
         self.newbutton.connect("clicked", self._on_newbutton_clicked)
@@ -95,15 +105,17 @@ class CategoriesDialog(gtk.Dialog):
         self.deletebutton = gtk.Button(stock=gtk.STOCK_DELETE)
         self.deletebutton.connect("clicked", self._on_deletebutton_clicked)
 
-        self.actions.pack_start(self.newbutton)
-        self.actions.pack_start(self.savebutton)
-        self.actions.pack_start(self.deletebutton)
+        self.actionspack.pack_start(self.newbutton)
+        self.actionspack.pack_start(self.savebutton)
+        self.actionspack.pack_start(self.deletebutton)
 
-        self.fieldbox.pack_start(self.scrolledwindow,
+        if not self.new:
+            self.fieldbox.pack_start(self.scrolledwindow,
                                      expand=True, fill=True)
         self.fieldbox.pack_start(self.table,
-                                     expand=False, fill=True)
-        self.fieldbox.pack_start(self.actions,
+                                 expand=False, fill=True)
+        if not self.new:
+            self.fieldbox.pack_start(self.actionspack,
                                      expand=False, fill=True)
         self.topcontainer_alignment.add(self.fieldbox)
         self.vbox.pack_start(self.topcontainer,
@@ -183,8 +195,10 @@ class CategoriesDialog(gtk.Dialog):
         self.deletebutton.set_sensitive(False)
         self.savebutton.set_sensitive(False)
         #self.list.set_cursor((11,))
+        self.name_.grab_focus()
 
     def _on_savebutton_clicked(self, button):
+    # TODO: Verify if already exist another category with the same name
         name =  self.name_.get_text()
         color = self.color.get_color().to_string()
         if self.currentrecord:
