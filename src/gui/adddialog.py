@@ -102,7 +102,7 @@ class AddDialog(gtk.Dialog):
         self.category = gtk.ComboBox()
         self.categorybutton = gtk.Button()
         self.categorybutton.connect("clicked",
-                                    _on_categoriesbutton_clicked, self)
+                                    self._on_categoriesbutton_clicked)
         self.categorybutton.set_tooltip_text(_("Manage Categories"))
         self.categorybuttonimage = gtk.Image()
         self.categorybuttonimage.set_from_stock(gtk.STOCK_EDIT,
@@ -294,9 +294,9 @@ class AddDialog(gtk.Dialog):
         #return the bill
         return self.currentrecord
 
-def _on_categoriesbutton_clicked(button, parent=None):
-    categories = CategoriesDialog(parent=parent)
-    ret = categories.run()
-    categories.destroy()
+    def _on_categoriesbutton_clicked(self, button):
+        categories = CategoriesDialog(parent=self)
+        ret = categories.run()
+        categories.destroy()
 
-    return ret
+        return ret
