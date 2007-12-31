@@ -24,6 +24,11 @@ class ViewCategory(GenericListView):
         cell.set_property('text', category)
         column.set_visible(True)
 
+    def color_cell_data_function(self, column, cell, model, iter):
+        color = model.get_value(iter, 3)
+        cell.set_property('text', color)
+        column.set_visible(False)
+
     # This dictionary represents the columns displayed by the listview.
     # It is indexed by the order you want them to be displayed, followed
     # by the column title and cellrenderer type.
@@ -34,6 +39,8 @@ class ViewCategory(GenericListView):
             gtk.CellRendererPixbuf(), None],
         2: [_('Category'),
             gtk.CellRendererText(), category_cell_data_function],
+        3: [None,
+            gtk.CellRendererText(), color_cell_data_function],
     }
 
     def __init__(self):
@@ -47,3 +54,8 @@ class ViewCategory(GenericListView):
         category = self.get_column(2)
         category.set_cell_data_func(category.get_cell_renderers()[0],
                                     self.category_cell_data_function)
+
+        color = self.get_column(3)
+        color.set_cell_data_func(color.get_cell_renderers()[0],
+                              self.color_cell_data_function)
+        color.set_visible(False)
