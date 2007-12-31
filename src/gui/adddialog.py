@@ -99,7 +99,8 @@ class AddDialog(gtk.Dialog):
         self.amount = gtk.Entry()
         ### Category
         self.categorydock = gtk.HBox(homogeneous=False, spacing=0)
-        self.category = gtk.ComboBox()
+        self.category = gtk.combo_box_new_text()
+        self.category.set_row_separator_func(self._determine_separator)
         self.categorybutton = gtk.Button()
         self.categorybutton.connect("clicked",
                                     self._on_categoriesbutton_clicked)
@@ -149,6 +150,9 @@ class AddDialog(gtk.Dialog):
 
         # Show all widgets
         self.show_all()
+
+    def _determine_separator(self, model, iter, data=None):
+        return model.get_value(iter, 0) == "---"
 
     def _populate_fields(self):
         self.decimal_sep = locale.localeconv()['mon_decimal_point']
@@ -213,19 +217,20 @@ class AddDialog(gtk.Dialog):
         categories = []
         records = actions.get_categories("")
         records = records or []
+
         for rec in records:
             if rec['categoryname'] not in categories:
                 categories.append(rec['categoryname'])
 
         store = gtk.ListStore(gobject.TYPE_STRING)
+        self.category.set_model(store)
+        store.append([_("None")])
+        store.append(["---"])
+
         for category in categories:
             store.append([category])
-        print store
-
-        self.category.set_model(store)
-        cell = gtk.CellRendererText()
-        self.category.pack_start(cell, True)
-        self.category.add_attribute(cell, 'text', 0)
+        store.append(["---"])
+        store.append([_("New category")])
 
     def _get_category(self):
         """ Extracts information typed into comboboxentry """
@@ -239,7 +244,7 @@ class AddDialog(gtk.Dialog):
         else:
             name = None
 
-        if not name:
+        if not name or name == _("None"):
             return None
 
         records = actions.get_categories({'categoryname': name})
@@ -298,5 +303,8 @@ class AddDialog(gtk.Dialog):
         categories = CategoriesDialog(parent=self)
         ret = categories.run()
         categories.destroy()
+
+        # Repopulate categories
+        self._populate_category()
 
         return ret

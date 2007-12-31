@@ -2,6 +2,7 @@ Sun Dec 30 19:14:16 EST 2007
 
 Road to a 0.3 release:
 
+* Make sure to update categorie combobox in adddialog with category selected from categorydialog or original value if user clicked on cancel button in categorydialog.
 * Finish categoriesdialog so that it allows the user to associate a color (use gtk.ColorButton?) to a category.
   * Create a categoriesview class (inherit genericview) to display a colored square (pixbuf) and the name of the category (string).
 * Make sure that maindialog also displays the category name and the colored image.
