@@ -213,6 +213,7 @@ class CategoriesDialog(gtk.Dialog):
         self.reloadTreeView()
 
     def _on_deletebutton_clicked(self, button):
+    # TODO: Alert if there is more bills in category and ask confirmation
         if self.currentrecord:
             id = self.currentrecord[0]
             row = self.actions.delete_category(int(id))
