@@ -28,6 +28,8 @@ class CategoriesDialog(gtk.Dialog):
             self.set_transient_for(parent)
             self.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
 
+        self.currentrecord = None
+
         # Set up the UI
         self._initialize_dialog_widgets()
         #self._populate_fields()
@@ -46,6 +48,7 @@ class CategoriesDialog(gtk.Dialog):
 
         self.list = ViewCategory()
         self.list.set_size_request(300, 150)
+        self.list.connect('cursor_changed', self._on_list_cursor_changed)
 
         # ScrolledWindow
         self.scrolledwindow = gtk.ScrolledWindow()
@@ -78,8 +81,11 @@ class CategoriesDialog(gtk.Dialog):
         self.actions.set_spacing(6)
 
         self.newbutton = gtk.Button(stock=gtk.STOCK_NEW)
+        self.newbutton.connect("clicked", self._on_newbutton_clicked)
         self.savebutton = gtk.Button(stock=gtk.STOCK_SAVE)
+        self.savebutton.connect("clicked", self._on_savebutton_clicked)
         self.deletebutton = gtk.Button(stock=gtk.STOCK_DELETE)
+        self.deletebutton.connect("clicked", self._on_deletebutton_clicked)
 
         self.actions.pack_start(self.newbutton)
         self.actions.pack_start(self.savebutton)
@@ -123,3 +129,59 @@ class CategoriesDialog(gtk.Dialog):
             formated.append(row[key])
         print formated
         return formated
+
+    def _on_list_cursor_changed(self, widget):
+        # Get currently selected bill
+        self._get_selected_record()
+        print self.currentrecord
+        # Update statusbar
+        self._update_fields()
+
+    def _get_selected_record(self):
+        """ Returns a tuple from the current selected record """
+        if len(self.list.listStore) > 0:
+            selection = self.list.get_selection()
+            _model, iteration = selection.get_selected()
+            self.currentrecord = (_model.get_value(iteration, 0),
+                                  _model.get_value(iteration, 2),
+                                  _model.get_value(iteration, 3))
+
+    def _update_fields(self):
+        self.name_.set_text(self.currentrecord[1])
+        try:
+            color = gtk.gdk.color_parse(self.currentrecord[2])
+        except ValueError:
+            color = gtk.gdk.color_parse("#000")
+        self.color.set_color(color)
+
+    def reloadTreeView(self, *arg):
+        # Update list with updated record
+        path = self.list.get_cursor()[0]
+        self.list.listStore.clear()
+        self._populateTreeView(self.actions.get_categories(""))
+        self.list.set_cursor(path)
+
+    def _on_newbutton_clicked(self, button):
+        self.currentrecord = None
+        self.name_.set_text("")
+        self.color.set_color(gtk.gdk.color_parse("#000"))
+        #self.list.set_cursor((-1,))
+
+    def _on_savebutton_clicked(self, button):
+        name =  self.name_.get_text()
+        color = self.color.get_color().to_string()
+        if self.currentrecord:
+            id = self.currentrecord[0]
+            row = self.actions.edit_category({'id': id,
+                                              'categoryname': name,
+                                              'color': color})
+        else:
+            row = self.actions.add_category({'categoryname': name,
+                                             'color': color})
+        self.reloadTreeView()
+
+    def _on_deletebutton_clicked(self, button):
+        if self.currentrecord:
+            id = self.currentrecord[0]
+            row = self.actions.delete_category(int(id))
+            self.reloadTreeView()
