@@ -64,6 +64,11 @@ class ViewBill(GenericListView):
         cell.set_property('text', paid)
         column.set_visible(False)
 
+    def alarm_cell_data_function(self, column, cell, model, iter):
+        alarm = model.get_value (iter, 7)
+        cell.set_property('text', alarm)
+        column.set_visible(False)
+
     # This dictionary represents the columns displayed by the listview.
     # It is indexed by the order you want them to be displayed, followed
     # by the column title and cellrenderer type.
@@ -81,7 +86,9 @@ class ViewBill(GenericListView):
         5: [_('Notes'),
             gtk.CellRendererText(), notes_cell_data_function],
         6: [_('Paid'),
-            gtk.CellRendererText(), paid_cell_data_function]
+            gtk.CellRendererText(), paid_cell_data_function],
+        7: [_('Alarm'),
+            gtk.CellRendererText(), alarm_cell_data_function]
     }
 
     def __init__(self):
@@ -117,3 +124,8 @@ class ViewBill(GenericListView):
         paid.set_cell_data_func(paid.get_cell_renderers()[0],
                                 self.paid_cell_data_function)
         paid.set_visible(False)
+
+        alarm = self.get_column(7)
+        alarm.set_cell_data_func(alarm.get_cell_renderers()[0],
+                                self.alarm_cell_data_function)
+        alarm.set_visible(False)
