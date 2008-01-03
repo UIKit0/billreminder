@@ -38,24 +38,6 @@ class Actions(object):
         """ Delete a record in the database """
         return self.dal.delete(BillsTable, key)
 
-
-    def get_alarms(self, kwargs):
-        """ Returns one or more records that meet the criteria passed """
-        return self.dal.get(AlarmsTable, kwargs)
-
-    def add_alarm(self, kwargs):
-        """ Adds a alarm to the database """
-        return self.dal.add(AlarmsTable, kwargs)
-
-    def edit_alarm(self, kwargs):
-        """ Edit a record in the database """
-        return self.dal.edit(AlarmsTable, kwargs)
-
-    def delete_alarm(self, key):
-        """ Delete a record in the database """
-        return self.dal.delete(AlarmsTable, key)
-
-
     def get_categories(self, kwargs):
         """ Returns one or more records that meet the criteria passed """
         return self.dal.get(CategoriesTable, kwargs)
