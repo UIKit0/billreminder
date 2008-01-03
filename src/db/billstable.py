@@ -7,7 +7,7 @@ from generictable import GenericTable
 
 class BillsTable(GenericTable):
     """ Table to hold information for all bills created. """
-    Version = 2
+    Version = 3
     Key = "Id"
     KeyAuto = True
     Name = "br_BillsTable"
@@ -19,6 +19,7 @@ class BillsTable(GenericTable):
             dueDate INTEGER NOT NULL,
             amountDue INTEGER NOT NULL,
             notes TEXT,
-            paid INTEGER DEFAULT 0)
+            paid INTEGER DEFAULT 0,
+            alarm INTEGER)
     """ % Name
-    Fields = ['Id', 'catId', 'payee', 'dueDate', 'amountDue', 'notes', 'paid']
+    Fields = ['Id', 'catId', 'payee', 'dueDate', 'amountDue', 'notes', 'paid', 'alarm']
