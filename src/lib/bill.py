@@ -9,7 +9,7 @@ import time
 class Bill(object):
 
     def __init__(self, payee, category='', dueDate='', amountDue='',
-                 notes=None, paid=0, id=-1):
+                 notes=None, paid=0, id=-1, alarm=-1):
 
         if isinstance(payee,dict):
             self.__set_id(payee['Id'])
@@ -23,6 +23,7 @@ class Bill(object):
             self.__set_amountDue(payee['amountDue'])
             self.__set_notes(payee['notes'])
             self.__set_paid(payee['paid'])
+            self.__set_alarm(payee['alarm'])
         else:
             self.__set_id(id)
             self.__set_payee(payee)
@@ -34,6 +35,7 @@ class Bill(object):
             self.__set_amountDue(amountDue)
             self.__set_notes(notes)
             self.__set_paid(paid)
+            self.__set_alarm(alarm)
 
     # Id
     def __get_id (self): return self.__id
@@ -84,6 +86,15 @@ class Bill(object):
     Paid = property(fget=__get_paid, fset=__set_paid,
                     doc='Get/Set if package was paid.')
 
+    # Alarm
+    def __get_alarm(self): return self.__alarm
+    def __set_alarm(self, value):
+        #assert isinstance(value, int)
+        #assert 0 <= value <= 1
+        self.__alarm = value
+    Alarm = property(fget=__get_alarm, fset=__set_alarm,
+                    doc='Get/Set if package has alarm.')
+
     # Dictionary
     def __get_dictionary(self):
         return dict({
@@ -93,7 +104,8 @@ class Bill(object):
             'dueDate': self.__dueDate,
             'amountDue': self.__amountDue,
             'notes': self.__notes,
-            'paid': self.__paid})
+            'paid': self.__paid,
+            'alarm': self.__alarm})
     Dictionary = property(fget=__get_dictionary,
                           doc='Gets a dictionary representation of bill.')
 
