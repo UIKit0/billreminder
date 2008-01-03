@@ -15,7 +15,6 @@ except ImportError:
 from lib.bill import Bill
 from lib.common import DB_NAME, DB_PATH
 from db.versionstable import VersionsTable
-from db.alarmstable import AlarmsTable
 from db.fieldstable import FieldsTable
 from db.billstable import BillsTable
 from db.categoriestable import CategoriesTable
@@ -30,7 +29,6 @@ class DAL(object):
     # Tables used by applications and corresponding versions
     tables = {'tblversions': VersionsTable(),
         'tblcategories': CategoriesTable(),
-        'tblalarms': AlarmsTable(),
         'tblfields': FieldsTable(),
         'tblbills': BillsTable()}
     # Same dict, but with real table name
@@ -150,13 +148,15 @@ class DAL(object):
 
     def _update_table(self, table):
         oldfields = self.get(self.tables['tblfields'],
-                            {'tablename': table.Name})[0]['fields'].split(',')
+                            {'tablename': table.Name})[0]['fields'].split(', ')
+
         stmt = "SELECT %(fields)s FROM %(name)s" \
             % dict(fields=", ".join(oldfields), name=table.Name)
         print stmt
         self.cur.execute(stmt)
         oldrecords = [dict([ (f, row[i]) for i, f in enumerate(oldfields) ]) \
                       for row in self.cur.fetchall()]
+
         stmt = "ALTER TABLE %s RENAME TO %s_old" % (table.Name, table.Name)
         self.cur.execute(stmt)
         self.delete(self.tables['tblversions'],  table.Name)
@@ -164,7 +164,7 @@ class DAL(object):
         self._create_table(table)
 
         for rec in oldrecords:
-            self.add(table, dict([(col,rec.get(col,'')) \
+            print self.add(table, dict([(col,rec.get(col,'')) \
                                   for col in table.Fields]))
 
         self._delete_table('%s_old' % table.Name)
