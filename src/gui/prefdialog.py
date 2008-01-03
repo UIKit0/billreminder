@@ -274,8 +274,10 @@ class PrefDialog(gtk.Dialog):
 
         store = gtk.ListStore(gobject.TYPE_STRING)
         for i in range(24):
-            store.append(["%02d:00" % i])
-            store.append(["%02d:30" % i])
+            store.append([_('%H:%M').replace('%H',
+                        "%02d" % i).replace('%M', '00')])
+            store.append([_('%H:%M').replace('%H',
+                        "%02d" % i).replace('%M', '30')])
 
         self.notif_alert_combo.set_model(store)
         self.notif_alert_combo.set_text_column(0)

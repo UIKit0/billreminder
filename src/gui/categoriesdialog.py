@@ -36,6 +36,7 @@ class CategoriesDialog(gtk.Dialog):
 
         # Set up the UI
         self._initialize_dialog_widgets()
+        self._connect_fields()
         #self._populate_fields()
         self.actions = Actions()
         self._populateTreeView(self.actions.get_categories(""))
@@ -64,7 +65,6 @@ class CategoriesDialog(gtk.Dialog):
 
         self.list = ViewCategory()
         self.list.set_size_request(300, 150)
-        self.list.connect('cursor_changed', self._on_list_cursor_changed)
 
         # ScrolledWindow
         self.scrolledwindow = gtk.ScrolledWindow()
@@ -85,9 +85,7 @@ class CategoriesDialog(gtk.Dialog):
         self.colorlabel.set_alignment(0.00, 0.50)
 
         self.name_ = gtk.Entry()
-        self.name_.connect("changed", self._on_edit)
         self.color = gtk.ColorButton()
-        self.color.connect("color-set", self._on_edit)
 
         self.table.attach(self.namelabel, 0, 1, 0, 1, gtk.FILL, gtk.FILL)
         self.table.attach(self.colorlabel, 0, 1, 1, 2, gtk.FILL, gtk.FILL)
@@ -99,11 +97,8 @@ class CategoriesDialog(gtk.Dialog):
         self.actionspack.set_spacing(6)
 
         self.newbutton = gtk.Button(stock=gtk.STOCK_NEW)
-        self.newbutton.connect("clicked", self._on_newbutton_clicked)
         self.savebutton = gtk.Button(stock=gtk.STOCK_SAVE)
-        self.savebutton.connect("clicked", self._on_savebutton_clicked)
         self.deletebutton = gtk.Button(stock=gtk.STOCK_DELETE)
-        self.deletebutton.connect("clicked", self._on_deletebutton_clicked)
 
         self.actionspack.pack_start(self.newbutton)
         self.actionspack.pack_start(self.savebutton)
@@ -124,6 +119,13 @@ class CategoriesDialog(gtk.Dialog):
         # Show all widgets
         self.show_all()
 
+    def _connect_fields(self):
+        self.list.connect('cursor_changed', self._on_list_cursor_changed)
+        self.name_.connect("changed", self._on_edit)
+        self.color.connect("color-set", self._on_edit)
+        self.newbutton.connect("clicked", self._on_newbutton_clicked)
+        self.savebutton.connect("clicked", self._on_savebutton_clicked)
+        self.deletebutton.connect("clicked", self._on_deletebutton_clicked)
 
     def _populateTreeView(self, records):
         """ Populates the treeview control with the records passed """

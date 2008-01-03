@@ -37,15 +37,17 @@ class AddDialog(gtk.Dialog):
         # Private copy of any record passed
         self.currentrecord = record
 
+        self.alarm = [None, None]
+
         # Set up the UI
         self._initialize_dialog_widgets()
+        self._connect_fields()
 
         # If a record was passed, we're in edit mode
         if record:
             self._populate_fields()
 
     def _initialize_dialog_widgets(self):
-        # TODO: Add CATEGORY selector
         self.vbox.set_spacing(8)
         self.topcontainer = gtk.HBox(homogeneous=False, spacing=0)
         self.calbox = gtk.VBox(homogeneous=False, spacing=0)
@@ -53,7 +55,7 @@ class AddDialog(gtk.Dialog):
 
         # Add calendar and label
         self.callabel = gtk.Label()
-        self.callabel.set_markup("<b>%s: </b>" % _("Due Date"))
+        self.callabel.set_markup("<b>%s</b> " % _("Due Date:"))
         self.callabel.set_alignment(0.00, 0.50)
         self.calendar = gtk.Calendar()
         self.calendar.mark_day(datetime.datetime.today().day)
@@ -67,7 +69,7 @@ class AddDialog(gtk.Dialog):
         ## Table of 5 x 2
         self.table = gtk.Table(rows=5, columns=2, homogeneous=False)
         ### Spacing to make things look better
-        self.table.set_col_spacing(0, 10)
+        self.table.set_col_spacing(0, 6)
         self.table.set_row_spacing(0, 6)
         self.table.set_row_spacing(1, 6)
         self.table.set_row_spacing(2, 6)
@@ -75,19 +77,19 @@ class AddDialog(gtk.Dialog):
 
         ## Labels
         self.payeelabel = gtk.Label()
-        self.payeelabel.set_markup("<b>%s </b>" % _("Payee:"))
+        self.payeelabel.set_markup("<b>%s</b> " % _("Payee:"))
         self.payeelabel.set_alignment(0.00, 0.50)
         self.amountlabel = gtk.Label()
-        self.amountlabel.set_markup("<b>%s </b>" % _("Amount:"))
+        self.amountlabel.set_markup("<b>%s</b> " % _("Amount:"))
         self.amountlabel.set_alignment(0.00, 0.50)
         self.categorylabel = gtk.Label()
-        self.categorylabel.set_markup("<b>%s </b>" % _("Category:"))
+        self.categorylabel.set_markup("<b>%s</b> " % _("Category:"))
         self.categorylabel.set_alignment(0.00, 0.50)
         self.noteslabel = gtk.Label()
-        self.noteslabel.set_markup("<b>%s </b>" % _("Notes:"))
+        self.noteslabel.set_markup("<b>%s</b> " % _("Notes:"))
         self.noteslabel.set_alignment(0.00, 0.50)
         self.alarmlabel = gtk.Label()
-        self.alarmlabel.set_markup("<b>%s </b>" % _("Alarm:"))
+        self.alarmlabel.set_markup("<b>%s</b> " % _("Alarm:"))
         self.alarmlabel.set_alignment(0.00, 0.50)
         ## Fields
         ### Payee
@@ -101,10 +103,7 @@ class AddDialog(gtk.Dialog):
         self.categorydock = gtk.HBox(homogeneous=False, spacing=0)
         self.category = gtk.combo_box_new_text()
         self.category.set_row_separator_func(self._determine_separator)
-        self.category.connect("changed", self._on_categorycombo_changed)
         self.categorybutton = gtk.Button()
-        self.categorybutton.connect("clicked",
-                                    self._on_categoriesbutton_clicked)
         self.categorybutton.set_tooltip_text(_("Manage Categories"))
         self.categorybuttonimage = gtk.Image()
         self.categorybuttonimage.set_from_stock(gtk.STOCK_EDIT,
@@ -124,8 +123,8 @@ class AddDialog(gtk.Dialog):
         ### Buffer object for Notes field
         self.txtbuffer = self.notes.get_buffer()
         ### Alarm
-        self.alarm = DateButton(self)
-        self.alarm.set_tooltip_text(_("Select Date and Time"))
+        self.alarmbutton = DateButton(self)
+        self.alarmbutton.set_tooltip_text(_("Select Date and Time"))
 
         ## Pack it all into the table
         self.table.attach(self.payeelabel, 0, 1, 0, 1, gtk.FILL, gtk.FILL)
@@ -137,20 +136,26 @@ class AddDialog(gtk.Dialog):
         self.table.attach(self.amount, 1, 2, 1, 2, gtk.FILL, gtk.FILL)
         self.table.attach(self.categorydock, 1, 2, 2, 3, gtk.FILL, gtk.FILL)
         self.table.attach(self.notesdock, 1, 2, 3, 4, gtk.FILL, gtk.FILL)
-        self.table.attach(self.alarm, 1, 2, 4, 5, gtk.FILL, gtk.FILL)
+        self.table.attach(self.alarmbutton, 1, 2, 4, 5, gtk.FILL, gtk.FILL)
         ## Pack table
         self.fieldbox.pack_start(self.table, expand=True, fill=True, padding=0)
 
         # Everything
         self.topcontainer.pack_start(self.calbox,
-                                     expand=False, fill=False, padding=5)
+                                     expand=False, fill=False, padding=10)
         self.topcontainer.pack_start(self.fieldbox,
-                                     expand=False, fill=False, padding=5)
+                                     expand=False, fill=False, padding=10)
         self.vbox.pack_start(self.topcontainer,
                              expand=False, fill=True, padding=10)
 
         # Show all widgets
         self.show_all()
+
+    def _connect_fields(self):
+        self.category.connect("changed", self._on_categorycombo_changed)
+        self.categorybutton.connect("clicked",
+                                    self._on_categoriesbutton_clicked)
+
 
     def _determine_separator(self, model, iter, data=None):
         return model.get_value(iter, 0) == "---"
@@ -178,6 +183,9 @@ class AddDialog(gtk.Dialog):
 
         self.txtbuffer.set_text(self.currentrecord.Notes)
         #self.chkPaid.set_active(self.currentrecord.Paid)
+
+        if self.currentrecord.Alarm > 0:
+            self.alarmbutton.set_date(self.currentrecord.Alarm)
 
     def _populate_payee(self):
         """ Populates combobox with existing payees """
@@ -212,32 +220,39 @@ class AddDialog(gtk.Dialog):
         else:
             return self.payeeEntry.get_text()
 
-    def _populate_category(self):
+    def _populate_category(self, return_id=None):
         """ Populates combobox with existing categories """
         # Connects to the database
         actions = Actions()
 
         # List of categories from database
         categories = []
-        records = actions.get_categories("")
-        records = records or []
+        records = actions.get_categories("") or []
+
+        ret = 0
 
         for rec in records:
-            if rec['categoryname'] not in categories:
-                categories.append(rec['categoryname'])
+            if [rec['categoryname'], rec['id']] not in categories:
+                categories.append([rec['categoryname'], int(rec['id'])])
+                if return_id and int(return_id) == int(rec['id']):
+                    ret = len(categories) + 1
 
-        store = gtk.ListStore(gobject.TYPE_STRING)
+        store = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_INT)
         self.category.set_model(store)
-        store.append([_("None")])
-        store.append(["---"])
+        store.append([_("None"), -1])
+        store.append(["---", -1])
 
         for category in categories:
-            store.append([category])
-        store.append(["---"])
-        store.append([_("New Category")])
+            print category
+            store.append(category)
+        store.append(["---", -1])
+        store.append([_("New Category"), -2])
+
+        return ret
 
     def _get_category(self):
         """ Extracts information typed into comboboxentry """
+
         actions = Actions()
 
         if self.category.get_active_iter() is not None:
@@ -254,10 +269,7 @@ class AddDialog(gtk.Dialog):
         records = actions.get_categories({'categoryname': name})
         if records:
             cat_id = records[0]['id']
-        else:
-            row = actions.add_category({'categoryname': name})
-            if row:
-                cat_id = row['id']
+
         return cat_id and int(cat_id) or None
 
     def get_record(self):
@@ -280,14 +292,19 @@ class AddDialog(gtk.Dialog):
         # Gets the category
         category = self._get_category()
 
+        # Gets the alarm date
+        alarm = self.alarmbutton.get_date()  or -1
+
         # Validate form
         if len(payee.strip()) == 0 or len(self.amount.get_text().strip()) == 0:
             return None, None
 
+
         if self.currentrecord is None:
             # Create a new object
             self.currentrecord = Bill(payee, category, selectedDate,
-                                      self.amount.get_text(), sbuffer)
+                                      self.amount.get_text(), sbuffer,
+                                      0, -1, alarm)
             #self.currentrecord = Bill(payee, selectedDate,
             #                          self.amount.get_text(), sbuffer,
             #                          int(self.chkPaid.get_active()))
@@ -298,6 +315,7 @@ class AddDialog(gtk.Dialog):
             self.currentrecord.DueDate = int(selectedDate)
             self.currentrecord.AmountDue = float(self.amount.get_text())
             self.currentrecord.Notes = sbuffer
+            self.currentrecord.Alarm = alarm
             #self.currentrecord.Paid = int(self.chkPaid.get_active())
 
         #return the bill
@@ -311,20 +329,24 @@ class AddDialog(gtk.Dialog):
             categories._on_savebutton_clicked(None)
 
         index = self.category.get_active()
-        name_before = self.category.get_model()[index][0]
+        model = self.category.get_model()
+        id_original = int(model[index][1])
+
         # Repopulate categories
-        self._populate_category()
-        name_after = self.category.get_model()[index][0]
+        new_index = self._populate_category(id_original)
+
+        cat_index = categories.list.get_cursor()[0][0]
+        cat_model = categories.list.get_model()
+        id_selected = int(cat_model[cat_index][0])
+
         if ret == gtk.RESPONSE_OK:
-            cat_index = categories.list.get_cursor()[0][0]
             if cat_index:
                 index = cat_index + 2
         else:
-            if name_after != name_before:
-                index = 0
+            index = new_index
 
-        if new:
-            index = len(self.category.get_model()) - 3
+        if ret == gtk.RESPONSE_OK and new:
+            index = len(cat_model) + 1
 
         self.category.set_active(index)
 
@@ -333,7 +355,8 @@ class AddDialog(gtk.Dialog):
 
     def _on_categorycombo_changed(self, combobox):
         index = self.category.get_active()
-        if index == len(self.category.get_model()) - 1:
+        model = self.category.get_model()
+        if index == len(model) - 1:
             self.category.set_active(self.category_index_before)
             self._on_categoriesbutton_clicked(combobox, True)
         self.category_index_before = index
