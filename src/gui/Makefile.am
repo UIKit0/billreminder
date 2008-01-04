@@ -7,6 +7,7 @@ billreminder_gui_PYTHON = \
 	__init__.py \
 	aboutdialog.py \
 	adddialog.py \
+	categoriesdialog.py \
 	maindialog.py \
 	prefdialog.py
 
