@@ -3,7 +3,6 @@
 billreminder_dbdir = $(pythondir)/billreminder/db
 billreminder_db_PYTHON = \
 	__init__.py \
-	alarmstable.py \
 	billstable.py \
 	categoriestable.py \
 	fieldstable.py \
