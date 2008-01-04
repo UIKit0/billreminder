@@ -37,7 +37,7 @@ class DateButton(gtk.Button):
         return time.mktime(self.date.timetuple())
 
     def show_calendar(self, *arg):
-        self.dialog = gtk.Dialog(title=_("Select date and time"),
+        self.dialog = gtk.Dialog(title=_("Select Date and Time"),
                             parent=self.parent_window,
                             flags=gtk.DIALOG_MODAL,
                             buttons=(str(_("None")), gtk.RESPONSE_REJECT,
