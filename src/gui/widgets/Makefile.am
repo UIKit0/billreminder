@@ -8,6 +8,7 @@ billreminder_widgets_PYTHON = \
 	statusbar.py \
 	toolbar.py \
 	trayicon.py \
-	viewbill.py
+	viewbill.py \
+	viewcategory.py
 
 
