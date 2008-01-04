@@ -42,6 +42,7 @@ class AddDialog(gtk.Dialog):
         # Set up the UI
         self._initialize_dialog_widgets()
         self._connect_fields()
+        self.category_index_before = 0
 
         # If a record was passed, we're in edit mode
         if record:
@@ -99,6 +100,7 @@ class AddDialog(gtk.Dialog):
         self._populate_payee() # Populate combobox with payee from db
         ### Amount
         self.amount = gtk.Entry()
+        self.amount.set_alignment(1.00)
         ### Category
         self.categorydock = gtk.HBox(homogeneous=False, spacing=0)
         self.category = gtk.combo_box_new_text()
@@ -155,6 +157,7 @@ class AddDialog(gtk.Dialog):
         self.category.connect("changed", self._on_categorycombo_changed)
         self.categorybutton.connect("clicked",
                                     self._on_categoriesbutton_clicked)
+        self.amount.connect("insert-text", self._on_amount_insert)
 
 
     def _determine_separator(self, model, iter, data=None):
@@ -166,8 +169,7 @@ class AddDialog(gtk.Dialog):
 
         self.allowed_digts = [self.decimal_sep , self.thousands_sep]
         # Format the amount field
-        self.amount.set_text("%(amount)0.2f" % \
-                             {'amount': self.currentrecord.AmountDue})
+        self.amount.set_text(utils.float_to_currency(self.currentrecord.AmountDue))
         # Format the dueDate field
         dt = datetime.datetime.fromtimestamp(self.currentrecord.DueDate)
         self.calendar.select_day(dt.day)
@@ -299,12 +301,12 @@ class AddDialog(gtk.Dialog):
         if len(payee.strip()) == 0 or len(self.amount.get_text().strip()) == 0:
             return None, None
 
+        amount = utils.currency_to_float(self.amount.get_text())
 
         if self.currentrecord is None:
             # Create a new object
             self.currentrecord = Bill(payee, category, selectedDate,
-                                      self.amount.get_text(), sbuffer,
-                                      0, -1, alarm)
+                                      amount, sbuffer, 0, -1, alarm)
             #self.currentrecord = Bill(payee, selectedDate,
             #                          self.amount.get_text(), sbuffer,
             #                          int(self.chkPaid.get_active()))
@@ -313,7 +315,7 @@ class AddDialog(gtk.Dialog):
             self.currentrecord.Category = category
             self.currentrecord.Payee = payee
             self.currentrecord.DueDate = int(selectedDate)
-            self.currentrecord.AmountDue = float(self.amount.get_text())
+            self.currentrecord.AmountDue = amount
             self.currentrecord.Notes = sbuffer
             self.currentrecord.Alarm = alarm
             #self.currentrecord.Paid = int(self.chkPaid.get_active())
@@ -335,12 +337,17 @@ class AddDialog(gtk.Dialog):
         # Repopulate categories
         new_index = self._populate_category(id_original)
 
-        cat_index = categories.list.get_cursor()[0][0]
+        cursor = categories.list.get_cursor()
+        if cursor[0]:
+            cat_index = cursor[0][0]
+        else:
+            cat_index = 0
         cat_model = categories.list.get_model()
-        id_selected = int(cat_model[cat_index][0])
 
         if ret == gtk.RESPONSE_OK:
-            if cat_index:
+            if not len(cat_model):
+                index = 0
+            else:
                 index = cat_index + 2
         else:
             index = new_index
@@ -360,3 +367,6 @@ class AddDialog(gtk.Dialog):
             self.category.set_active(self.category_index_before)
             self._on_categoriesbutton_clicked(combobox, True)
         self.category_index_before = index
+
+    def _on_amount_insert(self, entry, string, len, position):
+        print string
