@@ -9,6 +9,7 @@ import datetime
 from gui.widgets.genericlistview import GenericListView
 from lib.bill import Bill
 from lib import i18n
+from lib import utils
 
 class ViewBill(GenericListView):
     """
@@ -45,10 +46,10 @@ class ViewBill(GenericListView):
         cell.set_property('xalign', 0.5)
 
     def amountdue_cell_data_function(self, column, cell, model, iter):
-        amountDue = model.get_value(iter, 4)
+        amountDue = model.get_value(iter, 4).replace(',', '.')
         paid = int(model.get_value(iter, 6))
         amountDue = len(amountDue) > 0 and amountDue or 0
-        amountDue = "%0.2f" % float(amountDue)
+        amountDue = utils.float_to_currency(float(amountDue))
         if paid:
             amountDue = "<s>%s</s>" % amountDue
         cell.set_property('markup', amountDue)
