@@ -6,6 +6,7 @@ __all__ = ['ContextMenu', 'Message']
 import sys
 import os
 import datetime
+import locale
 try:
     import pygtk
     pygtk.require("2.0")
@@ -212,3 +213,19 @@ def verify_pid(pid):
             return True
     except OSError:
         return False
+
+def currency_to_float(string):
+    try:
+        ret = locale.atof(string)
+    except ValueError:
+        ret = locale.atof(string.replace(
+                            locale.localeconv()['mon_thousands_sep'], ''))
+    return float(ret)
+
+def float_to_currency(number):
+    format = "%%.%df" % locale.localeconv()['int_frac_digits']
+    ret = locale.format(format, number)
+    return ret
+
+def check_date_format(string):
+    pass
