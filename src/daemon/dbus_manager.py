@@ -103,46 +103,6 @@ class Server(dbus.service.Object):
         return ret
 
     @dbus.service.method(common.DBUS_INTERFACE, in_signature='a{ss}', out_signature='aa{ss}')
-    def get_alarms(self, kwargs):
-        """ Returns one or more records that meet the criteria passed """
-        print kwargs
-        ret = []
-        records = self.actions.get_alarms(kwargs)
-        for record in records:
-            ret.append(force_string(record))
-        print ret
-        return ret
-
-    @dbus.service.method(common.DBUS_INTERFACE, in_signature='s', out_signature='aa{ss}')
-    def get_alarms_(self, kwargs):
-        """ Returns one or more records that meet the criteria passed """
-        #print kwargs
-        ret = []
-        records = self.actions.get_alarms(kwargs)
-        for record in records:
-            ret.append(force_string(record))
-        print ret
-        return ret
-
-    @dbus.service.method(common.DBUS_INTERFACE, in_signature='a{ss}', out_signature='a{ss}')
-    def edit_alarm(self, kwargs):
-        """ Edit a record in the database """
-        ret = self.actions.edit_alarm(kwargs)
-        return force_string(ret)
-
-    @dbus.service.method(common.DBUS_INTERFACE, in_signature='a{ss}', out_signature='a{ss}')
-    def add_alarm(self, kwargs):
-        """ Add a record to the database """
-        ret = self.actions.add_alarm(kwargs)
-        return force_string(ret)
-
-    @dbus.service.method(common.DBUS_INTERFACE, in_signature='i', out_signature='b')
-    def delete_alarm(self, key):
-        """ Delete a record in the database """
-        ret = self.actions.delete_alarm(key)
-        return ret
-
-    @dbus.service.method(common.DBUS_INTERFACE, in_signature='a{ss}', out_signature='aa{ss}')
     def get_categories(self, kwargs):
         """ Returns one or more records that meet the criteria passed """
         print kwargs
