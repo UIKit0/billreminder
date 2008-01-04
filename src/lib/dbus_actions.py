@@ -33,14 +33,13 @@ class Actions(object):
                 raise SystemExit
             return False
 
-
     def _correct_type(self, record):
         if 'Id' in record.keys():
             record['Id'] = int(record['Id'])
         if 'dueDate' in record.keys():
             record['dueDate'] = int(record['dueDate'])
         if 'amountDue' in record.keys():
-            record['amountDue'] = float(record['amountDue'])
+            record['amountDue'] = float(record['amountDue'].replace(',', '.'))
         if 'paid' in record.keys():
             record['paid'] = int(record['paid'])
         if 'alarm' in record.keys():

@@ -11,7 +11,6 @@ from lib import common
 from lib.utils import force_string
 from lib.utils import verify_dbus_service
 from db.billstable import BillsTable
-from db.alarmstable import AlarmsTable
 from db.categoriestable import CategoriesTable
 
 class Actions(object):
