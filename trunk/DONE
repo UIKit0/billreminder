@@ -1,0 +1,38 @@
+Jan 06 13:04:22 EDT 2007
+
+Road to a 0.3 release:
+
+* Make sure to update categorie combobox in adddialog with category selected from categorydialog or original value if user clicked on cancel button in categorydialog.
+* Finish categoriesdialog so that it allows the user to associate a color (use gtk.ColorButton?) to a category.
+  * Create a categoriesview class (inherit genericview) to display a colored square (pixbuf) and the name of the category (string).
+* Finish alarm dialog so that user can select date and time for individual record.
+
+Dec 04 01:05:35 EDT 2007
+
+*  Add an "action" to the notification message, allowing the user to open/start BillReminder to work on his bills.  This has to detect if an instance of BillReminder is already running or not.  If running, display it; else, launch it.
+*  Use all icons created by vdpizzol and add them to the setup script.
+
+Mar 24 12:30:03 EDT 2007
+
+*  Add a label to the billdialog's calendar stating what it is for (i.e. Choose due date);
+
+Mar 18 18:27:21 EDT 2007
+
+*  Add vdpizzol and pygi to the list of contributors.
+
+Jan 15 20:52:37 EST 2007
+
+*  Add a mechanism for updating (drop and create) the database layer;
+   Partially implemented by larmesto (r.134)
+
+Jan  10 05:48:23 GMT+1 2007
+
+*  Make a png icon.
+   Created by vdpizzol
+
+*  Change .desktop, setup and billy (done)
+
+Jan  1 21:15:05 EST 2007
+
+*  Turn the class DAL into a singleton.
+   Changed my mind on this one.

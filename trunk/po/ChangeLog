@@ -1,0 +1,38 @@
+2008-02-28  Og Maciel <ogmaciel@gnome.org>
+
+    * no.po: Nordic translation updated by
+    Tommy Mikkelsen <tamikkelsen@gmail.com>
+    * no_NB.po: Nordic translation updated by
+    Tommy Mikkelsen <tamikkelsen@gmail.com>
+
+2008-02-24  Og Maciel <ogmaciel@gnome.org>
+
+    * es.po: Spanish translation updated by
+    Gilberto J. Miralla <xyhthyx@gmail.com>
+
+2008-02-23  Og Maciel <ogmaciel@gnome.org>
+
+    * de.po: German translation updated by 
+    Sebastian Haselbeck <sebastian.haselbeck@gmx.com>
+    * sv.po: Swedish translation updated by
+    Daniel Nylander <po@danielnylander.se>
+    * es.po: Spanish translation updated by
+    Gilberto J. Miralla <xyhthyx@gmail.com>
+
+2008-02-22  Og Maciel <ogmaciel@gnome.org>
+
+    * pt_BR.po: Brazilian Portuguese translation updated by
+    Fábio Nogueira <deb-user-ba@ubuntu.com>
+
+2008-02-22  Og Maciel <ogmaciel@gnome.org>
+
+    * billreminder.pot de.po es.po nl.po no_NB.po no.po pt_BR.po sv.po: Updated.
+
+2007-01-20  Og Maciel <ogmaciel@gnome.org>
+
+    * de.po: Updated partial de translation by Sebastian Haselbeck <haselbeck@gmx.net>
+
+2007-01-19  Og Maciel <ogmaciel@gnome.org>
+
+    * de.po: Added partial de translation by Sebastian Haselbeck <haselbeck@gmx.net>
+    * LINGUAS: Added de

@@ -1,0 +1,56 @@
+README for BillReminder
+=======================
+
+BillReminder is a small and quick accounting application
+designed to allow for easy tracking of bills.  
+
+Many thanks to the following people who directly and indirectly helped with this project:
+
+    * Laudeci Oliveira
+    * Luiz Armesto
+    * Giovanni Deganni
+    * Ruivaldo
+    * Mario Danic
+    * Led Style
+    * Vinicius Depizzol
+    * Mat Davey
+    * Rolando Espinoza La Fuente
+    * Gilberto Miralla
+    * Reinout van Schouwen
+    * Sebastian Haselbeck
+    * Fábio Nogueira
+    * Tommy Mikkelsen
+    * Daniel Nylander
+    * Diogo Autilio
+    * Alex Bevilacqua
+
+DEPENDENCIES
+============
+python gtk
+python sqlite2
+python image
+
+INSTALLATION
+============
+See the 'INSTALL' file.
+
+
+HOW TO HELP
+===========
+You can report new bugs at
+ http://sourceforge.net/projects/billreminder/
+
+I'm currently looking for people with the following skills:
+
+    * Packagers;
+    * Python Developers;
+    * PyGtk/Gtk Developers;
+    * Web designers;
+
+Feel free to send patches.
+
+
+CONTACTS
+========
+BillReminder Mailing List <billreminder-devel@lists.sourceforge.net>
+
