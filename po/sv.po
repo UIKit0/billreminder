@@ -1,14 +1,14 @@
 # Swedish translation for billreminder.
-# Copyright (C) 2007, 2008 Og Maciel
+# Copyright (C) 2007, 2008, 2009 Free Software Foundation, Inc.
 # This file is distributed under the same license as the billreminder package.
-# Daniel Nylander <po@danielnylander.se>, 2007, 2008.
+# Daniel Nylander <po@danielnylander.se>, 2007, 2008, 2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: billreminder\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 08:18+0200\n"
-"PO-Revision-Date: 2008-09-12 08:19+0100\n"
+"POT-Creation-Date: 2009-02-11 15:33+0100\n"
+"PO-Revision-Date: 2009-02-11 15:34+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -137,7 +137,7 @@ msgstr "Huruvida notifieringar om betalda räkningar ska visas."
 
 #: ../data/billreminder.schemas.in.h:25
 msgid "Whether to start the application in the system's tray."
-msgstr "Huruvida programmet ska startas i systemets aktivitetsfält."
+msgstr "Huruvida programmet ska startas i systemet aktivitetsfält."
 
 #: ../data/billreminder.schemas.in.h:26
 msgid "Whether to use dialogs for notifications."
