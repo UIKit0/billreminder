@@ -25,6 +25,14 @@ except ImportError, e:
 
 from lib import i18n
 
+
+def load_ui_file(name):
+    import common
+    ui = gtk.Builder()
+    ui.add_from_file(os.path.join(common.DEFAULT_CFG_PATH, name))
+    return ui
+
+
 class ContextMenu(gtk.Menu):
     """ Creates context menus accessed by mouse right click. """
     def __init__(self, *args):

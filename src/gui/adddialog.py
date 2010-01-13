@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
 
-__all__ = ['AddDialog']
-
-import os
-import pygtk
-pygtk.require('2.0')
 import gtk
 import datetime
 import locale
@@ -13,14 +8,14 @@ import gobject
 from lib import utils
 from lib import common
 from lib import scheduler
-from db.entities import Bill, Category
 from lib.actions import Actions
-from lib.utils import create_pixbuf
+from db.entities import Bill
 from lib import i18n
-from gui.widgets.datebutton import DateButton
-from gui.widgets.datepicker import DatePicker
+
+from gui import widgets
+
+
 from gui.categoriesdialog import CategoriesDialog
-#from lib.config import Configuration
 from lib.Settings import Settings as Configuration
 
 class AddDialog(object):
@@ -28,10 +23,10 @@ class AddDialog(object):
     Class used to generate dialog to allow user to enter/edit records.
     """
     def __init__(self, title=None, parent=None, record=None, selectedDate=None):
-        self.ui = gtk.Builder()
-        self.ui.add_from_file(os.path.join(common.DEFAULT_CFG_PATH, "add_bill.ui"))
-
+        self.ui = utils.load_ui_file("add_bill.ui")
         self.window = self.ui.get_object("add_bill_dialog")
+        self.actions = Actions()
+
 
         self.window.set_icon_from_file(common.APP_ICON)
 
@@ -72,11 +67,11 @@ class AddDialog(object):
     def _initialize_dialog_widgets(self):
         self.frequency = self.ui.get_object("frequency")
 
-        self.dueDate = DatePicker()
+        self.dueDate = widgets.DatePicker()
         self.ui.get_object("due_date_box").add(self.dueDate)
         self.dueDate.connect('date_changed', self._on_datepicker_date_changed)
 
-        self.endDate = DatePicker()
+        self.endDate = widgets.DatePicker()
         self.ui.get_object("end_date_box").add(self.endDate)
 
         self.payee = self.ui.get_object("payee")
@@ -99,7 +94,7 @@ class AddDialog(object):
         self.notes = self.ui.get_object("notes")
         self.txtbuffer = self.notes.get_buffer()
 
-        self.alarmbutton = DateButton(self.window)
+        self.alarmbutton = widgets.DateButton(self.window)
         self.alarmbutton.set_tooltip_text(_("Select Date and Time"))
         self.ui.get_object("alarm_button_box").add(self.alarmbutton)
         self.ui.get_object("alarm_label").set_mnemonic_widget(self.alarmbutton)
@@ -147,9 +142,8 @@ class AddDialog(object):
         utils.select_combo_text(self.payee, self.currentrecord.payee)
 
         if self.currentrecord.category:
-            actions = Actions()
             cat_name = self.currentrecord.category.name
-            records = actions.get_categories(name=cat_name)
+            records = self.actions.get_categories(name=cat_name)
             if records:
                 categoryname = records[0].name
                 utils.select_combo_text(self.category, categoryname, 1)
@@ -166,11 +160,9 @@ class AddDialog(object):
     def _populate_payee(self):
         """ Populates combobox with existing payees """
         # Connects to the database
-        actions = Actions()
-
         # List of payees from database
         payees = []
-        records = actions.get_bills()
+        records = self.actions.get_bills()
         for rec in records:
             if rec.payee not in payees:
                 payees.append(rec.payee)
@@ -217,20 +209,18 @@ class AddDialog(object):
     def _populate_category(self, categoryname=None):
         """ Populates combobox with existing categories """
         # Connects to the database
-        actions = Actions()
-
         # List of categories from database
         categories = []
-        records = actions.get_categories()
+        records = self.actions.get_categories()
 
         ret = 0
-        empty_color = create_pixbuf()
+        empty_color = utils.create_pixbuf()
         for rec in records:
             #if [rec['categoryname'], rec['id']] not in categories:
             #TODO: Better put color creation in a function
             color = rec.color and rec.color or '#000'
 
-            categories.append([create_pixbuf(color=color), rec.name, int(rec.id)])
+            categories.append([utils.create_pixbuf(color=color), rec.name, int(rec.id)])
             if categoryname and categoryname == rec.name:
                 ret = len(categories) + 1
 
@@ -250,9 +240,6 @@ class AddDialog(object):
 
     def _get_category(self):
         """ Extracts information typed into comboboxentry """
-
-        actions = Actions()
-
         if self.category.get_active_iter() is not None:
             model = self.category.get_model()
             iteration = self.category.get_active_iter()
@@ -264,7 +251,7 @@ class AddDialog(object):
         if not name or name == _("None"):
             return None
 
-        records = actions.get_categories(name=name)
+        records = self.actions.get_categories(name=name)
         if records:
             return records[0]
         else:

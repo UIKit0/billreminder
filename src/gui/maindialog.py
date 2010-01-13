@@ -1,68 +1,39 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__all__ = ['MainDialog']
-
-import os
-
-import pygtk
-pygtk.require('2.0')
 import gtk
-import time
-import datetime
+import datetime as dt
 from gobject import timeout_add
 
-# Import widgets modules
-from gui.widgets.statusbar import Statusbar
-from gui.widgets.viewbill import ViewBill as ViewBill
-from gui.widgets.trayicon import NotifyIcon
-from gui.widgets.chartwidget import ChartWidget
-from gui.widgets.timeline import Timeline, Bullet
-
-# Import data model modules
-from lib.bill import Bill
-from lib.actions import Actions
+from gui import widgets
+from lib.actions import Actions # data model
 
 # Import common utilities
 from lib import common
 from lib import dialogs
-from lib import scheduler
-#from lib.config import Configuration
-from lib.Settings import Settings as Configuration
-from lib.utils import Message
-from lib.utils import get_dbus_interface
-from lib.utils import force_string
-from lib.utils import create_pixbuf
-from lib import i18n
 
-from lib.common import GCONF_PATH, GCONF_GUI_PATH, GCONF_ALARM_PATH
-from lib.common import CFG_NAME
-from lib.common import USER_CFG_PATH, DEFAULT_CFG_PATH
-from os.path import exists, join
+from lib.Settings import Settings as Configuration
+from lib import utils
+from lib import i18n
 
 class MainDialog:
     search_text = ""
     _bullet_cache = {}
 
     def __init__(self):
-        if exists(join(USER_CFG_PATH, CFG_NAME)):
-            from lib.migrate_to_gconf import migrate
-            migrate(join(USER_CFG_PATH, CFG_NAME))
-
         self.gconf_client = Configuration()
-        self.message = Message()
+        self.message = utils.Message()
         # Connects to the database
         self.actions = Actions()
 
-
-        self.ui = gtk.Builder()
-        self.ui.add_from_file(os.path.join(DEFAULT_CFG_PATH, "main.ui"))
+        self.ui = utils.load_ui_file("main.ui")
 
         self.window = self.ui.get_object("main_window")
         self.window.set_title("%s" % common.APPNAME)
         self.window.set_icon_from_file(common.APP_ICON)
 
         # ViewBill
-        self.list = ViewBill()
+        self.list = widgets.ViewBill()
         self.list.connect('cursor_changed', self._on_list_cursor_changed)
         self.list.connect('row_activated', self._on_list_row_activated)
         self.list.connect('button_press_event', self._on_list_button_press_event)
@@ -76,16 +47,16 @@ class MainDialog:
         self._populate_menubar()
 
         # Statusbar
-        self.statusbar = Statusbar()
+        self.statusbar = widgets.Statusbar()
         self.ui.get_object("statusbar_box").add(self.statusbar)
 
         # Timeline
-        self.timeline = Timeline(callback=self.on_timeline_cb)
+        self.timeline = widgets.Timeline(callback=self.on_timeline_cb)
         self.timeline.connect("value-changed", self._on_timeline_changed)
         self.ui.get_object("timeline_box").add(self.timeline)
 
         # Chart
-        self.chart = ChartWidget()
+        self.chart = widgets.ChartWidget()
         self.ui.get_object("chart_box").add(self.chart)
 
         # Restore position and size of window
@@ -111,11 +82,11 @@ class MainDialog:
 
         # populate treeview
         self.reloadTreeView()
-        self.notify = NotifyIcon(self)
+        self.notify = widgets.NotifyIcon(self)
 
         # Connects to the Daemon
         self.iface = None
-        iface = get_dbus_interface(common.DBUS_INTERFACE, common.DBUS_PATH)
+        iface = utils.get_dbus_interface(common.DBUS_INTERFACE, common.DBUS_PATH)
         if iface:
             iface.connect_to_signal("bill_edited", self.reloadTreeView)
             iface.connect_to_signal("bill_edited", self.reloadTimeline)
@@ -149,17 +120,9 @@ class MainDialog:
 
     # Methods:  UI
     def _send_tray_hints(self):
-        self.iface.set_tray_hints(force_string(self.notify.get_hints()))
+        self.iface.set_tray_hints(utils.force_string(self.notify.get_hints()))
         timeout_add(60000, self._send_tray_hints)
 
-    def get_window_visibility(self):
-        return self.window.get_property("visible")
-
-    def show_hide_window(self):
-        if self.window.get_property("visible"):
-            self.window.hide()
-        else:
-            self.window.show()
 
     def get_selected_record(self):
         """ Returns a bill object from the current selected record """
@@ -233,7 +196,7 @@ class MainDialog:
         categoryColor = row.category.color if row.category else '#d3d7cf'
         formatted = [
             row.id,
-            create_pixbuf(color=categoryColor),
+            utils.create_pixbuf(color=categoryColor),
             categoryName,
             row.payee,
             row.dueDate.strftime(_('%m/%d').encode('ASCII')),
@@ -282,42 +245,6 @@ class MainDialog:
         self.ui.get_object("showToolbar").set_active(self.gconf_client.get('show_toolbar'))
 
 
-    def add_bill(self):
-        selectedDate = self.timeline.value
-        records = dialogs.add_dialog(parent=self.window, selectedDate=selectedDate)
-
-        # Checks if the user did not cancel the action
-        if records:
-            # Add new bill to database
-            for rec in records:
-                bill = self.actions.add(rec)
-                if bill:
-                    self.list.add(self.format_row(bill))
-            self.update_statusbar()
-            # Reload records tree (something changed)
-            self.reloadTreeView()
-            self.reloadTimeline()
-
-    def edit_bill(self):
-        records = dialogs.edit_dialog(parent=self.window, record=self.currentrecord)
-
-        # Checks if the user did not cancel the action
-        if records:
-            for rec in records:
-                # Edit bill to database
-                rec = self.actions.edit(rec)
-
-            # Reload records tree (something changed)
-            self.reloadTreeView()
-            self.reloadTimeline()
-
-    def remove_bill(self):
-        self.actions.delete(self.currentrecord)
-        self.list.remove()
-        self.update_statusbar()
-        self.reloadTreeView()
-        self.reloadTimeline()
-
     def toggle_bill_paid(self):
         # Fetch record from database
         record = self.actions.get_bills(id=self.currentrecord.id)[0]
@@ -336,12 +263,6 @@ class MainDialog:
         self.update_statusbar(idx)
         self.reloadTreeView()
         self.reloadTimeline()
-
-    def about(self):
-        dialogs.about_dialog(parent=self.window)
-
-    def preferences(self):
-        dialogs.preferences_dialog(parent=self.window)
 
     # Methods
     def _quit_application(self):
@@ -412,20 +333,55 @@ class MainDialog:
         self.update_statusbar()
 
     def on_newBill_activate(self, toolbutton):
-        self.add_bill()
+        selectedDate = self.timeline.value
+        records = dialogs.add_dialog(parent=self.window, selectedDate=selectedDate)
+
+        # Checks if the user did not cancel the action
+        if records:
+            # Add new bill to database
+            for rec in records:
+                bill = self.actions.add(rec)
+                if bill:
+                    self.list.add(self.format_row(bill))
+            self.update_statusbar()
+            # Reload records tree (something changed)
+            self.reloadTreeView()
+            self.reloadTimeline()
 
     def on_editBill_activate(self, toolbutton):
-        if self.currentrecord:
-            self.edit_bill()
+        if not self.currentrecord:
+            return
+        
+        records = dialogs.edit_dialog(parent=self.window, record=self.currentrecord)
+
+        # Checks if the user did not cancel the action
+        if records:
+            for rec in records:
+                # Edit bill to database
+                rec = self.actions.edit(rec)
+
+            # Reload records tree (something changed)
+            self.reloadTreeView()
+            self.reloadTimeline()
+
 
     def on_removeBill_activate(self, toolbutton):
-        if self.currentrecord:
-            resp = self.message.ShowQuestionYesNo(
-                _("Do you really want to delete \"%s\"?") % \
-                self.currentrecord.payee,
-                self.window, _("Confirmation"))
-            if resp:
-                self.remove_bill()
+        if not self.currentrecord:
+            return
+
+        resp = self.message.ShowQuestionYesNo(
+            _("Do you really want to delete \"%s\"?") % \
+            self.currentrecord.payee,
+            self.window, _("Confirmation"))
+        if not resp:
+            return
+
+        self.actions.delete(self.currentrecord)
+        self.list.remove()
+        self.update_statusbar()
+        self.reloadTreeView()
+        self.reloadTimeline()
+
 
     def on_markNotPaid_activate(self, toolbutton):
         self.on_markPaid_activate(toolbutton) # forward
@@ -435,10 +391,10 @@ class MainDialog:
             self.toggle_bill_paid()
 
     def on_btnAbout_activate(self, toolbutton):
-        self.about()
+        dialogs.about_dialog(parent=self.window)
 
     def on_btnPrefs_activate(self, toolbutton):
-        self.preferences()
+        dialogs.preferences_dialog(parent=self.window)
 
     def on_btnQuit_activate(self, toolbutton):
         self._quit_application()
@@ -491,7 +447,7 @@ class MainDialog:
             status = self.gconf_client.get('show_paid_bills')
             amount = 0
             tooltip = ''
-            bullet = Bullet()
+            bullet = widgets.Bullet()
             bullet.date = date
 
             for bill in self._bullet_cache[date]:
@@ -505,7 +461,7 @@ class MainDialog:
                 if bill.paid:
                     if status == 0: return False
                     bullet.status = bullet.status | bullet.PAID
-                elif date <= datetime.date.today():
+                elif date <= dt.date.today():
                     if status == 1: return False
                     bullet.status = bullet.status | bullet.OVERDUE
                 else:

@@ -1,8 +1,10 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import sys
 import os
 from optparse import OptionParser
+import datetime as dt
 
 current_path = os.path.realpath(__file__)
 basedir = os.path.dirname(os.path.realpath(__file__))
@@ -11,7 +13,6 @@ if not os.path.exists(os.path.join(basedir, "billreminder.py")):
         basedir = os.getcwd()
 sys.path.insert(0, basedir)
 os.chdir(basedir)
-
 
 
 try:
@@ -38,8 +39,14 @@ from lib import common
 from lib import i18n
 from gui.maindialog import MainDialog as BillReminder
 
-def main():
+# migrate settings to gconf
+# TODO - move to fixtures / consider for removal
+if os.path.exists(os.path.join(common.USER_CFG_PATH, common.CFG_NAME)):
+    from lib.migrate_to_gconf import migrate
+    migrate(os.path.join(common.USER_CFG_PATH, common.CFG_NAME))
 
+
+def main():
     #args = sys.argv
     parser = OptionParser()
     parser.set_usage(_("Usage:  billreminder [OPTIONS...]"))
@@ -50,6 +57,7 @@ def main():
 
     # Verify arguments
     options, args = parser.parse_args()
+
     if options.app_about:
         dialogs.about_dialog()
     elif options.app_add:
