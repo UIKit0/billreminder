@@ -54,11 +54,18 @@ def main():
     parser.add_option('--about', action='store_true', dest='app_about', default=False, help=_('About this application.'))
     parser.add_option('--add', action='store_true', dest='app_add', default=False, help=_('Adds a new bill to the database.'))
     parser.add_option('--standalone', action='store_true', dest='app_standalone', default=False, help=_('Access database directly, without daemon.'))
+    parser.add_option('--new', action='store_true', dest='new_main', default=False)
 
     # Verify arguments
     options, args = parser.parse_args()
 
-    if options.app_about:
+
+    if options.new_main:
+        from gui.new import BasicWindow
+        app = BasicWindow()
+        gtk.main()
+
+    elif options.app_about:
         dialogs.about_dialog()
     elif options.app_add:
         print dialogs.add_dialog()

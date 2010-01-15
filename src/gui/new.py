@@ -3,7 +3,7 @@
 
 import gtk
 from db import entities
-from gui import widgets
+import widgets
 
 class BasicWindow:
 
@@ -18,7 +18,7 @@ class BasicWindow:
 
         self.window.set_title("Basic Window")
 
-        self.window.set_size_request(300, 200)
+        self.window.set_size_request(500, 300)
 
         self.window.connect("delete_event", self.delete_event)
 
