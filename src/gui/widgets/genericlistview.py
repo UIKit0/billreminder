@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Copyright (c) 2007, Og Macieli <omaciel@foresightlinux.org>
+Copyright (c) 2007, Og Maciel <ogmaciel@gnome.org>
 
 All rights reserved.
 
