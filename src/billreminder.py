@@ -61,8 +61,8 @@ def main():
 
 
     if options.new_main:
-        from gui.new import BasicWindow
-        app = BasicWindow()
+        from gui.new import MainWindow
+        app = MainWindow()
         gtk.main()
 
     elif options.app_about:
