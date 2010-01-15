@@ -25,6 +25,7 @@ class BillTree(gtk.TreeView):
         self.insert_column_with_attributes(-1, _("Payee"), gtk.CellRendererText(), text=2)
         self.insert_column_with_data_func(-1, _("Date"), gtk.CellRendererText(), self.duedate_cell_data_function)
         self.insert_column_with_data_func(-1, _("Amount"), gtk.CellRendererText(), self.amountdue_cell_data_function)
+        self.insert_column_with_data_func(-1, "", gtk.CellRendererPixbuf(), self.edit_cell_data_function)
 
         # Set columns attributes
         for col in self.get_columns():
@@ -50,6 +51,15 @@ class BillTree(gtk.TreeView):
         cell.set_property('text', amount)
         cell.set_property('xalign', 1.0)
         column.set_sort_column_id(4)
+
+    def edit_cell_data_function(self, column, cell, model, iter):
+        bill = model.get_value(iter, 5)
+        cell.set_property('xalign', 1)
+
+        if model.get_value(iter, 5) is None:
+            cell.set_property("stock_id", "")
+        else:
+            cell.set_property("stock_id", "gtk-edit")
 
     def add_bill(self, bill, parent = None):
 
@@ -85,17 +95,19 @@ class BillTree(gtk.TreeView):
 
     def _on_button_release_event(self, tree, event):
         # a hackish solution to make edit icon keyboard accessible
-        return False
         pointer = event.window.get_pointer() # x, y, flags
         path = self.get_path_at_pos(pointer[0], pointer[1]) #column, innerx, innery
+        column = path[1]
 
-        if path and path[1] == self.edit_column:
+        if path and path[1] == self.get_column(5):
+            print "jackpot!"
             self.emit("edit-clicked", self.get_selected_bill())
             return True
 
         return False
 
     def _on_row_activated(self, tree, path, column):
+        print column.cell_get_position(gtk.CellRendererPixbuf())
         return False
         if column == self.edit_column:
             self.emit_stop_by_name ('row-activated')
@@ -104,7 +116,6 @@ class BillTree(gtk.TreeView):
 
     def _on_key_pressed(self, tree, event):
         # capture ctrl+e and pretend that user click on edit
-        return False
         if (event.keyval == gtk.keysyms.e  \
               and event.state & gtk.gdk.CONTROL_MASK):
             self.emit("edit-clicked", self.get_selected_bill())
