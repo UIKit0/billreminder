@@ -306,7 +306,12 @@
                                     <property name="visible">True</property>
                                     <property name="resize_mode">queue</property>
                                     <child>
-                                      <placeholder/>
+                                      <object class="GtkAlignment" id="bill_box">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <placeholder/>
+                                        </child>
+                                      </object>
                                     </child>
                                   </object>
                                 </child>
