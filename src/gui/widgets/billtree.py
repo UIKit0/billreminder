@@ -1,13 +1,37 @@
 # - coding: utf-8 -
 
-import gobject
+# Copyright (C) 2006-2010  Og Maciel <ogmaciel@gnome.org>
+
+# This file is part of BillReminder.
+
+# Project Hamster is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# Project Hamster is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with Project Hamster.  If not, see <http://www.gnu.org/licenses/>.
+
+
+# The core code of this class is an adaptation of the code developed for the Hamster Project.
+# Copyright (C) 2008-2009 Toms Bauģis <toms.baugis at gmail.com>.
+
 import gtk
+import gobject
+import locale
 from lib import i18n
 from lib import utils
 
+(CAT_ICON, CAT_NAME, PAYEE, DUEDATE, AMOUNT, BILL) = range(6)
+
 class BillTree(gtk.TreeView):
     __gsignals__ = {
-        "edit-clicked": (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, (gobject.TYPE_PYOBJECT, )),
+        "bill_clicked": (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, (gobject.TYPE_PYOBJECT, )),
         "double-click": (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, (gobject.TYPE_PYOBJECT, ))
     }
 
@@ -20,37 +44,77 @@ class BillTree(gtk.TreeView):
         self.store_model = gtk.TreeStore(gtk.gdk.Pixbuf, str, str, str, str, gobject.TYPE_PYOBJECT)
         self.set_model(self.store_model)
 
-        self.insert_column_with_attributes(-1, "", gtk.CellRendererPixbuf(), pixbuf=0)
-        self.insert_column_with_attributes(-1, _("Category"), gtk.CellRendererText(), text=1)
-        self.insert_column_with_attributes(-1, _("Payee"), gtk.CellRendererText(), text=2)
-        self.insert_column_with_data_func(-1, _("Date"), gtk.CellRendererText(), self.duedate_cell_data_function)
-        self.insert_column_with_data_func(-1, _("Amount"), gtk.CellRendererText(), self.amountdue_cell_data_function)
-        self.insert_column_with_data_func(-1, "", gtk.CellRendererPixbuf(), self.edit_cell_data_function)
+        # Category Icon
+        cat_icon_cell = gtk.CellRendererPixbuf()
+        cat_icon_cell.set_property('xalign', 0.5)
+        cat_icon_column = gtk.TreeViewColumn("", cat_icon_cell, pixbuf=CAT_ICON)
+        cat_icon_column.set_resizable(False)
+        cat_icon_column.set_clickable(True)
+        cat_icon_column.set_expand(False)
+        self.append_column(cat_icon_column)
 
-        # Set columns attributes
-        for col in self.get_columns():
-            col.set_resizable(True)
-            col.set_clickable(True)
+        # Category Name
+        cat_name_cell = gtk.CellRendererText()
+        cat_name_column = gtk.TreeViewColumn(_("Category"), cat_name_cell, text=CAT_NAME)
+        cat_name_column.set_resizable(True)
+        cat_name_column.set_clickable(True)
+        cat_name_column.set_sort_column_id(CAT_NAME)
+        self.append_column(cat_name_column)
 
+        # Payee Name
+        payee_cell = gtk.CellRendererText()
+        payee_column = gtk.TreeViewColumn(_("Payee"), payee_cell, text=PAYEE)
+        payee_column.set_cell_data_func(payee_cell, self.payee_cell_data_function)
+        self.append_column(payee_column)
+
+        # Due Date
+        due_date_cell = gtk.CellRendererText()
+        due_date_column = gtk.TreeViewColumn(_("Date"), due_date_cell, text=DUEDATE,)
+        due_date_column.set_cell_data_func(due_date_cell, self.duedate_cell_data_function)
+        self.append_column(due_date_column)
+
+        # Amount Due
+        amount_cell = gtk.CellRendererText()
+        amount_label = "%s (%s)" % (_('Amount'), locale.localeconv()['currency_symbol'])
+        amount_column = gtk.TreeViewColumn(amount_label, amount_cell, text=AMOUNT)
+        amount_column.set_cell_data_func(amount_cell, self.amountdue_cell_data_function)
+        self.append_column(amount_column)
+
+        # Connect events
         self.connect("row-activated", self._on_row_activated)
-        self.connect("button-release-event", self._on_button_release_event)
-        self.connect("key-press-event", self._on_key_pressed)
+        self.connect("cursor-changed", self._on_cursor_changed)
+        self.connect("button-press-event", self._on_button_pressed)
+
+        # Set the search function to search by payee when pressing keys
+        self.set_search_column(PAYEE)
+        self.set_search_equal_func(self._search_payee)
+        self.set_enable_search(True)
 
         self.show()
 
+    def payee_cell_data_function(self, column, cell, model, iter):
+        column.set_resizable(True)
+        column.set_clickable(True)
+        column.set_expand(True)
+        column.set_sort_column_id(PAYEE)
+
     def duedate_cell_data_function(self, column, cell, model, iter):
-        bill = model.get_value(iter, 5)
+        bill = model.get_value(iter, BILL)
         dueDate = bill.dueDate.strftime(_('%m/%d').encode('ASCII'))
         cell.set_property('text', dueDate)
-        cell.set_property('xalign', 1.0)
-        column.set_sort_column_id(3)
+        cell.set_property('xalign', 0.5)
+        column.set_resizable(False)
+        column.set_clickable(True)
+        column.set_sort_column_id(DUEDATE)
 
     def amountdue_cell_data_function(self, column, cell, model, iter):
-        bill = model.get_value(iter, 5)
-        amount = bill.amount
+        bill = model.get_value(iter, BILL)
+        amount = utils.float_to_currency(bill.amount)
         cell.set_property('text', amount)
         cell.set_property('xalign', 1.0)
-        column.set_sort_column_id(4)
+        column.set_resizable(True)
+        column.set_clickable(True)
+        column.set_sort_column_id(AMOUNT)
 
     def edit_cell_data_function(self, column, cell, model, iter):
         bill = model.get_value(iter, 5)
@@ -90,35 +154,34 @@ class BillTree(gtk.TreeView):
     def get_selected_bill(self):
         selection = self.get_selection()
         (model, iter) = selection.get_selected()
-        return model[iter][5]
+        if iter:
+            return model[iter][5]
+        else:
+            return None
 
+    def _search_payee(self, model, column, key, iter):
+        bill = model.get_value(iter, BILL)
+        payee = bill.payee
+        # Compare the value typed (key) with payee text
+        if key.lower() in payee.lower():
+            return False
+        return True
 
-    def _on_button_release_event(self, tree, event):
-        # a hackish solution to make edit icon keyboard accessible
-        pointer = event.window.get_pointer() # x, y, flags
-        path = self.get_path_at_pos(pointer[0], pointer[1]) #column, innerx, innery
-        column = path[1]
-
-        if path and path[1] == self.get_column(5):
-            print "jackpot!"
-            self.emit("edit-clicked", self.get_selected_bill())
-            return True
-
-        return False
+    def _on_cursor_changed(self, tree):
+        self.emit("bill_clicked", self.get_selected_bill())
+        return True
 
     def _on_row_activated(self, tree, path, column):
-        print column.cell_get_position(gtk.CellRendererPixbuf())
-        return False
-        if column == self.edit_column:
+        print "_on_row_activated"
+        if path:
+            print "jackpot!"
             self.emit_stop_by_name ('row-activated')
-            self.emit("edit-clicked", self.get_selected_bill())
+            self.emit("bill_clicked", self.get_selected_bill())
             return True
 
-    def _on_key_pressed(self, tree, event):
-        # capture ctrl+e and pretend that user click on edit
-        if (event.keyval == gtk.keysyms.e  \
-              and event.state & gtk.gdk.CONTROL_MASK):
-            self.emit("edit-clicked", self.get_selected_bill())
+    def _on_button_pressed(self, tree, event):
+        if event.button == 3 and event.type == gtk.gdk.BUTTON_PRESS:
+            print self.get_selected_bill()
+            self.emit("bill_clicked", self.get_selected_bill())
             return True
-
         return False
