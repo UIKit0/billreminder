@@ -255,13 +255,10 @@ def create_pixbuf(height=16, width=16, color='#F5F5F5'):
     green = float(color.green) / 65536
     blue = float(color.blue) / 65536
 
-    # Draw a black border for a square
-    cr.set_source_rgb(0, 0, 0)
-    cr.rectangle(0, 0, height, width)
-    cr.stroke()
+
     # Draw a smaller colored square inside of previous one
     cr.set_source_rgb(red, green, blue)
-    cr.rectangle(1, 1, height - 2, width - 2)
+    cr.rectangle(0, 0, width, height)
     cr.fill ()
 
     # Buffer to hold the image
