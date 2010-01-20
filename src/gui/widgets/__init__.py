@@ -10,6 +10,7 @@ from datepicker import DatePicker
 from genericlistview import GenericListView
 from statusbar import Statusbar
 from timeline import Timeline, Bullet
+from timechart import TimeChart
 from toolbar import Toolbar
 from trayicon import NotifyIcon
 from viewbill import ViewBill

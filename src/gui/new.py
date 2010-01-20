@@ -33,6 +33,9 @@ class MainWindow:
         self.filtered_types = []
         self.filtered_categories = []
 
+        self.time_chart = widgets.TimeChart()
+        self.get_widget("time_box").add(self.time_chart)
+
         self.type_chart = charting.HorizontalBarChart(interactive = True)
         self.type_chart.max_bar_width = 20
         self.type_chart.legend_width = 60
@@ -92,6 +95,10 @@ class MainWindow:
 
 
     def update_graphs(self, bills):
+        bill_amounts = [(bill.dueDate, float(bill.amount)) for bill in bills]
+        self.time_chart.draw(bill_amounts, self.start_date, self.end_date)
+
+
         today = dt.date.today()
         # totals by type - paid, upcoming and overdue
         bill_types = ("Paid", "Upcoming", "Overdue")
@@ -118,6 +125,26 @@ class MainWindow:
 
         self.category_chart.plot(category_keys, category_amount)
 
+
+    def on_prev_clicked(self, button):
+        self.end_date = self.start_date - dt.timedelta(1)
+        first_weekday, days_in_month = calendar.monthrange(self.end_date.year, self.end_date.month)
+        self.start_date = self.end_date - dt.timedelta(days_in_month - 1)
+        self.load_bills()
+
+    def on_next_clicked(self, button):
+        self.start_date = self.end_date + dt.timedelta(1)
+        first_weekday, days_in_month = calendar.monthrange(self.start_date.year, self.start_date.month)
+        self.end_date = self.start_date + dt.timedelta(days_in_month - 1)
+        self.load_bills()
+
+    def on_home_clicked(self, button):
+        today = dt.date.today()
+        self.start_date = today - dt.timedelta(today.day - 1) #set to beginning of month
+        first_weekday, days_in_month = calendar.monthrange(today.year, today.month)
+        self.end_date = self.start_date + dt.timedelta(days_in_month - 1)
+
+        self.load_bills()
 
     def get_widget(self, name):
         """ skip one variable (huh) """

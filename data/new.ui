@@ -3,7 +3,7 @@
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
   <object class="GtkWindow" id="main_window">
-    <property name="border_width">12</property>
+    <property name="window_position">center</property>
     <property name="default_width">600</property>
     <property name="default_height">400</property>
     <signal name="delete_event" handler="on_delete_event"/>
@@ -11,16 +11,48 @@
       <object class="GtkVBox" id="vbox1">
         <property name="visible">True</property>
         <property name="orientation">vertical</property>
-        <property name="spacing">10</property>
         <child>
-          <object class="GtkLabel" id="range_title">
+          <object class="GtkToolbar" id="toolbar1">
             <property name="visible">True</property>
-            <property name="xalign">0</property>
-            <property name="label">January 1-31, 2010</property>
-            <attributes>
-              <attribute name="weight" value="bold"/>
-              <attribute name="size" value="15000"/>
-            </attributes>
+            <child>
+              <object class="GtkToolButton" id="prev">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">toolbutton1</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-go-back</property>
+                <signal name="clicked" handler="on_prev_clicked"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolButton" id="next">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">toolbutton2</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-go-forward</property>
+                <signal name="clicked" handler="on_next_clicked"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolButton" id="home">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">toolbutton3</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-home</property>
+                <signal name="clicked" handler="on_home_clicked"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -28,81 +60,32 @@
           </packing>
         </child>
         <child>
-          <object class="GtkAlignment" id="time_box">
-            <property name="height_request">100</property>
+          <object class="GtkVBox" id="vbox2">
             <property name="visible">True</property>
+            <property name="border_width">12</property>
+            <property name="orientation">vertical</property>
+            <property name="spacing">20</property>
             <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkHBox" id="hbox1">
-            <property name="visible">True</property>
-            <property name="spacing">10</property>
-            <child>
-              <object class="GtkScrolledWindow" id="scrollbox99">
+              <object class="GtkLabel" id="range_title">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="hscrollbar_policy">automatic</property>
-                <property name="vscrollbar_policy">automatic</property>
-                <child>
-                  <object class="GtkViewport" id="upcoming_box">
-                    <property name="visible">True</property>
-                    <property name="resize_mode">queue</property>
-                    <child>
-                      <object class="GtkAlignment" id="bill_box">
-                        <property name="visible">True</property>
-                        <child>
-                          <placeholder/>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
+                <property name="xalign">0</property>
+                <property name="label">January 1-31, 2010</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                  <attribute name="size" value="15000"/>
+                </attributes>
               </object>
               <packing>
+                <property name="expand">False</property>
                 <property name="position">0</property>
               </packing>
             </child>
             <child>
-              <object class="GtkAlignment" id="totals">
-                <property name="width_request">250</property>
+              <object class="GtkAlignment" id="time_box">
+                <property name="height_request">60</property>
                 <property name="visible">True</property>
                 <child>
-                  <object class="GtkVBox" id="vbox2">
-                    <property name="visible">True</property>
-                    <property name="orientation">vertical</property>
-                    <child>
-                      <object class="GtkAlignment" id="by_type">
-                        <property name="visible">True</property>
-                        <child>
-                          <placeholder/>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkAlignment" id="by_category">
-                        <property name="visible">True</property>
-                        <child>
-                          <placeholder/>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                  </object>
+                  <placeholder/>
                 </child>
               </object>
               <packing>
@@ -110,9 +93,87 @@
                 <property name="position">1</property>
               </packing>
             </child>
+            <child>
+              <object class="GtkHBox" id="hbox1">
+                <property name="visible">True</property>
+                <property name="spacing">10</property>
+                <child>
+                  <object class="GtkScrolledWindow" id="scrollbox99">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hscrollbar_policy">automatic</property>
+                    <property name="vscrollbar_policy">automatic</property>
+                    <child>
+                      <object class="GtkViewport" id="upcoming_box">
+                        <property name="visible">True</property>
+                        <property name="resize_mode">queue</property>
+                        <child>
+                          <object class="GtkAlignment" id="bill_box">
+                            <property name="visible">True</property>
+                            <child>
+                              <placeholder/>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkAlignment" id="totals">
+                    <property name="width_request">250</property>
+                    <property name="visible">True</property>
+                    <property name="top_padding">20</property>
+                    <child>
+                      <object class="GtkVBox" id="vbox3">
+                        <property name="visible">True</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkAlignment" id="by_type">
+                            <property name="height_request">80</property>
+                            <property name="visible">True</property>
+                            <child>
+                              <placeholder/>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkAlignment" id="by_category">
+                            <property name="visible">True</property>
+                            <child>
+                              <placeholder/>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="position">2</property>
+              </packing>
+            </child>
           </object>
           <packing>
-            <property name="position">2</property>
+            <property name="position">1</property>
           </packing>
         </child>
       </object>
