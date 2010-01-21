@@ -3,6 +3,7 @@
 
 import gtk
 from db import entities
+from lib import dialogs
 from lib import utils
 import widgets
 
@@ -145,6 +146,35 @@ class MainWindow:
         self.end_date = self.start_date + dt.timedelta(days_in_month - 1)
 
         self.load_bills()
+
+    def on_add_clicked(self, button):
+        today = dt.date.today()
+        records = dialogs.add_dialog(parent=self.window, selectedDate=today)
+
+        # Checks if the user did not cancel the action
+        if records:
+            # Add new bill to database
+            for rec in records:
+                bill = self.actions.add(rec)
+                if bill:
+                    self.upcoming.add_bill(bill)
+            #self.update_statusbar()
+            # Reload records tree (something changed)
+            #self.reloadTreeView()
+            #self.reloadTimeline()
+
+    def on_edit_clicked(self, button):
+        current = self.upcoming.get_selected_bill()
+        if not current:
+            return
+
+        records = dialogs.edit_dialog(parent=self.window, record=current)
+
+        # Checks if the user did not cancel the action
+        if records:
+            for rec in records:
+                # Edit bill to database
+                rec = self.actions.edit(rec)
 
     def get_widget(self, name):
         """ skip one variable (huh) """
