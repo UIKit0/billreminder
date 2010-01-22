@@ -25,7 +25,6 @@ class MainWindow:
         self.upcoming = widgets.BillTree()
         self.ui.get_object("bill_box").add(self.upcoming)
 
-
         today = dt.date.today()
         self.start_date = today - dt.timedelta(today.day - 1) # beginning of month
         first_weekday, days_in_month = calendar.monthrange(today.year, today.month)
@@ -158,10 +157,7 @@ class MainWindow:
                 bill = self.actions.add(rec)
                 if bill:
                     self.upcoming.add_bill(bill)
-            #self.update_statusbar()
-            # Reload records tree (something changed)
-            #self.reloadTreeView()
-            #self.reloadTimeline()
+        self.load_bills()
 
     def on_edit_clicked(self, button):
         current = self.upcoming.get_selected_bill()
@@ -175,6 +171,23 @@ class MainWindow:
             for rec in records:
                 # Edit bill to database
                 rec = self.actions.edit(rec)
+        self.load_bills()
+
+    def on_remove_clicked(self, button):
+        current = self.upcoming.get_selected_bill()
+        if not current:
+            return
+
+        message = utils.Message()
+        resp = message.ShowQuestionYesNo(
+            _("Do you really want to delete \"%s\"?") % \
+            current.payee,
+            self.window, _("Confirmation"))
+        if not resp:
+            return
+
+        self.actions.delete(current)
+        self.load_bills()
 
     def get_widget(self, name):
         """ skip one variable (huh) """
