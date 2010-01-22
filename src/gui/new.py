@@ -59,7 +59,8 @@ class MainWindow:
         start_date, end_date = self.start_date, self.end_date
 
         if 1 in self.filtered_types: # upcoming
-            start_date = dt.date.today() + dt.timedelta(days = 1)
+            # Make sure to show upcoming bills for the selected month only.
+            start_date = max(self.start_date, dt.date.today() + dt.timedelta(days = 1))
 
 
         bills = self.actions.get_interval_bills(start_date, end_date)
