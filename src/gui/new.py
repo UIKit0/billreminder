@@ -57,13 +57,19 @@ class MainWindow:
         self.upcoming.clear()
 
         start_date, end_date = self.start_date, self.end_date
+        paid = None
+
+        if 0 in self.filtered_types: # paid
+            paid = True
 
         if 1 in self.filtered_types: # upcoming
             # Make sure to show upcoming bills for the selected month only.
             start_date = max(self.start_date, dt.date.today() + dt.timedelta(days = 1))
 
+        if 2 in self.filtered_types: # overdue
+            end_date = dt.date.today() - dt.timedelta(days = 1)
 
-        bills = self.actions.get_interval_bills(start_date, end_date)
+        bills = self.actions.get_interval_bills(start_date, end_date, paid)
         for bill in bills:
             self.upcoming.add_bill(bill)
 
@@ -102,7 +108,7 @@ class MainWindow:
 
         today = dt.date.today()
         # totals by type - paid, upcoming and overdue
-        bill_types = ("Paid", "Upcoming", "Overdue")
+        bill_types = (_("Paid"), _("Upcoming"), _("Overdue"))
         type_totals = [0,0,0]
         for bill in bills:
             if bill.paid:
