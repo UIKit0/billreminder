@@ -54,12 +54,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToolButton" id="add">
+              <object class="GtkToolButton" id="new">
                 <property name="visible">True</property>
                 <property name="label" translatable="yes">toolbutton4</property>
                 <property name="use_underline">True</property>
-                <property name="stock_id">gtk-add</property>
-                <signal name="clicked" handler="on_add_clicked"/>
+                <property name="stock_id">gtk-new</property>
+                <signal name="clicked" handler="on_new_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -80,12 +80,25 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToolButton" id="remove">
+              <object class="GtkToolButton" id="delete">
                 <property name="visible">True</property>
                 <property name="label" translatable="yes">toolbutton6</property>
                 <property name="use_underline">True</property>
-                <property name="stock_id">gtk-remove</property>
-                <signal name="clicked" handler="on_remove_clicked"/>
+                <property name="stock_id">gtk-delete</property>
+                <signal name="clicked" handler="on_delete_clicked"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolButton" id="about">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">toolbutton7</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-about</property>
+                <signal name="clicked" handler="on_about_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>

@@ -15,6 +15,8 @@ import itertools
 import datetime as dt
 import calendar
 
+(PAID, UPCOMING, OVERDUE) = range(3)
+
 class MainWindow:
     def __init__(self):
         # Create a new window
@@ -59,14 +61,14 @@ class MainWindow:
         start_date, end_date = self.start_date, self.end_date
         paid = None
 
-        if 0 in self.filtered_types: # paid
+        if PAID in self.filtered_types: # paid
             paid = True
 
-        if 1 in self.filtered_types: # upcoming
+        if UPCOMING in self.filtered_types: # upcoming
             # Make sure to show upcoming bills for the selected month only.
             start_date = max(self.start_date, dt.date.today() + dt.timedelta(days = 1))
 
-        if 2 in self.filtered_types: # overdue
+        if OVERDUE in self.filtered_types: # overdue
             end_date = dt.date.today() - dt.timedelta(days = 1)
 
         bills = self.actions.get_interval_bills(start_date, end_date, paid)
@@ -153,7 +155,7 @@ class MainWindow:
 
         self.load_bills()
 
-    def on_add_clicked(self, button):
+    def on_new_clicked(self, button):
         today = dt.date.today()
         records = dialogs.add_dialog(parent=self.window, selectedDate=today)
 
@@ -180,7 +182,7 @@ class MainWindow:
                 rec = self.actions.edit(rec)
         self.load_bills()
 
-    def on_remove_clicked(self, button):
+    def on_delete_clicked(self, button):
         current = self.upcoming.get_selected_bill()
         if not current:
             return
@@ -195,6 +197,9 @@ class MainWindow:
 
         self.actions.delete(current)
         self.load_bills()
+
+    def on_about_clicked(self, button):
+        dialogs.about_dialog(parent=self.window)
 
     def get_widget(self, name):
         """ skip one variable (huh) """
