@@ -37,6 +37,11 @@ class MainWindow:
 
         self.time_chart = widgets.TimeChart()
         self.get_widget("time_box").add(self.time_chart)
+        self.time_chart.connect('motion-notify-event', self.on_time_chart_motion)
+        self.time_chart.connect('button-press-event', self.on_time_chart_press)
+        self.time_chart.connect('button-release-event', self.on_time_chart_release)
+        self.time_chart.connect('scroll-event', self.on_time_chart_scroll)
+        self.__time_chart_pressed = False
 
         self.type_chart = charting.HorizontalBarChart(interactive = True)
         self.type_chart.max_bar_width = 20
@@ -97,8 +102,15 @@ class MainWindow:
         self.load_bills()
 
     def set_title(self):
-        title = "%s - %s" % (self.start_date.strftime("%B %d"),
-                             self.end_date.strftime("%d, %Y"))
+        if (self.start_date.month == self.end_date.month and self.start_date.year == self.end_date.year):
+            title = "%s - %s" % (self.start_date.strftime("%B %d"),
+                                self.end_date.strftime("%d, %Y"))
+        elif (self.start_date.year == self.end_date.year):
+            title = "%s - %s" % (self.start_date.strftime("%B %d"),
+                                self.end_date.strftime("%B %d, %Y"))
+        else:
+            title = "%s - %s" % (self.start_date.strftime("%B %d %Y"),
+                                self.end_date.strftime("%B %d %Y"))
 
         self.get_widget("range_title").set_text(title)
 
@@ -197,6 +209,35 @@ class MainWindow:
 
         self.actions.delete(current)
         self.load_bills()
+
+    def on_time_chart_motion(self, widget, event):
+        if self.__time_chart_pressed is not False:
+            width = widget.get_allocation().width
+            days = (event.x - self.__time_chart_pressed['x']) / (width / (self.__time_chart_pressed['end_date'] - self.__time_chart_pressed['start_date']).days)
+
+            self.start_date = self.__time_chart_pressed['start_date'] - dt.timedelta(days=days)
+            self.end_date = self.__time_chart_pressed['end_date'] - dt.timedelta(days=days)
+            self.load_bills()
+
+    def on_time_chart_press(self, widget, event):
+        self.__time_chart_pressed = {'x': event.x,
+            'start_date': self.start_date,
+            'end_date': self.end_date}
+        widget.window.set_cursor(gtk.gdk.Cursor(gtk.gdk.FLEUR))
+
+    def on_time_chart_release(self, widget, event):
+        self.__time_chart_pressed = False
+        widget.window.set_cursor(gtk.gdk.Cursor(gtk.gdk.ARROW))
+
+    def on_time_chart_scroll(self, widget, event):
+        if event.direction in (gtk.gdk.SCROLL_DOWN, gtk.gdk.SCROLL_RIGHT):
+            self.start_date = self.start_date + dt.timedelta(days=1)
+            self.end_date = self.end_date + dt.timedelta(days=1)
+            self.load_bills()
+        else:
+            self.start_date = self.start_date - dt.timedelta(days=1)
+            self.end_date = self.end_date - dt.timedelta(days=1)
+            self.load_bills()
 
     def on_about_clicked(self, button):
         dialogs.about_dialog(parent=self.window)
