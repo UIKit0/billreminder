@@ -1,3 +1,5 @@
+from lib import i18n
+
 from sqlalchemy import Column, Integer, String, Numeric, Text, Date, DateTime, Boolean, ForeignKey
 from sqlalchemy.orm import relation, backref
 from sqlalchemy.ext.declarative import declarative_base
@@ -11,7 +13,7 @@ class Category(Base):
     name = Column(String(length=255, convert_unicode=True))
     color = Column(String(length=6, convert_unicode=True))
 
-    def __init__(self, name, color=None):
+    def __init__(self, name=_("None"), color="#d3d7cf"):
         self.name = name
         if color:
             self.color = color
