@@ -52,12 +52,20 @@ class Colors(object):
         
     def is_light(self, color):
         # tells you if color is dark or light, so you can up or down the scale for improved contrast
-        return colorsys.rgb_to_hls(*self.rgb(color))[1] > 150
+        return math.sqrt(self.rgb(color)[0]**2 * .241 + self.rgb(color)[1]**2 * .691 + self.rgb(color)[2]**2 * .068) > 160
 
     def darker(self, color, step):
         # returns color darker by step (where step is in range 0..255)
-        hls = colorsys.rgb_to_hls(*self.rgb(color))
-        return colorsys.hls_to_rgb(hls[0], hls[1] - step, hls[2])
+        (r, g, b) = self.rgb(color)
+        if step < 0:
+            r -= (255 - r) * (step/255.)
+            g -= (255 - g) * (step/255.)
+            b -= (255 - b) * (step/255.)
+        else:
+            r -= r * (step/255.)
+            g -= g * (step/255.)
+            b -= b * (step/255.)
+        return (r, g, b)
         
 
 class Area(gtk.DrawingArea):

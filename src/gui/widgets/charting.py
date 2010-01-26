@@ -630,7 +630,7 @@ class HorizontalBarChart(Chart):
                 if i in self.bars_selected:
                     last_color = self.get_style().bg[gtk.STATE_SELECTED].to_string()
                 elif i == self.mouse_bar:
-                    last_color = self.get_style().base[gtk.STATE_PRELIGHT].to_string()
+                    last_color = self.colors.darker(self.key_colors.get(self.keys[i]),  -50) if self.key_colors.get(self.keys[i]) else self.get_style().base[gtk.STATE_PRELIGHT].to_string()
                 else:
                     last_color = self.key_colors.get(self.keys[i]) or base_color
 
