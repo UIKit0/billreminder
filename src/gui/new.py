@@ -47,13 +47,13 @@ class MainWindow:
         self.time_chart.connect('scroll-event', self.on_time_chart_scroll)
         self.__time_chart_pressed = False
 
-        self.type_chart = charting.HorizontalBarChart(interactive = True)
+        self.type_chart = charting.HorizontalBarChart(interactive=True)
         self.type_chart.max_bar_width = 20
         self.type_chart.legend_width = 60
         self.type_chart.connect("bar-clicked", self.on_type_chart_clicked)
         self.get_widget("by_type").add(self.type_chart)
 
-        self.category_chart = charting.HorizontalBarChart(interactive = True)
+        self.category_chart = charting.HorizontalBarChart(interactive=True)
         self.category_chart.max_bar_width = 20
         self.category_chart.legend_width = 60
         self.category_chart.connect("bar-clicked", self.on_category_chart_clicked)
@@ -75,10 +75,10 @@ class MainWindow:
 
         if UPCOMING in self.filtered_types: # upcoming
             # Make sure to show upcoming bills for the selected month only.
-            start_date = max(self.start_date, dt.date.today() + dt.timedelta(days = 1))
+            start_date = max(self.start_date, dt.date.today() + dt.timedelta(days=1))
 
         if OVERDUE in self.filtered_types: # overdue
-            end_date = dt.date.today() - dt.timedelta(days = 1)
+            end_date = dt.date.today() - dt.timedelta(days=1)
 
         bills = self.actions.get_interval_bills(start_date, end_date, paid)
         for bill in bills:
@@ -147,6 +147,7 @@ class MainWindow:
             total_amount = sum([float(total.amount) for total in totals])
             category_keys.append(category.name)
             category_amount.append(total_amount)
+            self.category_chart.key_colors[category.name] = category.color
 
         self.category_chart.plot(category_keys, category_amount)
 
