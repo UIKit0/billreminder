@@ -140,10 +140,10 @@ class MainWindow:
 
 
         # totals by category
-        bills = sorted(bills, key=lambda bill: bill.category.name)
+        bills = sorted(bills, key=lambda bill: bill.category.name if bill.category else _("None"))
         category_keys = []
         category_amount = []
-        for category, totals in itertools.groupby(bills, lambda bill: bill.category):
+        for category, totals in itertools.groupby(bills, lambda bill: bill.category if bill.category else entities.Category()):
             total_amount = sum([float(total.amount) for total in totals])
             category_keys.append(category.name)
             category_amount.append(total_amount)
