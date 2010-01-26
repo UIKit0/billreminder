@@ -3,6 +3,7 @@
 
 import gtk
 from db import entities
+from lib import common
 from lib import dialogs
 from lib import utils
 import widgets
@@ -22,6 +23,9 @@ class MainWindow:
         # Create a new window
         self.ui = utils.load_ui_file("new.ui")
         self.window = self.ui.get_object("main_window")
+        self.window.set_title("%s" % common.APPNAME)
+        self.window.set_icon_from_file(common.APP_ICON)
+
         self.actions = Actions()
 
         self.upcoming = widgets.BillTree()
