@@ -27,10 +27,8 @@ src/gui/widgets/trayicon.py
 src/gui/widgets/viewbill.py
 src/gui/widgets/viewcategory.py
 src/lib/actions.py
-src/lib/bill.py
 src/lib/bubble.py
 src/lib/common.py
-src/lib/config.py
 src/lib/dal.py
 src/lib/dbus_actions.py
 src/lib/dialogs.py
