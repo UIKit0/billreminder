@@ -6,15 +6,16 @@
 # Gilberto Miralla <xyhthyx@gmail.com>, 2007, 2008.
 # Ulises Genis <ulises.genis@gmail.com>, 2008.
 # Jorge González <jorgegonz@svn.gnome.org>, 2008, 2009, 2010.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: billreminder.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=billreminder&component=general\n"
-"POT-Creation-Date: 2010-12-28 03:14+0000\n"
-"PO-Revision-Date: 2010-12-29 23:06+0100\n"
-"Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
+"product=billreminder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-06-29 21:21+0000\n"
+"PO-Revision-Date: 2011-07-01 10:43+0200\n"
+"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +23,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../data/billreminderd.desktop.in.h:1 ../src/billreminderd.py:43
-#: ../src/daemon/alarm.py:139 ../src/daemon/dbus_manager.py:46
+#: ../src/daemon/alarm.py:138 ../src/daemon/dbus_manager.py:46
 msgid "BillReminder Notifier"
 msgstr "Notificador BillReminder"
 
@@ -34,7 +35,7 @@ msgstr "Gestor de facturas"
 msgid "Never forget to pay a bill again!"
 msgstr "Nunca volverá a olvidarse de pagar sus facturas"
 
-#: ../data/billreminder.desktop.in.h:1 ../src/gui/widgets/trayicon.py:29
+#: ../data/billreminder.desktop.in.h:1 ../src/gui/widgets/trayicon.py:43
 #: ../src/lib/utils.py:138
 msgid "BillReminder"
 msgstr "BillReminder"
@@ -148,21 +149,21 @@ msgstr "Usar diálogos para notificaciones."
 msgid "Add a new bill"
 msgstr "Añadir una factura nueva"
 
-#: ../data/main.ui.h:2 ../src/gui/maindialog.py:140
+#: ../data/main.ui.h:2 ../src/gui/maindialog.py:161
 msgid "Delete selected bill"
 msgstr "Eliminar la factura seleccionada"
 
 #. Dialog Title
-#: ../data/main.ui.h:3 ../src/gui/maindialog.py:137 ../src/lib/dialogs.py:76
+#: ../data/main.ui.h:3 ../src/gui/maindialog.py:158 ../src/lib/dialogs.py:76
 msgid "Edit a bill"
 msgstr "Editar una factura"
 
-#: ../data/main.ui.h:4 ../src/gui/maindialog.py:146
+#: ../data/main.ui.h:4 ../src/gui/maindialog.py:167
 msgid "Mark as not paid"
 msgstr "Marcar como no pagada"
 
 #. Button Title
-#: ../data/main.ui.h:5 ../src/daemon/alarm.py:146 ../src/gui/maindialog.py:143
+#: ../data/main.ui.h:5 ../src/daemon/alarm.py:145 ../src/gui/maindialog.py:164
 #: ../src/lib/utils.py:135
 msgid "Mark as paid"
 msgstr "Marcar como pagada"
@@ -175,7 +176,7 @@ msgstr "Mostrar barra de herramientas"
 msgid "_All Bills"
 msgstr "_Todas las facturas"
 
-#: ../data/main.ui.h:8 ../src/gui/maindialog.py:136
+#: ../data/main.ui.h:8 ../src/gui/maindialog.py:157
 msgid "_Edit"
 msgstr "_Editar"
 
@@ -285,28 +286,28 @@ msgstr "Iniciar el demonio y arrancar la GUI."
 msgid "Stop daemon."
 msgstr "Detener el demonio."
 
-#: ../src/daemon/alarm.py:76
+#: ../src/daemon/alarm.py:75
 #, python-format
 msgid "You have %s outstanding bill to pay!"
 msgid_plural "You have %s outstanding bills to pay!"
 msgstr[0] "Queda %s factura por pagar"
 msgstr[1] "Quedan %s facturas por pagar"
 
-#: ../src/daemon/alarm.py:81
+#: ../src/daemon/alarm.py:80
 msgid "Show BillReminder"
 msgstr "Mostrar BillReminder"
 
-#: ../src/daemon/alarm.py:123 ../src/daemon/alarm.py:230
+#: ../src/daemon/alarm.py:122 ../src/daemon/alarm.py:229
 #, python-format
 msgid "The bill %(bill)s will be due at %(day)s."
 msgstr "La factura %(bill)s vence el día %(day)s."
 
-#: ../src/daemon/alarm.py:135
+#: ../src/daemon/alarm.py:134
 #, python-format
 msgid "The bill %s is due."
 msgstr "La factura %s ha vencido."
 
-#: ../src/daemon/alarm.py:148 ../src/lib/utils.py:136
+#: ../src/daemon/alarm.py:147 ../src/lib/utils.py:136
 msgid "Edit"
 msgstr "Editar"
 
@@ -369,7 +370,7 @@ msgstr "Seleccionar fecha y hora"
 
 #. TRANSLATORS: No date selected
 #: ../src/gui/adddialog.py:241 ../src/gui/adddialog.py:265
-#: ../src/gui/maindialog.py:230 ../src/gui/widgets/datebutton.py:18
+#: ../src/gui/maindialog.py:251 ../src/gui/widgets/datebutton.py:18
 #: ../src/gui/widgets/datebutton.py:26
 msgid "None"
 msgstr "Ninguno"
@@ -396,12 +397,12 @@ msgid "\"%s\" and \"%s\" are required fields."
 msgstr "«%s» y «%s» son campos obligatorios."
 
 #: ../src/gui/adddialog.py:415 ../src/gui/adddialog.py:418
-#: ../src/gui/widgets/viewbill.py:85
+#: ../src/gui/widgets/viewbill.py:84
 msgid "Payee"
 msgstr "Beneficiario"
 
 #: ../src/gui/adddialog.py:415 ../src/gui/adddialog.py:421
-#: ../src/gui/widgets/viewbill.py:89
+#: ../src/gui/widgets/viewbill.py:88
 msgid "Amount"
 msgstr "Cantidad"
 
@@ -454,50 +455,64 @@ msgid_plural "There are %d more bills in this category."
 msgstr[0] "Hay %d factura en esta categoría."
 msgstr[1] "Hay %d facturas en esta categoría."
 
-#: ../src/gui/categoriesdialog.py:243 ../src/gui/maindialog.py:424
+#: ../src/gui/categoriesdialog.py:243 ../src/gui/maindialog.py:463
 msgid "Confirmation"
 msgstr "Confirmación"
 
 #. for some reason the actions strings do not get translated yet
 #. so we define them here so they would be picked up by the pyfile scanner
-#: ../src/gui/maindialog.py:133
+#: ../src/gui/maindialog.py:154
 msgid "_New"
 msgstr "_Nueva"
 
-#: ../src/gui/maindialog.py:134
+#: ../src/gui/maindialog.py:155
 msgid "Add new bill"
 msgstr "Añadir una factura nueva"
 
-#: ../src/gui/maindialog.py:139
+#: ../src/gui/maindialog.py:160
 msgid "_Delete"
 msgstr "_Eliminar"
 
-#: ../src/gui/maindialog.py:142
+#: ../src/gui/maindialog.py:163
 msgid "P_aid"
 msgstr "_Pagada"
 
-#: ../src/gui/maindialog.py:145
+#: ../src/gui/maindialog.py:166
 msgid "No_t Paid"
 msgstr "_Sin pagar"
 
-#: ../src/gui/maindialog.py:148
+#: ../src/gui/maindialog.py:169
 msgid "_Show Toolbar"
 msgstr "Mostrar barra de _herramientas"
 
-#: ../src/gui/maindialog.py:149
+#: ../src/gui/maindialog.py:170
 msgid "Show the toolbar"
 msgstr "Mostrar barra de herramientas"
 
-#: ../src/gui/maindialog.py:237
+#: ../src/gui/maindialog.py:258
 msgid "%m/%d"
 msgstr "%d/%m"
 
-#: ../src/gui/maindialog.py:422
+#: ../src/gui/maindialog.py:424
+#| msgid "_Not Paid Only"
+msgid "Not Paid Only"
+msgstr "Sólo las no pagadas"
+
+#: ../src/gui/maindialog.py:426
+#| msgid "_Paid Only"
+msgid "Paid Only"
+msgstr "Sólo las pagadas"
+
+#: ../src/gui/maindialog.py:461
 #, python-format
 msgid "Do you really want to delete \"%s\"?"
 msgstr "¿Seguro que desea eliminar «%s»?"
 
-#: ../src/gui/prefdialog.py:26 ../src/gui/widgets/trayicon.py:47
+#: ../src/gui/maindialog.py:545 ../src/gui/widgets/viewbill.py:92
+msgid "Paid"
+msgstr "Pagada"
+
+#: ../src/gui/prefdialog.py:26 ../src/gui/widgets/trayicon.py:67
 msgid "Preferences"
 msgstr "Preferencias"
 
@@ -584,11 +599,11 @@ msgstr "Seleccione fecha y hora"
 msgid "<b>_Time:</b>"
 msgstr "<b>_Hora:</b>"
 
-#: ../src/gui/widgets/statusbar.py:16
+#: ../src/gui/widgets/statusbar.py:17
 msgid "Bills:"
 msgstr "Facturas:"
 
-#: ../src/gui/widgets/statusbar.py:26
+#: ../src/gui/widgets/statusbar.py:27
 msgid "Notes:"
 msgstr "Notas:"
 
@@ -596,39 +611,35 @@ msgstr "Notas:"
 msgid "(hh/mm)"
 msgstr "(hh/mm)"
 
-#: ../src/gui/widgets/trayicon.py:42
+#: ../src/gui/widgets/trayicon.py:53 ../src/gui/widgets/trayicon.py:62
 msgid "Hide Window"
 msgstr "Ocultar ventana"
 
-#: ../src/gui/widgets/trayicon.py:44
+#: ../src/gui/widgets/trayicon.py:55 ../src/gui/widgets/trayicon.py:64
 msgid "Show Window"
 msgstr "Mostrar ventana"
 
-#: ../src/gui/widgets/trayicon.py:50
+#: ../src/gui/widgets/trayicon.py:70
 msgid "About"
 msgstr "Acerca de"
 
-#: ../src/gui/widgets/trayicon.py:54
+#: ../src/gui/widgets/trayicon.py:74
 msgid "Quit"
 msgstr "Salir"
 
-#: ../src/gui/widgets/viewbill.py:83 ../src/gui/widgets/viewcategory.py:39
+#: ../src/gui/widgets/viewbill.py:82 ../src/gui/widgets/viewcategory.py:39
 msgid "Category"
 msgstr "Categoría"
 
-#: ../src/gui/widgets/viewbill.py:87
+#: ../src/gui/widgets/viewbill.py:86
 msgid "Date"
 msgstr "Fecha"
 
-#: ../src/gui/widgets/viewbill.py:91
+#: ../src/gui/widgets/viewbill.py:90
 msgid "Notes"
 msgstr "Notas"
 
-#: ../src/gui/widgets/viewbill.py:93
-msgid "Paid"
-msgstr "Pagada"
-
-#: ../src/gui/widgets/viewbill.py:95
+#: ../src/gui/widgets/viewbill.py:94
 msgid "Alarm"
 msgstr "Alarma"
 
@@ -640,68 +651,67 @@ msgstr "Desarrolladores:"
 msgid "Contributors:"
 msgstr "Colaboradores:"
 
-#: ../src/lib/dal.py:131
+#: ../src/lib/dal.py:155
 msgid "Utilities"
 msgstr "Utilidades"
 
-#: ../src/lib/dal.py:132
+#: ../src/lib/dal.py:156
 msgid "Food & Dining"
 msgstr "Comida y bebida"
 
-#: ../src/lib/dal.py:133
+#: ../src/lib/dal.py:157
 msgid "Mortgage"
 msgstr "Hipoteca"
 
-#: ../src/lib/dal.py:134
+#: ../src/lib/dal.py:158
 msgid "Rent"
 msgstr "Alquiler"
 
-#: ../src/lib/dal.py:135
+#: ../src/lib/dal.py:159
 msgid "Medical"
 msgstr "Médicos"
 
-#: ../src/lib/dal.py:136
+#: ../src/lib/dal.py:160
 msgid "Educational"
 msgstr "Educación"
 
-#: ../src/lib/dal.py:137
-#| msgid "Confirmation"
+#: ../src/lib/dal.py:161
 msgid "Donations"
 msgstr "Donaciones"
 
-#: ../src/lib/dal.py:138
+#: ../src/lib/dal.py:162
 msgid "Credit Card"
 msgstr "Tarjeta de crédito"
 
-#: ../src/lib/dal.py:139
+#: ../src/lib/dal.py:163
 msgid "Gifts"
 msgstr "Regalos"
 
-#: ../src/lib/dal.py:140
+#: ../src/lib/dal.py:164
 msgid "Books"
 msgstr "Libros"
 
-#: ../src/lib/dal.py:141
+#: ../src/lib/dal.py:165
 msgid "Online Services"
 msgstr "Servicios en línea"
 
-#: ../src/lib/dal.py:142
+#: ../src/lib/dal.py:166
 msgid "Insurance"
 msgstr "Seguros"
 
-#: ../src/lib/dal.py:143
+#: ../src/lib/dal.py:167
 msgid "Auto & Transport"
 msgstr "Vehículo y transporte"
 
-#: ../src/lib/dal.py:144
+#: ../src/lib/dal.py:168
 msgid "Home"
 msgstr "Casa"
 
-#: ../src/lib/dal.py:145
+#: ../src/lib/dal.py:169
 msgid "Gas & Fuel"
 msgstr "Gas y gasóleo"
 
-#: ../src/lib/dal.py:146
+#: ../src/lib/dal.py:170
 msgid "Electronics"
 msgstr "Electrónica"
 
