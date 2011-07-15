@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: billreminder\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-25 23:35+0200\n"
-"PO-Revision-Date: 2011-01-25 23:38+0200\n"
+"POT-Creation-Date: 2011-07-15 18:35+0300\n"
+"PO-Revision-Date: 2011-07-15 18:37+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
+"Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,7 +20,7 @@ msgstr ""
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/billreminderd.desktop.in.h:1 ../src/billreminderd.py:43
-#: ../src/daemon/alarm.py:139 ../src/daemon/dbus_manager.py:46
+#: ../src/daemon/alarm.py:138 ../src/daemon/dbus_manager.py:46
 msgid "BillReminder Notifier"
 msgstr "המתריע של מזכיר החשבונות"
 
@@ -29,9 +30,9 @@ msgstr "מנהל החשבונות"
 
 #: ../data/billreminderd.desktop.in.h:3 ../data/billreminder.desktop.in.h:3
 msgid "Never forget to pay a bill again!"
-msgstr "החשבונות שלך לא יזנחו עוד לעולם!"
+msgstr "החשבונות שלך לא ייזנחו עוד לעולם!"
 
-#: ../data/billreminder.desktop.in.h:1 ../src/gui/widgets/trayicon.py:29
+#: ../data/billreminder.desktop.in.h:1 ../src/gui/widgets/trayicon.py:43
 #: ../src/lib/utils.py:138
 msgid "BillReminder"
 msgstr "מזכיר החשבונות"
@@ -145,24 +146,24 @@ msgstr "Whether to use dialogs for notifications."
 msgid "Add a new bill"
 msgstr "הוספת חשבון חדש"
 
-#: ../data/main.ui.h:2 ../src/gui/maindialog.py:141
+#: ../data/main.ui.h:2 ../src/gui/maindialog.py:161
 msgid "Delete selected bill"
 msgstr "מחיקת החשבון הנבחר"
 
 #. Dialog Title
-#: ../data/main.ui.h:3 ../src/gui/maindialog.py:138 ../src/lib/dialogs.py:76
+#: ../data/main.ui.h:3 ../src/gui/maindialog.py:158 ../src/lib/dialogs.py:76
 msgid "Edit a bill"
 msgstr "עריכת חשבון"
 
-#: ../data/main.ui.h:4 ../src/gui/maindialog.py:147
+#: ../data/main.ui.h:4 ../src/gui/maindialog.py:167
 msgid "Mark as not paid"
 msgstr "סימון כ'לא שולם'"
 
 #. Button Title
-#: ../data/main.ui.h:5 ../src/daemon/alarm.py:146 ../src/gui/maindialog.py:144
+#: ../data/main.ui.h:5 ../src/daemon/alarm.py:145 ../src/gui/maindialog.py:164
 #: ../src/lib/utils.py:135
 msgid "Mark as paid"
-msgstr "סמן כשולם"
+msgstr "סימון כשולם"
 
 #: ../data/main.ui.h:6
 msgid "Show Toolbar"
@@ -172,7 +173,7 @@ msgstr "הצגת סרגל הכלים"
 msgid "_All Bills"
 msgstr "כל ה_חשבונות"
 
-#: ../data/main.ui.h:8 ../src/gui/maindialog.py:137
+#: ../data/main.ui.h:8 ../src/gui/maindialog.py:157
 msgid "_Edit"
 msgstr "ע_ריכה"
 
@@ -250,7 +251,7 @@ msgstr "About this application."
 
 #: ../src/billreminder.py:48
 msgid "Adds a new bill to the database."
-msgstr "הוספת חשבון חדש למסד הנתונים."
+msgstr "Adds a new bill to the database."
 
 #: ../src/billreminder.py:49
 msgid "Access database directly, without daemon."
@@ -282,28 +283,28 @@ msgstr "Start daemon and launch GUI."
 msgid "Stop daemon."
 msgstr "Stop daemon."
 
-#: ../src/daemon/alarm.py:76
+#: ../src/daemon/alarm.py:75
 #, python-format
 msgid "You have %s outstanding bill to pay!"
 msgid_plural "You have %s outstanding bills to pay!"
-msgstr[0] "יש לך חשבון אחד הממתין לתשלום!"
+msgstr[0] "יש לך חשבון אחד (%s) הממתין לתשלום!"
 msgstr[1] "יש לך %s חשבונות הממתינים לתשלום!"
 
-#: ../src/daemon/alarm.py:81
+#: ../src/daemon/alarm.py:80
 msgid "Show BillReminder"
 msgstr "הצגת מזכיר החשבונות"
 
-#: ../src/daemon/alarm.py:123 ../src/daemon/alarm.py:230
+#: ../src/daemon/alarm.py:122 ../src/daemon/alarm.py:229
 #, python-format
 msgid "The bill %(bill)s will be due at %(day)s."
 msgstr "החשבון %(bill)s יפוג תוך %(day)s ימים."
 
-#: ../src/daemon/alarm.py:135
+#: ../src/daemon/alarm.py:134
 #, python-format
 msgid "The bill %s is due."
 msgstr "פג תוקפו של החשבון %s."
 
-#: ../src/daemon/alarm.py:148 ../src/lib/utils.py:136
+#: ../src/daemon/alarm.py:147 ../src/lib/utils.py:136
 msgid "Edit"
 msgstr "עריכה"
 
@@ -346,7 +347,7 @@ msgstr "בחירת תאריך ושעה"
 
 #. TRANSLATORS: No date selected
 #: ../src/gui/adddialog.py:241 ../src/gui/adddialog.py:265
-#: ../src/gui/maindialog.py:231 ../src/gui/widgets/datebutton.py:18
+#: ../src/gui/maindialog.py:251 ../src/gui/widgets/datebutton.py:18
 #: ../src/gui/widgets/datebutton.py:26
 msgid "None"
 msgstr "ללא"
@@ -371,12 +372,12 @@ msgid "\"%s\" and \"%s\" are required fields."
 msgstr "\"%s\" ו־\"%s\" הנם שדות נדרשים."
 
 #: ../src/gui/adddialog.py:415 ../src/gui/adddialog.py:418
-#: ../src/gui/widgets/viewbill.py:85
+#: ../src/gui/widgets/viewbill.py:84
 msgid "Payee"
 msgstr "מוטב"
 
 #: ../src/gui/adddialog.py:415 ../src/gui/adddialog.py:421
-#: ../src/gui/widgets/viewbill.py:89
+#: ../src/gui/widgets/viewbill.py:88
 msgid "Amount"
 msgstr "סכום"
 
@@ -424,53 +425,65 @@ msgstr "האם באמת ברצונך למחוק קטגוריה זו?\n"
 #, python-format
 msgid "There is %d more bill in this category."
 msgid_plural "There are %d more bills in this category."
-msgstr[0] "קיים עוד חשבון אחד בקטגוריה זו."
+msgstr[0] "קיים עוד חשבון אחד (%d) בקטגוריה זו."
 msgstr[1] "ישנם עוד %d חשבונות בקטגוריה זו."
 
-#: ../src/gui/categoriesdialog.py:243 ../src/gui/maindialog.py:425
+#: ../src/gui/categoriesdialog.py:243 ../src/gui/maindialog.py:463
 msgid "Confirmation"
 msgstr "אישור"
 
 #. for some reason the actions strings do not get translated yet
 #. so we define them here so they would be picked up by the pyfile scanner
-#: ../src/gui/maindialog.py:134
+#: ../src/gui/maindialog.py:154
 msgid "_New"
 msgstr "_חדש"
 
-#: ../src/gui/maindialog.py:135
+#: ../src/gui/maindialog.py:155
 msgid "Add new bill"
 msgstr "הוספת חשבון חדש"
 
-#: ../src/gui/maindialog.py:140
+#: ../src/gui/maindialog.py:160
 msgid "_Delete"
 msgstr "מחי_קה"
 
-#: ../src/gui/maindialog.py:143
+#: ../src/gui/maindialog.py:163
 msgid "P_aid"
 msgstr "ש_ולם"
 
-#: ../src/gui/maindialog.py:146
+#: ../src/gui/maindialog.py:166
 msgid "No_t Paid"
 msgstr "_לא שולם"
 
-#: ../src/gui/maindialog.py:149
+#: ../src/gui/maindialog.py:169
 msgid "_Show Toolbar"
 msgstr "הצגת _סרגל הכלים"
 
-#: ../src/gui/maindialog.py:150
+#: ../src/gui/maindialog.py:170
 msgid "Show the toolbar"
 msgstr "הצגת סרגל הכלים"
 
-#: ../src/gui/maindialog.py:238
+#: ../src/gui/maindialog.py:258
 msgid "%m/%d"
 msgstr "%d/%m"
 
-#: ../src/gui/maindialog.py:423
+#: ../src/gui/maindialog.py:424
+msgid "Not Paid Only"
+msgstr "שלא שולמו בלבד"
+
+#: ../src/gui/maindialog.py:426
+msgid "Paid Only"
+msgstr "שולמו בלבד"
+
+#: ../src/gui/maindialog.py:461
 #, python-format
 msgid "Do you really want to delete \"%s\"?"
 msgstr "האם באמת ברצונך למחוק את \"%s\"?"
 
-#: ../src/gui/prefdialog.py:26 ../src/gui/widgets/trayicon.py:47
+#: ../src/gui/maindialog.py:545 ../src/gui/widgets/viewbill.py:92
+msgid "Paid"
+msgstr "שולם"
+
+#: ../src/gui/prefdialog.py:26 ../src/gui/widgets/trayicon.py:67
 msgid "Preferences"
 msgstr "העדפות"
 
@@ -557,11 +570,11 @@ msgstr "בחירת תאריך ושעה"
 msgid "<b>_Time:</b>"
 msgstr "<b>_שעה:</b>"
 
-#: ../src/gui/widgets/statusbar.py:16
+#: ../src/gui/widgets/statusbar.py:17
 msgid "Bills:"
 msgstr "חשבונות:"
 
-#: ../src/gui/widgets/statusbar.py:26
+#: ../src/gui/widgets/statusbar.py:27
 msgid "Notes:"
 msgstr "הערות:"
 
@@ -569,39 +582,35 @@ msgstr "הערות:"
 msgid "(hh/mm)"
 msgstr "(hh/mm)"
 
-#: ../src/gui/widgets/trayicon.py:42
+#: ../src/gui/widgets/trayicon.py:53 ../src/gui/widgets/trayicon.py:62
 msgid "Hide Window"
 msgstr "הסתרת חלון"
 
-#: ../src/gui/widgets/trayicon.py:44
+#: ../src/gui/widgets/trayicon.py:55 ../src/gui/widgets/trayicon.py:64
 msgid "Show Window"
 msgstr "הצגת חלון"
 
-#: ../src/gui/widgets/trayicon.py:50
+#: ../src/gui/widgets/trayicon.py:70
 msgid "About"
 msgstr "על אודות"
 
-#: ../src/gui/widgets/trayicon.py:54
+#: ../src/gui/widgets/trayicon.py:74
 msgid "Quit"
 msgstr "יציאה"
 
-#: ../src/gui/widgets/viewbill.py:83 ../src/gui/widgets/viewcategory.py:39
+#: ../src/gui/widgets/viewbill.py:82 ../src/gui/widgets/viewcategory.py:39
 msgid "Category"
 msgstr "קטגוריה"
 
-#: ../src/gui/widgets/viewbill.py:87
+#: ../src/gui/widgets/viewbill.py:86
 msgid "Date"
 msgstr "תאריך"
 
-#: ../src/gui/widgets/viewbill.py:91
+#: ../src/gui/widgets/viewbill.py:90
 msgid "Notes"
 msgstr "הערות"
 
-#: ../src/gui/widgets/viewbill.py:93
-msgid "Paid"
-msgstr "שולם"
-
-#: ../src/gui/widgets/viewbill.py:95
+#: ../src/gui/widgets/viewbill.py:94
 msgid "Alarm"
 msgstr "התראה"
 
@@ -613,67 +622,67 @@ msgstr "מפתחים:"
 msgid "Contributors:"
 msgstr "תורמים:"
 
-#: ../src/lib/dal.py:131
+#: ../src/lib/dal.py:155
 msgid "Utilities"
 msgstr "עזרים"
 
-#: ../src/lib/dal.py:132
+#: ../src/lib/dal.py:156
 msgid "Food & Dining"
 msgstr "מזון וסעודות"
 
-#: ../src/lib/dal.py:133
+#: ../src/lib/dal.py:157
 msgid "Mortgage"
 msgstr "משכנתה"
 
-#: ../src/lib/dal.py:134
+#: ../src/lib/dal.py:158
 msgid "Rent"
 msgstr "שכירות"
 
-#: ../src/lib/dal.py:135
+#: ../src/lib/dal.py:159
 msgid "Medical"
 msgstr "תרופות"
 
-#: ../src/lib/dal.py:136
+#: ../src/lib/dal.py:160
 msgid "Educational"
 msgstr "חינוך"
 
-#: ../src/lib/dal.py:137
+#: ../src/lib/dal.py:161
 msgid "Donations"
 msgstr "תרומות"
 
-#: ../src/lib/dal.py:138
+#: ../src/lib/dal.py:162
 msgid "Credit Card"
 msgstr "כרטיס אשראי"
 
-#: ../src/lib/dal.py:139
+#: ../src/lib/dal.py:163
 msgid "Gifts"
 msgstr "מתנות"
 
-#: ../src/lib/dal.py:140
+#: ../src/lib/dal.py:164
 msgid "Books"
 msgstr "ספרים"
 
-#: ../src/lib/dal.py:141
+#: ../src/lib/dal.py:165
 msgid "Online Services"
 msgstr "שירותים מקוונים"
 
-#: ../src/lib/dal.py:142
+#: ../src/lib/dal.py:166
 msgid "Insurance"
 msgstr "ביטוח"
 
-#: ../src/lib/dal.py:143
+#: ../src/lib/dal.py:167
 msgid "Auto & Transport"
 msgstr "רכב ונסיעות"
 
-#: ../src/lib/dal.py:144
+#: ../src/lib/dal.py:168
 msgid "Home"
 msgstr "בית"
 
-#: ../src/lib/dal.py:145
+#: ../src/lib/dal.py:169
 msgid "Gas & Fuel"
 msgstr "גז ודלק"
 
-#: ../src/lib/dal.py:146
+#: ../src/lib/dal.py:170
 msgid "Electronics"
 msgstr "מוצרי חשמל"
 
