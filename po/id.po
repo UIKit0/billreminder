@@ -1,0 +1,744 @@
+# Indonesian translation for billreminder.
+# Copyright (C) 2011 billreminder's COPYRIGHT HOLDER
+# This file is distributed under the same license as the billreminder package.
+# Andika Triwidada <andika@gmail.com>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: billreminder 0.4.0\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=billreminder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-09-16 16:14+0000\n"
+"PO-Revision-Date: 2011-09-26 20:36+0700\n"
+"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
+"Language-Team: Indonesian <gnome@i15n.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../data/billreminderd.desktop.in.h:1
+#: ../src/billreminderd.py:43
+#: ../src/daemon/alarm.py:139
+#: ../src/daemon/dbus_manager.py:46
+msgid "BillReminder Notifier"
+msgstr "Pemberitahu BillReminder"
+
+#: ../data/billreminderd.desktop.in.h:2
+#: ../data/billreminder.desktop.in.h:2
+msgid "Bills manager"
+msgstr "Manajer tagihan"
+
+#: ../data/billreminderd.desktop.in.h:3
+#: ../data/billreminder.desktop.in.h:3
+msgid "Never forget to pay a bill again!"
+msgstr "Tak pernah lupa membayar tagihan lagi!"
+
+#: ../data/billreminder.desktop.in.h:1
+#: ../src/gui/widgets/trayicon.py:29
+#: ../src/lib/utils.py:138
+msgid "BillReminder"
+msgstr "BillReminder"
+
+#: ../data/billreminder.schemas.in.h:1
+msgid "Default X coordinate for the application."
+msgstr "Koordinat X baku bagi aplikasi."
+
+#: ../data/billreminder.schemas.in.h:2
+msgid "Default Y coordinate for the application."
+msgstr "Koordinat Y baku bagi aplikasi."
+
+#: ../data/billreminder.schemas.in.h:3
+msgid "Default height of the application."
+msgstr "Tinggi baku jendela aplikasi."
+
+#: ../data/billreminder.schemas.in.h:4
+msgid "Default width of the application."
+msgstr "Lebar baku jendela aplikasi."
+
+#: ../data/billreminder.schemas.in.h:5
+msgid "Defines the default X coordinate for the application."
+msgstr "Mendefinisikan koordinat X baku bagi aplikasi."
+
+#: ../data/billreminder.schemas.in.h:6
+msgid "Defines the default Y coordinate for the application."
+msgstr "Mendefinisikan koordinat Y baku bagi aplikasi."
+
+#: ../data/billreminder.schemas.in.h:7
+msgid "Defines the default height of the application."
+msgstr "Mendefinisikan tinggi baku jendela aplikasi."
+
+#: ../data/billreminder.schemas.in.h:8
+msgid "Defines the default width of the application."
+msgstr "Mendefinisikan lebar baku jendela aplikasi."
+
+#: ../data/billreminder.schemas.in.h:9
+msgid "Delay between notifications."
+msgstr "Jeda antar pemberitahuan."
+
+#: ../data/billreminder.schemas.in.h:10
+msgid "Display only paid bills."
+msgstr "Tampilkan hanya tagihan yang telah dibayar."
+
+#: ../data/billreminder.schemas.in.h:11
+msgid "Display the menu bar."
+msgstr "Tampilkan bilah menu."
+
+#: ../data/billreminder.schemas.in.h:12
+msgid "Display the toolbar."
+msgstr "Tampilkan bilah alat."
+
+#: ../data/billreminder.schemas.in.h:13
+msgid "How long to display the alarm notification."
+msgstr "Berapa lama menampilkan pemberitahuan alarm."
+
+#: ../data/billreminder.schemas.in.h:14
+msgid "How many days prior to due date to alert."
+msgstr "Berapa hari sebelum jatuh tempo untuk mengingatkan."
+
+#: ../data/billreminder.schemas.in.h:15
+msgid "How many days prior to due date to notify."
+msgstr "Berapa hari sebelum jatuh tempo untuk memberitahu."
+
+#: ../data/billreminder.schemas.in.h:16
+msgid "Start the application in the system's tray."
+msgstr "Memulai aplikasi di baki sistem."
+
+#: ../data/billreminder.schemas.in.h:17
+msgid "The date a bill is due."
+msgstr "Tanggal saat tagihan jatuh tempo."
+
+#: ../data/billreminder.schemas.in.h:18
+msgid "What specific time to display alert."
+msgstr "Waktu spesifik apa untuk menampilkan peringatan."
+
+#: ../data/billreminder.schemas.in.h:19
+msgid "Whether to display notifications on startup."
+msgstr "Apakah menampilkan pemberitahuan saat awal mula."
+
+#: ../data/billreminder.schemas.in.h:20
+msgid "Whether to display the menu bar or not."
+msgstr "Apakah menampilkan bilah menu."
+
+#: ../data/billreminder.schemas.in.h:21
+msgid "Whether to display the toolbar or not."
+msgstr "Apakah menampilkan bilah alat."
+
+#: ../data/billreminder.schemas.in.h:22
+msgid "Whether to show alarms before a bill is due."
+msgstr "Apakah menampilkan alarm sebelum tagihan jatuh tempo."
+
+#: ../data/billreminder.schemas.in.h:23
+msgid "Whether to show alarms."
+msgstr "Apakah menampilkan alarm."
+
+#: ../data/billreminder.schemas.in.h:24
+msgid "Whether to show notifications for paid bills."
+msgstr "Apakah menampilkan pemberitahuan bagi tagihan yang telah dibayar."
+
+#: ../data/billreminder.schemas.in.h:25
+msgid "Whether to start the application in the system's tray."
+msgstr "Apakah memulai aplikasi di baki sistem."
+
+#: ../data/billreminder.schemas.in.h:26
+msgid "Whether to use dialogs for notifications."
+msgstr "Apakah memakai dialog untuk pemberitahuan."
+
+#. Dialog Title
+#: ../data/main.ui.h:1
+#: ../src/lib/dialogs.py:65
+msgid "Add a new bill"
+msgstr "Tambah tagihan baru"
+
+#: ../data/main.ui.h:2
+#: ../src/gui/maindialog.py:141
+msgid "Delete selected bill"
+msgstr "Hapus tagihan yang dipilih"
+
+#. Dialog Title
+#: ../data/main.ui.h:3
+#: ../src/gui/maindialog.py:138
+#: ../src/lib/dialogs.py:76
+msgid "Edit a bill"
+msgstr "Sunting tagihan"
+
+#: ../data/main.ui.h:4
+#: ../src/gui/maindialog.py:147
+msgid "Mark as not paid"
+msgstr "Tandai belum dibayar"
+
+#. Button Title
+#: ../data/main.ui.h:5
+#: ../src/daemon/alarm.py:146
+#: ../src/gui/maindialog.py:144
+#: ../src/lib/utils.py:135
+msgid "Mark as paid"
+msgstr "Tandai telah dibayar"
+
+#: ../data/main.ui.h:6
+msgid "Show Toolbar"
+msgstr "Tampilkan Bilah Perkakas"
+
+#: ../data/main.ui.h:7
+msgid "_All Bills"
+msgstr "Semua T_agihan"
+
+#: ../data/main.ui.h:8
+#: ../src/gui/maindialog.py:137
+msgid "_Edit"
+msgstr "_Sunting"
+
+#: ../data/main.ui.h:9
+msgid "_File"
+msgstr "_Berkas"
+
+#: ../data/main.ui.h:10
+msgid "_Help"
+msgstr "Ba_ntuan"
+
+#: ../data/main.ui.h:11
+msgid "_Not Paid Only"
+msgstr "Ha_nya Belum Dibayar"
+
+#: ../data/main.ui.h:12
+msgid "_Paid Only"
+msgstr "Hanya Telah Di_bayar"
+
+#: ../data/main.ui.h:13
+msgid "_View"
+msgstr "_Tilikan"
+
+#: ../data/add_bill.ui.h:1
+msgid "A_larm:\t"
+msgstr "A_larm:\t"
+
+#: ../data/add_bill.ui.h:2
+msgid "Manage Categories"
+msgstr "Kelola Kategori"
+
+#: ../data/add_bill.ui.h:3
+msgid "Optional Fields"
+msgstr "Ruas Opsional"
+
+#: ../data/add_bill.ui.h:4
+msgid "_Amount:"
+msgstr "B_anyaknya:"
+
+#: ../data/add_bill.ui.h:5
+msgid "_Category:"
+msgstr "_Kategori:"
+
+#: ../data/add_bill.ui.h:6
+msgid "_Due Date:"
+msgstr "Tanggal Jatuh _Tempo:"
+
+#: ../data/add_bill.ui.h:7
+msgid "_End Date:"
+msgstr "Tanggal S_elesai:"
+
+#: ../data/add_bill.ui.h:8
+msgid "_Notes:"
+msgstr "Catata_n:"
+
+#: ../data/add_bill.ui.h:9
+msgid "_Payee:"
+msgstr "_Penerima:"
+
+#: ../data/add_bill.ui.h:10
+msgid "_Repeat:"
+msgstr "_Ulangi:"
+
+#: ../src/billreminder.py:45
+#: ../src/billreminderd.py:23
+msgid "Usage:  billreminder [OPTIONS...]"
+msgstr "Cara pakai: billreminder [OPSI...]"
+
+#: ../src/billreminder.py:46
+#: ../src/billreminderd.py:24
+msgid "Displays the version number for this application."
+msgstr "Menampilkan nomor versi aplikasi ini."
+
+#: ../src/billreminder.py:47
+msgid "About this application."
+msgstr "Tentang aplikasi ini."
+
+#: ../src/billreminder.py:48
+msgid "Adds a new bill to the database."
+msgstr "Tambahkan tagihan baru ke basis data."
+
+#: ../src/billreminder.py:49
+msgid "Access database directly, without daemon."
+msgstr "Mengakses basis data secara langsung, tanpa daemon."
+
+#: ../src/billreminder.py:58
+msgid "This option is not implemented yet."
+msgstr "Opsi ini belum diimplementasi."
+
+#: ../src/billreminder.py:60
+#: ../src/billreminderd.py:42
+#: ../src/daemon/dbus_manager.py:45
+#, python-format
+msgid "This is %(appname)s - Version: %(version)s"
+msgstr "Ini adalah %(appname)s - Versi: %(version)s"
+
+#: ../src/billreminderd.py:25
+msgid "Print output messages."
+msgstr "Cetak pesan keluaran."
+
+#: ../src/billreminderd.py:26
+msgid "Don't run as a daemon."
+msgstr "Jangan jalan sebagai daemon."
+
+#: ../src/billreminderd.py:27
+msgid "Start daemon and launch GUI."
+msgstr "Jalankan daemon dan luncurkan GUI."
+
+#: ../src/billreminderd.py:28
+msgid "Stop daemon."
+msgstr "Hentikan daemon."
+
+#: ../src/daemon/alarm.py:76
+#, python-format
+msgid "You have %s outstanding bill to pay!"
+msgid_plural "You have %s outstanding bills to pay!"
+msgstr[0] "Anda memiliki %s tagihan yang belum dibayar!"
+
+#: ../src/daemon/alarm.py:81
+msgid "Show BillReminder"
+msgstr "Tampilkan BillReminder"
+
+#: ../src/daemon/alarm.py:123
+#: ../src/daemon/alarm.py:230
+#, python-format
+msgid "The bill %(bill)s will be due at %(day)s."
+msgstr "Tagihan %(bill)s akan jatuh tempo pada %(day)s."
+
+#: ../src/daemon/alarm.py:135
+#, python-format
+msgid "The bill %s is due."
+msgstr "Tagihan %s jatuh tempo."
+
+#: ../src/daemon/alarm.py:148
+#: ../src/lib/utils.py:136
+msgid "Edit"
+msgstr "Sunting"
+
+#: ../src/daemon/main.py:85
+#, python-format
+msgid "Lock File found: You have another instance running. (pid=%d)"
+msgstr "Ditemukan berkas penguncian: Anda memiliki instansi lain yang sedang berjalan. (pid=%d)"
+
+#: ../src/daemon/main.py:90
+msgid "Lock File found: Possibly the program was exited unexpectedly."
+msgstr "Ditemukan berkas penguncian: Mungkin program keluar tak disangka-sangka."
+
+#: ../src/daemon/main.py:93
+msgid "Removing Lock File..."
+msgstr "Menghapus Berkas Pengunci..."
+
+#: ../src/daemon/main.py:95
+msgid "Successfully."
+msgstr "Dengan sukses."
+
+#: ../src/daemon/main.py:97
+msgid "Failed."
+msgstr "Gagal."
+
+#: ../src/daemon/main.py:101
+msgid "BillReminder Notifier is already running."
+msgstr "Pemberitahuan BillReminder telah berjalan."
+
+#: ../src/gui/aboutdialog.py:16
+msgid "translator-credits"
+msgstr "Andika Triwidada <andika@gmail.com>, 2011."
+
+#: ../src/gui/aboutdialog.py:30
+msgid "BillReminder Website"
+msgstr "Situs Web BillReminder"
+
+#: ../src/gui/adddialog.py:104
+#: ../src/gui/widgets/datebutton.py:40
+msgid "Select Date and Time"
+msgstr "Pilih Tanggal dan Waktu"
+
+#. TRANSLATORS: No date selected
+#: ../src/gui/adddialog.py:241
+#: ../src/gui/adddialog.py:265
+#: ../src/gui/maindialog.py:231
+#: ../src/gui/widgets/datebutton.py:18
+#: ../src/gui/widgets/datebutton.py:26
+msgid "None"
+msgstr "Tak ada"
+
+#: ../src/gui/adddialog.py:247
+#: ../src/gui/categoriesdialog.py:48
+msgid "New Category"
+msgstr "Kategori Baru"
+
+#: ../src/gui/adddialog.py:287
+msgid "The end date is set to a date prior to the start date. Setting it to match the start date."
+msgstr "Tanggal akhir ditata ke nilai yang lebih awal daripada tanggal awal. Menatanya agar sama dengan tanggal awal."
+
+#: ../src/gui/adddialog.py:288
+msgid "Date set in the past"
+msgstr "Tanggal di masa lampau"
+
+#: ../src/gui/adddialog.py:414
+#, python-format
+msgid "\"%s\" and \"%s\" are required fields."
+msgstr "\"%s\" dan \"%s\" adalah ruas yang diperlukan."
+
+#: ../src/gui/adddialog.py:415
+#: ../src/gui/adddialog.py:418
+#: ../src/gui/widgets/viewbill.py:85
+msgid "Payee"
+msgstr "Penerima"
+
+#: ../src/gui/adddialog.py:415
+#: ../src/gui/adddialog.py:421
+#: ../src/gui/widgets/viewbill.py:89
+msgid "Amount"
+msgstr "Banyaknya"
+
+#: ../src/gui/adddialog.py:418
+#: ../src/gui/adddialog.py:421
+#, python-format
+msgid "\"%s\" is required field."
+msgstr "\"%s\" adalah ruas yang diperlukan."
+
+#: ../src/gui/adddialog.py:424
+msgid "The end date is set to a date prior to the start date."
+msgstr "Tanggal akhir lebih awal daripada tanggal awal."
+
+#: ../src/gui/categoriesdialog.py:23
+msgid "Categories Manager"
+msgstr "Manajer Kategori"
+
+#: ../src/gui/categoriesdialog.py:59
+msgid "Categories"
+msgstr "Kategori"
+
+#: ../src/gui/categoriesdialog.py:82
+msgid "Name:"
+msgstr "Nama:"
+
+#: ../src/gui/categoriesdialog.py:85
+msgid "Color:"
+msgstr "Warna:"
+
+#: ../src/gui/categoriesdialog.py:215
+#, python-format
+msgid ""
+"The category \"%s\" already exists in the database!\n"
+"\n"
+"Do you want to save your change to the existing category?"
+msgstr ""
+"Kategori \"%s\" telah ada di dalam basis data!\n"
+"\n"
+"Apakah Anda ingin menyimpan perubahan Anda ke kategori yang telah ada?"
+
+#: ../src/gui/categoriesdialog.py:239
+msgid "Do you really want to delete this category?\n"
+msgstr "Apakah Anda benar-benar ingin menghapus kategori ini?\n"
+
+#: ../src/gui/categoriesdialog.py:240
+#, python-format
+msgid "There is %d more bill in this category."
+msgid_plural "There are %d more bills in this category."
+msgstr[0] "Ada %d tagihan lagi dalam kategori ini."
+
+#: ../src/gui/categoriesdialog.py:243
+#: ../src/gui/maindialog.py:425
+msgid "Confirmation"
+msgstr "Konfirmasi"
+
+#. for some reason the actions strings do not get translated yet
+#. so we define them here so they would be picked up by the pyfile scanner
+#: ../src/gui/maindialog.py:134
+msgid "_New"
+msgstr "Bar_u"
+
+#: ../src/gui/maindialog.py:135
+msgid "Add new bill"
+msgstr "Tambah tagihan baru"
+
+#: ../src/gui/maindialog.py:140
+msgid "_Delete"
+msgstr "_Hapus"
+
+#: ../src/gui/maindialog.py:143
+msgid "P_aid"
+msgstr "Dib_ayar"
+
+#: ../src/gui/maindialog.py:146
+msgid "No_t Paid"
+msgstr "Belu_m Dibayar"
+
+#: ../src/gui/maindialog.py:149
+msgid "_Show Toolbar"
+msgstr "Tampilkan Bilah Perkaka_s"
+
+#: ../src/gui/maindialog.py:150
+msgid "Show the toolbar"
+msgstr "Tampilkan bilah perkakas"
+
+#: ../src/gui/maindialog.py:238
+msgid "%m/%d"
+msgstr "%m/%d"
+
+#: ../src/gui/maindialog.py:423
+#, python-format
+msgid "Do you really want to delete \"%s\"?"
+msgstr "Apakah benar ingin menghapus \"%s\"?"
+
+#: ../src/gui/prefdialog.py:26
+#: ../src/gui/widgets/trayicon.py:47
+msgid "Preferences"
+msgstr "Preferensi"
+
+#: ../src/gui/prefdialog.py:55
+msgid "<b>Alarms</b>"
+msgstr "<b>Alarm</b>"
+
+#: ../src/gui/prefdialog.py:61
+msgid "_Alert before due date:"
+msgstr "Pering_atan sebelum tanggal jatuh tempo:"
+
+#: ../src/gui/prefdialog.py:66
+#: ../src/gui/prefdialog.py:116
+msgid "day(s)."
+msgstr "hari."
+
+#: ../src/gui/prefdialog.py:69
+msgid "_Preferred time:"
+msgstr "Waktu yang _disukai:"
+
+#: ../src/gui/prefdialog.py:72
+msgid "Get alerted when individual bills are due."
+msgstr "Dapatkan peringatan ketika tagihan individual jatuh tempo."
+
+#: ../src/gui/prefdialog.py:96
+msgid "<b>Notifications</b>"
+msgstr "<b>Pemberitahuan</b>"
+
+#: ../src/gui/prefdialog.py:102
+msgid "Define when to be notified of upcoming bills."
+msgstr "Definisikan kapan mendapat pemberitahuan dari tagihan mendatang."
+
+#: ../src/gui/prefdialog.py:110
+msgid "_Notify before due date:"
+msgstr "Beritahu sebelum ta_nggal jatuh tempo:"
+
+#: ../src/gui/prefdialog.py:131
+msgid "<b>Alert Type</b>"
+msgstr "<b>Jenis Peringatan</b>"
+
+#: ../src/gui/prefdialog.py:141
+msgid "Notification _Bubble"
+msgstr "_Balon Pemberitahuan"
+
+#: ../src/gui/prefdialog.py:143
+msgid "Alert _Dialog"
+msgstr "_Dialog Peringatan"
+
+#: ../src/gui/prefdialog.py:155
+msgid ""
+"<b>Warning:</b> BillReminder Notifier is \n"
+"not running! You need to start it in order \n"
+" to receive notifications."
+msgstr ""
+"<b>Peringatan:</b> Pemberitahuan BillReminder \n"
+"tidak sedang berjalan! Anda perlu memulainya agar \n"
+"menerima pemberitahuan."
+
+#: ../src/gui/prefdialog.py:162
+msgid "_Start BillReminder Notifier"
+msgstr "Mulai _Pemberitahuan BillReminder"
+
+#: ../src/gui/prefdialog.py:231
+msgid "<b>Note:</b> BillReminder Notifier is now running."
+msgstr "<b>Catatan:</b> Pemberitahuan BillReminder kini sedang berjalan."
+
+#. TRANSLATORS: This is the date that is selected from the calendar. Try to keep it small.
+#: ../src/gui/widgets/datepicker.py:87
+msgid "%m/%d/%Y"
+msgstr "%d/%m/%Y"
+
+#: ../src/gui/widgets/datebutton.py:32
+#: ../src/gui/widgets/datebutton.py:65
+msgid "%Y/%m/%d %H:%M"
+msgstr "%Y/%m/%d %H:%M"
+
+#: ../src/gui/widgets/datebutton.py:43
+#: ../src/gui/widgets/datebutton.py:73
+msgid "_None"
+msgstr "_Nihil"
+
+#: ../src/gui/widgets/datebutton.py:70
+msgid "Select date and time"
+msgstr "Pilih tanggal dan waktu"
+
+#: ../src/gui/widgets/datebutton.py:94
+msgid "<b>_Time:</b>"
+msgstr "<b>Wak_tu:</b>"
+
+#: ../src/gui/widgets/statusbar.py:16
+msgid "Bills:"
+msgstr "Tagihan:"
+
+#: ../src/gui/widgets/statusbar.py:26
+msgid "Notes:"
+msgstr "Catatan:"
+
+#: ../src/gui/widgets/timewidget.py:39
+msgid "(hh/mm)"
+msgstr "(hh/mm)"
+
+#: ../src/gui/widgets/trayicon.py:42
+msgid "Hide Window"
+msgstr "Sembunyikan Jendela"
+
+#: ../src/gui/widgets/trayicon.py:44
+msgid "Show Window"
+msgstr "Tampilkan Jendela"
+
+#: ../src/gui/widgets/trayicon.py:50
+msgid "About"
+msgstr "Tentang"
+
+#: ../src/gui/widgets/trayicon.py:54
+msgid "Quit"
+msgstr "Keluar"
+
+#: ../src/gui/widgets/viewbill.py:83
+#: ../src/gui/widgets/viewcategory.py:39
+msgid "Category"
+msgstr "Katagori"
+
+#: ../src/gui/widgets/viewbill.py:87
+msgid "Date"
+msgstr "Tanggal"
+
+#: ../src/gui/widgets/viewbill.py:91
+msgid "Notes"
+msgstr "Catatan"
+
+#: ../src/gui/widgets/viewbill.py:93
+msgid "Paid"
+msgstr "Dibayar"
+
+#: ../src/gui/widgets/viewbill.py:95
+msgid "Alarm"
+msgstr "Alarm"
+
+#: ../src/lib/common.py:19
+msgid "Developers:"
+msgstr "Pengembang:"
+
+#: ../src/lib/common.py:22
+msgid "Contributors:"
+msgstr "Penyumbang:"
+
+#: ../src/lib/dal.py:131
+msgid "Utilities"
+msgstr "Utilitas"
+
+#: ../src/lib/dal.py:132
+msgid "Food & Dining"
+msgstr "Makan"
+
+#: ../src/lib/dal.py:133
+msgid "Mortgage"
+msgstr "Agunan"
+
+#: ../src/lib/dal.py:134
+msgid "Rent"
+msgstr "Sewa"
+
+#: ../src/lib/dal.py:135
+msgid "Medical"
+msgstr "Kesehatan"
+
+#: ../src/lib/dal.py:136
+msgid "Educational"
+msgstr "Pendidikan"
+
+#: ../src/lib/dal.py:137
+msgid "Donations"
+msgstr "Sumbangan"
+
+#: ../src/lib/dal.py:138
+msgid "Credit Card"
+msgstr "Kartu Kredit"
+
+#: ../src/lib/dal.py:139
+msgid "Gifts"
+msgstr "Hadiah"
+
+#: ../src/lib/dal.py:140
+msgid "Books"
+msgstr "Buku"
+
+#: ../src/lib/dal.py:141
+msgid "Online Services"
+msgstr "Layanan Daring"
+
+#: ../src/lib/dal.py:142
+msgid "Insurance"
+msgstr "Asuransi"
+
+#: ../src/lib/dal.py:143
+msgid "Auto & Transport"
+msgstr "Mobil & Transportasi"
+
+#: ../src/lib/dal.py:144
+msgid "Home"
+msgstr "Rumah"
+
+#: ../src/lib/dal.py:145
+msgid "Gas & Fuel"
+msgstr "Bahan Bakar"
+
+#: ../src/lib/dal.py:146
+msgid "Electronics"
+msgstr "Elektronik"
+
+#. Dialog Title
+#: ../src/lib/utils.py:83
+msgid "Question"
+msgstr "Pertanyaan"
+
+#. Dialog Title
+#: ../src/lib/utils.py:96
+#: ../src/lib/utils.py:109
+msgid "Error"
+msgstr "Galat"
+
+#. Dialog Title
+#: ../src/lib/utils.py:122
+msgid "Information"
+msgstr "Informasi"
+
+#: ../src/lib/utils.py:150
+msgid "Close _Without Saving"
+msgstr "Tutup _Tanpa Menyimpan"
+
+#: ../src/lib/utils.py:156
+msgid "Save changes before closing?"
+msgstr "Simpan perubahan sebelum ditutup?"
+
+#: ../src/lib/utils.py:157
+msgid "If you close without saving, your changes will be discarded."
+msgstr "Jika ditutup tanpa disimpan, perubahan Anda akan dibuang."
+
+#: ../src/lib/scheduler.py:7
+msgid "Once"
+msgstr "Sekali"
+
+#: ../src/lib/scheduler.py:8
+msgid "Weekly"
+msgstr "Mingguan"
+
+#: ../src/lib/scheduler.py:9
+msgid "Monthly"
+msgstr "Bulanan"
+
