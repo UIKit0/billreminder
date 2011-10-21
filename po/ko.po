@@ -1,0 +1,714 @@
+# Korean translation for billreminder.
+# Copyright (C) 2011 billreminder's COPYRIGHT HOLDER
+# This file is distributed under the same license as the billreminder package.
+# Seong-ho Cho <darkcircle.0426@gmail.com>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: billreminder billreminder-0.4.0\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=billreminder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-09-26 13:39+0000\n"
+"PO-Revision-Date: 2011-09-29 22:31+0900\n"
+"Last-Translator: Seong-ho, Cho <darkcircle.0426@gmail.com>\n"
+"Language-Team: Korean <gnome-kr@googlegroups.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../data/billreminderd.desktop.in.h:1 ../src/billreminderd.py:43
+#: ../src/daemon/alarm.py:139 ../src/daemon/dbus_manager.py:46
+msgid "BillReminder Notifier"
+msgstr "청구서 알림 알리미"
+
+#: ../data/billreminderd.desktop.in.h:2 ../data/billreminder.desktop.in.h:2
+msgid "Bills manager"
+msgstr "청구서 관리자"
+
+#: ../data/billreminderd.desktop.in.h:3 ../data/billreminder.desktop.in.h:3
+msgid "Never forget to pay a bill again!"
+msgstr "청구 요금을 다시 지불하는 것을 잊지 마세요!"
+
+#: ../data/billreminder.desktop.in.h:1 ../src/gui/widgets/trayicon.py:29
+#: ../src/lib/utils.py:138
+msgid "BillReminder"
+msgstr "청구서 알림"
+
+#: ../data/billreminder.schemas.in.h:1
+msgid "Default X coordinate for the application."
+msgstr "프로그램 창의 기본 X 좌표입니다."
+
+#: ../data/billreminder.schemas.in.h:2
+msgid "Default Y coordinate for the application."
+msgstr "프로그램 창의 기본 Y 좌표입니다."
+
+#: ../data/billreminder.schemas.in.h:3
+msgid "Default height of the application."
+msgstr "프로그램 창의 기본 높이입니다."
+
+#: ../data/billreminder.schemas.in.h:4
+msgid "Default width of the application."
+msgstr "프로그램 창의 기본 너비입니다."
+
+#: ../data/billreminder.schemas.in.h:5
+msgid "Defines the default X coordinate for the application."
+msgstr "프로그램 창의 기본 X 좌표를 정합니다."
+
+#: ../data/billreminder.schemas.in.h:6
+msgid "Defines the default Y coordinate for the application."
+msgstr "프로그램 창의 기본 Y 좌표를 정합니다."
+
+#: ../data/billreminder.schemas.in.h:7
+msgid "Defines the default height of the application."
+msgstr "프로그램 창의 기본 높이를 정합니다."
+
+#: ../data/billreminder.schemas.in.h:8
+msgid "Defines the default width of the application."
+msgstr "프로그램 창의 기본 너비를 정합니다."
+
+#: ../data/billreminder.schemas.in.h:9
+msgid "Delay between notifications."
+msgstr "알림 시간 간격."
+
+#: ../data/billreminder.schemas.in.h:10
+msgid "Display only paid bills."
+msgstr "지불한 청구서만 표시합니다."
+
+#: ../data/billreminder.schemas.in.h:11
+msgid "Display the menu bar."
+msgstr "메뉴 막대를 표시합니다."
+
+#: ../data/billreminder.schemas.in.h:12
+msgid "Display the toolbar."
+msgstr "도구 막대를 표시합니다."
+
+#: ../data/billreminder.schemas.in.h:13
+msgid "How long to display the alarm notification."
+msgstr "알림을 표시할 시간입니다."
+
+#: ../data/billreminder.schemas.in.h:14
+msgid "How many days prior to due date to alert."
+msgstr "기한을 경고하기 위해 언제 미리 알려줄 지에 대한 일수입니다."
+
+#: ../data/billreminder.schemas.in.h:15
+msgid "How many days prior to due date to notify."
+msgstr "기한을 알리기 위해 언제 미리 알려줄 지에 대한 일수입니다."
+
+#: ../data/billreminder.schemas.in.h:16
+msgid "Start the application in the system's tray."
+msgstr "시스템 트레이에서 프로그램을 시작합니다."
+
+#: ../data/billreminder.schemas.in.h:17
+msgid "The date a bill is due."
+msgstr "청구서 기한 날짜입니다."
+
+#: ../data/billreminder.schemas.in.h:18
+msgid "What specific time to display alert."
+msgstr "경고를 표시할 특정한 시간입니다."
+
+#: ../data/billreminder.schemas.in.h:19
+msgid "Whether to display notifications on startup."
+msgstr "시작시 알림을 표시할 것인지에 대한 여부입니다."
+
+#: ../data/billreminder.schemas.in.h:20
+msgid "Whether to display the menu bar or not."
+msgstr "메뉴 막대를 표시할 것인지에 대한 여부입니다."
+
+#: ../data/billreminder.schemas.in.h:21
+msgid "Whether to display the toolbar or not."
+msgstr "도구 막대를 표시할 것인지에 대한 여부입니다."
+
+#: ../data/billreminder.schemas.in.h:22
+msgid "Whether to show alarms before a bill is due."
+msgstr "청구서 기한 이전에 알람을 보여줄 것인지에 대한 여부입니다."
+
+#: ../data/billreminder.schemas.in.h:23
+msgid "Whether to show alarms."
+msgstr "알람을 보여줄 것인지에 대한 여부입니다."
+
+#: ../data/billreminder.schemas.in.h:24
+msgid "Whether to show notifications for paid bills."
+msgstr "납부한 청구서에 대한 알림을 보여줄 것인지에 대한 여부입니다."
+
+#: ../data/billreminder.schemas.in.h:25
+msgid "Whether to start the application in the system's tray."
+msgstr "시스템 트레이에서 프로그램을 시작할 지에 대한 여부입니다."
+
+#: ../data/billreminder.schemas.in.h:26
+msgid "Whether to use dialogs for notifications."
+msgstr "알림에 대화 상자를 사용할 지에 대한 여부입니다."
+
+#. Dialog Title
+#: ../data/main.ui.h:1 ../src/lib/dialogs.py:65
+msgid "Add a new bill"
+msgstr "새 청구서 더하기"
+
+#: ../data/main.ui.h:2 ../src/gui/maindialog.py:141
+msgid "Delete selected bill"
+msgstr "선택된 청구서 삭제하기"
+
+#. Dialog Title
+#: ../data/main.ui.h:3 ../src/gui/maindialog.py:138 ../src/lib/dialogs.py:76
+msgid "Edit a bill"
+msgstr "청구서 편집"
+
+#: ../data/main.ui.h:4 ../src/gui/maindialog.py:147
+msgid "Mark as not paid"
+msgstr "지불 안됨으로 표시"
+
+#. Button Title
+#: ../data/main.ui.h:5 ../src/daemon/alarm.py:146 ../src/gui/maindialog.py:144
+#: ../src/lib/utils.py:135
+msgid "Mark as paid"
+msgstr "지불됨으로 표시"
+
+#: ../data/main.ui.h:6
+msgid "Show Toolbar"
+msgstr "도구 막대 보이기"
+
+#: ../data/main.ui.h:7
+msgid "_All Bills"
+msgstr "모든 청구서(_A)"
+
+#: ../data/main.ui.h:8 ../src/gui/maindialog.py:137
+msgid "_Edit"
+msgstr "편집(_E)"
+
+#: ../data/main.ui.h:9
+msgid "_File"
+msgstr "파일(_F)"
+
+#: ../data/main.ui.h:10
+msgid "_Help"
+msgstr "도움말(_H)"
+
+#: ../data/main.ui.h:11
+msgid "_Not Paid Only"
+msgstr "지불 되지 않은 것만(_N)"
+
+#: ../data/main.ui.h:12
+msgid "_Paid Only"
+msgstr "지불된 것만(_P)"
+
+#: ../data/main.ui.h:13
+msgid "_View"
+msgstr "보기(_V)"
+
+#: ../data/add_bill.ui.h:1
+msgid "A_larm:\t"
+msgstr "알람(_L):\t"
+
+#: ../data/add_bill.ui.h:2
+msgid "Manage Categories"
+msgstr "분류 관리"
+
+#: ../data/add_bill.ui.h:3
+msgid "Optional Fields"
+msgstr "선택적 필드"
+
+#: ../data/add_bill.ui.h:4
+msgid "_Amount:"
+msgstr "총계(_A):"
+
+#: ../data/add_bill.ui.h:5
+msgid "_Category:"
+msgstr "분류(_C):"
+
+#: ../data/add_bill.ui.h:6
+msgid "_Due Date:"
+msgstr "기한(_D):"
+
+#: ../data/add_bill.ui.h:7
+msgid "_End Date:"
+msgstr "말일(_E):"
+
+#: ../data/add_bill.ui.h:8
+msgid "_Notes:"
+msgstr "참고(_N):"
+
+#: ../data/add_bill.ui.h:9
+msgid "_Payee:"
+msgstr "청구자(_P):"
+
+#: ../data/add_bill.ui.h:10
+msgid "_Repeat:"
+msgstr "반복주기(_R):"
+
+#: ../src/billreminder.py:45 ../src/billreminderd.py:23
+msgid "Usage:  billreminder [OPTIONS...]"
+msgstr "사용법: billreminder [옵션...]"
+
+#: ../src/billreminder.py:46 ../src/billreminderd.py:24
+msgid "Displays the version number for this application."
+msgstr "이 프로그램의 버전 번호를 보여줍니다."
+
+#: ../src/billreminder.py:47
+msgid "About this application."
+msgstr "이 프로그램의 정보."
+
+#: ../src/billreminder.py:48
+msgid "Adds a new bill to the database."
+msgstr "새로운 청구서를 데이터베이스에 추가합니다."
+
+#: ../src/billreminder.py:49
+msgid "Access database directly, without daemon."
+msgstr "데몬을 통하지 않고 데이터베이스에 바로 접근합니다."
+
+#: ../src/billreminder.py:58
+msgid "This option is not implemented yet."
+msgstr "이 옵션은 아직 구현되지 않았습니다."
+
+#: ../src/billreminder.py:60 ../src/billreminderd.py:42
+#: ../src/daemon/dbus_manager.py:45
+#, python-format
+msgid "This is %(appname)s - Version: %(version)s"
+msgstr "이 것은 %(appname)s - 버전: %(version)s 입니다"
+
+#: ../src/billreminderd.py:25
+msgid "Print output messages."
+msgstr "출력 메시지를 인쇄합니다."
+
+#: ../src/billreminderd.py:26
+msgid "Don't run as a daemon."
+msgstr "데몬으로 실행하지 않습니다."
+
+#: ../src/billreminderd.py:27
+msgid "Start daemon and launch GUI."
+msgstr "데몬을 시작하고 GUI를 실행합니다."
+
+#: ../src/billreminderd.py:28
+msgid "Stop daemon."
+msgstr "데몬을 멈춥니다."
+
+#: ../src/daemon/alarm.py:76
+#, python-format
+msgid "You have %s outstanding bill to pay!"
+msgid_plural "You have %s outstanding bills to pay!"
+msgstr[0] "지불해야 할 %s 미납 청구서가 있습니다!"
+
+#: ../src/daemon/alarm.py:81
+msgid "Show BillReminder"
+msgstr "청구서 알림 보이기"
+
+#: ../src/daemon/alarm.py:123 ../src/daemon/alarm.py:230
+#, python-format
+msgid "The bill %(bill)s will be due at %(day)s."
+msgstr "청구서 %(bill)s이(가) %(day)s에 마감됩니다."
+
+#: ../src/daemon/alarm.py:135
+#, python-format
+msgid "The bill %s is due."
+msgstr "청구서 %s의 납부 기한일 입니다."
+
+#: ../src/daemon/alarm.py:148 ../src/lib/utils.py:136
+msgid "Edit"
+msgstr "편집"
+
+#: ../src/daemon/main.py:85
+#, python-format
+msgid "Lock File found: You have another instance running. (pid=%d)"
+msgstr "잠금 파일 발견: 다른 작업이 실행중입니다. (pid=%d)"
+
+#: ../src/daemon/main.py:90
+msgid "Lock File found: Possibly the program was exited unexpectedly."
+msgstr "잠금 파일 발견: 프로그램이 예기치 않게 끝났었던 것 같습니다."
+
+#: ../src/daemon/main.py:93
+msgid "Removing Lock File..."
+msgstr "잠금 파일 제거중..."
+
+#: ../src/daemon/main.py:95
+msgid "Successfully."
+msgstr "성공."
+
+#: ../src/daemon/main.py:97
+msgid "Failed."
+msgstr "실패."
+
+#: ../src/daemon/main.py:101
+msgid "BillReminder Notifier is already running."
+msgstr "청구서 알림 알리미가 이미 실행중입니다."
+
+#: ../src/gui/aboutdialog.py:16
+msgid "translator-credits"
+msgstr "Seong-ho, Cho <darkcircle.0426@gmail.com>"
+
+#: ../src/gui/aboutdialog.py:30
+msgid "BillReminder Website"
+msgstr "청구서 알림 웹사이트"
+
+#: ../src/gui/adddialog.py:104 ../src/gui/widgets/datebutton.py:40
+msgid "Select Date and Time"
+msgstr "날짜와 시간 선택"
+
+#. TRANSLATORS: No date selected
+#: ../src/gui/adddialog.py:241 ../src/gui/adddialog.py:265
+#: ../src/gui/maindialog.py:231 ../src/gui/widgets/datebutton.py:18
+#: ../src/gui/widgets/datebutton.py:26
+msgid "None"
+msgstr "없음"
+
+#: ../src/gui/adddialog.py:247 ../src/gui/categoriesdialog.py:48
+msgid "New Category"
+msgstr "새 분류"
+
+#: ../src/gui/adddialog.py:287
+msgid ""
+"The end date is set to a date prior to the start date. Setting it to match "
+"the start date."
+msgstr "말일이 시작일보다 앞서 설정되었습니다. 시작일과 동일하게 설정합니다."
+
+#: ../src/gui/adddialog.py:288
+msgid "Date set in the past"
+msgstr "과거 날짜로 설정되었습니다"
+
+#: ../src/gui/adddialog.py:414
+#, python-format
+msgid "\"%s\" and \"%s\" are required fields."
+msgstr "\"%s\" 와(과) \"%s\"은(는) 필수 필드입니다."
+
+#: ../src/gui/adddialog.py:415 ../src/gui/adddialog.py:418
+#: ../src/gui/widgets/viewbill.py:85
+msgid "Payee"
+msgstr "청구자"
+
+#: ../src/gui/adddialog.py:415 ../src/gui/adddialog.py:421
+#: ../src/gui/widgets/viewbill.py:89
+msgid "Amount"
+msgstr "총계"
+
+#: ../src/gui/adddialog.py:418 ../src/gui/adddialog.py:421
+#, python-format
+msgid "\"%s\" is required field."
+msgstr "\"%s\"은(는) 필수 필드입니다."
+
+#: ../src/gui/adddialog.py:424
+msgid "The end date is set to a date prior to the start date."
+msgstr "말일이 시작일보다 앞서 설정되었습니다."
+
+#: ../src/gui/categoriesdialog.py:23
+msgid "Categories Manager"
+msgstr "분류 관리자"
+
+#: ../src/gui/categoriesdialog.py:59
+msgid "Categories"
+msgstr "분류"
+
+#: ../src/gui/categoriesdialog.py:82
+msgid "Name:"
+msgstr "이름:"
+
+#: ../src/gui/categoriesdialog.py:85
+msgid "Color:"
+msgstr "색:"
+
+#: ../src/gui/categoriesdialog.py:215
+#, python-format
+msgid ""
+"The category \"%s\" already exists in the database!\n"
+"\n"
+"Do you want to save your change to the existing category?"
+msgstr ""
+"분류 \"%s\"이(가) 데이터베이스에 이미 존재합니다!\n"
+"\n"
+"바뀐 내용을 존재하는 분류에 저장하시겠습니까?"
+
+#: ../src/gui/categoriesdialog.py:239
+msgid "Do you really want to delete this category?\n"
+msgstr "이 분류를 정말로 삭제하시겠습니까?\n"
+
+#: ../src/gui/categoriesdialog.py:240
+#, python-format
+msgid "There is %d more bill in this category."
+msgid_plural "There are %d more bills in this category."
+msgstr[0] "이 분류 항목에 %d건 이상의 청구서가 있습니다."
+
+#: ../src/gui/categoriesdialog.py:243 ../src/gui/maindialog.py:425
+msgid "Confirmation"
+msgstr "확인"
+
+#. for some reason the actions strings do not get translated yet
+#. so we define them here so they would be picked up by the pyfile scanner
+#: ../src/gui/maindialog.py:134
+msgid "_New"
+msgstr "새로 만들기(_N)"
+
+#: ../src/gui/maindialog.py:135
+msgid "Add new bill"
+msgstr "새로운 청구서 추가"
+
+#: ../src/gui/maindialog.py:140
+msgid "_Delete"
+msgstr "삭제(_D)"
+
+#: ../src/gui/maindialog.py:143
+msgid "P_aid"
+msgstr "지불됨(_A)"
+
+#: ../src/gui/maindialog.py:146
+msgid "No_t Paid"
+msgstr "지불되지 않음(_T)"
+
+#: ../src/gui/maindialog.py:149
+msgid "_Show Toolbar"
+msgstr "도구 막대 보이기(_S)"
+
+#: ../src/gui/maindialog.py:150
+msgid "Show the toolbar"
+msgstr "도구 막대 보이기"
+
+#: ../src/gui/maindialog.py:238
+msgid "%m/%d"
+msgstr "%m/%d"
+
+#: ../src/gui/maindialog.py:423
+#, python-format
+msgid "Do you really want to delete \"%s\"?"
+msgstr "\"%s\"을(를) 정말로 삭제하시겠습니까?"
+
+#: ../src/gui/prefdialog.py:26 ../src/gui/widgets/trayicon.py:47
+msgid "Preferences"
+msgstr "기본 설정"
+
+#: ../src/gui/prefdialog.py:55
+msgid "<b>Alarms</b>"
+msgstr "<b>알람</b>"
+
+#: ../src/gui/prefdialog.py:61
+msgid "_Alert before due date:"
+msgstr "기한일 이전에 알림(_A):"
+
+#: ../src/gui/prefdialog.py:66 ../src/gui/prefdialog.py:116
+msgid "day(s)."
+msgstr "일."
+
+#: ../src/gui/prefdialog.py:69
+msgid "_Preferred time:"
+msgstr "지정된 시간(_P):"
+
+#: ../src/gui/prefdialog.py:72
+msgid "Get alerted when individual bills are due."
+msgstr "각각의 청구서가 기한이 도래하면 경고합니다."
+
+#: ../src/gui/prefdialog.py:96
+msgid "<b>Notifications</b>"
+msgstr "<b>알림</b>"
+
+#: ../src/gui/prefdialog.py:102
+msgid "Define when to be notified of upcoming bills."
+msgstr "곧 나오게 될 청구서를 알릴 때를 정합니다."
+
+#: ../src/gui/prefdialog.py:110
+msgid "_Notify before due date:"
+msgstr "기한 일자 이전 알림(_N):"
+
+#: ../src/gui/prefdialog.py:131
+msgid "<b>Alert Type</b>"
+msgstr "<b>경고 유형</b>"
+
+#: ../src/gui/prefdialog.py:141
+msgid "Notification _Bubble"
+msgstr "알림 풍선(_B)"
+
+#: ../src/gui/prefdialog.py:143
+msgid "Alert _Dialog"
+msgstr "경고 대화상자(_D)"
+
+#: ../src/gui/prefdialog.py:155
+msgid ""
+"<b>Warning:</b> BillReminder Notifier is \n"
+"not running! You need to start it in order \n"
+" to receive notifications."
+msgstr ""
+"<b>경고:</b> 청구서 알림 알리미가\n"
+"실행되고 있지 않습니다! 알림을 받으려면\n"
+"이를 시작할 필요가 있삽니다."
+
+#: ../src/gui/prefdialog.py:162
+msgid "_Start BillReminder Notifier"
+msgstr "청구서 알림 알리미 시작(_S)"
+
+#: ../src/gui/prefdialog.py:231
+msgid "<b>Note:</b> BillReminder Notifier is now running."
+msgstr "<b>참고:</b> 청구서 알림 알리미가 실행중입니다."
+
+#. TRANSLATORS: This is the date that is selected from the calendar. Try to keep it small.
+#: ../src/gui/widgets/datepicker.py:87
+msgid "%m/%d/%Y"
+msgstr "%Y/%m/%d"
+
+#: ../src/gui/widgets/datebutton.py:32 ../src/gui/widgets/datebutton.py:65
+msgid "%Y/%m/%d %H:%M"
+msgstr "%Y/%m/%d %H:%M"
+
+#: ../src/gui/widgets/datebutton.py:43 ../src/gui/widgets/datebutton.py:73
+msgid "_None"
+msgstr "없음(_N)"
+
+#: ../src/gui/widgets/datebutton.py:70
+msgid "Select date and time"
+msgstr "날짜와 시간 선택"
+
+#: ../src/gui/widgets/datebutton.py:94
+msgid "<b>_Time:</b>"
+msgstr "<b>시간(_T):</b>"
+
+#: ../src/gui/widgets/statusbar.py:16
+msgid "Bills:"
+msgstr "청구서:"
+
+#: ../src/gui/widgets/statusbar.py:26
+msgid "Notes:"
+msgstr "참고:"
+
+#: ../src/gui/widgets/timewidget.py:39
+msgid "(hh/mm)"
+msgstr "(시/분)"
+
+#: ../src/gui/widgets/trayicon.py:42
+msgid "Hide Window"
+msgstr "창 숨기기"
+
+#: ../src/gui/widgets/trayicon.py:44
+msgid "Show Window"
+msgstr "창 보이기"
+
+#: ../src/gui/widgets/trayicon.py:50
+msgid "About"
+msgstr "정보"
+
+#: ../src/gui/widgets/trayicon.py:54
+msgid "Quit"
+msgstr "나가기"
+
+#: ../src/gui/widgets/viewbill.py:83 ../src/gui/widgets/viewcategory.py:39
+msgid "Category"
+msgstr "분류"
+
+#: ../src/gui/widgets/viewbill.py:87
+msgid "Date"
+msgstr "날짜"
+
+#: ../src/gui/widgets/viewbill.py:91
+msgid "Notes"
+msgstr "참고"
+
+#: ../src/gui/widgets/viewbill.py:93
+msgid "Paid"
+msgstr "지불됨"
+
+#: ../src/gui/widgets/viewbill.py:95
+msgid "Alarm"
+msgstr "알람"
+
+#: ../src/lib/common.py:19
+msgid "Developers:"
+msgstr "개발자:"
+
+#: ../src/lib/common.py:22
+msgid "Contributors:"
+msgstr "공헌자:"
+
+#: ../src/lib/dal.py:131
+msgid "Utilities"
+msgstr "일용품"
+
+#: ../src/lib/dal.py:132
+msgid "Food & Dining"
+msgstr "식재료"
+
+#: ../src/lib/dal.py:133
+msgid "Mortgage"
+msgstr "모기지"
+
+#: ../src/lib/dal.py:134
+msgid "Rent"
+msgstr "전세"
+
+#: ../src/lib/dal.py:135
+msgid "Medical"
+msgstr "의료"
+
+#: ../src/lib/dal.py:136
+msgid "Educational"
+msgstr "교육"
+
+#: ../src/lib/dal.py:137
+msgid "Donations"
+msgstr "기부"
+
+#: ../src/lib/dal.py:138
+msgid "Credit Card"
+msgstr "신용카드"
+
+#: ../src/lib/dal.py:139
+msgid "Gifts"
+msgstr "선물"
+
+#: ../src/lib/dal.py:140
+msgid "Books"
+msgstr "책"
+
+#: ../src/lib/dal.py:141
+msgid "Online Services"
+msgstr "온라인 서비스"
+
+#: ../src/lib/dal.py:142
+msgid "Insurance"
+msgstr "보험"
+
+#: ../src/lib/dal.py:143
+msgid "Auto & Transport"
+msgstr "자가용, 교통"
+
+#: ../src/lib/dal.py:144
+msgid "Home"
+msgstr "집세"
+
+#: ../src/lib/dal.py:145
+msgid "Gas & Fuel"
+msgstr "가스, 기름"
+
+#: ../src/lib/dal.py:146
+msgid "Electronics"
+msgstr "전기"
+
+#. Dialog Title
+#: ../src/lib/utils.py:83
+msgid "Question"
+msgstr "질문"
+
+#. Dialog Title
+#: ../src/lib/utils.py:96 ../src/lib/utils.py:109
+msgid "Error"
+msgstr "오류"
+
+#. Dialog Title
+#: ../src/lib/utils.py:122
+msgid "Information"
+msgstr "정보"
+
+#: ../src/lib/utils.py:150
+msgid "Close _Without Saving"
+msgstr "저장하지 않고 닫기(_W)"
+
+#: ../src/lib/utils.py:156
+msgid "Save changes before closing?"
+msgstr "닫기 전에 바뀐 내용을 저장합니까?"
+
+#: ../src/lib/utils.py:157
+msgid "If you close without saving, your changes will be discarded."
+msgstr "저장하지 않고 닫게 되면, 바뀐 내용은 무시됩니다."
+
+#: ../src/lib/scheduler.py:7
+msgid "Once"
+msgstr "한 번"
+
+#: ../src/lib/scheduler.py:8
+msgid "Weekly"
+msgstr "주간"
+
+#: ../src/lib/scheduler.py:9
+msgid "Monthly"
+msgstr "월간"
