@@ -1,113 +1,107 @@
 # Turkish translation for billreminder
-# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd
 # This file is distributed under the same license as the billreminder package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 #
+# Rail Aliev <rail@i-rs.ru>, 2008.
+# Muhammet Kara <muhammet.k@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: billreminder\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-13 16:00-0500\n"
-"PO-Revision-Date: 2008-06-25 06:29+0000\n"
-"Last-Translator: Rail Aliev <rail@i-rs.ru>\n"
-"Language-Team: Turkish <tr@li.org>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=billreminder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-06-29 21:21+0000\n"
+"PO-Revision-Date: 2012-01-01 08:13+0000\n"
+"Last-Translator: Muhammet Kara <muhammet.k@gmail.com>\n"
+"Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Launchpad-Export-Date: 2008-07-12 02:24+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Generator: Lokalize 1.2\n"
+"Language: tr\n"
 
 #: ../data/billreminderd.desktop.in.h:1 ../src/billreminderd.py:43
-#: ../src/daemon/alarm.py:139 ../src/daemon/dbus_manager.py:46
+#: ../src/daemon/alarm.py:138 ../src/daemon/dbus_manager.py:46
 msgid "BillReminder Notifier"
-msgstr ""
+msgstr "BillReminder Bildirimcisi"
 
 #: ../data/billreminderd.desktop.in.h:2 ../data/billreminder.desktop.in.h:2
 msgid "Bills manager"
-msgstr ""
+msgstr "Fatura yöneticisi"
 
 #: ../data/billreminderd.desktop.in.h:3 ../data/billreminder.desktop.in.h:3
 msgid "Never forget to pay a bill again!"
-msgstr ""
+msgstr "Bir faturayı ödemeyi bir daha asla unutmayın!"
 
-#: ../data/billreminder.desktop.in.h:1 ../src/gui/widgets/trayicon.py:29
+#: ../data/billreminder.desktop.in.h:1 ../src/gui/widgets/trayicon.py:43
 #: ../src/lib/utils.py:138
 msgid "BillReminder"
-msgstr ""
+msgstr "BillReminder"
 
 #: ../data/billreminder.schemas.in.h:1
-#, fuzzy
 msgid "Default X coordinate for the application."
-msgstr "Uygulamanın sürüm numarasını gösterir"
+msgstr "Uygulamanın öntanımlı X koordinatı."
 
 #: ../data/billreminder.schemas.in.h:2
-#, fuzzy
 msgid "Default Y coordinate for the application."
-msgstr "Uygulamanın sürüm numarasını gösterir"
+msgstr "Uygulamanın öntanımlı Y koordinatı."
 
 #: ../data/billreminder.schemas.in.h:3
-#, fuzzy
 msgid "Default height of the application."
-msgstr "Program hakkında"
+msgstr "Uygulamanın öntanımlı yüksekliği."
 
 #: ../data/billreminder.schemas.in.h:4
-#, fuzzy
 msgid "Default width of the application."
-msgstr "Program hakkında"
+msgstr "Uygulamanın öntanımlı genişliği."
 
 #: ../data/billreminder.schemas.in.h:5
-#, fuzzy
 msgid "Defines the default X coordinate for the application."
-msgstr "Uygulamanın sürüm numarasını gösterir"
+msgstr "Uygulamanın öntanımlı X koordinatını belirler."
 
 #: ../data/billreminder.schemas.in.h:6
-#, fuzzy
 msgid "Defines the default Y coordinate for the application."
-msgstr "Uygulamanın sürüm numarasını gösterir"
+msgstr "Uygulamanın öntanımlı Y koordinatını belirler."
 
 #: ../data/billreminder.schemas.in.h:7
-#, fuzzy
 msgid "Defines the default height of the application."
-msgstr "Uygulamanın sürüm numarasını gösterir"
+msgstr "Uygulamanın öntanımlı yüksekliğini belirler."
 
 #: ../data/billreminder.schemas.in.h:8
 msgid "Defines the default width of the application."
-msgstr ""
+msgstr "Uygulamanın öntanımlı genişliğini belirler."
 
 #: ../data/billreminder.schemas.in.h:9
 msgid "Delay between notifications."
-msgstr ""
+msgstr "Bildirimler arası gecikme süresi."
 
 #: ../data/billreminder.schemas.in.h:10
-#, fuzzy
 msgid "Display only paid bills."
-msgstr "Sadece ödenmiş kayıtları göster"
+msgstr "Sadece ödenmiş faturaları görüntüle."
 
 #: ../data/billreminder.schemas.in.h:11
 msgid "Display the menu bar."
-msgstr ""
+msgstr "Menü çubuğunu göster."
 
 #: ../data/billreminder.schemas.in.h:12
-#, fuzzy
 msgid "Display the toolbar."
-msgstr "Araç çubuğunu göster"
+msgstr "Araç çubuğunu görüntüle."
 
 #: ../data/billreminder.schemas.in.h:13
 msgid "How long to display the alarm notification."
-msgstr ""
+msgstr "Alarm bildiriminin ne kadar süreyle görüntüleneceği."
 
 #: ../data/billreminder.schemas.in.h:14
 msgid "How many days prior to due date to alert."
-msgstr ""
+msgstr "Son ödeme tarihinden kaç gün önce uyarı verileceği."
 
 #: ../data/billreminder.schemas.in.h:15
 msgid "How many days prior to due date to notify."
-msgstr ""
+msgstr "Son ödeme tarihinden kaç gün önce bildirileceği."
 
 #: ../data/billreminder.schemas.in.h:16
 msgid "Start the application in the system's tray."
-msgstr ""
+msgstr "Uygulamayı sistem tepsisinde başlat."
 
 #: ../data/billreminder.schemas.in.h:17
 msgid "The date a bill is due."
@@ -151,43 +145,39 @@ msgstr ""
 
 #. Dialog Title
 #: ../data/main.ui.h:1 ../src/lib/dialogs.py:65
-#, fuzzy
 msgid "Add a new bill"
-msgstr "Yeni kayıt ekle"
+msgstr "Yeni bir fatura ekle"
 
-#: ../data/main.ui.h:2 ../src/gui/maindialog.py:140
-#, fuzzy
+#: ../data/main.ui.h:2 ../src/gui/maindialog.py:161
 msgid "Delete selected bill"
-msgstr "Seçili kayıdı sil"
+msgstr "Seçilen faturayı sil"
 
 #. Dialog Title
-#: ../data/main.ui.h:3 ../src/gui/maindialog.py:137 ../src/lib/dialogs.py:76
+#: ../data/main.ui.h:3 ../src/gui/maindialog.py:158 ../src/lib/dialogs.py:76
 msgid "Edit a bill"
-msgstr ""
+msgstr "Bir faturayı düzenle"
 
-#: ../data/main.ui.h:4 ../src/gui/maindialog.py:146
+#: ../data/main.ui.h:4 ../src/gui/maindialog.py:167
 msgid "Mark as not paid"
 msgstr "Ödenmemiş olarak işaretle"
 
 #. Button Title
-#: ../data/main.ui.h:5 ../src/daemon/alarm.py:146 ../src/gui/maindialog.py:143
+#: ../data/main.ui.h:5 ../src/daemon/alarm.py:145 ../src/gui/maindialog.py:164
 #: ../src/lib/utils.py:135
 msgid "Mark as paid"
 msgstr "Ödenmiş olarak işaretle"
 
 #: ../data/main.ui.h:6
-#, fuzzy
 msgid "Show Toolbar"
 msgstr "Araç Çubuğunu Göster"
 
 #: ../data/main.ui.h:7
 msgid "_All Bills"
-msgstr ""
+msgstr "_Tüm Faturalar"
 
-#: ../data/main.ui.h:8 ../src/gui/maindialog.py:136
-#, fuzzy
+#: ../data/main.ui.h:8 ../src/gui/maindialog.py:157
 msgid "_Edit"
-msgstr "Düzenle"
+msgstr "_Düzenle"
 
 #: ../data/main.ui.h:9
 msgid "_File"
@@ -210,9 +200,8 @@ msgid "_View"
 msgstr "_Görünüm"
 
 #: ../data/add_bill.ui.h:1
-#, fuzzy
 msgid "A_larm:\t"
-msgstr "Alarm"
+msgstr "A_larm:\t"
 
 #: ../data/add_bill.ui.h:2
 msgid "Manage Categories"
@@ -220,42 +209,35 @@ msgstr "Kategorileri Yönet"
 
 #: ../data/add_bill.ui.h:3
 msgid "Optional Fields"
-msgstr ""
+msgstr "İsteğe Bağlı Alanlar"
 
 #: ../data/add_bill.ui.h:4
-#, fuzzy
 msgid "_Amount:"
-msgstr "Tutar"
+msgstr "_Miktar:"
 
 #: ../data/add_bill.ui.h:5
-#, fuzzy
 msgid "_Category:"
-msgstr "Kategori"
+msgstr "_Kategori:"
 
 #: ../data/add_bill.ui.h:6
-#, fuzzy
 msgid "_Due Date:"
-msgstr "Tarih:"
+msgstr "_Son Ödeme Tarihi:"
 
 #: ../data/add_bill.ui.h:7
-#, fuzzy
 msgid "_End Date:"
-msgstr "Tarih:"
+msgstr "_Bitiş Tarihi:"
 
 #: ../data/add_bill.ui.h:8
-#, fuzzy
 msgid "_Notes:"
-msgstr "Notlar:"
+msgstr "_Notlar:"
 
 #: ../data/add_bill.ui.h:9
-#, fuzzy
 msgid "_Payee:"
-msgstr "Alacaklı"
+msgstr "_Alacaklı:"
 
 #: ../data/add_bill.ui.h:10
-#, fuzzy
 msgid "_Repeat:"
-msgstr "Tekrar:"
+msgstr "_Tekrarla:"
 
 #: ../src/billreminder.py:45 ../src/billreminderd.py:23
 msgid "Usage:  billreminder [OPTIONS...]"
@@ -270,9 +252,8 @@ msgid "About this application."
 msgstr "Program hakkında"
 
 #: ../src/billreminder.py:48
-#, fuzzy
 msgid "Adds a new bill to the database."
-msgstr "Veritabanına yeni kayıt ekler"
+msgstr "Veritabanına yeni bir fatura ekler."
 
 #: ../src/billreminder.py:49
 msgid "Access database directly, without daemon."
@@ -290,42 +271,41 @@ msgstr "%(appname)s, Sürum: %(version)s"
 
 #: ../src/billreminderd.py:25
 msgid "Print output messages."
-msgstr ""
+msgstr "Çıktı iletilerini yazdır."
 
 #: ../src/billreminderd.py:26
 msgid "Don't run as a daemon."
-msgstr ""
+msgstr "Artalan süreci olarak çalıştırma."
 
 #: ../src/billreminderd.py:27
 msgid "Start daemon and launch GUI."
-msgstr ""
+msgstr "Artalan sürecini başlat ve GUI'yi aç."
 
 #: ../src/billreminderd.py:28
 msgid "Stop daemon."
-msgstr ""
+msgstr "Artalan sürecini durdur."
 
-#: ../src/daemon/alarm.py:76
+#: ../src/daemon/alarm.py:75
 #, python-format
 msgid "You have %s outstanding bill to pay!"
 msgid_plural "You have %s outstanding bills to pay!"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s ödenmemiş faturanız var!"
 
-#: ../src/daemon/alarm.py:81
+#: ../src/daemon/alarm.py:80
 msgid "Show BillReminder"
-msgstr ""
+msgstr "BillReminder'ı Göster"
 
-#: ../src/daemon/alarm.py:123 ../src/daemon/alarm.py:230
+#: ../src/daemon/alarm.py:122 ../src/daemon/alarm.py:229
 #, python-format
 msgid "The bill %(bill)s will be due at %(day)s."
 msgstr ""
 
-#: ../src/daemon/alarm.py:135
+#: ../src/daemon/alarm.py:134
 #, python-format
 msgid "The bill %s is due."
-msgstr ""
+msgstr "%s faturasının son ödeme tarihi geçmiş."
 
-#: ../src/daemon/alarm.py:148 ../src/lib/utils.py:136
+#: ../src/daemon/alarm.py:147 ../src/lib/utils.py:136
 msgid "Edit"
 msgstr "Düzenle"
 
@@ -340,7 +320,7 @@ msgstr ""
 
 #: ../src/daemon/main.py:93
 msgid "Removing Lock File..."
-msgstr ""
+msgstr "Kilit Dosyası Kaldırılıyor..."
 
 #: ../src/daemon/main.py:95
 msgid "Successfully."
@@ -352,17 +332,17 @@ msgstr "Başarısız."
 
 #: ../src/daemon/main.py:101
 msgid "BillReminder Notifier is already running."
-msgstr ""
+msgstr "BillReminder Bildirimcisi zaten çalışıyor."
 
 #: ../src/gui/aboutdialog.py:16
 msgid "translator-credits"
 msgstr ""
-"Launchpad Contributions:\n"
-"  Rail Aliev https://launchpad.net/~rail"
+"Rail Aliev <https://launchpad.net/~rail>\n"
+"Muhammet Kara <muhammet.k@gmail.com>"
 
 #: ../src/gui/aboutdialog.py:30
 msgid "BillReminder Website"
-msgstr ""
+msgstr "BillReminder Web Sitesi"
 
 #: ../src/gui/adddialog.py:104 ../src/gui/widgets/datebutton.py:40
 msgid "Select Date and Time"
@@ -370,7 +350,7 @@ msgstr "Tarıh ve zaman seç"
 
 #. TRANSLATORS: No date selected
 #: ../src/gui/adddialog.py:241 ../src/gui/adddialog.py:265
-#: ../src/gui/maindialog.py:230 ../src/gui/widgets/datebutton.py:18
+#: ../src/gui/maindialog.py:251 ../src/gui/widgets/datebutton.py:18
 #: ../src/gui/widgets/datebutton.py:26
 msgid "None"
 msgstr "Hiçbiri"
@@ -379,36 +359,38 @@ msgstr "Hiçbiri"
 msgid "New Category"
 msgstr "Yeni Kategori"
 
-#: ../src/gui/adddialog.py:287 ../src/gui/adddialog.py:425
-#: ../src/gui/adddialog.py:434
+#: ../src/gui/adddialog.py:287
 msgid ""
 "The end date is set to a date prior to the start date. Setting it to match "
 "the start date."
 msgstr ""
 
-#: ../src/gui/adddialog.py:288 ../src/gui/adddialog.py:426
-#: ../src/gui/adddialog.py:435
+#: ../src/gui/adddialog.py:288
 msgid "Date set in the past"
 msgstr ""
 
-#: ../src/gui/adddialog.py:403
+#: ../src/gui/adddialog.py:414
 #, python-format
 msgid "\"%s\" and \"%s\" are required fields."
-msgstr ""
+msgstr "\"%s\" ve \"%s\" alanlarının doldurulması zorunludur."
 
-#: ../src/gui/adddialog.py:404 ../src/gui/adddialog.py:407
-#: ../src/gui/widgets/viewbill.py:85
+#: ../src/gui/adddialog.py:415 ../src/gui/adddialog.py:418
+#: ../src/gui/widgets/viewbill.py:84
 msgid "Payee"
 msgstr "Alacaklı"
 
-#: ../src/gui/adddialog.py:404 ../src/gui/adddialog.py:410
-#: ../src/gui/widgets/viewbill.py:89
+#: ../src/gui/adddialog.py:415 ../src/gui/adddialog.py:421
+#: ../src/gui/widgets/viewbill.py:88
 msgid "Amount"
 msgstr "Tutar"
 
-#: ../src/gui/adddialog.py:407 ../src/gui/adddialog.py:410
+#: ../src/gui/adddialog.py:418 ../src/gui/adddialog.py:421
 #, python-format
 msgid "\"%s\" is required field."
+msgstr "\"%s\" alanının doldurulması zorunludur."
+
+#: ../src/gui/adddialog.py:424
+msgid "The end date is set to a date prior to the start date."
 msgstr ""
 
 #: ../src/gui/categoriesdialog.py:23
@@ -437,71 +419,78 @@ msgstr ""
 
 #: ../src/gui/categoriesdialog.py:239
 msgid "Do you really want to delete this category?\n"
-msgstr ""
+msgstr "Gerçekten bu kategoriyi silmek istiyor musunuz?\n"
 
 #: ../src/gui/categoriesdialog.py:240
 #, python-format
 msgid "There is %d more bill in this category."
 msgid_plural "There are %d more bills in this category."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Bu kategoride %d fatura daha var."
 
-#: ../src/gui/categoriesdialog.py:243 ../src/gui/maindialog.py:424
+#: ../src/gui/categoriesdialog.py:243 ../src/gui/maindialog.py:463
 msgid "Confirmation"
 msgstr "Onaylama"
 
 #. for some reason the actions strings do not get translated yet
 #. so we define them here so they would be picked up by the pyfile scanner
-#: ../src/gui/maindialog.py:133
-#, fuzzy
+#: ../src/gui/maindialog.py:154
 msgid "_New"
-msgstr "Yeni"
+msgstr "_Yeni"
 
-#: ../src/gui/maindialog.py:134
-#, fuzzy
+#: ../src/gui/maindialog.py:155
 msgid "Add new bill"
-msgstr "_Yeni ekle"
+msgstr "Yeni fatura ekle"
 
-#: ../src/gui/maindialog.py:139
+#: ../src/gui/maindialog.py:160
 msgid "_Delete"
-msgstr ""
+msgstr "_Sil"
 
-#: ../src/gui/maindialog.py:142
-#, fuzzy
+#: ../src/gui/maindialog.py:163
 msgid "P_aid"
-msgstr "Ödenmiş"
+msgstr "_Ödenmiş"
 
-#: ../src/gui/maindialog.py:145
-#, fuzzy
+#: ../src/gui/maindialog.py:166
 msgid "No_t Paid"
-msgstr "Ödenmemiş"
+msgstr "Ö_denmemiş"
 
-#: ../src/gui/maindialog.py:148
-#, fuzzy
+#: ../src/gui/maindialog.py:169
 msgid "_Show Toolbar"
-msgstr "Araç Çubuğunu Göster"
+msgstr "Araç Çubuğunu _Göster"
 
-#: ../src/gui/maindialog.py:149
+#: ../src/gui/maindialog.py:170
 msgid "Show the toolbar"
 msgstr "Araç çubuğunu göster"
 
-#: ../src/gui/maindialog.py:237
+#: ../src/gui/maindialog.py:258
 msgid "%m/%d"
 msgstr "%d.%m"
 
-#: ../src/gui/maindialog.py:422
+#: ../src/gui/maindialog.py:424
+#| msgid "_Not Paid Only"
+msgid "Not Paid Only"
+msgstr "Sadece Ödenmemiş"
+
+#: ../src/gui/maindialog.py:426
+#| msgid "_Paid Only"
+msgid "Paid Only"
+msgstr "Sadece Ödenmiş"
+
+#: ../src/gui/maindialog.py:461
 #, python-format
 msgid "Do you really want to delete \"%s\"?"
-msgstr ""
+msgstr "Gerçekten \"%s\"i silmek istiyor musunuz?"
 
-#: ../src/gui/prefdialog.py:26 ../src/gui/widgets/trayicon.py:47
+#: ../src/gui/maindialog.py:545 ../src/gui/widgets/viewbill.py:92
+msgid "Paid"
+msgstr "Ödenmiş"
+
+#: ../src/gui/prefdialog.py:26 ../src/gui/widgets/trayicon.py:67
 msgid "Preferences"
 msgstr "Tercihler"
 
 #: ../src/gui/prefdialog.py:55
-#, fuzzy
 msgid "<b>Alarms</b>"
-msgstr "Alarmlar"
+msgstr "<b>Alarmlar</b>"
 
 #: ../src/gui/prefdialog.py:61
 msgid "_Alert before due date:"
@@ -509,21 +498,19 @@ msgstr ""
 
 #: ../src/gui/prefdialog.py:66 ../src/gui/prefdialog.py:116
 msgid "day(s)."
-msgstr ""
+msgstr "gün."
 
 #: ../src/gui/prefdialog.py:69
-#, fuzzy
 msgid "_Preferred time:"
-msgstr "Tercih edilen zaman:"
+msgstr "_Tercih edilen zaman:"
 
 #: ../src/gui/prefdialog.py:72
 msgid "Get alerted when individual bills are due."
 msgstr ""
 
 #: ../src/gui/prefdialog.py:96
-#, fuzzy
 msgid "<b>Notifications</b>"
-msgstr "Bildiriler"
+msgstr "<b>Bildirimler</b>"
 
 #: ../src/gui/prefdialog.py:102
 msgid "Define when to be notified of upcoming bills."
@@ -534,14 +521,12 @@ msgid "_Notify before due date:"
 msgstr ""
 
 #: ../src/gui/prefdialog.py:131
-#, fuzzy
 msgid "<b>Alert Type</b>"
-msgstr "Uyarı Türü"
+msgstr "<b>Uyarı Türü</b>"
 
 #: ../src/gui/prefdialog.py:141
-#, fuzzy
 msgid "Notification _Bubble"
-msgstr "Bildiriler"
+msgstr "_Bildirim Baloncuğu"
 
 #: ../src/gui/prefdialog.py:143
 msgid "Alert _Dialog"
@@ -556,80 +541,74 @@ msgstr ""
 
 #: ../src/gui/prefdialog.py:162
 msgid "_Start BillReminder Notifier"
-msgstr ""
+msgstr "BillReminder Bildirimcisini _Başlat"
 
 #: ../src/gui/prefdialog.py:231
 msgid "<b>Note:</b> BillReminder Notifier is now running."
-msgstr ""
+msgstr "<b>Not:</b> BillReminder Bildirimcisi şu anda çalışıyor."
 
 #. TRANSLATORS: This is the date that is selected from the calendar. Try to keep it small.
 #: ../src/gui/widgets/datepicker.py:87
-#, fuzzy
 msgid "%m/%d/%Y"
-msgstr "%d.%m"
+msgstr "%d/%m/%Y"
 
 #: ../src/gui/widgets/datebutton.py:32 ../src/gui/widgets/datebutton.py:65
 msgid "%Y/%m/%d %H:%M"
 msgstr "%d.%m.%Y %H:%M"
 
 #: ../src/gui/widgets/datebutton.py:43 ../src/gui/widgets/datebutton.py:73
-#, fuzzy
 msgid "_None"
-msgstr "Hiçbiri"
+msgstr "_Hiçbiri"
 
 #: ../src/gui/widgets/datebutton.py:70
 msgid "Select date and time"
-msgstr "Tarih ve zamanı seçiniz"
+msgstr "Tarih ve saati seçiniz"
 
 #: ../src/gui/widgets/datebutton.py:94
 msgid "<b>_Time:</b>"
-msgstr ""
+msgstr "<b>_Saat:</b>"
 
-#: ../src/gui/widgets/statusbar.py:16
+#: ../src/gui/widgets/statusbar.py:17
 msgid "Bills:"
-msgstr ""
+msgstr "Faturalar:"
 
-#: ../src/gui/widgets/statusbar.py:26
+#: ../src/gui/widgets/statusbar.py:27
 msgid "Notes:"
 msgstr "Notlar:"
 
 #: ../src/gui/widgets/timewidget.py:39
 msgid "(hh/mm)"
-msgstr ""
+msgstr "(ss/aa)"
 
-#: ../src/gui/widgets/trayicon.py:42
+#: ../src/gui/widgets/trayicon.py:53 ../src/gui/widgets/trayicon.py:62
 msgid "Hide Window"
 msgstr "Pencereyi gizle"
 
-#: ../src/gui/widgets/trayicon.py:44
+#: ../src/gui/widgets/trayicon.py:55 ../src/gui/widgets/trayicon.py:64
 msgid "Show Window"
 msgstr "Pencereyi göster"
 
-#: ../src/gui/widgets/trayicon.py:50
+#: ../src/gui/widgets/trayicon.py:70
 msgid "About"
 msgstr "Hakkında"
 
-#: ../src/gui/widgets/trayicon.py:54
+#: ../src/gui/widgets/trayicon.py:74
 msgid "Quit"
 msgstr "Çıkış"
 
-#: ../src/gui/widgets/viewbill.py:83 ../src/gui/widgets/viewcategory.py:39
+#: ../src/gui/widgets/viewbill.py:82 ../src/gui/widgets/viewcategory.py:39
 msgid "Category"
 msgstr "Kategori"
 
-#: ../src/gui/widgets/viewbill.py:87
+#: ../src/gui/widgets/viewbill.py:86
 msgid "Date"
 msgstr "Tarih"
 
-#: ../src/gui/widgets/viewbill.py:91
+#: ../src/gui/widgets/viewbill.py:90
 msgid "Notes"
 msgstr "Notlar"
 
-#: ../src/gui/widgets/viewbill.py:93
-msgid "Paid"
-msgstr "Ödenmiş"
-
-#: ../src/gui/widgets/viewbill.py:95
+#: ../src/gui/widgets/viewbill.py:94
 msgid "Alarm"
 msgstr "Alarm"
 
@@ -640,6 +619,71 @@ msgstr "Geliştiriciler:"
 #: ../src/lib/common.py:22
 msgid "Contributors:"
 msgstr "Katkıda Bulunanlar:"
+
+#: ../src/lib/dal.py:155
+msgid "Utilities"
+msgstr "Gereçler"
+
+#: ../src/lib/dal.py:156
+msgid "Food & Dining"
+msgstr "Yeme & İçme"
+
+#: ../src/lib/dal.py:157
+msgid "Mortgage"
+msgstr "Mortgage"
+
+#: ../src/lib/dal.py:158
+msgid "Rent"
+msgstr "Kira"
+
+#: ../src/lib/dal.py:159
+msgid "Medical"
+msgstr "Sağlık"
+
+#: ../src/lib/dal.py:160
+msgid "Educational"
+msgstr "Eğitim"
+
+#: ../src/lib/dal.py:161
+#| msgid "Confirmation"
+msgid "Donations"
+msgstr "Bağışlar"
+
+#: ../src/lib/dal.py:162
+msgid "Credit Card"
+msgstr "Kredi Kartı"
+
+#: ../src/lib/dal.py:163
+msgid "Gifts"
+msgstr "Hediyeler"
+
+#: ../src/lib/dal.py:164
+msgid "Books"
+msgstr "Kitaplar"
+
+#: ../src/lib/dal.py:165
+msgid "Online Services"
+msgstr "Çevrimiçi Hizmetler"
+
+#: ../src/lib/dal.py:166
+msgid "Insurance"
+msgstr "Sigorta"
+
+#: ../src/lib/dal.py:167
+msgid "Auto & Transport"
+msgstr ""
+
+#: ../src/lib/dal.py:168
+msgid "Home"
+msgstr "Ev"
+
+#: ../src/lib/dal.py:169
+msgid "Gas & Fuel"
+msgstr "Gaz ve Yakıt"
+
+#: ../src/lib/dal.py:170
+msgid "Electronics"
+msgstr "Elektronik"
 
 #. Dialog Title
 #: ../src/lib/utils.py:83
@@ -662,21 +706,21 @@ msgstr "Kay_detmeden Kapat"
 
 #: ../src/lib/utils.py:156
 msgid "Save changes before closing?"
-msgstr ""
+msgstr "Kapatmadan önce değişiklikler kaydedilsin mi?"
 
 #: ../src/lib/utils.py:157
 msgid "If you close without saving, your changes will be discarded."
-msgstr ""
+msgstr "Eğer kaydetmeden kapatırsanız, yaptığınız değişiklikler silinecektir."
 
-#: ../src/lib/scheduler.py:6
+#: ../src/lib/scheduler.py:7
 msgid "Once"
 msgstr "Bir kez"
 
-#: ../src/lib/scheduler.py:7
+#: ../src/lib/scheduler.py:8
 msgid "Weekly"
 msgstr "Haftalık"
 
-#: ../src/lib/scheduler.py:8
+#: ../src/lib/scheduler.py:9
 msgid "Monthly"
 msgstr "Aylık"
 
