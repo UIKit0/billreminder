@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: billreminder HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-27 21:32-0400\n"
-"PO-Revision-Date: 2008-08-25 18:10+0200\n"
+"POT-Creation-Date: 2008-11-07 00:26+0100\n"
+"PO-Revision-Date: 2012-05-24 11:56+0200\n"
 "Last-Translator: Robert-André Mauchin <zebob.m@pengzone.org>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -69,62 +69,74 @@ msgid "Defines the default width of the application."
 msgstr "Définit la largeur par défaut de l'application."
 
 #: ../data/billreminder.schemas.in.h:9
+msgid "Delay between notifications."
+msgstr "Délai entre les notifications."
+
+#: ../data/billreminder.schemas.in.h:10
 msgid "Display only paid bills."
 msgstr "Afficher uniquement les factures payées."
 
-#: ../data/billreminder.schemas.in.h:10
+#: ../data/billreminder.schemas.in.h:11
 msgid "Display the menu bar."
 msgstr "Afficher la barre de menus."
 
-#: ../data/billreminder.schemas.in.h:11
+#: ../data/billreminder.schemas.in.h:12
 msgid "Display the toolbar."
 msgstr "Afficher la barre d'outils."
 
-#: ../data/billreminder.schemas.in.h:12
+#: ../data/billreminder.schemas.in.h:13
 msgid "How long to display the alarm notification."
 msgstr "Durée d'affichage de la notification d'alarme."
 
-#: ../data/billreminder.schemas.in.h:13
+#: ../data/billreminder.schemas.in.h:14
 msgid "How many days prior to due date to alert."
 msgstr "Nombre de jours avant d'alerter de l'échéance."
 
-#: ../data/billreminder.schemas.in.h:14
+#: ../data/billreminder.schemas.in.h:15
 msgid "How many days prior to due date to notify."
 msgstr "Nombre de jours avant de notifier de l'échéance."
 
-#: ../data/billreminder.schemas.in.h:15
+#: ../data/billreminder.schemas.in.h:16
+msgid "Start the application in the system's tray."
+msgstr "Démarrer l'application dans la zone de notification."
+
+#: ../data/billreminder.schemas.in.h:17
 msgid "The date a bill is due."
 msgstr "La date où une facture est dûe."
 
-#: ../data/billreminder.schemas.in.h:16
+#: ../data/billreminder.schemas.in.h:18
 msgid "What specific time to display alert."
 msgstr "Heure spécifique à laquelle afficher l'alerte."
 
-#: ../data/billreminder.schemas.in.h:17
+#: ../data/billreminder.schemas.in.h:19
 msgid "Whether to display notifications on startup."
 msgstr "Indique s'il faut afficher les notifications au démarrage."
 
-#: ../data/billreminder.schemas.in.h:18
+#: ../data/billreminder.schemas.in.h:20
 msgid "Whether to display the menu bar or not."
 msgstr "Indique s'il faut afficher la barre de menus."
 
-#: ../data/billreminder.schemas.in.h:19
+#: ../data/billreminder.schemas.in.h:21
 msgid "Whether to display the toolbar or not."
 msgstr "Indique s'il faut afficher la barre d'outils."
 
-#: ../data/billreminder.schemas.in.h:20
+#: ../data/billreminder.schemas.in.h:22
 msgid "Whether to show alarms before a bill is due."
 msgstr "Indique s'il faut afficher une alarme avant qu'une facture soit dûe."
 
-#: ../data/billreminder.schemas.in.h:21
+#: ../data/billreminder.schemas.in.h:23
 msgid "Whether to show alarms."
 msgstr "Indique s'il faut afficher les alarmes."
 
-#: ../data/billreminder.schemas.in.h:22
+#: ../data/billreminder.schemas.in.h:24
 msgid "Whether to show notifications for paid bills."
 msgstr "Indique s'il faut afficher les notifications pour les factures payées."
 
-#: ../data/billreminder.schemas.in.h:23
+#: ../data/billreminder.schemas.in.h:25
+msgid "Whether to start the application in the system's tray."
+msgstr "Indique s'il faut démarrer l'application dans la zone de notification."
+
+#: ../data/billreminder.schemas.in.h:26
 msgid "Whether to use dialogs for notifications."
 msgstr ""
 "Indique s'il faut utiliser des boites de dialogue pour les notifications."
@@ -238,7 +250,7 @@ msgstr "Échoué."
 msgid "BillReminder Notifier is already running."
 msgstr "Le système d'alerte BillReminder est déjà lancé."
 
-#: ../src/gui/aboutdialog.py:12
+#: ../src/gui/aboutdialog.py:21
 msgid "translator-credits"
 msgstr ""
 "Robert-André Mauchin <zebob.m@pengzone.org>, 2008.\n"
@@ -249,7 +261,7 @@ msgstr ""
 "  Og Maciel https://launchpad.net/~ogmaciel\n"
 "  maxime valy https://launchpad.net/~maxime.valy"
 
-#: ../src/gui/aboutdialog.py:35
+#: ../src/gui/aboutdialog.py:44
 msgid "BillReminder Website"
 msgstr "Site web de BillReminder"
 
