@@ -6,10 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: billreminder\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-13 16:00-0500\n"
-"PO-Revision-Date: 2010-08-16 11:39+0200\n"
-"Last-Translator: Γιάννης Κατσαμπίρης <juankatsampirhs@gmail.com>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=billreminder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-06-29 21:21+0000\n"
+"PO-Revision-Date: 2012-07-17 12:24+0200\n"
+"Last-Translator: Tom Tryfonidis <tomtryf@gmail.com>\n"
 "Language-Team: greek <gnome@gnome.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -19,20 +19,25 @@ msgstr ""
 "X-Poedit-Country: GREECE\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../data/billreminderd.desktop.in.h:1 ../src/billreminderd.py:43
-#: ../src/daemon/alarm.py:139 ../src/daemon/dbus_manager.py:46
+#: ../data/billreminderd.desktop.in.h:1
+#: ../src/billreminderd.py:43
+#: ../src/daemon/alarm.py:138
+#: ../src/daemon/dbus_manager.py:46
 msgid "BillReminder Notifier"
 msgstr "BillReminder - Υπενθύμιση λογαριασμών"
 
-#: ../data/billreminderd.desktop.in.h:2 ../data/billreminder.desktop.in.h:2
+#: ../data/billreminderd.desktop.in.h:2
+#: ../data/billreminder.desktop.in.h:2
 msgid "Bills manager"
 msgstr "Διαχείριση λογαριασμών"
 
-#: ../data/billreminderd.desktop.in.h:3 ../data/billreminder.desktop.in.h:3
+#: ../data/billreminderd.desktop.in.h:3
+#: ../data/billreminder.desktop.in.h:3
 msgid "Never forget to pay a bill again!"
 msgstr "Δεν θα ξεχάσετε να πληρώσετε το λογαριασμό ξανά!"
 
-#: ../data/billreminder.desktop.in.h:1 ../src/gui/widgets/trayicon.py:29
+#: ../data/billreminder.desktop.in.h:1
+#: ../src/gui/widgets/trayicon.py:43
 #: ../src/lib/utils.py:138
 msgid "BillReminder"
 msgstr "BillReminder"
@@ -142,25 +147,32 @@ msgid "Whether to use dialogs for notifications."
 msgstr "Αν θα γίνει χρήση των διαλόγων για ειδοποιήσεις."
 
 #. Dialog Title
-#: ../data/main.ui.h:1 ../src/lib/dialogs.py:65
+#: ../data/main.ui.h:1
+#: ../src/lib/dialogs.py:65
 msgid "Add a new bill"
 msgstr "Προσθήκη νέου λογαριασμού"
 
-#: ../data/main.ui.h:2 ../src/gui/maindialog.py:140
+#: ../data/main.ui.h:2
+#: ../src/gui/maindialog.py:161
 msgid "Delete selected bill"
 msgstr "Διαγραφή επιλεγμένου λογαριασμού"
 
 #. Dialog Title
-#: ../data/main.ui.h:3 ../src/gui/maindialog.py:137 ../src/lib/dialogs.py:76
+#: ../data/main.ui.h:3
+#: ../src/gui/maindialog.py:158
+#: ../src/lib/dialogs.py:76
 msgid "Edit a bill"
 msgstr "Επεξεργασία λογαριασμού"
 
-#: ../data/main.ui.h:4 ../src/gui/maindialog.py:146
+#: ../data/main.ui.h:4
+#: ../src/gui/maindialog.py:167
 msgid "Mark as not paid"
 msgstr "Σήμανση ως μη πληρωμένου"
 
 #. Button Title
-#: ../data/main.ui.h:5 ../src/daemon/alarm.py:146 ../src/gui/maindialog.py:143
+#: ../data/main.ui.h:5
+#: ../src/daemon/alarm.py:145
+#: ../src/gui/maindialog.py:164
 #: ../src/lib/utils.py:135
 msgid "Mark as paid"
 msgstr "Σήμανση ως πληρωμένου"
@@ -170,11 +182,11 @@ msgid "Show Toolbar"
 msgstr "Εμφάνιση γραμμής εργαλείων"
 
 #: ../data/main.ui.h:7
-#, fuzzy
 msgid "_All Bills"
-msgstr "Όλοι οι λογαριασμοί"
+msgstr "Ό_λοι οι λογαριασμοί"
 
-#: ../data/main.ui.h:8 ../src/gui/maindialog.py:136
+#: ../data/main.ui.h:8
+#: ../src/gui/maindialog.py:157
 msgid "_Edit"
 msgstr "_Επεξεργασία"
 
@@ -189,12 +201,12 @@ msgstr "_Βοήθεια"
 #: ../data/main.ui.h:11
 #, fuzzy
 msgid "_Not Paid Only"
-msgstr "Απλήρωτα μόνο"
+msgstr "Δημιουργία μόνο εάν δεν υπάρχει"
 
 #: ../data/main.ui.h:12
 #, fuzzy
 msgid "_Paid Only"
-msgstr "Πληρωμένα μόνο"
+msgstr "[μόνο για ανάγνωση]"
 
 #: ../data/main.ui.h:13
 msgid "_View"
@@ -240,11 +252,13 @@ msgstr "_Δικαιούχος πληρωμής:"
 msgid "_Repeat:"
 msgstr "_Επανάληψη:"
 
-#: ../src/billreminder.py:45 ../src/billreminderd.py:23
+#: ../src/billreminder.py:45
+#: ../src/billreminderd.py:23
 msgid "Usage:  billreminder [OPTIONS...]"
 msgstr "Χρήση: billreminder  [ΕΠΙΛΟΓΕΣ...]"
 
-#: ../src/billreminder.py:46 ../src/billreminderd.py:24
+#: ../src/billreminder.py:46
+#: ../src/billreminderd.py:24
 msgid "Displays the version number for this application."
 msgstr "Εμφανίζει τον αριθμό έκδοσης για αυτή την εφαρμογή."
 
@@ -264,7 +278,8 @@ msgstr "Πρόσβαση στη βάση δεδομένων, χωρίς το δ�
 msgid "This option is not implemented yet."
 msgstr "Η επιλογή δεν έχει εφαρμοστεί ακόμη."
 
-#: ../src/billreminder.py:60 ../src/billreminderd.py:42
+#: ../src/billreminder.py:60
+#: ../src/billreminderd.py:42
 #: ../src/daemon/dbus_manager.py:45
 #, python-format
 msgid "This is %(appname)s - Version: %(version)s"
@@ -286,28 +301,30 @@ msgstr "Εκκίνηση δαίμονα και έναρξη του γραφικ�
 msgid "Stop daemon."
 msgstr "Διακοπή του δαίμονα."
 
-#: ../src/daemon/alarm.py:76
+#: ../src/daemon/alarm.py:75
 #, python-format
 msgid "You have %s outstanding bill to pay!"
 msgid_plural "You have %s outstanding bills to pay!"
 msgstr[0] "Έχετε %s αξιοσημείωτο λογαριασμό για πληρωμή!"
 msgstr[1] "Έχετε %s αξιοσημείωτους λογαριασμούς για πληρωμή!"
 
-#: ../src/daemon/alarm.py:81
+#: ../src/daemon/alarm.py:80
 msgid "Show BillReminder"
 msgstr "Εμφάνιση BillReminder"
 
-#: ../src/daemon/alarm.py:123 ../src/daemon/alarm.py:230
+#: ../src/daemon/alarm.py:122
+#: ../src/daemon/alarm.py:229
 #, python-format
 msgid "The bill %(bill)s will be due at %(day)s."
 msgstr "Ο λογαριασμός %(bill)s θα λήξει σε %(day)s."
 
-#: ../src/daemon/alarm.py:135
+#: ../src/daemon/alarm.py:134
 #, python-format
 msgid "The bill %s is due."
 msgstr "Ο λογαριασμός %s έφθασε στην ημερομηνία εξόφλησης."
 
-#: ../src/daemon/alarm.py:148 ../src/lib/utils.py:136
+#: ../src/daemon/alarm.py:147
+#: ../src/lib/utils.py:136
 msgid "Edit"
 msgstr "Επεξεργασία"
 
@@ -318,8 +335,7 @@ msgstr "Βρέθηκε κλειδωμένο αρχείο:  Εκτελείται 
 
 #: ../src/daemon/main.py:90
 msgid "Lock File found: Possibly the program was exited unexpectedly."
-msgstr ""
-"Βρέθηκε κλειδωμένο αρχείο: Πιθανόν το πρόγραμμα τερματίστηκε αναπάντεχα."
+msgstr "Βρέθηκε κλειδωμένο αρχείο: Πιθανόν το πρόγραμμα τερματίστηκε αναπάντεχα."
 
 #: ../src/daemon/main.py:93
 msgid "Removing Lock File..."
@@ -348,54 +364,62 @@ msgstr ""
 msgid "BillReminder Website"
 msgstr "Ιστοσελίδα BillReminder"
 
-#: ../src/gui/adddialog.py:104 ../src/gui/widgets/datebutton.py:40
+#: ../src/gui/adddialog.py:104
+#: ../src/gui/widgets/datebutton.py:40
 msgid "Select Date and Time"
 msgstr "Επιλογή ημερομηνίας και ώρας"
 
 #. TRANSLATORS: No date selected
-#: ../src/gui/adddialog.py:241 ../src/gui/adddialog.py:265
-#: ../src/gui/maindialog.py:230 ../src/gui/widgets/datebutton.py:18
+#: ../src/gui/adddialog.py:241
+#: ../src/gui/adddialog.py:265
+#: ../src/gui/maindialog.py:251
+#: ../src/gui/widgets/datebutton.py:18
 #: ../src/gui/widgets/datebutton.py:26
 msgid "None"
 msgstr "Κανένα"
 
-#: ../src/gui/adddialog.py:247 ../src/gui/categoriesdialog.py:48
+#: ../src/gui/adddialog.py:247
+#: ../src/gui/categoriesdialog.py:48
 msgid "New Category"
 msgstr "Νέα κατηγορία"
 
-#: ../src/gui/adddialog.py:287 ../src/gui/adddialog.py:425
-#: ../src/gui/adddialog.py:434
-msgid ""
-"The end date is set to a date prior to the start date. Setting it to match "
-"the start date."
-msgstr ""
-"Η τελική ημερομηνία έχει οριστεί σε ημερομηνία πριν την αρχική ημερομηνία. "
-"Ορίστε την να ταιριάζει με την ημερομηνία έναρξης."
+#: ../src/gui/adddialog.py:287
+msgid "The end date is set to a date prior to the start date. Setting it to match the start date."
+msgstr "Η τελική ημερομηνία έχει οριστεί σε ημερομηνία πριν την αρχική ημερομηνία. Ορίστε την να ταιριάζει με την ημερομηνία έναρξης."
 
-#: ../src/gui/adddialog.py:288 ../src/gui/adddialog.py:426
-#: ../src/gui/adddialog.py:435
+#: ../src/gui/adddialog.py:288
 msgid "Date set in the past"
 msgstr "Η ημερομηνία ρυθμίστηκε στο παρελθόν"
 
-#: ../src/gui/adddialog.py:403
+#: ../src/gui/adddialog.py:414
 #, python-format
 msgid "\"%s\" and \"%s\" are required fields."
 msgstr "\"%s\" και \"%s\" είναι απαιτούμενα πεδία."
 
-#: ../src/gui/adddialog.py:404 ../src/gui/adddialog.py:407
-#: ../src/gui/widgets/viewbill.py:85
+#: ../src/gui/adddialog.py:415
+#: ../src/gui/adddialog.py:418
+#: ../src/gui/widgets/viewbill.py:84
 msgid "Payee"
 msgstr "Δικαιούχος πληρωμής"
 
-#: ../src/gui/adddialog.py:404 ../src/gui/adddialog.py:410
-#: ../src/gui/widgets/viewbill.py:89
+#: ../src/gui/adddialog.py:415
+#: ../src/gui/adddialog.py:421
+#: ../src/gui/widgets/viewbill.py:88
 msgid "Amount"
 msgstr "Ποσό"
 
-#: ../src/gui/adddialog.py:407 ../src/gui/adddialog.py:410
+#: ../src/gui/adddialog.py:418
+#: ../src/gui/adddialog.py:421
 #, python-format
 msgid "\"%s\" is required field."
 msgstr "\"%s\" είναι απαιτούμενο πεδίο."
+
+#: ../src/gui/adddialog.py:424
+#| msgid ""
+#| "The end date is set to a date prior to the start date. Setting it to "
+#| "match the start date."
+msgid "The end date is set to a date prior to the start date."
+msgstr "Η τελική ημερομηνία έχει οριστεί σε ημερομηνία πριν την αρχική ημερομηνία."
 
 #: ../src/gui/categoriesdialog.py:23
 msgid "Categories Manager"
@@ -435,55 +459,69 @@ msgid_plural "There are %d more bills in this category."
 msgstr[0] "Υπάρχει %d ακόμα λογαριασμός σε αυτή τη κατηγορία."
 msgstr[1] "Υπάρχουν %d ακόμα λογαριασμοί σε αυτή τη κατηγορία."
 
-#: ../src/gui/categoriesdialog.py:243 ../src/gui/maindialog.py:424
+#: ../src/gui/categoriesdialog.py:243
+#: ../src/gui/maindialog.py:463
 msgid "Confirmation"
 msgstr "Επιβεβαίωση"
 
 #. for some reason the actions strings do not get translated yet
 #. so we define them here so they would be picked up by the pyfile scanner
-#: ../src/gui/maindialog.py:133
-#, fuzzy
+#: ../src/gui/maindialog.py:154
 msgid "_New"
-msgstr "Νέο"
+msgstr "_Νέο"
 
-#: ../src/gui/maindialog.py:134
+#: ../src/gui/maindialog.py:155
 msgid "Add new bill"
 msgstr "Προσθήκη νέου λογαριασμού"
 
-#: ../src/gui/maindialog.py:139
-#, fuzzy
+#: ../src/gui/maindialog.py:160
 msgid "_Delete"
-msgstr "Διαγραφή"
+msgstr "_Διαγραφή"
 
-#: ../src/gui/maindialog.py:142
+#: ../src/gui/maindialog.py:163
 #, fuzzy
 msgid "P_aid"
 msgstr "Πληρωμένο"
 
-#: ../src/gui/maindialog.py:145
+#: ../src/gui/maindialog.py:166
 #, fuzzy
 msgid "No_t Paid"
-msgstr "Απλήρωτο"
+msgstr "<i>χωρίς περιγραφή</i>"
 
-#: ../src/gui/maindialog.py:148
-#, fuzzy
+#: ../src/gui/maindialog.py:169
 msgid "_Show Toolbar"
-msgstr "Εμφάνιση γραμμής εργαλείων"
+msgstr "_Εμφάνιση γραμμής εργαλείων"
 
-#: ../src/gui/maindialog.py:149
+#: ../src/gui/maindialog.py:170
 msgid "Show the toolbar"
 msgstr "Εμφάνιση γραμμής εργαλείων"
 
-#: ../src/gui/maindialog.py:237
+#: ../src/gui/maindialog.py:258
 msgid "%m/%d"
 msgstr "%m/%d"
 
-#: ../src/gui/maindialog.py:422
+#: ../src/gui/maindialog.py:424
+#, fuzzy
+msgid "Not Paid Only"
+msgstr "Δημιουργία μόνο εάν δεν υπάρχει"
+
+#: ../src/gui/maindialog.py:426
+#, fuzzy
+msgid "Paid Only"
+msgstr "[μόνο για ανάγνωση]"
+
+#: ../src/gui/maindialog.py:461
 #, python-format
 msgid "Do you really want to delete \"%s\"?"
 msgstr "Θέλετε πραγματικά να διαγράψετε το \"%s\";"
 
-#: ../src/gui/prefdialog.py:26 ../src/gui/widgets/trayicon.py:47
+#: ../src/gui/maindialog.py:545
+#: ../src/gui/widgets/viewbill.py:92
+msgid "Paid"
+msgstr "Πληρωμένο"
+
+#: ../src/gui/prefdialog.py:26
+#: ../src/gui/widgets/trayicon.py:67
 msgid "Preferences"
 msgstr "Προτιμήσεις"
 
@@ -495,7 +533,8 @@ msgstr "<b>Ειδοποιήσεις</b>"
 msgid "_Alert before due date:"
 msgstr "_Ειδοποίηση πριν την ημερομηνία λήξης:"
 
-#: ../src/gui/prefdialog.py:66 ../src/gui/prefdialog.py:116
+#: ../src/gui/prefdialog.py:66
+#: ../src/gui/prefdialog.py:116
 msgid "day(s)."
 msgstr "μέρα(ες)."
 
@@ -505,8 +544,7 @@ msgstr "_Προτιμώμενη ώρα:"
 
 #: ../src/gui/prefdialog.py:72
 msgid "Get alerted when individual bills are due."
-msgstr ""
-"Ειδοποιηθείτε όταν ατομικοί λογαριασμοί φθάσουν στην ημερομηνία εξόφλησης."
+msgstr "Ειδοποιηθείτε όταν ατομικοί λογαριασμοί φθάσουν στην ημερομηνία εξόφλησης."
 
 #: ../src/gui/prefdialog.py:96
 msgid "<b>Notifications</b>"
@@ -555,11 +593,13 @@ msgstr "<b>Σημείωση:</b> Ο ειδοποιητής του BillReminder �
 msgid "%m/%d/%Y"
 msgstr "%d/%m/%Y"
 
-#: ../src/gui/widgets/datebutton.py:32 ../src/gui/widgets/datebutton.py:65
+#: ../src/gui/widgets/datebutton.py:32
+#: ../src/gui/widgets/datebutton.py:65
 msgid "%Y/%m/%d %H:%M"
 msgstr "%d/%m/%Y %H:%M"
 
-#: ../src/gui/widgets/datebutton.py:43 ../src/gui/widgets/datebutton.py:73
+#: ../src/gui/widgets/datebutton.py:43
+#: ../src/gui/widgets/datebutton.py:73
 msgid "_None"
 msgstr "_Κανένα"
 
@@ -571,11 +611,11 @@ msgstr "Επιλογή ημερομηνίας και ώρας"
 msgid "<b>_Time:</b>"
 msgstr "<b>Ώ_ρα:</b>"
 
-#: ../src/gui/widgets/statusbar.py:16
+#: ../src/gui/widgets/statusbar.py:17
 msgid "Bills:"
 msgstr "Λογαριασμοί:"
 
-#: ../src/gui/widgets/statusbar.py:26
+#: ../src/gui/widgets/statusbar.py:27
 msgid "Notes:"
 msgstr "Σημειώσεις:"
 
@@ -583,39 +623,38 @@ msgstr "Σημειώσεις:"
 msgid "(hh/mm)"
 msgstr "(ωω/λλ)"
 
-#: ../src/gui/widgets/trayicon.py:42
+#: ../src/gui/widgets/trayicon.py:53
+#: ../src/gui/widgets/trayicon.py:62
 msgid "Hide Window"
 msgstr "Απόκρυψη παραθύρου"
 
-#: ../src/gui/widgets/trayicon.py:44
+#: ../src/gui/widgets/trayicon.py:55
+#: ../src/gui/widgets/trayicon.py:64
 msgid "Show Window"
 msgstr "Εμφάνιση παραθύρου"
 
-#: ../src/gui/widgets/trayicon.py:50
+#: ../src/gui/widgets/trayicon.py:70
 msgid "About"
 msgstr "Περί"
 
-#: ../src/gui/widgets/trayicon.py:54
+#: ../src/gui/widgets/trayicon.py:74
 msgid "Quit"
 msgstr "Τερματισμός"
 
-#: ../src/gui/widgets/viewbill.py:83 ../src/gui/widgets/viewcategory.py:39
+#: ../src/gui/widgets/viewbill.py:82
+#: ../src/gui/widgets/viewcategory.py:39
 msgid "Category"
 msgstr "Κατηγορία"
 
-#: ../src/gui/widgets/viewbill.py:87
+#: ../src/gui/widgets/viewbill.py:86
 msgid "Date"
 msgstr "Ημερομηνία"
 
-#: ../src/gui/widgets/viewbill.py:91
+#: ../src/gui/widgets/viewbill.py:90
 msgid "Notes"
 msgstr "Σημειώσεις"
 
-#: ../src/gui/widgets/viewbill.py:93
-msgid "Paid"
-msgstr "Πληρωμένο"
-
-#: ../src/gui/widgets/viewbill.py:95
+#: ../src/gui/widgets/viewbill.py:94
 msgid "Alarm"
 msgstr "Ειδοποίηση"
 
@@ -627,13 +666,79 @@ msgstr "Προγραμματιστές:"
 msgid "Contributors:"
 msgstr "Συντελεστές:"
 
+#: ../src/lib/dal.py:155
+msgid "Utilities"
+msgstr "Εργαλεία"
+
+#: ../src/lib/dal.py:156
+msgid "Food & Dining"
+msgstr "Τρόφιμα"
+
+#: ../src/lib/dal.py:157
+msgid "Mortgage"
+msgstr "Υποθήκη"
+
+#: ../src/lib/dal.py:158
+msgid "Rent"
+msgstr "Ενοικιάσεις"
+
+#: ../src/lib/dal.py:159
+msgid "Medical"
+msgstr "Ιατρικά"
+
+#: ../src/lib/dal.py:160
+msgid "Educational"
+msgstr "Εκπαιδευτικά"
+
+#: ../src/lib/dal.py:161
+#| msgid "Confirmation"
+msgid "Donations"
+msgstr "Δωρεές"
+
+#: ../src/lib/dal.py:162
+msgid "Credit Card"
+msgstr "Πιστωτική κάρτα"
+
+#: ../src/lib/dal.py:163
+msgid "Gifts"
+msgstr "Δώρα"
+
+#: ../src/lib/dal.py:164
+msgid "Books"
+msgstr "Βιβλία "
+
+#: ../src/lib/dal.py:165
+msgid "Online Services"
+msgstr "Διαδικτυακές υπηρεσίες"
+
+#: ../src/lib/dal.py:166
+msgid "Insurance"
+msgstr "Ασφάλιση"
+
+#: ../src/lib/dal.py:167
+msgid "Auto & Transport"
+msgstr "Μεταφορά"
+
+#: ../src/lib/dal.py:168
+msgid "Home"
+msgstr "Οικία"
+
+#: ../src/lib/dal.py:169
+msgid "Gas & Fuel"
+msgstr "Αέριο & καύσιμα"
+
+#: ../src/lib/dal.py:170
+msgid "Electronics"
+msgstr "Ηλεκτρονικά"
+
 #. Dialog Title
 #: ../src/lib/utils.py:83
 msgid "Question"
 msgstr "Ερώτηση"
 
 #. Dialog Title
-#: ../src/lib/utils.py:96 ../src/lib/utils.py:109
+#: ../src/lib/utils.py:96
+#: ../src/lib/utils.py:109
 msgid "Error"
 msgstr "Σφάλμα"
 
@@ -654,15 +759,15 @@ msgstr "Αποθήκευση αλλαγών πριν το κλείσιμο;"
 msgid "If you close without saving, your changes will be discarded."
 msgstr "Αν κλείσετε χωρίς αποθήκευση, οι αλλαγές σας θα απορριφθούν."
 
-#: ../src/lib/scheduler.py:6
-msgid "Once"
-msgstr "Μία φορά"
-
 #: ../src/lib/scheduler.py:7
+msgid "Once"
+msgstr "Μια φορά"
+
+#: ../src/lib/scheduler.py:8
 msgid "Weekly"
 msgstr "Εβδομαδιαία"
 
-#: ../src/lib/scheduler.py:8
+#: ../src/lib/scheduler.py:9
 msgid "Monthly"
 msgstr "Μηνιαία"
 
