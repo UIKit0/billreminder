@@ -1,0 +1,729 @@
+# Serbian translation for billreminder.
+# Copyright (C) 2013 billreminder's COPYRIGHT HOLDER
+# This file is distributed under the same license as the billreminder package.
+# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2012, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: billreminder billreminder-0.4.0\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=billre"
+"minder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2013-01-21 19:11+0000\n"
+"PO-Revision-Date: 2013-03-30 07:25+0200\n"
+"Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
+"Language-Team: Serbian <gnom@prevod.org>\n"
+"Language: sr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : "
+"n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Project-Style: gnome\n"
+
+#: ../data/billreminderd.desktop.in.h:1 ../src/billreminderd.py:43
+#: ../src/daemon/alarm.py:139 ../src/daemon/dbus_manager.py:46
+msgid "BillReminder Notifier"
+msgstr "Указивач Подсетника рачуна"
+
+#: ../data/billreminderd.desktop.in.h:2 ../data/billreminder.desktop.in.h:2
+msgid "Never forget to pay a bill again!"
+msgstr "Никада више не заборавите да платите неки рачун!"
+
+#: ../data/billreminderd.desktop.in.h:3 ../data/billreminder.desktop.in.h:3
+msgid "Bills manager"
+msgstr "Управник рачунима"
+
+#: ../data/billreminder.desktop.in.h:1 ../src/gui/widgets/trayicon.py:29
+#: ../src/lib/utils.py:138
+msgid "BillReminder"
+msgstr "Подсетник рачуна"
+
+#: ../data/billreminder.schemas.in.h:1
+msgid "How long to display the alarm notification."
+msgstr "Колико дуго ће бити приказано обавештење аларма."
+
+#: ../data/billreminder.schemas.in.h:2
+msgid "Whether to display notifications on startup."
+msgstr "Да ли ће обавештења бити приказана при покретању."
+
+#: ../data/billreminder.schemas.in.h:3
+msgid "Whether to use dialogs for notifications."
+msgstr "Да ли ће бити коришћени прозорчићи за обавештења."
+
+#: ../data/billreminder.schemas.in.h:4
+msgid "Whether to show alarms before a bill is due."
+msgstr "Да ли ће бити приказани аларми пре истека рачуна."
+
+#: ../data/billreminder.schemas.in.h:5
+msgid "Whether to show notifications for paid bills."
+msgstr "Да ли ће бити приказана обавештења за плаћене рачуне."
+
+#: ../data/billreminder.schemas.in.h:6
+msgid "Whether to show alarms."
+msgstr "Да ли ће бити приказани аларми."
+
+#: ../data/billreminder.schemas.in.h:7
+msgid "How many days prior to due date to notify."
+msgstr "Колико дана пре датума истека за обавештење."
+
+#: ../data/billreminder.schemas.in.h:8
+msgid "How many days prior to due date to alert."
+msgstr "Колико дана пре датума истека за упозорење."
+
+#: ../data/billreminder.schemas.in.h:9
+msgid "What specific time to display alert."
+msgstr "У које посебно време ће бити приказано упозорење."
+
+#: ../data/billreminder.schemas.in.h:10
+msgid "The date a bill is due."
+msgstr "Датум истека рачуна."
+
+#: ../data/billreminder.schemas.in.h:11
+msgid "Display the menu bar."
+msgstr "Приказивање траке изборника."
+
+#: ../data/billreminder.schemas.in.h:12
+msgid "Whether to display the menu bar or not."
+msgstr "Да ли ће бити приказана трака изборника или не."
+
+#: ../data/billreminder.schemas.in.h:13
+msgid "Display only paid bills."
+msgstr "Приказивање само плаћених рачуна."
+
+#: ../data/billreminder.schemas.in.h:14
+msgid "Display the toolbar."
+msgstr "Приказивање траке алата."
+
+#: ../data/billreminder.schemas.in.h:15
+msgid "Whether to display the toolbar or not."
+msgstr "Да ли ће бити приказана трака алата или не."
+
+#: ../data/billreminder.schemas.in.h:16
+msgid "Default width of the application."
+msgstr "Основна ширина програма."
+
+#: ../data/billreminder.schemas.in.h:17
+msgid "Defines the default width of the application."
+msgstr "Одређује основну ширину програма."
+
+#: ../data/billreminder.schemas.in.h:18
+msgid "Default height of the application."
+msgstr "Основна висина програма."
+
+#: ../data/billreminder.schemas.in.h:19
+msgid "Defines the default height of the application."
+msgstr "Одређује основну висину програма."
+
+#: ../data/billreminder.schemas.in.h:20
+msgid "Default X coordinate for the application."
+msgstr "Основна X координата програма."
+
+#: ../data/billreminder.schemas.in.h:21
+msgid "Defines the default X coordinate for the application."
+msgstr "Одређује основну водоравну координату програма."
+
+#: ../data/billreminder.schemas.in.h:22
+msgid "Default Y coordinate for the application."
+msgstr "Основна Y координата програма."
+
+#: ../data/billreminder.schemas.in.h:23
+msgid "Defines the default Y coordinate for the application."
+msgstr "Одређује основну усправну координату програма."
+
+#: ../data/billreminder.schemas.in.h:24
+msgid "Delay between notifications."
+msgstr "Застој између обавештења."
+
+#: ../data/billreminder.schemas.in.h:25
+msgid "Start the application in the system's tray."
+msgstr "Покретање програма у системској касети."
+
+#: ../data/billreminder.schemas.in.h:26
+msgid "Whether to start the application in the system's tray."
+msgstr "Да ли ће програм бити покренут у системској касети."
+
+#: ../data/main.ui.h:1
+msgid "_File"
+msgstr "_Датотека"
+
+#: ../data/main.ui.h:2 ../src/gui/maindialog.py:137
+msgid "_Edit"
+msgstr "_Уређивање"
+
+#: ../data/main.ui.h:3
+msgid "_View"
+msgstr "_Преглед"
+
+#: ../data/main.ui.h:4
+msgid "Show Toolbar"
+msgstr "Прикажи траку алата"
+
+#: ../data/main.ui.h:5
+msgid "_Paid Only"
+msgstr "_Само плаћене"
+
+#: ../data/main.ui.h:6
+msgid "_Not Paid Only"
+msgstr "_Не само плаћене"
+
+#: ../data/main.ui.h:7
+msgid "_All Bills"
+msgstr "_Све рачуне"
+
+#: ../data/main.ui.h:8
+msgid "_Help"
+msgstr "По_моћ"
+
+#. Dialog Title
+#: ../data/main.ui.h:9 ../src/lib/dialogs.py:65
+msgid "Add a new bill"
+msgstr "Додајте нови рачун"
+
+#. Dialog Title
+#: ../data/main.ui.h:10 ../src/gui/maindialog.py:138 ../src/lib/dialogs.py:76
+msgid "Edit a bill"
+msgstr "Уредите рачун"
+
+#: ../data/main.ui.h:11 ../src/gui/maindialog.py:141
+msgid "Delete selected bill"
+msgstr "Обришите изабрани рачун"
+
+#. Button Title
+#: ../data/main.ui.h:12 ../src/daemon/alarm.py:146
+#: ../src/gui/maindialog.py:144 ../src/lib/utils.py:135
+msgid "Mark as paid"
+msgstr "Означите да је плаћен"
+
+#: ../data/main.ui.h:13 ../src/gui/maindialog.py:147
+msgid "Mark as not paid"
+msgstr "Означите да није плаћен"
+
+#: ../data/add_bill.ui.h:1
+msgid "_Payee:"
+msgstr "_Поверилац:"
+
+#: ../data/add_bill.ui.h:2
+msgid "_Amount:"
+msgstr "_Износ:"
+
+#: ../data/add_bill.ui.h:3
+msgid "_Due Date:"
+msgstr "_Крајњи рок:"
+
+#: ../data/add_bill.ui.h:4
+msgid "_Category:"
+msgstr "_Категорија:"
+
+#: ../data/add_bill.ui.h:5
+msgid "_Repeat:"
+msgstr "_Понови:"
+
+#: ../data/add_bill.ui.h:6
+msgid "_End Date:"
+msgstr "_Датум завршетка:"
+
+#: ../data/add_bill.ui.h:7
+msgid "A_larm:\t"
+msgstr "_Аларм:\t"
+
+#: ../data/add_bill.ui.h:8
+msgid "_Notes:"
+msgstr "_Белешке:"
+
+#: ../data/add_bill.ui.h:9
+msgid "Optional Fields"
+msgstr "Необавезна поља"
+
+#: ../data/add_bill.ui.h:10
+msgid "Manage Categories"
+msgstr "Управљајте категоријама"
+
+#: ../src/billreminder.py:45 ../src/billreminderd.py:23
+msgid "Usage:  billreminder [OPTIONS...]"
+msgstr "Употреба:  billreminder [ОПЦИЈЕ...]"
+
+#: ../src/billreminder.py:46 ../src/billreminderd.py:24
+msgid "Displays the version number for this application."
+msgstr "Приказује број издања за овај програм."
+
+#: ../src/billreminder.py:47
+msgid "About this application."
+msgstr "О овом програму."
+
+#: ../src/billreminder.py:48
+msgid "Adds a new bill to the database."
+msgstr "Додаје нови рачун у базу података."
+
+#: ../src/billreminder.py:49
+msgid "Access database directly, without daemon."
+msgstr "Приступа бази података непосредно, без демона."
+
+#: ../src/billreminder.py:58
+msgid "This option is not implemented yet."
+msgstr "Ова опција још увек није примењена."
+
+#: ../src/billreminder.py:60 ../src/billreminderd.py:42
+#: ../src/daemon/dbus_manager.py:45
+#, python-format
+msgid "This is %(appname)s - Version: %(version)s"
+msgstr "Ово је „%(appname)s“ — Издање: %(version)s"
+
+#: ../src/billreminderd.py:25
+msgid "Print output messages."
+msgstr "Исписује излазне поруке."
+
+#: ../src/billreminderd.py:26
+msgid "Don't run as a daemon."
+msgstr "Не ради у позадини."
+
+#: ../src/billreminderd.py:27
+msgid "Start daemon and launch GUI."
+msgstr "Покреће демона и корисничко сучеље."
+
+#: ../src/billreminderd.py:28
+msgid "Stop daemon."
+msgstr "Зауставља демона."
+
+#: ../src/daemon/alarm.py:76
+#, python-format
+msgid "You have %s outstanding bill to pay!"
+msgid_plural "You have %s outstanding bills to pay!"
+msgstr[0] "Имате %s заостали рачун за плаћање!"
+msgstr[1] "Имате %s заостала рачуна за плаћање!"
+msgstr[2] "Имате %s заосталих рачуна за плаћање!"
+msgstr[3] "Имате %s заостали рачун за плаћање!"
+
+#: ../src/daemon/alarm.py:81
+msgid "Show BillReminder"
+msgstr "Прикажи подсетник рачуна"
+
+#: ../src/daemon/alarm.py:123 ../src/daemon/alarm.py:230
+#, python-format
+msgid "The bill %(bill)s will be due at %(day)s."
+msgstr "Рачун „%(bill)s“ ће истећи за %(day)s."
+
+#: ../src/daemon/alarm.py:135
+#, python-format
+msgid "The bill %s is due."
+msgstr "Рачун „%s“ је истекао."
+
+#: ../src/daemon/alarm.py:148 ../src/lib/utils.py:136
+msgid "Edit"
+msgstr "Уреди"
+
+#: ../src/daemon/main.py:85
+#, python-format
+msgid "Lock File found: You have another instance running. (pid=%d)"
+msgstr ""
+"Пронађена је закључана датотека: Постоји још један радни примерак. (пиб=%d)"
+
+#: ../src/daemon/main.py:90
+msgid "Lock File found: Possibly the program was exited unexpectedly."
+msgstr ""
+"Пронађена је закључана датотека: Вероватно да је програм неочекивано завршио."
+
+#: ../src/daemon/main.py:93
+msgid "Removing Lock File..."
+msgstr "Уклањам закључавање..."
+
+#: ../src/daemon/main.py:95
+msgid "Successfully."
+msgstr "Успео сам."
+
+#: ../src/daemon/main.py:97
+msgid "Failed."
+msgstr "Нисам успео."
+
+#: ../src/daemon/main.py:101
+msgid "BillReminder Notifier is already running."
+msgstr "Указивач Подсетника рачуна је већ покренут."
+
+#: ../src/gui/aboutdialog.py:16
+msgid "translator-credits"
+msgstr ""
+"  Мирослав Николић\n"
+"\n"
+"  http://prevod.org — превод на српски језик"
+
+#: ../src/gui/aboutdialog.py:30
+msgid "BillReminder Website"
+msgstr "Веб страница програма"
+
+#: ../src/gui/adddialog.py:104 ../src/gui/widgets/datebutton.py:40
+msgid "Select Date and Time"
+msgstr "Изабери датум и време"
+
+#. TRANSLATORS: No date selected
+#: ../src/gui/adddialog.py:241 ../src/gui/adddialog.py:265
+#: ../src/gui/maindialog.py:231 ../src/gui/widgets/datebutton.py:18
+#: ../src/gui/widgets/datebutton.py:26
+msgid "None"
+msgstr "Ништа"
+
+#: ../src/gui/adddialog.py:247 ../src/gui/categoriesdialog.py:48
+msgid "New Category"
+msgstr "Нова категорија"
+
+#: ../src/gui/adddialog.py:287
+msgid ""
+"The end date is set to a date prior to the start date. Setting it to match "
+"the start date."
+msgstr ""
+"Завршни датум је постављен на датум пре почетног датума. Подесите га да "
+"одговара почетном датуму."
+
+#: ../src/gui/adddialog.py:288
+msgid "Date set in the past"
+msgstr "Датум је постављен у прошлост"
+
+#: ../src/gui/adddialog.py:414
+#, python-format
+msgid "\"%s\" and \"%s\" are required fields."
+msgstr "„%s“ и „%s“ су обавезна поља."
+
+#: ../src/gui/adddialog.py:415 ../src/gui/adddialog.py:418
+#: ../src/gui/widgets/viewbill.py:85
+msgid "Payee"
+msgstr "Поверилац"
+
+#: ../src/gui/adddialog.py:415 ../src/gui/adddialog.py:421
+#: ../src/gui/widgets/viewbill.py:89
+msgid "Amount"
+msgstr "Износ"
+
+#: ../src/gui/adddialog.py:418 ../src/gui/adddialog.py:421
+#, python-format
+msgid "\"%s\" is required field."
+msgstr "„%s“ је обавезно поље."
+
+#: ../src/gui/adddialog.py:424
+msgid "The end date is set to a date prior to the start date."
+msgstr "Крајњи датум је постављен пре почетног датума."
+
+#: ../src/gui/categoriesdialog.py:23
+msgid "Categories Manager"
+msgstr "Управник категоријама"
+
+#: ../src/gui/categoriesdialog.py:59
+msgid "Categories"
+msgstr "Категорије"
+
+#: ../src/gui/categoriesdialog.py:82
+msgid "Name:"
+msgstr "Назив:"
+
+#: ../src/gui/categoriesdialog.py:85
+msgid "Color:"
+msgstr "Боја:"
+
+#: ../src/gui/categoriesdialog.py:215
+#, python-format
+msgid ""
+"The category \"%s\" already exists in the database!\n"
+"\n"
+"Do you want to save your change to the existing category?"
+msgstr ""
+"Категорија „%s“ већ постоји у бази података!\n"
+"\n"
+"Да ли желите да сачувате ваше измене у постојећој категорији?"
+
+#: ../src/gui/categoriesdialog.py:239
+msgid "Do you really want to delete this category?\n"
+msgstr "Да ли заиста желите да обришете ову категорију?\n"
+
+#: ../src/gui/categoriesdialog.py:240
+#, python-format
+msgid "There is %d more bill in this category."
+msgid_plural "There are %d more bills in this category."
+msgstr[0] "Постоји још %d рачун у овој категорији."
+msgstr[1] "Постоје још %d рачуна у овој категорији."
+msgstr[2] "Постоји још %d рачуна у овој категорији."
+msgstr[3] "Постоји још %d рачун у овој категорији."
+
+#: ../src/gui/categoriesdialog.py:243 ../src/gui/maindialog.py:425
+msgid "Confirmation"
+msgstr "Потврда"
+
+#. for some reason the actions strings do not get translated yet
+#. so we define them here so they would be picked up by the pyfile scanner
+#: ../src/gui/maindialog.py:134
+msgid "_New"
+msgstr "_Ново"
+
+#: ../src/gui/maindialog.py:135
+msgid "Add new bill"
+msgstr "Додајте нови рачун"
+
+#: ../src/gui/maindialog.py:140
+msgid "_Delete"
+msgstr "_Обриши"
+
+#: ../src/gui/maindialog.py:143
+msgid "P_aid"
+msgstr "_Плаћен"
+
+#: ../src/gui/maindialog.py:146
+msgid "No_t Paid"
+msgstr "_Није плаћен"
+
+#: ../src/gui/maindialog.py:149
+msgid "_Show Toolbar"
+msgstr "Прикажи траку _алата"
+
+#: ../src/gui/maindialog.py:150
+msgid "Show the toolbar"
+msgstr "Прикажите траку алата"
+
+#: ../src/gui/maindialog.py:238
+msgid "%m/%d"
+msgstr "%m/%d"
+
+#: ../src/gui/maindialog.py:423
+#, python-format
+msgid "Do you really want to delete \"%s\"?"
+msgstr "Да ли заиста желите да обришете „%s“?"
+
+#: ../src/gui/prefdialog.py:26 ../src/gui/widgets/trayicon.py:47
+msgid "Preferences"
+msgstr "Поставке"
+
+#: ../src/gui/prefdialog.py:55
+msgid "<b>Alarms</b>"
+msgstr "<b>Аларм</b>"
+
+#: ../src/gui/prefdialog.py:61
+msgid "_Alert before due date:"
+msgstr "_Упозори пре датума истека:"
+
+#: ../src/gui/prefdialog.py:66 ../src/gui/prefdialog.py:116
+msgid "day(s)."
+msgstr "дан(и)."
+
+#: ../src/gui/prefdialog.py:69
+msgid "_Preferred time:"
+msgstr "_Жељено време:"
+
+#: ../src/gui/prefdialog.py:72
+msgid "Get alerted when individual bills are due."
+msgstr "Будите упозорени када истекну појединачни рачуни."
+
+#: ../src/gui/prefdialog.py:96
+msgid "<b>Notifications</b>"
+msgstr "<b>Обавештења</b>"
+
+#: ../src/gui/prefdialog.py:102
+msgid "Define when to be notified of upcoming bills."
+msgstr "Одредите када ћете бити обавештени о надолазећим рачунима."
+
+#: ../src/gui/prefdialog.py:110
+msgid "_Notify before due date:"
+msgstr "_Обавести пре датума истека:"
+
+#: ../src/gui/prefdialog.py:131
+msgid "<b>Alert Type</b>"
+msgstr "<b>Врста упозорења</b>"
+
+#: ../src/gui/prefdialog.py:141
+msgid "Notification _Bubble"
+msgstr "_Балончић обавештења"
+
+#: ../src/gui/prefdialog.py:143
+msgid "Alert _Dialog"
+msgstr "Прозорче _упозорења"
+
+#: ../src/gui/prefdialog.py:155
+msgid ""
+"<b>Warning:</b> BillReminder Notifier is \n"
+"not running! You need to start it in order \n"
+" to receive notifications."
+msgstr ""
+"<b>Упозорење:</b> Указивач Подсетника рачуна \n"
+"није покренут! Морате да га покренете да \n"
+" бисте примали обавештења."
+
+#: ../src/gui/prefdialog.py:162
+msgid "_Start BillReminder Notifier"
+msgstr "_Покрени указивача Подсетника рачуна"
+
+#: ../src/gui/prefdialog.py:231
+msgid "<b>Note:</b> BillReminder Notifier is now running."
+msgstr "<b>Напомена:</b> Указивач Подсетника рачуна је сада покренут."
+
+#. TRANSLATORS: This is the date that is selected from the calendar. Try to keep it small.
+#: ../src/gui/widgets/datepicker.py:87
+msgid "%m/%d/%Y"
+msgstr "%d. %m. %Y."
+
+#: ../src/gui/widgets/datebutton.py:32 ../src/gui/widgets/datebutton.py:65
+msgid "%Y/%m/%d %H:%M"
+msgstr "%d. %m. %Y. %H:%M"
+
+#: ../src/gui/widgets/datebutton.py:43 ../src/gui/widgets/datebutton.py:73
+msgid "_None"
+msgstr "_Ништа"
+
+#: ../src/gui/widgets/datebutton.py:70
+msgid "Select date and time"
+msgstr "Изаберите датум и време"
+
+#: ../src/gui/widgets/datebutton.py:94
+msgid "<b>_Time:</b>"
+msgstr "<b>_Време:</b>"
+
+#: ../src/gui/widgets/statusbar.py:16
+msgid "Bills:"
+msgstr "Рачуни:"
+
+#: ../src/gui/widgets/statusbar.py:26
+msgid "Notes:"
+msgstr "Белешке:"
+
+#: ../src/gui/widgets/timewidget.py:39
+msgid "(hh/mm)"
+msgstr "(чч/мм)"
+
+#: ../src/gui/widgets/trayicon.py:42
+msgid "Hide Window"
+msgstr "Сакриј прозор"
+
+#: ../src/gui/widgets/trayicon.py:44
+msgid "Show Window"
+msgstr "Прикажи прозор"
+
+#: ../src/gui/widgets/trayicon.py:50
+msgid "About"
+msgstr "О програму"
+
+#: ../src/gui/widgets/trayicon.py:54
+msgid "Quit"
+msgstr "Изађи"
+
+#: ../src/gui/widgets/viewbill.py:83 ../src/gui/widgets/viewcategory.py:39
+msgid "Category"
+msgstr "Категорија"
+
+#: ../src/gui/widgets/viewbill.py:87
+msgid "Date"
+msgstr "Датум"
+
+#: ../src/gui/widgets/viewbill.py:91
+msgid "Notes"
+msgstr "Напомене"
+
+#: ../src/gui/widgets/viewbill.py:93
+msgid "Paid"
+msgstr "Плаћен"
+
+#: ../src/gui/widgets/viewbill.py:95
+msgid "Alarm"
+msgstr "Аларм"
+
+#: ../src/lib/common.py:19
+msgid "Developers:"
+msgstr "Програмери:"
+
+#: ../src/lib/common.py:22
+msgid "Contributors:"
+msgstr "Доприносиоци:"
+
+#: ../src/lib/dal.py:131
+msgid "Utilities"
+msgstr "Алатке"
+
+#: ../src/lib/dal.py:132
+msgid "Food & Dining"
+msgstr "Храна и вечере"
+
+#: ../src/lib/dal.py:133
+msgid "Mortgage"
+msgstr "Хипотека"
+
+#: ../src/lib/dal.py:134
+msgid "Rent"
+msgstr "Изнајмљивање"
+
+#: ../src/lib/dal.py:135
+msgid "Medical"
+msgstr "Медицина"
+
+#: ../src/lib/dal.py:136
+msgid "Educational"
+msgstr "Образовање"
+
+#: ../src/lib/dal.py:137
+msgid "Donations"
+msgstr "Добровољни прилози"
+
+#: ../src/lib/dal.py:138
+msgid "Credit Card"
+msgstr "Кредитна картица"
+
+#: ../src/lib/dal.py:139
+msgid "Gifts"
+msgstr "Поклони"
+
+#: ../src/lib/dal.py:140
+msgid "Books"
+msgstr "Књиге"
+
+#: ../src/lib/dal.py:141
+msgid "Online Services"
+msgstr "Услуге на мрежи"
+
+#: ../src/lib/dal.py:142
+msgid "Insurance"
+msgstr "Осигурање"
+
+#: ../src/lib/dal.py:143
+msgid "Auto & Transport"
+msgstr "Аутомобил и превоз"
+
+#: ../src/lib/dal.py:144
+msgid "Home"
+msgstr "Кућа"
+
+#: ../src/lib/dal.py:145
+msgid "Gas & Fuel"
+msgstr "Гас и гориво"
+
+#: ../src/lib/dal.py:146
+msgid "Electronics"
+msgstr "Електроника"
+
+#. Dialog Title
+#: ../src/lib/utils.py:83
+msgid "Question"
+msgstr "Питање"
+
+#. Dialog Title
+#: ../src/lib/utils.py:96 ../src/lib/utils.py:109
+msgid "Error"
+msgstr "Грeшкa"
+
+#. Dialog Title
+#: ../src/lib/utils.py:122
+msgid "Information"
+msgstr "Обавештење"
+
+#: ../src/lib/utils.py:150
+msgid "Close _Without Saving"
+msgstr "Затвори _без чувања"
+
+#: ../src/lib/utils.py:156
+msgid "Save changes before closing?"
+msgstr "Да сачувам измене пре затварања?"
+
+#: ../src/lib/utils.py:157
+msgid "If you close without saving, your changes will be discarded."
+msgstr "Уколико затворите без снимања, ваше измене ће бити одбачене."
+
+#: ../src/lib/scheduler.py:7
+msgid "Once"
+msgstr "Једном"
+
+#: ../src/lib/scheduler.py:8
+msgid "Weekly"
+msgstr "Недељно"
+
+#: ../src/lib/scheduler.py:9
+msgid "Monthly"
+msgstr "Месечно"
