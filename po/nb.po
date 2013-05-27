@@ -1,15 +1,17 @@
 # Norwegian translation of BillReminder.Copyright (C) 2007 Og Maciel
 # This file is distributed under the same license as the BillReminder package.
 # Tommy Mikkelsen <tamikkelsen@gmail.com>, 2007,2008.
+# Kjartan Maraas <kmaraas@gnome.org>, 2013
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: BillReminder VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-13 16:00-0500\n"
-"PO-Revision-Date: 2008-06-30 09:45+0000\n"
-"Last-Translator: Tommy Mikkelsen <tamikkelsen@gmail.com>\n"
-"Language-Team: Norwegian/Bokmaal <i18n-nb@lister.ping.uio.no>\n"
+"POT-Creation-Date: 2013-05-27 13:38+0200\n"
+"PO-Revision-Date: 2013-05-27 13:47+0200\n"
+"Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
+"Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,246 +20,229 @@ msgstr ""
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../data/billreminderd.desktop.in.h:1 ../src/billreminderd.py:43
-#: ../src/daemon/alarm.py:139 ../src/daemon/dbus_manager.py:46
-#, fuzzy
+#: ../src/daemon/alarm.py:138 ../src/daemon/dbus_manager.py:46
 msgid "BillReminder Notifier"
 msgstr "BillReminder varsling"
 
 #: ../data/billreminderd.desktop.in.h:2 ../data/billreminder.desktop.in.h:2
-msgid "Bills manager"
-msgstr "Regnings Administrator"
-
-#: ../data/billreminderd.desktop.in.h:3 ../data/billreminder.desktop.in.h:3
 msgid "Never forget to pay a bill again!"
 msgstr "Du vil aldri glemme å betale en regning igjen!"
 
-#: ../data/billreminder.desktop.in.h:1 ../src/gui/widgets/trayicon.py:29
+#: ../data/billreminderd.desktop.in.h:3 ../data/billreminder.desktop.in.h:3
+msgid "Bills manager"
+msgstr "Regnings Administrator"
+
+#: ../data/billreminder.desktop.in.h:1 ../src/gui/widgets/trayicon.py:43
 #: ../src/lib/utils.py:138
 msgid "BillReminder"
 msgstr "BillReminder"
 
 #: ../data/billreminder.schemas.in.h:1
-#, fuzzy
-msgid "Default X coordinate for the application."
-msgstr "Vis versjonnummer for dette programmet"
+msgid "How long to display the alarm notification."
+msgstr ""
 
 #: ../data/billreminder.schemas.in.h:2
-#, fuzzy
-msgid "Default Y coordinate for the application."
-msgstr "Vis versjonnummer for dette programmet"
+msgid "Whether to display notifications on startup."
+msgstr ""
 
 #: ../data/billreminder.schemas.in.h:3
+msgid "Whether to use dialogs for notifications."
+msgstr ""
+
+#: ../data/billreminder.schemas.in.h:4
+msgid "Whether to show alarms before a bill is due."
+msgstr ""
+
+#: ../data/billreminder.schemas.in.h:5
+msgid "Whether to show notifications for paid bills."
+msgstr ""
+
+#: ../data/billreminder.schemas.in.h:6
+msgid "Whether to show alarms."
+msgstr ""
+
+#: ../data/billreminder.schemas.in.h:7
+msgid "How many days prior to due date to notify."
+msgstr ""
+
+#: ../data/billreminder.schemas.in.h:8
+msgid "How many days prior to due date to alert."
+msgstr ""
+
+#: ../data/billreminder.schemas.in.h:9
+msgid "What specific time to display alert."
+msgstr ""
+
+#: ../data/billreminder.schemas.in.h:10
+msgid "The date a bill is due."
+msgstr "Datoen regningen forfaller."
+
+#: ../data/billreminder.schemas.in.h:11
+msgid "Display the menu bar."
+msgstr "Vis menylinjen."
+
+#: ../data/billreminder.schemas.in.h:12
+msgid "Whether to display the menu bar or not."
+msgstr "Hvorvidt menylinjen skal vises eller ikke."
+
+#: ../data/billreminder.schemas.in.h:13
+msgid "Display only paid bills."
+msgstr "Vis kun betalte regninger."
+
+#: ../data/billreminder.schemas.in.h:14
+msgid "Display the toolbar."
+msgstr "Vis verktøylinjen."
+
+#: ../data/billreminder.schemas.in.h:15
+msgid "Whether to display the toolbar or not."
+msgstr "Hvorvidt verktøylinjen skal vises eller ikke."
+
+#: ../data/billreminder.schemas.in.h:16
+msgid "Default width of the application."
+msgstr "Forvalgt bredde for programmet."
+
+#: ../data/billreminder.schemas.in.h:17
+msgid "Defines the default width of the application."
+msgstr ""
+
+#: ../data/billreminder.schemas.in.h:18
 #, fuzzy
 msgid "Default height of the application."
 msgstr "Om programmet"
 
-#: ../data/billreminder.schemas.in.h:4
-#, fuzzy
-msgid "Default width of the application."
-msgstr "Om programmet"
-
-#: ../data/billreminder.schemas.in.h:5
-#, fuzzy
-msgid "Defines the default X coordinate for the application."
-msgstr "Vis versjonnummer for dette programmet"
-
-#: ../data/billreminder.schemas.in.h:6
-#, fuzzy
-msgid "Defines the default Y coordinate for the application."
-msgstr "Vis versjonnummer for dette programmet"
-
-#: ../data/billreminder.schemas.in.h:7
+#: ../data/billreminder.schemas.in.h:19
 #, fuzzy
 msgid "Defines the default height of the application."
 msgstr "Vis versjonnummer for dette programmet"
 
-#: ../data/billreminder.schemas.in.h:8
-msgid "Defines the default width of the application."
-msgstr ""
+#: ../data/billreminder.schemas.in.h:20
+#, fuzzy
+msgid "Default X coordinate for the application."
+msgstr "Vis versjonnummer for dette programmet"
 
-#: ../data/billreminder.schemas.in.h:9
+#: ../data/billreminder.schemas.in.h:21
+#, fuzzy
+msgid "Defines the default X coordinate for the application."
+msgstr "Vis versjonnummer for dette programmet"
+
+#: ../data/billreminder.schemas.in.h:22
+#, fuzzy
+msgid "Default Y coordinate for the application."
+msgstr "Vis versjonnummer for dette programmet"
+
+#: ../data/billreminder.schemas.in.h:23
+#, fuzzy
+msgid "Defines the default Y coordinate for the application."
+msgstr "Vis versjonnummer for dette programmet"
+
+#: ../data/billreminder.schemas.in.h:24
 msgid "Delay between notifications."
 msgstr ""
 
-#: ../data/billreminder.schemas.in.h:10
-#, fuzzy
-msgid "Display only paid bills."
-msgstr "Vis kun betalte oppføringer"
-
-#: ../data/billreminder.schemas.in.h:11
-msgid "Display the menu bar."
-msgstr ""
-
-#: ../data/billreminder.schemas.in.h:12
-#, fuzzy
-msgid "Display the toolbar."
-msgstr "Vis verktøylinja"
-
-#: ../data/billreminder.schemas.in.h:13
-msgid "How long to display the alarm notification."
-msgstr ""
-
-#: ../data/billreminder.schemas.in.h:14
-msgid "How many days prior to due date to alert."
-msgstr ""
-
-#: ../data/billreminder.schemas.in.h:15
-msgid "How many days prior to due date to notify."
-msgstr ""
-
-#: ../data/billreminder.schemas.in.h:16
+#: ../data/billreminder.schemas.in.h:25
 msgid "Start the application in the system's tray."
 msgstr ""
 
-#: ../data/billreminder.schemas.in.h:17
-#, fuzzy
-msgid "The date a bill is due."
-msgstr "Regningen %s er forfalt."
-
-#: ../data/billreminder.schemas.in.h:18
-msgid "What specific time to display alert."
-msgstr ""
-
-#: ../data/billreminder.schemas.in.h:19
-msgid "Whether to display notifications on startup."
-msgstr ""
-
-#: ../data/billreminder.schemas.in.h:20
-msgid "Whether to display the menu bar or not."
-msgstr ""
-
-#: ../data/billreminder.schemas.in.h:21
-msgid "Whether to display the toolbar or not."
-msgstr ""
-
-#: ../data/billreminder.schemas.in.h:22
-msgid "Whether to show alarms before a bill is due."
-msgstr ""
-
-#: ../data/billreminder.schemas.in.h:23
-msgid "Whether to show alarms."
-msgstr ""
-
-#: ../data/billreminder.schemas.in.h:24
-msgid "Whether to show notifications for paid bills."
-msgstr ""
-
-#: ../data/billreminder.schemas.in.h:25
+#: ../data/billreminder.schemas.in.h:26
 msgid "Whether to start the application in the system's tray."
 msgstr ""
 
-#: ../data/billreminder.schemas.in.h:26
-msgid "Whether to use dialogs for notifications."
-msgstr ""
-
-#. Dialog Title
-#: ../data/main.ui.h:1 ../src/lib/dialogs.py:65
-#, fuzzy
-msgid "Add a new bill"
-msgstr "Legg til ny regningspåminnelse"
-
-#: ../data/main.ui.h:2 ../src/gui/maindialog.py:140
-#, fuzzy
-msgid "Delete selected bill"
-msgstr "Slett valgte regningspåminnelse"
-
-#. Dialog Title
-#: ../data/main.ui.h:3 ../src/gui/maindialog.py:137 ../src/lib/dialogs.py:76
-#, fuzzy
-msgid "Edit a bill"
-msgstr "Rediger regning '%s'"
-
-#: ../data/main.ui.h:4 ../src/gui/maindialog.py:146
-msgid "Mark as not paid"
-msgstr "Marker som ikke betalt"
-
-#. Button Title
-#: ../data/main.ui.h:5 ../src/daemon/alarm.py:146 ../src/gui/maindialog.py:143
-#: ../src/lib/utils.py:135
-msgid "Mark as paid"
-msgstr "Marker som betalt"
-
-#: ../data/main.ui.h:6
-#, fuzzy
-msgid "Show Toolbar"
-msgstr "Vis verktøylinje"
-
-#: ../data/main.ui.h:7
-#, fuzzy
-msgid "_All Bills"
-msgstr "Regninger:"
-
-#: ../data/main.ui.h:8 ../src/gui/maindialog.py:136
-msgid "_Edit"
-msgstr "R_ediger"
-
-#: ../data/main.ui.h:9
+#: ../data/main.ui.h:1
 msgid "_File"
 msgstr "_Fil"
 
-#: ../data/main.ui.h:10
-msgid "_Help"
-msgstr "_Hjelp"
+#: ../data/main.ui.h:2 ../src/gui/maindialog.py:157
+msgid "_Edit"
+msgstr "R_ediger"
 
-#: ../data/main.ui.h:11
-msgid "_Not Paid Only"
-msgstr "_Kun ubetalte"
-
-#: ../data/main.ui.h:12
-msgid "_Paid Only"
-msgstr "_Kun betalte"
-
-#: ../data/main.ui.h:13
+#: ../data/main.ui.h:3
 msgid "_View"
 msgstr "_Vis"
 
+#: ../data/main.ui.h:4
+msgid "Show Toolbar"
+msgstr "Vis verktøylinje"
+
+#: ../data/main.ui.h:5
+msgid "_Paid Only"
+msgstr "_Kun betalte"
+
+#: ../data/main.ui.h:6
+msgid "_Not Paid Only"
+msgstr "_Kun ubetalte"
+
+#: ../data/main.ui.h:7
+msgid "_All Bills"
+msgstr "_Alle regninger"
+
+#: ../data/main.ui.h:8
+msgid "_Help"
+msgstr "_Hjelp"
+
+#. Dialog Title
+#: ../data/main.ui.h:9 ../src/lib/dialogs.py:65
+msgid "Add a new bill"
+msgstr "Legg til ny regning"
+
+#. Dialog Title
+#: ../data/main.ui.h:10 ../src/gui/maindialog.py:158 ../src/lib/dialogs.py:76
+msgid "Edit a bill"
+msgstr "Rediger en regning"
+
+#: ../data/main.ui.h:11 ../src/gui/maindialog.py:161
+msgid "Delete selected bill"
+msgstr "Slett valgt regning"
+
+#. Button Title
+#: ../data/main.ui.h:12 ../src/daemon/alarm.py:145
+#: ../src/gui/maindialog.py:164 ../src/lib/utils.py:135
+msgid "Mark as paid"
+msgstr "Marker som betalt"
+
+#: ../data/main.ui.h:13 ../src/gui/maindialog.py:167
+msgid "Mark as not paid"
+msgstr "Marker som ikke betalt"
+
 #: ../data/add_bill.ui.h:1
 #, fuzzy
-msgid "A_larm:\t"
-msgstr "Varsel"
+msgid "_Payee:"
+msgstr "_Betalingsmottaker:"
 
 #: ../data/add_bill.ui.h:2
-msgid "Manage Categories"
-msgstr "Rediger kategorier"
+msgid "_Amount:"
+msgstr "_Beløp"
 
 #: ../data/add_bill.ui.h:3
+msgid "_Due Date:"
+msgstr "Forfalls_dato:"
+
+#: ../data/add_bill.ui.h:4
+msgid "_Category:"
+msgstr "_Kategori:"
+
+#: ../data/add_bill.ui.h:5
+msgid "_Repeat:"
+msgstr "_Gjenta:"
+
+#: ../data/add_bill.ui.h:6
+msgid "_End Date:"
+msgstr "Sl_uttdato:"
+
+#: ../data/add_bill.ui.h:7
+msgid "A_larm:\t"
+msgstr "Varsel:\t"
+
+#: ../data/add_bill.ui.h:8
+msgid "_Notes:"
+msgstr "_Merknader:"
+
+#: ../data/add_bill.ui.h:9
 msgid "Optional Fields"
 msgstr ""
 
-#: ../data/add_bill.ui.h:4
-#, fuzzy
-msgid "_Amount:"
-msgstr "Beløp"
-
-#: ../data/add_bill.ui.h:5
-#, fuzzy
-msgid "_Category:"
-msgstr "Kategori"
-
-#: ../data/add_bill.ui.h:6
-#, fuzzy
-msgid "_Due Date:"
-msgstr "Ferdigdato:"
-
-#: ../data/add_bill.ui.h:7
-#, fuzzy
-msgid "_End Date:"
-msgstr "Dato:"
-
-#: ../data/add_bill.ui.h:8
-#, fuzzy
-msgid "_Notes:"
-msgstr "Merknad:"
-
-#: ../data/add_bill.ui.h:9
-#, fuzzy
-msgid "_Payee:"
-msgstr "Betalingsmottaker"
-
 #: ../data/add_bill.ui.h:10
-#, fuzzy
-msgid "_Repeat:"
-msgstr "Repeter:"
+msgid "Manage Categories"
+msgstr "Rediger kategorier"
 
 #: ../src/billreminder.py:45 ../src/billreminderd.py:23
 msgid "Usage:  billreminder [OPTIONS...]"
@@ -272,9 +257,8 @@ msgid "About this application."
 msgstr "Om dette programmet"
 
 #: ../src/billreminder.py:48
-#, fuzzy
 msgid "Adds a new bill to the database."
-msgstr "Legg til ny"
+msgstr "Legg til ny regning i databasen."
 
 #: ../src/billreminder.py:49
 msgid "Access database directly, without daemon."
@@ -306,28 +290,28 @@ msgstr ""
 msgid "Stop daemon."
 msgstr ""
 
-#: ../src/daemon/alarm.py:76
+#: ../src/daemon/alarm.py:75
 #, python-format
 msgid "You have %s outstanding bill to pay!"
 msgid_plural "You have %s outstanding bills to pay!"
 msgstr[0] ""
 msgstr[1] "Du har %s utestående regninger som må betales!"
 
-#: ../src/daemon/alarm.py:81
+#: ../src/daemon/alarm.py:80
 msgid "Show BillReminder"
 msgstr "Vis BillReminder"
 
-#: ../src/daemon/alarm.py:123 ../src/daemon/alarm.py:230
+#: ../src/daemon/alarm.py:122 ../src/daemon/alarm.py:229
 #, python-format
 msgid "The bill %(bill)s will be due at %(day)s."
 msgstr "Regningen %(bill)s will forfalle den %(day)s."
 
-#: ../src/daemon/alarm.py:135
+#: ../src/daemon/alarm.py:134
 #, python-format
 msgid "The bill %s is due."
 msgstr "Regningen %s er forfalt."
 
-#: ../src/daemon/alarm.py:148 ../src/lib/utils.py:136
+#: ../src/daemon/alarm.py:147 ../src/lib/utils.py:136
 msgid "Edit"
 msgstr "Rediger"
 
@@ -375,7 +359,7 @@ msgstr "Velg dato og tid"
 
 #. TRANSLATORS: No date selected
 #: ../src/gui/adddialog.py:241 ../src/gui/adddialog.py:265
-#: ../src/gui/maindialog.py:230 ../src/gui/widgets/datebutton.py:18
+#: ../src/gui/maindialog.py:251 ../src/gui/widgets/datebutton.py:18
 #: ../src/gui/widgets/datebutton.py:26
 msgid "None"
 msgstr "Ingen"
@@ -384,37 +368,39 @@ msgstr "Ingen"
 msgid "New Category"
 msgstr "Ny kategori"
 
-#: ../src/gui/adddialog.py:287 ../src/gui/adddialog.py:425
-#: ../src/gui/adddialog.py:434
+#: ../src/gui/adddialog.py:287
 msgid ""
 "The end date is set to a date prior to the start date. Setting it to match "
 "the start date."
 msgstr ""
 
-#: ../src/gui/adddialog.py:288 ../src/gui/adddialog.py:426
-#: ../src/gui/adddialog.py:435
+#: ../src/gui/adddialog.py:288
 msgid "Date set in the past"
 msgstr ""
 
-#: ../src/gui/adddialog.py:403
+#: ../src/gui/adddialog.py:414
 #, python-format
 msgid "\"%s\" and \"%s\" are required fields."
 msgstr "\"%s\" og \"%s\" er obligatoriske felter."
 
-#: ../src/gui/adddialog.py:404 ../src/gui/adddialog.py:407
-#: ../src/gui/widgets/viewbill.py:85
+#: ../src/gui/adddialog.py:415 ../src/gui/adddialog.py:418
+#: ../src/gui/widgets/viewbill.py:84
 msgid "Payee"
 msgstr "Betalingsmottaker"
 
-#: ../src/gui/adddialog.py:404 ../src/gui/adddialog.py:410
-#: ../src/gui/widgets/viewbill.py:89
+#: ../src/gui/adddialog.py:415 ../src/gui/adddialog.py:421
+#: ../src/gui/widgets/viewbill.py:88
 msgid "Amount"
 msgstr "Beløp"
 
-#: ../src/gui/adddialog.py:407 ../src/gui/adddialog.py:410
+#: ../src/gui/adddialog.py:418 ../src/gui/adddialog.py:421
 #, python-format
 msgid "\"%s\" is required field."
 msgstr "\"%s\" er et obligatorisk felt."
+
+#: ../src/gui/adddialog.py:424
+msgid "The end date is set to a date prior to the start date."
+msgstr ""
 
 #: ../src/gui/categoriesdialog.py:23
 msgid "Categories Manager"
@@ -454,85 +440,88 @@ msgid_plural "There are %d more bills in this category."
 msgstr[0] "Det er %d regning til i denne kategorien."
 msgstr[1] "Det er %d regninger til i denne kategorien."
 
-#: ../src/gui/categoriesdialog.py:243 ../src/gui/maindialog.py:424
+#: ../src/gui/categoriesdialog.py:243 ../src/gui/maindialog.py:463
 msgid "Confirmation"
 msgstr "Bekreftelse"
 
 #. for some reason the actions strings do not get translated yet
 #. so we define them here so they would be picked up by the pyfile scanner
-#: ../src/gui/maindialog.py:133
-#, fuzzy
+#: ../src/gui/maindialog.py:154
 msgid "_New"
-msgstr "Ny"
+msgstr "_Ny"
 
-#: ../src/gui/maindialog.py:134
-#, fuzzy
+#: ../src/gui/maindialog.py:155
 msgid "Add new bill"
-msgstr "_Legg til ny"
+msgstr "Legg til en ny regning"
 
-#: ../src/gui/maindialog.py:139
+#: ../src/gui/maindialog.py:160
 msgid "_Delete"
-msgstr ""
+msgstr "_Slett"
 
-#: ../src/gui/maindialog.py:142
-#, fuzzy
+#: ../src/gui/maindialog.py:163
 msgid "P_aid"
-msgstr "Betalt"
+msgstr "_Betalt"
 
-#: ../src/gui/maindialog.py:145
-#, fuzzy
+#: ../src/gui/maindialog.py:166
 msgid "No_t Paid"
-msgstr "Ikke betalt"
+msgstr "Ikke be_talt"
 
-#: ../src/gui/maindialog.py:148
-#, fuzzy
+#: ../src/gui/maindialog.py:169
 msgid "_Show Toolbar"
-msgstr "Vis verktøylinje"
+msgstr "Vi_s verktøylinje"
 
-#: ../src/gui/maindialog.py:149
+#: ../src/gui/maindialog.py:170
 msgid "Show the toolbar"
-msgstr "Vis verktøylinja"
+msgstr "Vis verktøylinjen"
 
-#: ../src/gui/maindialog.py:237
+#: ../src/gui/maindialog.py:258
 msgid "%m/%d"
 msgstr "%d/%m"
 
-#: ../src/gui/maindialog.py:422
+#: ../src/gui/maindialog.py:424
+msgid "Not Paid Only"
+msgstr "Kun ubetalte"
+
+#: ../src/gui/maindialog.py:426
+msgid "Paid Only"
+msgstr "Kun betalte"
+
+#: ../src/gui/maindialog.py:461
 #, python-format
 msgid "Do you really want to delete \"%s\"?"
 msgstr "Vil du virkelig slette \"%s\"?"
 
-#: ../src/gui/prefdialog.py:26 ../src/gui/widgets/trayicon.py:47
+#: ../src/gui/maindialog.py:545 ../src/gui/widgets/viewbill.py:92
+msgid "Paid"
+msgstr "Betalt"
+
+#: ../src/gui/prefdialog.py:26 ../src/gui/widgets/trayicon.py:67
 msgid "Preferences"
 msgstr "Innstillinger"
 
 #: ../src/gui/prefdialog.py:55
-#, fuzzy
 msgid "<b>Alarms</b>"
-msgstr "<b>Sum:</b>"
+msgstr "<b>Varsler</b>"
 
 #: ../src/gui/prefdialog.py:61
-#, fuzzy
 msgid "_Alert before due date:"
-msgstr "Varsel før forfall:"
+msgstr "V_arsel før forfall:"
 
 #: ../src/gui/prefdialog.py:66 ../src/gui/prefdialog.py:116
 msgid "day(s)."
 msgstr "dag(er)."
 
 #: ../src/gui/prefdialog.py:69
-#, fuzzy
 msgid "_Preferred time:"
-msgstr "Klokkeslett for varsel"
+msgstr "_Foretrukket tid:"
 
 #: ../src/gui/prefdialog.py:72
 msgid "Get alerted when individual bills are due."
 msgstr "Varsel når enkeltregninger forfaller"
 
 #: ../src/gui/prefdialog.py:96
-#, fuzzy
 msgid "<b>Notifications</b>"
-msgstr "Varslinger"
+msgstr "<b>Varslinger</b>"
 
 #: ../src/gui/prefdialog.py:102
 msgid "Define when to be notified of upcoming bills."
@@ -544,9 +533,8 @@ msgid "_Notify before due date:"
 msgstr "Varsle før forfall:"
 
 #: ../src/gui/prefdialog.py:131
-#, fuzzy
 msgid "<b>Alert Type</b>"
-msgstr "Varseltype"
+msgstr "<b>Varseltype</b>"
 
 #: ../src/gui/prefdialog.py:141
 #, fuzzy
@@ -578,73 +566,66 @@ msgstr "<b>Info:</b> BillReminder varsling er nå aktiv."
 
 #. TRANSLATORS: This is the date that is selected from the calendar. Try to keep it small.
 #: ../src/gui/widgets/datepicker.py:87
-#, fuzzy
 msgid "%m/%d/%Y"
-msgstr "%d/%m"
+msgstr "%d.%m.%Y"
 
 #: ../src/gui/widgets/datebutton.py:32 ../src/gui/widgets/datebutton.py:65
 msgid "%Y/%m/%d %H:%M"
-msgstr "%d/%m/%Y %H:%M"
+msgstr "%d.%m.%Y %H.%M"
 
 #: ../src/gui/widgets/datebutton.py:43 ../src/gui/widgets/datebutton.py:73
-#, fuzzy
 msgid "_None"
-msgstr "Ingen"
+msgstr "I_ngen"
 
 #: ../src/gui/widgets/datebutton.py:70
 msgid "Select date and time"
 msgstr "Velg dato og tidspunkt"
 
 #: ../src/gui/widgets/datebutton.py:94
-#, fuzzy
 msgid "<b>_Time:</b>"
-msgstr "<b>Notat:</b>"
+msgstr "<b>_Tid:</b>"
 
-#: ../src/gui/widgets/statusbar.py:16
+#: ../src/gui/widgets/statusbar.py:17
 msgid "Bills:"
 msgstr "Regninger:"
 
-#: ../src/gui/widgets/statusbar.py:26
+#: ../src/gui/widgets/statusbar.py:27
 msgid "Notes:"
 msgstr "Merknad:"
 
 #: ../src/gui/widgets/timewidget.py:39
 msgid "(hh/mm)"
-msgstr ""
+msgstr "(hh.mm)"
 
-#: ../src/gui/widgets/trayicon.py:42
+#: ../src/gui/widgets/trayicon.py:53 ../src/gui/widgets/trayicon.py:62
 msgid "Hide Window"
 msgstr "Skjul vindu"
 
-#: ../src/gui/widgets/trayicon.py:44
+#: ../src/gui/widgets/trayicon.py:55 ../src/gui/widgets/trayicon.py:64
 msgid "Show Window"
 msgstr "Vis vindu"
 
-#: ../src/gui/widgets/trayicon.py:50
+#: ../src/gui/widgets/trayicon.py:70
 msgid "About"
 msgstr "Om"
 
-#: ../src/gui/widgets/trayicon.py:54
+#: ../src/gui/widgets/trayicon.py:74
 msgid "Quit"
 msgstr "Avslutt"
 
-#: ../src/gui/widgets/viewbill.py:83 ../src/gui/widgets/viewcategory.py:39
+#: ../src/gui/widgets/viewbill.py:82 ../src/gui/widgets/viewcategory.py:39
 msgid "Category"
 msgstr "Kategori"
 
-#: ../src/gui/widgets/viewbill.py:87
+#: ../src/gui/widgets/viewbill.py:86
 msgid "Date"
 msgstr "Dato"
 
-#: ../src/gui/widgets/viewbill.py:91
+#: ../src/gui/widgets/viewbill.py:90
 msgid "Notes"
 msgstr "Merknader"
 
-#: ../src/gui/widgets/viewbill.py:93
-msgid "Paid"
-msgstr "Betalt"
-
-#: ../src/gui/widgets/viewbill.py:95
+#: ../src/gui/widgets/viewbill.py:94
 msgid "Alarm"
 msgstr "Varsel"
 
@@ -655,6 +636,70 @@ msgstr "Utviklere"
 #: ../src/lib/common.py:22
 msgid "Contributors:"
 msgstr "Bidragsytere:"
+
+#: ../src/lib/dal.py:155
+msgid "Utilities"
+msgstr "Verktøy"
+
+#: ../src/lib/dal.py:156
+msgid "Food & Dining"
+msgstr "Mat og spising"
+
+#: ../src/lib/dal.py:157
+msgid "Mortgage"
+msgstr "Huslån"
+
+#: ../src/lib/dal.py:158
+msgid "Rent"
+msgstr "Rente"
+
+#: ../src/lib/dal.py:159
+msgid "Medical"
+msgstr "Medisin"
+
+#: ../src/lib/dal.py:160
+msgid "Educational"
+msgstr "Opplæring"
+
+#: ../src/lib/dal.py:161
+msgid "Donations"
+msgstr "Donasjoner"
+
+#: ../src/lib/dal.py:162
+msgid "Credit Card"
+msgstr "Kredittkort"
+
+#: ../src/lib/dal.py:163
+msgid "Gifts"
+msgstr "Gaver"
+
+#: ../src/lib/dal.py:164
+msgid "Books"
+msgstr "Bøker"
+
+#: ../src/lib/dal.py:165
+msgid "Online Services"
+msgstr "Tjenester på nettet"
+
+#: ../src/lib/dal.py:166
+msgid "Insurance"
+msgstr "Forsikring"
+
+#: ../src/lib/dal.py:167
+msgid "Auto & Transport"
+msgstr "Bil og transport"
+
+#: ../src/lib/dal.py:168
+msgid "Home"
+msgstr "Hjem"
+
+#: ../src/lib/dal.py:169
+msgid "Gas & Fuel"
+msgstr "Bensin og brennstoff"
+
+#: ../src/lib/dal.py:170
+msgid "Electronics"
+msgstr "Elektronikk"
 
 #. Dialog Title
 #: ../src/lib/utils.py:83
@@ -684,215 +729,14 @@ msgstr "Lagre endringer før programmet lukkes?"
 msgid "If you close without saving, your changes will be discarded."
 msgstr "Hvis du lukker uten å lagre vil alle endringer bli tapt."
 
-#: ../src/lib/scheduler.py:6
+#: ../src/lib/scheduler.py:7
 msgid "Once"
 msgstr "En gang"
 
-#: ../src/lib/scheduler.py:7
+#: ../src/lib/scheduler.py:8
 msgid "Weekly"
 msgstr "Ukentlig"
 
-#: ../src/lib/scheduler.py:8
+#: ../src/lib/scheduler.py:9
 msgid "Monthly"
 msgstr "Månedlig"
-
-#~ msgid "Cancel"
-#~ msgstr "Avbryt"
-
-#, fuzzy
-#~ msgid "<b>_Due Date:</b>"
-#~ msgstr "<b>Forfalls Dato:</b>"
-
-#, fuzzy
-#~ msgid "<b>_Repeat:</b>"
-#~ msgstr "<b>Betale til:</b>"
-
-#~ msgid "How many times to repeat this bill."
-#~ msgstr "Antall ganger denne betalingen skal gjentas"
-
-#, fuzzy
-#~ msgid "<b>_Payee:</b>"
-#~ msgstr "<b>Betale til:</b>"
-
-#, fuzzy
-#~ msgid "<b>_Amount:</b>"
-#~ msgstr "<b>Sum:</b>"
-
-#, fuzzy
-#~ msgid "<b>_Category:</b>"
-#~ msgstr "Kategori:"
-
-#, fuzzy
-#~ msgid "<b>_Notes:</b>"
-#~ msgstr "<b>Notat:</b>"
-
-#, fuzzy
-#~ msgid "<b>A_larm:</b>"
-#~ msgstr "<b>Sum:</b>"
-
-#, fuzzy
-#~ msgid "<b>_Bills:</b>"
-#~ msgstr "<b>Notat:</b>"
-
-#~ msgid "Edit a record"
-#~ msgstr "Rediger en eksisterende regningspåminnelse"
-
-#~ msgid "_Paid"
-#~ msgstr "_Betalt"
-
-#~ msgid "_Not Paid"
-#~ msgstr "_Ikke betalt"
-
-#~ msgid "Edit preferences"
-#~ msgstr "Endre innstillinger"
-
-#~ msgid "Quit the Program"
-#~ msgstr "Avslutt programmet"
-
-#~ msgid "About the application"
-#~ msgstr "Om programmet"
-
-#~ msgid "Display all unpaid records only"
-#~ msgstr "Vis kun ubetalte oppføringer"
-
-#~ msgid "Display all paid records only"
-#~ msgstr "Vis kun betalte oppføringer"
-
-#~ msgid "_All Records"
-#~ msgstr "_Alle oppføringer"
-
-#~ msgid "Display all records"
-#~ msgstr "Vis alle oppføringer"
-
-#, fuzzy
-#~ msgid "Not _Paid"
-#~ msgstr "Ikke _betalt"
-
-#~ msgid "Records:"
-#~ msgstr "Oppføringer"
-
-#~ msgid ""
-#~ "An error occurred while connecting to BillReminder Notifier!\n"
-#~ "Do you want to launch it and restart BillReminder?"
-#~ msgstr ""
-#~ "En feil oppstod ved tilkobling til BillReminder Informasjon!\n"
-#~ "Vil du starte det og restarte BillReminder?"
-
-#~ msgid "Add a New Record"
-#~ msgstr "Legg til ny oppføring"
-
-#~ msgid "Edit a Record"
-#~ msgstr "Endre en oppføring"
-
-#, fuzzy
-#~ msgid "%Y/%m/%d"
-#~ msgstr "%d/%m/%Y"
-
-#, fuzzy
-#~ msgid "Alarms"
-#~ msgstr "Alarm"
-
-#~ msgid "Time:"
-#~ msgstr "Tid:"
-
-#~ msgid "Hour :"
-#~ msgstr "Time:"
-
-#~ msgid "Minute :"
-#~ msgstr "Minutt:"
-
-#~ msgid ""
-#~ "Usage:  billreminder [OPTIONS...]\n"
-#~ "\n"
-#~ "Options:\n"
-#~ "  --help, -h, -?\tShow this message.\n"
-#~ "  --about\t\tAbout this application.\n"
-#~ "  --add\t\t\tAdds a new record to the database.\n"
-#~ "  --standalone\t\tAccess database directly, without daemon.\n"
-#~ "  --version, -v\t\tDisplays the version number for this application.\n"
-#~ msgstr ""
-#~ "Bruk:  bilreminder [VALG...]\n"
-#~ "\n"
-#~ "Valg:\n"
-#~ "  --help, -h, -?\tVis denne beskjeden.\n"
-#~ "  --about\t\tOm Dette programmet.\n"
-#~ "  --add\t\t\tLegger til ny informasjon i databasen.\n"
-#~ "  --standalone\t\tGå til databasen directe uten nisse.\n"
-#~ "  --version, -v\t\tVis versjons nummeret for programmet\n"
-
-#~ msgid ""
-#~ "Usage:  billreminderd [OPTIONS...]\n"
-#~ "\n"
-#~ "Options:\n"
-#~ "  --help, -h, -?\tShow this message.\n"
-#~ "  --verbose\t\tPrint output messages.\n"
-#~ "  --no-daemon\t\tDon't run as a daemon.\n"
-#~ "  --open-gui\t\tStart daemon and launch GUI.\n"
-#~ "  --stop\t\t\tStop daemon.\n"
-#~ "  --version, -v\t\tDisplays the version number for this application.\n"
-#~ msgstr ""
-#~ "Usage:··billreminderd·[VALG...]\n"
-#~ "\n"
-#~ "VALG:\n"
-#~ "··--help,·-h,·-?\tVis denne beskjeden.\n"
-#~ "··--verbose\t\tSkrivut informasjons beskjeder.\n"
-#~ "··--no-daemon\t\tIkke kjør som nisse.\n"
-#~ "··--open-gui\t\tStart·nisse og kjør programmet grafisk.\n"
-#~ "··--stop\t\t\tStopp nisse.\n"
-#~ "··--version,·-v\t\tVis versjons nummeret for dette programmet.\n"
-
-#~ msgid "Due Date"
-#~ msgstr "Forfalls dato"
-
-#~ msgid "Amount Due"
-#~ msgstr "Sum Forfalt"
-
-#~ msgid "Remove"
-#~ msgstr "Fjerne"
-
-#, fuzzy
-#~ msgid "<b>0</b>"
-#~ msgstr "<b>Notat:</b>"
-
-#, fuzzy
-#~ msgid "<b>%(payee)s</b>"
-#~ msgstr "<b>Betale til:</b>"
-
-#~ msgid "You have 1 outstanding bill to pay!"
-#~ msgstr "Du har 1 utesÃÂ¥ende regning ÃÂ¥ betale!"
-
-#~ msgid "Id"
-#~ msgstr "Id"
-
-#~ msgid ""
-#~ "do you really want to remove it?\n"
-#~ "\n"
-#~ " <b>%(payee)s - %(amount)0.2f </b>"
-#~ msgstr ""
-#~ "vil du virkelige fjerne den?\n"
-#~ "\n"
-#~ " <b>%(payee)sÃÂ·-ÃÂ·%(amount)0.2fÃÂ·</b>"
-
-#~ msgid "<big><b>Are you sure you want to quit?</b></big>"
-#~ msgstr "<big><b>Er du sikker pÃÂ¥ at du vil avslutte?</b></big>"
-
-#~ msgid "The following bill was removed:\n"
-#~ msgstr "FÃÂ¸lgende regninger ble fjernet:\n"
-
-#~ msgid "Item deleted."
-#~ msgstr "Objekt slettet."
-
-#~ msgid "Bill '%s' not deleted."
-#~ msgstr "Regning '%s' ikke slettet."
-
-#~ msgid "0"
-#~ msgstr "0"
-
-#~ msgid "<b>Info:</b>"
-#~ msgstr "<b>Info:</b>"
-
-#~ msgid "Mostrar Janela"
-#~ msgstr "Vis Vindu"
-
-#~ msgid "N_ot Paid"
-#~ msgstr "I_kke Betalt"
