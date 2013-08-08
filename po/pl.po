@@ -310,7 +310,7 @@ msgid "Stop daemon."
 msgstr "Zatrzymaj deamona."
 
 #: ../src/daemon/alarm.py:76
-#, python-format
+#, fuzzy, python-format
 msgid "You have %s outstanding bill to pay!"
 msgid_plural "You have %s outstanding bills to pay!"
 msgstr[0] "Nie masz zaległych rachunków."

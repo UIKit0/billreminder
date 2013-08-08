@@ -298,7 +298,7 @@ msgid "Stop daemon."
 msgstr "Hintergrunddienst stoppen."
 
 #: ../src/daemon/alarm.py:75
-#, python-format
+#, fuzzy, python-format
 msgid "You have %s outstanding bill to pay!"
 msgid_plural "You have %s outstanding bills to pay!"
 msgstr[0] "Sie haben eine ausstehende Rechnung zu bezahlen!"
@@ -452,7 +452,7 @@ msgid "Do you really want to delete this category?\n"
 msgstr "Wollen Sie »%s« wirklich löschen?\n"
 
 #: ../src/gui/categoriesdialog.py:240
-#, python-format
+#, fuzzy, python-format
 msgid "There is %d more bill in this category."
 msgid_plural "There are %d more bills in this category."
 msgstr[0] "Es gibt eine weitere Rechnung in dieser Kategorie."
