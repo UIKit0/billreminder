@@ -287,7 +287,7 @@ msgid "Stop daemon."
 msgstr "Stop daemon."
 
 #: ../src/daemon/alarm.py:76
-#, python-format
+#, fuzzy, python-format
 msgid "You have %s outstanding bill to pay!"
 msgid_plural "You have %s outstanding bills to pay!"
 msgstr[0] "יש לך חשבון אחד הממתין לתשלום!"
@@ -423,7 +423,7 @@ msgid "Do you really want to delete this category?\n"
 msgstr "האם באמת ברצונך למחוק קטגוריה זו?\n"
 
 #: ../src/gui/categoriesdialog.py:240
-#, python-format
+#, fuzzy, python-format
 msgid "There is %d more bill in this category."
 msgid_plural "There are %d more bills in this category."
 msgstr[0] "קיים עוד חשבון אחד בקטגוריה זו."
